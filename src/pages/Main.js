@@ -1,10 +1,6 @@
-
-
 const MainPage = () => {
-
-
     return(
-        <div>hello world</div>
+        <div>Main</div>
     );
 
 }
