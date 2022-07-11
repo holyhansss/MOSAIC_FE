@@ -9,7 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Reportacord from './Reportacord';
+import ReportAcord from './ReportAcord';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -51,7 +51,7 @@ function Reportcard() {
         alt="Paella dish"
       />
       <CardContent>
-        <Reportacord />
+        <ReportAcord />
         {/* <Typography variant="h6" gutterBottom component="div">
             거시경제
         </Typography>

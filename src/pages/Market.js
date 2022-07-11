@@ -1,7 +1,6 @@
-import { React } from "react";
-import FearandGreed from "../components/FearandGreed";
-import SPIndex from "../components/line";
-import Index from "../components/linetest";
+import React from "react";
+import FearandGreed from "../components/FearAndGreed/FearandGreed";
+import Index from "../components/LineGraph/LineGraph";
 
 // 시장동향
 // S&P 500 지수와 CMC 200 그래프(line) 불러옴
@@ -14,7 +13,6 @@ function Marketpage() {
         <div>
             <h>Market Trends</h>
             <Index/>
-            <SPIndex/>
             <FearandGreed/>
             
         </div>

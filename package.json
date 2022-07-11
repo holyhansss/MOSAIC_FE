@@ -15,6 +15,7 @@
     "dotenv": "^16.0.1",
     "firebase": "^9.8.4",
     "firebase-tools": "^1.2.0",
+    "internmap": "^2.0.3",
     "moment": "^2.29.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",

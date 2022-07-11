@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 
 
 //공포탐욕지수
@@ -10,4 +10,4 @@ function FearandGreed() {
         </div>
     );
   };
-export default  FearandGreed;
+export default FearandGreed;

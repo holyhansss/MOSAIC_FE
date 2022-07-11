@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {CardActionArea, CardActions, Box} from '@mui/material';
-import Reportdetail from '../pages/ReportDetail';
+import ReportDetail from '../../pages/ReportDetail';
 
 
 function Reportrecentcard({title, writer}) {

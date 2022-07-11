@@ -3,10 +3,10 @@ import Typography from '@mui/material/Typography';
 import {Container, Grid, Box} from '@mui/material';
 import { getDocs, query, where, collection, orderBy } from 'firebase/firestore';
 import { dbService } from '../firebase.js';
-import {Reportlistcard, Reportrecentcard} from '../component/Reportlistcard.js';
+import {Reportlistcard, Reportrecentcard} from '../components/Report/Reportlistcard.js';
 
 
-function Reportlist() {
+function ReportList() {
     // let recent = reports[0].title
     const [reports, setReports] = useState([]);
     const [invest, setInvest] = [useState([])];
@@ -44,10 +44,10 @@ function Reportlist() {
                 <Grid item xs={12}>
 
                     <div>
-                        { result !== "undefined" ?
+                        {/* { result !== "undefined" ?
                         // console.log(result?.writer)
                         <Reportrecentcard title={result?.title} writer={result?.writer} />
-                    : console.log("no")}
+                    : console.log("no")} */}
 
                     </div>                
                 </Grid>
@@ -77,5 +77,5 @@ function Reportlist() {
 };
 
 
-export default Reportlist;
+export default ReportList;
 

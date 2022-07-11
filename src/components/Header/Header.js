@@ -1,6 +1,7 @@
+import React from "react";
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import DefaultImg from '../img/profile.png';
-import { auth, logout } from '../firebase';
+import DefaultImg from '../../img/profile.png';
+import { auth, logout } from '../../firebase';
 
 function Header() {
     let isLogin = sessionStorage.getItem("isLogin");
@@ -16,7 +17,7 @@ function Header() {
             <Navbar bg="light" variant="light">
                 <Container>
                     <Navbar.Brand href="/">MOSAIC</Navbar.Brand>
-                    <Nav className="me-auto">
+                    <Nav className="me-auto"> 
                         <Nav.Link href="/">홈</Nav.Link>
                         <Nav.Link href="/market">시장 동향</Nav.Link>
                         <Nav.Link href="/report">리포트</Nav.Link>

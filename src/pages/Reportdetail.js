@@ -1,14 +1,14 @@
 import React from 'react';
-import Comment from '../component/Comment';
-import Reportcard from '../component/Reportcard';
+import Comment from '../components/Comment/Comment';
+import Reportcard from '../components/Report/Reportcard';
 import { Grid, Container,Box, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShareIcon from '@mui/icons-material/Share';
-import Reportacord from '../component/Reportacord';
+import ReportAcord from '../components/Report/ReportAcord';
 
-function Reportdetail({Title}) {
+function ReportDetail({Title}) {
     // sessionStorage.getItem({Title})
     return (
         <div>
@@ -24,7 +24,7 @@ function Reportdetail({Title}) {
                         <IconButton>
                             <ShareIcon />
                         </IconButton>
-                    </Grid>
+                    </Grid> 
 
                     <Grid item xs={12}>
                         <Comment />
@@ -39,4 +39,4 @@ function Reportdetail({Title}) {
     )
 };
 
-export default Reportdetail;
+export default ReportDetail;
