@@ -1,12 +1,13 @@
+import { React } from "react";
 
 
-const MainPage = () => {
-
-
-    return(
-        <div>hello world</div>
+//main
+function Mainpage() {
+    return (
+        <div>
+            <h>Hi, mainpage</h>
+           
+        </div>
     );
-
-}
-
-export default MainPage;
+  };
+export default  Mainpage;
