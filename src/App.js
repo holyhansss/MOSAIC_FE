@@ -4,7 +4,7 @@ import { Routes, Route, Switch } from "react-router-dom";
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
-
+import Admin from "./pages/Admin";
 
 function App() {
 
@@ -13,7 +13,10 @@ function App() {
       <Route path='/' element={<MainPage/>} ></Route>
       <Route path='/login' element={<Login/>} ></Route>
       <Route path='/join' element={<Join/>} ></Route>
-    </Routes>
+      <Route path='/admin' element={<Admin/>} ></Route>
+      //<Route path='/detailpages/*' >
+      //<Route path=":id" element={<DetailPage />} />
+  </Routes>
   );
 }
 
