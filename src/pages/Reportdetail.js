@@ -10,7 +10,7 @@ import ReportAcord from '../components/Report/ReportAcord';
 
 function ReportDetail({Title}) {
     // sessionStorage.getItem({Title})
-    return (
+    return ( 
         <div>
             <Container maxWidth="md" >
                 <Grid container spacing={1}>
