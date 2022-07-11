@@ -16,7 +16,7 @@ function App() {
       <Route path='/join' element={<Join/>} ></Route>
       <Route path='/admin' element={<Admin/>} ></Route>
       <Route path='/market' element={<MarketPage/>} ></Route>
-      {/* <Route path='/detailpages/*' >
+      {/* <Route path='/detailpages/*' > 
         <Route path=":id" element={<DetailPage />} />
       </Route>  */}
   </Routes>
