@@ -1,19 +1,19 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
-import { signInWithGoogle } from '../firebase';
+import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { logout } from '../firebase';
+import Header from '../components/Header';
 
-function Admin() {
-    return(
+const MainPage = () => {
+    return (
         <div>
-            <Container>
-                
-            </Container>
+            <Header/>
+            <div>Main</div>
         </div>
 
     );
 }
 
-export default Admin;
+export default MainPage;
 // 1. 주간 이슈: 뉴스 헤드라인 식으로 한줄로 작성
 // <거시 경제>
 // <크립토 규제/정책>
