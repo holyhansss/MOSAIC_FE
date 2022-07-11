@@ -3,45 +3,133 @@ import { React, useEffect, useState } from "react";
 // react bootstrap
 import { Container, Row } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
 const Admin = () => {
-    const [firsts, setFirsts] = useState([]);
 
+    const db = getFirestore();
+
+    const newContent = {
+        id: 0,
+        title: '',
+        description: '',
+    }
+    // contents
+    const [title, setTitle] = useState('');
+    const [firsts, setFirsts] = useState([newContent]);
+    const [seconds, setSeconds] = useState([newContent]);
+    const [thirds, setThirds] = useState([newContent]);
+
+    // contents counts
     const [countFirsts, setCountFirsts] = useState([0]);
+    const [countSeconds, setCountSeconds] = useState([0]);
+    const [countThirds, setCountThirds] = useState([0]);
 
-    const inputFirst = (bool) => {
-        if(bool === true){
-            let countArr = [...countFirsts]
-            let counter = countArr.slice(-1)[0]
-        
-            counter += 1
-            countArr.push(counter)
-            setCountFirsts(countArr)
-            addFirstsArray()
+    const inputContent = (bool, number) => {
+        let countArr;
+        if(number === 0){
+            countArr = [...countFirsts];
+        }else if(number === 1){
+            countArr = [...countSeconds];
+        }else if(number === 2){
+            countArr = [...countThirds];
         }
-        else {
-            let countArr = [...countFirsts]
-            countArr.pop()
-            if (firsts.length <= 0) {} else {
-                setCountFirsts(countArr)
-                subFirstsArray()
+
+        if(bool === true){    
+            let counter = countArr.slice(-1)[0];
+            counter += 1;
+            countArr.push(counter);
+            addContentsArray(countArr, number)  
+        }else {
+            if (countArr.length <= 1) {} 
+            else {
+                countArr.pop();
+                subContentsArray(countArr,number)
             }
         }
     }
-    const addFirstsArray = () => {
-        const newFirst = {
-            id: firsts.length,
-            name: '',
-            URL: ''
+    const addContentsArray = (countArr, number) => {
+        let content = {        
+            id: countArr.length-1,
+            title: '',
+            description: '',
         }
-        setFirsts(firsts.concat(newFirst))
-    }
-    const subFirstsArray = () => {
-        let firstsArr = [...firsts]
-        firstsArr.pop()
-        setFirsts(firstsArr)
-    }
+        if(number === 0){
+            setCountFirsts(countArr);
+            setFirsts(firsts.concat(content))
+        }else if(number === 1){
+            setCountSeconds(countArr);
+            setSeconds(seconds.concat(content))
 
-    useEffect(() => { }, [countFirsts]);
+        }else if(number === 2){
+            setCountThirds(countArr);
+            setThirds(thirds.concat(content))
+        }
+        
+    }
+    const subContentsArray = (countArr, number) => {
+        let contentArr;
+        if(number === 0){
+            contentArr = [...firsts]
+            contentArr.pop();
+            setCountFirsts(countArr);
+            setFirsts(contentArr);
+        }else if(number === 1){
+            contentArr = [...seconds]
+            contentArr.pop();
+            setCountSeconds(countArr);
+            setSeconds(contentArr);
+        }else if(number === 2){
+            contentArr = [...thirds]
+            contentArr.pop();
+            setCountThirds(countArr);
+            setThirds(contentArr);
+        }
+    }
+    const handleTitleChange = (targetId, title, number) => {
+        if(number === 0){
+            setFirsts(firsts.map((content) => content.id === targetId
+                ? { ...content, title: title }
+                : content        
+            ));
+        } else if(number === 1){
+            setSeconds(seconds.map((content) => content.id === targetId
+                ? { ...content, title: title }
+                : content        
+            ));
+        } else if(number === 2){
+            setThirds(thirds.map((content) => content.id === targetId
+                ? { ...content, title: title }
+                : content        
+            ));
+        }
+    }
+    const handleDescChange = (targetId, desc, number) => {
+        if(number === 0){
+            setFirsts(firsts.map((content) => content.id === targetId
+                ? { ...content, description: desc }
+                : content        
+            ));
+        } else if(number === 1){
+            setSeconds(seconds.map((content) => content.id === targetId
+                ? { ...content, description: desc }
+                : content        
+            ));
+        } else if(number === 2){
+            setThirds(thirds.map((content) => content.id === targetId
+                ? { ...content, description: desc }
+                : content        
+            ));
+        }
+    }
+    const submitContent = async () => {
+        const docRef = await addDoc(collection(db, "weekly_report"), {
+            title: "",
+            date: "",
+            writer: "",
+          });
+          
+    }
 
     return (
         <Container>
@@ -60,7 +148,7 @@ const Admin = () => {
                                         height: '50px',
                                     }}
                                     onChange={(e) => {
-
+                                        handleTitleChange(index, e.target.value, 0)
                                     }}
                                     label=''/>
                                 <Form.Control
@@ -70,6 +158,7 @@ const Admin = () => {
                                     as='textarea'
                                     placeholder='설명'
                                     onChange={(e) => {
+                                        handleDescChange(index, e.target.value, 0)
                                     }}
                                     style={{
                                         width: '67%',
@@ -88,7 +177,7 @@ const Admin = () => {
                             width: '60px',
                         }}
                         onClick={() => {
-                            inputFirst(true)
+                            inputContent(true,0)
                         }}>
                         Add
                     </Button>
@@ -98,7 +187,7 @@ const Admin = () => {
                             width: '60px',
                         }}
                         onClick={() => {
-                            inputFirst(false)
+                            inputContent(false,0)
                         }}>
                         Del
                     </Button>
@@ -106,60 +195,136 @@ const Admin = () => {
             </Container>
             <Container>
                 크립토 규제/정책
-                <Row>
-                    <Form.Control
-                        className='me-1 col-3'
-                        type=''
-                        placeholder='제목'
+                {countSeconds.map((x, index) => {
+                        return(
+                            <Row key={index} className="my-2">
+                                <Form.Control
+                                    key={"title" + index}
+                                    className='me-1 col-3'
+                                    type=''
+                                    placeholder='제목'
+                                    style={{
+                                        width: '20%',
+                                        height: '50px',
+                                    }}
+                                    onChange={(e) => {
+                                        handleTitleChange(index, e.target.value, 1)
+                                    }}
+                                    label=''/>
+                                <Form.Control
+                                    key={"desc" + index}
+                                    className="me-1 col-9"
+                                    type=''
+                                    as='textarea'
+                                    placeholder='설명'
+                                    onChange={(e) => {
+                                        handleDescChange(index, e.target.value, 1)
+                                    }}
+                                    style={{
+                                        width: '67%',
+                                        height: '150px'
+                                    }}/>
+                            </Row>
+                            
+                        );
+                    })}
+                    <Row 
+                    className="justify-content-md-center">
+                    <Button
+                        variant='outline-secondary'
+                        className='me-1'
                         style={{
-                            width: '15%',
-                            height: '50px',
+                            width: '60px',
                         }}
-                        onChange={(e) => {
-
-                        }}
-                        label=''/>
-                    <Form.Control
-                        className="me-1 col-9"
-                        type=''
-                        as='textarea'
-                        placeholder='설명'
-                        onChange={(e) => {
-                        }}
+                        onClick={() => {
+                            inputContent(true,1)
+                        }}>
+                        Add
+                    </Button>
+                    <Button
+                        variant='outline-secondary'
                         style={{
-                            width: '75%',
-                            height: '150px'
-                        }}/>
+                            width: '60px',
+                        }}
+                        onClick={() => {
+                            inputContent(false,1)
+                        }}>
+                        Del
+                    </Button>
                 </Row>
             </Container>
             <Container>
                 크립토 기술/투자 이슈
-                <Row>
-                    <Form.Control
-                        className='me-1 col-3'
-                        type=''
-                        placeholder='제목'
+                {countThirds.map((x, index) => {
+                        return(
+                            <Row key={index} className="my-2">
+                                <Form.Control
+                                    key={"title" + index}
+                                    className='me-1 col-3'
+                                    type=''
+                                    placeholder='제목'
+                                    style={{
+                                        width: '20%',
+                                        height: '50px',
+                                    }}
+                                    onChange={(e) => {
+                                        handleTitleChange(index, e.target.value, 2)
+                                    }}
+                                    label=''/>
+                                <Form.Control
+                                    key={"desc" + index}
+                                    className="me-1 col-9"
+                                    type=''
+                                    as='textarea'
+                                    placeholder='설명'
+                                    onChange={(e) => {
+                                        handleDescChange(index, e.target.value, 2)
+                                    }}
+                                    style={{
+                                        width: '67%',
+                                        height: '150px'
+                                    }}/>
+                            </Row>
+                            
+                        );
+                    })}
+                    <Row className="justify-content-md-center">
+                    <Button
+                        variant='outline-secondary'
+                        className='me-1'
                         style={{
-                            width: '15%',
-                            height: '50px',
+                            width: '60px',
                         }}
-                        onChange={(e) => {
-
-                        }}
-                        label=''/>
-                    <Form.Control
-                        className="me-1 col-9"
-                        type=''
-                        as='textarea'
-                        placeholder='설명'
-                        onChange={(e) => {
-                        }}
+                        onClick={() => {
+                            inputContent(true,2)
+                        }}>
+                        Add
+                    </Button>
+                    <Button
+                        variant='outline-secondary'
                         style={{
-                            width: '75%',
-                            height: '150px'
-                        }}/>
+                            width: '60px',
+                        }}
+                        onClick={() => {
+                            inputContent(false,2)
+                        }}>
+                        Del
+                    </Button>
                 </Row>
             </Container>
+            <Row className="justify-content-md-center my-5">
+                <Button
+                    variant='outline-primary'
+                    style={{
+                        width: '100px',
+                    }}
+                    onClick={() => {
+                        submitContent();
+                    }}>
+                    Upload
+                </Button>
+
+            </Row>
         </Container>
     );
 }
