@@ -14,8 +14,8 @@ function App() {
       <Route path='/login' element={<Login/>} ></Route>
       <Route path='/join' element={<Join/>} ></Route>
       <Route path='/admin' element={<Admin/>} ></Route>
-      //<Route path='/detailpages/*' >
-      //<Route path=":id" element={<DetailPage />} />
+      {/* <Route path='/detailpages/*' >
+      <Route path=":id" element={<DetailPage />} /> */}
   </Routes>
   );
 }
