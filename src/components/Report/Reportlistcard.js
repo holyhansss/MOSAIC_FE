@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {CardActionArea, CardActions, Box} from '@mui/material';
-import ReportDetail from '../../pages/ReportDetail';
+import {CardActionArea} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-
-function Reportrecentcard({title, writer}) {
-    // sessionStorage.setItem('title', title)
+function Reportrecentcard({title, writer, date}) {
+    const navigate = useNavigate();
+    const move = () => {
+        // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
+        navigate('/reportDetail', {
+          state: {
+            title: title,
+            writer: writer,
+            date: date
+          }
+        });
+      };
     return(
             <Card sx={{ width: 1, height: 250 }}>
                     <CardActionArea
-                        href="/reportdetail"
-                        onClick={()=>console.log({title})} >
+                        onClick={move}
+                        >
                         <CardMedia
                             component="img"
                             height="170"
@@ -30,7 +39,6 @@ function Reportrecentcard({title, writer}) {
                         </CardContent>
                     </CardActionArea>
                 </Card>
-
         
     )
 };
@@ -40,12 +48,21 @@ function Reportrecentcard({title, writer}) {
 export {Reportrecentcard};
 
 function Reportlistcard({title, date, writer}) {
+    const navigate = useNavigate();
+    const move = () => {
+        // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
+        navigate('/reportDetail', {
+          state: {
+            title: title,
+            writer: writer
+          }
+        });
+      };
     
     return(
             <Card sx={{ width: 1, height: 180, margin:1 }}>
                 <CardActionArea
-                    href="/reportdetail"
-                    // onClick={() => console.log("CardActionArea clicked")}
+                    onClick={move}
                     >
                     <CardMedia
                     component="img"
@@ -63,7 +80,6 @@ function Reportlistcard({title, date, writer}) {
                     </CardContent>
                 </CardActionArea>
             </Card>
-
         )
 };
 
