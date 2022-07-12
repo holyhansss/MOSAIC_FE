@@ -8,6 +8,7 @@ import Admin from "./pages/Admin";
 import MarketPage from "./pages/Market";
 import ReportList from "./pages/ReportList";
 import ReportDetail from "./pages/ReportDetail";
+import MyPage from "./pages/MyPage";
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
       <Route path='/market' element={<MarketPage/>} ></Route>
       <Route path='/reportList' element={<ReportList/>} ></Route>
       <Route path='/reportDetail' element={<ReportDetail/>} ></Route>
-      
+      <Route path='/profile' element={<MyPage/>} ></Route>
       {/* <Route path='/detailpages/*' > 
         <Route path=":id" element={<DetailPage />} />
       </Route>  */}
