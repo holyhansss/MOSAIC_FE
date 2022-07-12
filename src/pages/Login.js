@@ -5,7 +5,9 @@
 // import { brands } from '@fortawesome/fontawesome-svg-core/import.macro'
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { Container } from 'react-bootstrap';
+
+import { Container, Form, Button, ButtonGroup } from 'react-bootstrap';
+
 import { signInWithGoogle, signInWithEmail } from '../firebase';
 import gooLogo from '../img/logo_google.png';
 
@@ -29,44 +31,51 @@ function Login() {
     };
 
     return(
-        <div>
-            <Container>
-                <div>
-                    <div>
-                        <div>로그인</div>
-                        <form onSubmit={onSubmit}>
-                            <input
-                                name="email"
-                                value={email}
-                                onChange={handleOnChange}
-                                placeholder='아이디(이메일)'
-                                required
-                            /><br/>
-                            <input
-                                name="password"
-                                type="password"
-                                value={password}
-                                onChange={handleOnChange}
-                                placeholder='비밀번호'
-                                required
-                            /><br/>
-                            <button type="submit" >로그인</button>
-                        </form>
-                        <div>
-                            <span>비밀번호 찾기</span><span>         </span>
-                            <Link to='/join'>
-                                <button>회원가입</button>
-                            </Link>
-                        </div>
-                        <button onClick={signInWithGoogle}>
-                            <img width={30} height={30} src={gooLogo} />
-                            구글 아이디로 로그인
-                        </button>
-                    </div>
-                </div>
-            </Container>
-        </div>
-
+        <Container>
+            <Form
+                onSubmit={onSubmit}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContents: 'center',
+                    alignItems: 'center'  
+                }}
+                className="mt-5"
+            >
+                <Form.Label>로그인</Form.Label>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                        name="email"
+                        value={email}
+                        onChange={handleOnChange}
+                        placeholder='아이디(이메일)'
+                        required
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Control
+                        name="password"
+                        type="password"
+                        value={password}
+                        onChange={handleOnChange}
+                        placeholder='비밀번호'
+                        required
+                    />
+                </Form.Group>
+                <Button variant="primary" type="submit" >로그인</Button> <br/>
+                <ButtonGroup aria-label="Basic example">
+                    <Button variant="light">아이디 찾기</Button>
+                    <Button variant="light">비밀번호 찾기</Button>
+                    <Link to='/join'>
+                        <Button variant="primary">회원가입</Button>
+                    </Link>
+                </ButtonGroup> <br/><br/>
+                <Button variant="light" onClick={signInWithGoogle}>
+                    <img width={30} height={30} src={gooLogo} />
+                    구글 아이디로 로그인
+                </Button>
+            </Form>
+        </Container>
     );
 }
 
