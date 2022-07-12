@@ -28,10 +28,9 @@ function Join() {
         if (password !== passwordCheck){
             setPasswordError(true);
         } else {
-            email && signUpWithEmailAndPassword(email, password);
+            email !== "" && signUpWithEmailAndPassword(email, password, name);
         }
-    }
-
+    };
 
     return(
         <Container>

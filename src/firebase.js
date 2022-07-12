@@ -11,7 +11,6 @@ import {
           signOut,
           createUserWithEmailAndPassword,
           signInWithEmailAndPassword,
-          onAuthStateChanged,
           updateProfile
         } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -27,16 +26,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_ID,
   appId: process.env.REACT_APP_API_ID,
 };
-
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyD7wkWJoNEBKzWm41usHQU4s-B7lASwFCs",
-//   authDomain: "mosaic-db1e4.firebaseapp.com",
-//   projectId: "mosaic-db1e4",
-//   storageBucket: "mosaic-db1e4.appspot.com",
-//   messagingSenderId: "151055190349",
-//   appId: "1:151055190349:web:08ad7e69f8dcc584954f04",
-// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -65,18 +54,16 @@ export const signInWithGoogle = () => {
 };
 
 // 이메일로 회원가입
-export const signUpWithEmailAndPassword = (email, password) => {
-  console.log(email, password);
-  createUserWithEmailAndPassword(auth, email, password)
+export const signUpWithEmailAndPassword = (email, password, name) => {
+  createUserWithEmailAndPassword(auth, email, password, name)
     .then((userCredential) => {
       const user = userCredential.user;
-      // updateProfile(auth.currentUser, { displayName: name })
+      updateProfile(auth.currentUser, { displayName: name })
       window.location.replace("/login");
       alert("가입 완료");
     })
     .catch((error) => {
       console.log(error);
-      console.log("가입 실패")
     });
     
 };
@@ -85,18 +72,16 @@ export const signUpWithEmailAndPassword = (email, password) => {
 export const signInWithEmail = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
-      // const username = result.user.displayName;
+      const username = result.user.displayName;
       const email = result.user.email;
-      console.log(result.user)
 
-      // sessionStorage.setItem("name", username);
+      sessionStorage.setItem("name", username);
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("isLogin", true);
       window.location.replace("/");  
     })
     .catch((error) => {
       console.log(error);
-      console.log("로그인 실패")
     });
 };
 
@@ -111,13 +96,8 @@ export const logout = () => {
       window.location.replace("/");  
   }).catch((error) => {
     console.log(error);
-    console.log("로그아웃 실패")
   })
-  console.log(sessionStorage);
 }
-
-export { onAuthStateChanged };
-
 
 //Database
 export const dbService = getFirestore();

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import { logout } from '../firebase';
+import React from 'react';
 import Header from '../components/Header/Header';
 
 const MainPage = () => {
@@ -9,7 +7,6 @@ const MainPage = () => {
             <Header/>
             <div>Main</div>
         </div>
-
     );
 }
 

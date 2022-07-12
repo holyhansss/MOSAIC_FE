@@ -23,7 +23,7 @@ function Header() {
                         <Nav className="justify-content-around"> 
                             <Nav.Link href="/">홈</Nav.Link>
                             <Nav.Link href="/market">시장 동향</Nav.Link>
-                            <Nav.Link href="/report">리포트</Nav.Link>
+                            <Nav.Link href="/reportList">리포트</Nav.Link>
                         </Nav>
                     </Col>
                     <Col className="md-4">
