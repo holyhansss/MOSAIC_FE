@@ -38,8 +38,9 @@ function Login() {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContents: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center'  
                 }}
+                className="mt-5"
             >
                 <Form.Label>로그인</Form.Label>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

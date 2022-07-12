@@ -43,6 +43,7 @@ function Join() {
                     justifyContents: 'center',
                     alignItems: 'center'
                 }}
+                className="mt-5"
             >
                 <Form.Label>회원가입</Form.Label>
                 <Form.Group className="mb-3" controlId="formBasicName">
