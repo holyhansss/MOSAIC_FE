@@ -4550,15 +4550,19 @@ const options = {
 
 // getDataFromCoinpaprica();
 
-export const getDataFromCoinpaprica = () => {
-  axios.request(options).then(function (response) {  
-    return sortCoindeskList(response.data);
+
+export const getDataFromCoinpaprica = async () => {
+    axios.request(options).then(function (response) {  
+    // console.log(response.data);
+    const la = sortCoindeskList(response.data);  
+    console.log(la)
+    return la;
   }).catch(function (error) {
     console.error(error);
-  });
+  }); 
 }
 
-function sortCoindeskList (current_coin_marketcap_list) {
+export async function sortCoindeskList  (current_coin_marketcap_list) {
 
   let dataSorted = [];
   
@@ -4573,8 +4577,6 @@ function sortCoindeskList (current_coin_marketcap_list) {
   }  
 
   dataSorted.sort((a, b) => a["DACS Rank"] - b["DACS Rank"]);
-
-
 
 
   let isAllFull = 0;
@@ -4610,9 +4612,9 @@ function sortCoindeskList (current_coin_marketcap_list) {
   //   }
   // }
 
-  console.log(coinSectorList);
+  // console.log(coinSectorList);
 
-  console.log(coinSectorList[4].list);
+  // console.log(coinSectorList[0].list);
 
   return coinSectorList;
 }
