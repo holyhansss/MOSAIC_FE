@@ -1,37 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import {Container, Grid, Box} from '@mui/material';
-import { getDocs, query, where, collection, orderBy } from 'firebase/firestore';
+import { getDocs, query, where, collection, orderBy, collectionGroup } from 'firebase/firestore';
 import { dbService } from '../firebase.js';
+
+//components
 import {Reportlistcard, Reportrecentcard} from '../components/Report/Reportlistcard.js';
 
 
 function ReportList() {
     // let recent = reports[0].title
     const [reports, setReports] = useState([]);
-    const [invest, setInvest] = [useState([])];
+    // const [investments, setInvestments] = useState([]);
 
     const getReports = async() => {
-        const q = query(collection(dbService, "weekly_report"),orderBy("date"));
+        const q = query(collection(dbService, "weekly_report"), orderBy("date"));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-            // console.log(doc.id, " => ", doc.data());
-
             const reportObj = {
                 title : doc.data().title,
                 date : doc.data().date,
                 writer : doc.data().writer,
                 // invest : doc.c,
             };
-            setReports(prev => [reportObj, ...prev]);
+            setReports(prev => [reportObj, ...prev])
         });
+
+        // const invest = query(collectionGroup(dbService, 'policy'));
+        // const querySnapShot = await getDocs(invest);
+        // querySnapShot.forEach((doc)=> {
+        //     const investObj = {
+        //         title : doc.data().title,
+        //         content : doc.data().content,
+        //     };
+        //     setInvestments(prev => [investObj, ...prev]);
+        // });
     };
     let result = reports[0];
-    console.log(reports)
+    // console.log(reports)
+    // console.log(investments)
     useEffect(() => { getReports() }, []);
-
-
-    
 
     return(
         <Container>
@@ -44,10 +52,10 @@ function ReportList() {
                 <Grid item xs={12}>
 
                     <div>
-                        {/* { result !== "undefined" ?
+                        { result !== undefined ?
                         // console.log(result?.writer)
-                        <Reportrecentcard title={result?.title} writer={result?.writer} />
-                    : console.log("no")} */}
+                        <Reportrecentcard title={result.title} writer={result.writer} date={result.date} />
+                    : console.log("no")}
 
                     </div>                
                 </Grid>

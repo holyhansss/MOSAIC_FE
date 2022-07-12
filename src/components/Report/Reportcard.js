@@ -22,7 +22,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function Reportcard() {
+function Reportcard({title, writer,date}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -39,10 +39,10 @@ function Reportcard() {
         // }
         title={
           <Typography variant="h2" gutterBottom component="div">
-          7월 1주차 모자익 리포트
+            {title}
       </Typography>
         }
-        subheader="2022.07.01 Mosaic"
+        subheader={date}
       />
       <CardMedia
         component="img"
