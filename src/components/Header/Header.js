@@ -32,7 +32,7 @@ function Header() {
                                 isLogin ==='true' ? 
                                 (
                                     <NavDropdown title={<img src={profile?profile:DefaultImg} width="30" height="30" onError={onError}/>} id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.1">마이페이지</NavDropdown.Item>
+                                        <NavDropdown.Item href="/profile">마이페이지</NavDropdown.Item>
                                         <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                     </NavDropdown>
                                 ) :
