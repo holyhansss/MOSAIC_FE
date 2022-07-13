@@ -4548,19 +4548,28 @@ const options = {
   headers: {}
 };
 
-// getDataFromCoinpaprica();
+
 
 
 export const getDataFromCoinpaprica = async () => {
-    axios.request(options).then(function (response) {  
-    // console.log(response.data);
-    const la = sortCoindeskList(response.data);  
-    console.log(la)
+  let la;  
+  await axios.request(options)
+    .then(
+      async function (response) {  
+        la = await sortCoindeskList(response.data);  
+        return(la);
+      }
+    )
+    .catch(
+          function(error){
+            console.log(error);
+          }
+      )
     return la;
-  }).catch(function (error) {
-    console.error(error);
-  }); 
 }
+
+
+getDataFromCoinpaprica();
 
 export async function sortCoindeskList  (current_coin_marketcap_list) {
 
@@ -4596,26 +4605,7 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
       break;
     }
   }
-  // let isAllFull = 0;
-  // for (let i = 0; i < coindesk_coins_list.length; i++) {
-  //   for (let j = 0; j < coinSectorList.length; j++) {
-  //     if (coindesk_coins_list[i].Sector == coinSectorList[j]){
-  //       if (coinSectorList[j].length <= 10) {
-  //         coinSectorList[j].push(coindesk_coins_list[i]);
-  //         isAllFull ++;
-  //       }        
-  //       break;
-  //     }   
-  //   }
-  //   if (isAllFull >= 60) {       
-  //     break;
-  //   }
-  // }
-
-  // console.log(coinSectorList);
-
-  // console.log(coinSectorList[0].list);
-
+  
   return coinSectorList;
 }
 
