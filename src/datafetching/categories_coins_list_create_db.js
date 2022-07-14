@@ -1,5 +1,24 @@
 import fetch from "node-fetch";
 import axios from "axios";
+import { insert_category_coins } from "./queries";
+
+const initialize_category_db = async () => {
+  const data_to_insert_to_db = await getDataFromCoinpaprica();
+  let insert_to_db = [];  
+  for (let i=0; i<data_to_insert_to_db.length; i++){
+    for (let j=0; j<data_to_insert_to_db[i].list.length; j++){
+      insert_to_db.push(
+        [
+          data_to_insert_to_db[i].list[j].Symbol, 
+          data_to_insert_to_db[i].list[j]["Name"],
+          data_to_insert_to_db[i].list[j]["Sector"],
+          data_to_insert_to_db[i].list[j]["DACS Rank"]
+        ]
+      ); 
+    }
+  }
+  insert_category_coins("category_coins_list", insert_to_db);
+}
 
    
 let coinSectorList =  [
@@ -4549,8 +4568,6 @@ const options = {
 };
 
 
-
-
 export const getDataFromCoinpaprica = async () => {
   let la;  
   await axios.request(options)
@@ -4608,5 +4625,4 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
   
   return coinSectorList;
 }
-
 

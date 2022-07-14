@@ -1,7 +1,11 @@
 import axios from "axios";
+import { getAllCoinsAllCategories } from "./queries.js";
 
+const getCoinsListAllCategories = () => {
+  getAllCoinsAllCategories();
+}
 
-export const getHistoricalData = async (coin_id, start_date, time_interval) => {
+const getHistoricalData = async (coin_id, start_date, time_interval) => {
   const options = {
     method: 'GET',
     url: 'https://api.coinpaprika.com/v1/tickers/'+ coin_id +'/historical?start='+ start_date +'&interval='+time_interval,
@@ -20,13 +24,12 @@ export const getHistoricalData = async (coin_id, start_date, time_interval) => {
   return result;
 }
 
+getCoinsListAllCategories();
 
-const time_interval = '1d';
-const start_date = '2022-01-01'
-const coin_id = 'eth-ethereum'
+// const time_interval = '1d';
+// const start_date = '2022-01-01'
+// const coin_id = 'eth-ethereum'
 
-getHistoricalData(coin_id, start_date, time_interval);
+// getHistoricalData(coin_id, start_date, time_interval);
 
-// curl --request GET \
-// --url 'https://api.coinpaprika.com/v1/tickers/btc-bitcoin/historical?start=2022-01-01&interval=1d'
 

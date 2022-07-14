@@ -4,7 +4,7 @@ var connection = createConnection({
   host: "localhost",
   user: "root",
   password: "Password1!",
-  database : 'MOSAIC'
+  database : 'crypto_daily_price '
 });
 
 connection.connect(function(err) {
@@ -24,6 +24,38 @@ connection.query({
 
 
 //// dailyPrice QUERY LIST
+
+//Create category coins list
+export const insert_category_coins = (tableName, valuesList) => {
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    var sql = "INSERT INTO " + tableName + " VALUES ?";
+    
+    connection.query(sql, [valuesList], function (err, result) {
+      if (err) throw err;
+      console.log("Number of records inserted: " + result.affectedRows);
+    });
+  });
+}
+
+//Retrieve all coins from all categories
+export const getAllCoinsAllCategories = () => {
+  let result;
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    var sql = "SELECT CoinSymbol FROM categories_coins_list";
+    
+    connection.query(sql, [valuesList], function (err, result) {
+      if (err) throw err;
+      console.log("Number of records inserted: " + result.affectedRows);
+    });
+  });
+  // return result;
+}
+
+
 
 //find table by name
 let coin_symbol = 'BTC';
