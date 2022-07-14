@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box, Tab} from '@mui/material';
+import {Box, Tab, Container} from '@mui/material';
 import {TabList, TabPanel, TabContext} from '@mui/lab';
 
 //components
@@ -19,16 +19,21 @@ export default function LabTabs() {
     <Header />
     <p />
       <TabContext value={value}>
-        <Box sx={{  borderColor: 'divider' }} ml={76}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-          </TabList>
-        </Box>
+        <Container maxWidth="md">
+          <Box sx={{  borderColor: 'divider', position: "relative", left:"35%"}} >
+            <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{justifyContent: 'center'}}>
+              
+              <Tab label="주간이슈" value="1" />
+              <Tab label="Winner & Loser" value="2" />
+            
+            </TabList>
+          </Box> 
+        </Container>
         <p/>
         <TabPanel value="1"><ReportContents /></TabPanel>
         <TabPanel value="2"><Winner /></TabPanel>
       </TabContext>
+
 
     </div>
 

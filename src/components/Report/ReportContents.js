@@ -69,9 +69,10 @@ function ReportContents() {
             <p />
             <Container maxWidth="md" >
                 <Grid container spacing={1}>
+                    <Grid item xs={12}>
                     <Reportcard id={id} title={title} writer={writer} date={date} inve={investments} poli={policies} mac={marcro}/>
-                    {/* <Reportacord /> */}
-                    <Grid item xs={4} ml={90}>
+                </Grid>
+                    <Grid item xs={4}>
                         <VisibilityIcon />
                         <IconButton>
                             <FavoriteBorderIcon />
