@@ -26,7 +26,7 @@ function Index1mo() {
   
   },
     headers: {
-      'x-api-key': REACT_APP_COIN_API_KEY
+      'x-api-key': process.env.REACT_APP_COIN_API_KEY
     }
   };
   var CMCOptions = {
@@ -39,7 +39,7 @@ function Index1mo() {
 
   },
     headers: {
-      'x-api-key': REACT_APP_COIN_API_KEY
+      'x-api-key': process.env.REACT_APP_COIN_API_KEY
     }
   };
   
