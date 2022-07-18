@@ -2,6 +2,7 @@
   "name": "mosaic",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -17,6 +18,7 @@
     "firebase-tools": "^1.2.0",
     "internmap": "^2.0.3",
     "moment": "^2.29.3",
+    "mysql2": "^2.3.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.2.0",
