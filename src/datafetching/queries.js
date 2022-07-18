@@ -3,7 +3,6 @@ import mysql from 'mysql2/promise';
 
 //// dailyPrice QUERY LIST
 
-
 //Create categories coins list
 export const create_categories_coins_list = async () => {
   var sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
@@ -19,10 +18,9 @@ export const create_categories_coins_list = async () => {
   return rows;
 }
 
-
 //Insert data into categories coins list
 export const insert_category_coins = async (tableName, valuesList) => {
-  var sql = "INSERT INTO " + tableName + " VALUES ? ";
+  var sql = 'INSERT INTO ' + tableName + ' VALUES ?';
   const connection = await mysql.createConnection
     ({
         host: "localhost",
@@ -30,14 +28,14 @@ export const insert_category_coins = async (tableName, valuesList) => {
         password: "Password1!",
         database : "crypto_daily_price",
     });
-  const [rows, fields] = await connection.execute(sql, [valuesList]);
+  const [rows, fields] = await connection.query(sql, [valuesList]);
   console.log("end query insert_category_coins()");
   return rows;
 }
 
 //Retrieve all coins from all categories
 export const get_all_coinID_all_categories = async () => {
-  var sql = "SELECT CoinSymbol, LOWER(CONCAT( CoinSymbol, '-', CoinName)) AS CoinSymbolAndName FROM categories_coins_list";
+  var sql = "SELECT CoinSymbol, CoinPapricaID FROM categories_coins_list";
   const connection = await mysql.createConnection
     ({
         host: "localhost",
@@ -50,8 +48,6 @@ export const get_all_coinID_all_categories = async () => {
   console.log("end query get_all_coins_all_categories()");
   return rows;
 }
-
-get_all_coinID_all_categories()
 
 //find table by name
 export const does_table_exist = async (tableName) => {
@@ -107,7 +103,7 @@ const insert_coin_price = async (tableName, valuesList) => {
         password: "Password1!",
         database : "crypto_daily_price",
     });
-  const [rows, fields] = await connection.execute(sql, [valuesList]);
+  const [rows, fields] = await connection.query(sql, [valuesList]);
   console.log("end query insert_coin_price()");
   return rows;
 }
@@ -116,16 +112,18 @@ const insert_coin_price = async (tableName, valuesList) => {
 let startDate = '';
 let endDate = '';
 
-const get_prices_start_to_end = (tableName, valuesList, startDate, endDate) => {
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
+const get_prices_start_to_end = async (tableName, valuesList, startDate, endDate) => {
+
     var sql = "SELECT * FROM " + tableName + " WHERE date_column BETWEEN "+ startDate + " AND " + endDate;
-    
-    connection.query(sql, [valuesList], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
+    const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
     });
-  });
-  console.log("end query get_prices_start_to_end()");
+    const [rows, fields] = await connection.query(sql, [valuesList]);
+    console.log("end query get_prices_start_to_end()");
+    return rows;
+
 }

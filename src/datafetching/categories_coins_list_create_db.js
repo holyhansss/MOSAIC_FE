@@ -5,6 +5,7 @@ import { insert_category_coins } from "./queries.js";
 const initialize_category_db = async () => {
   const data_to_insert_to_db = await getDataFromCoinpaprica();
   let insert_to_db = [];  
+  console.log("data_to_insert_to_db[0].list[0]: ", data_to_insert_to_db[0].list[0]);
   
   for (let i=0; i<data_to_insert_to_db.length; i++){
     for (let j=0; j<data_to_insert_to_db[i].list.length; j++){
@@ -12,15 +13,14 @@ const initialize_category_db = async () => {
         [
           data_to_insert_to_db[i].list[j].Symbol, 
           data_to_insert_to_db[i].list[j]["Name"],
-          data_to_insert_to_db[i].list[j].id,
+          data_to_insert_to_db[i].list[j].CoinPapricaID,
           data_to_insert_to_db[i].list[j]["Sector"],
           data_to_insert_to_db[i].list[j]["DACS Rank"]
         ]
       ); 
     }
   }
-  // console.log('valuesList: ', insert_to_db);
-  // console.log("data to insert list: ", data_to_insert_to_db[0].list);
+  console.log("insert_to_db[0]: ", insert_to_db[0]); 
   insert_category_coins("categories_coins_list", insert_to_db);
 }
 
@@ -4578,7 +4578,6 @@ const getDataFromCoinpaprica = async () => {
     .then(
       async function (response) {  
         la = await sortCoindeskList(response.data);  
-        // console.log("This is la: ", la);
         return la;
       }
     )
@@ -4599,9 +4598,9 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
   
   for (let i=0; i < coindesk_coins_list.length; i++) {
     for (let j=0; j < current_coin_marketcap_list.length; j++) {
-      // for (let j=0; j < 10; j++) {
       if (coindesk_coins_list[i].Symbol == current_coin_marketcap_list[j].symbol){
         coindesk_coins_list[i]["DACS Rank"] = current_coin_marketcap_list[j].rank;
+        coindesk_coins_list[i].CoinPapricaID = current_coin_marketcap_list[j].id;
         dataSorted.push(coindesk_coins_list[i]);
         break;
       }
@@ -4628,6 +4627,7 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
   
   return coinSectorList;
 }
+
 
 
 

@@ -4,7 +4,7 @@ import { create_coin_table, does_table_exist, get_all_coinID_all_categories } fr
 const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
   const allCategoryCoinsList = await get_all_coinID_all_categories();
   
-  for (let i=50; i<allCategoryCoinsList.length; i++) {
+  for (let i=0; i<allCategoryCoinsList.length; i++) {
 
 
     const thisCoinSymbol = allCategoryCoinsList[i].CoinSymbol;
@@ -17,10 +17,10 @@ const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
       const time_interval = '1d';
       const start_date = getPreviousYearDate();
       
-      const thisCoinSymbolAndName = allCategoryCoinsList[i].CoinSymbolAndName;
-      const thisCoinHistoricalData = await getHistoricalData(thisCoinSymbolAndName, start_date, time_interval);
+      const thisCoinPapricaID = allCategoryCoinsList[i].CoinPapricaID;
+      const thisCoinHistoricalData = await getHistoricalData(thisCoinPapricaID, start_date, time_interval);
       if (thisCoinHistoricalData == null || thisCoinHistoricalData.length == undefined){
-        nullHistoricalDataError(thisCoinSymbolAndName);
+        nullHistoricalDataError(thisCoinPapricaID);
         continue;
         
       }
@@ -78,8 +78,8 @@ const getHistoricalData = async (coin_id, start_date, time_interval) => {
   return result;
 }
 
-const nullHistoricalDataError = (thisCoinSymbolAndName) => {
-  console.error("Historical Data for the coin ", thisCoinSymbolAndName, " is broken");
+const nullHistoricalDataError = (thisCoinPapricaID) => {
+  console.error("Historical Data for the coin ", thisCoinPapricaID, " is broken");
 }
 
 
