@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-
+import {MY_HOST, MY_USERNAME, MY_PASSWORD, MY_DATABASE} from querySecureInfo.js
 
 //// dailyPrice QUERY LIST
 
@@ -8,10 +8,10 @@ export const create_categories_coins_list = async () => {
   var sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
   const connection = await mysql.createConnection
     ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
+        host: MY_HOST,
+        user: MY_USERNAME,
+        password: MY_PASSWORD,
+        database : MY_DATABASE,
     });
   const [rows, fields] = await connection.execute(sql);
   console.log("end query create_categories_coins_list()");
@@ -22,12 +22,12 @@ export const create_categories_coins_list = async () => {
 export const insert_category_coins = async (tableName, valuesList) => {
   var sql = 'INSERT INTO ' + tableName + ' VALUES ?';
   const connection = await mysql.createConnection
-    ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
-    });
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
   const [rows, fields] = await connection.query(sql, [valuesList]);
   console.log("end query insert_category_coins()");
   return rows;
@@ -37,12 +37,12 @@ export const insert_category_coins = async (tableName, valuesList) => {
 export const get_all_coinID_all_categories = async () => {
   var sql = "SELECT CoinSymbol, CoinPapricaID FROM categories_coins_list";
   const connection = await mysql.createConnection
-    ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
-    });
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
   const [rows, fields] = await connection.execute(sql);
   console.log(rows);
   console.log("end query get_all_coins_all_categories()");
@@ -57,12 +57,12 @@ export const does_table_exist = async (tableName) => {
               where table_name = '" + tableName + "' \
             );"
   const connection = await mysql.createConnection
-    ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
-    });
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
   const [rows, fields] = await connection.execute(sql);
   //retrieving result of query that is in json form
   //does this really have to be this way..?
@@ -80,12 +80,12 @@ export const create_coin_table = async (tableName) => {
 
   var sql = "CREATE TABLE " + tableName + " (Date DATE, PriceInDollar DECIMAL(10,1))"
   const connection = await mysql.createConnection
-    ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
-    });
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
   const [rows, fields] = await connection.execute(sql);
   console.log("end query create_coin_table()");
   return rows;
@@ -97,12 +97,12 @@ export const create_coin_table = async (tableName) => {
 const insert_coin_price = async (tableName, valuesList) => {
   var sql = "INSERT INTO " + tableName + " VALUES ?";
   const connection = await mysql.createConnection
-    ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
-    });
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
   const [rows, fields] = await connection.query(sql, [valuesList]);
   console.log("end query insert_coin_price()");
   return rows;
@@ -117,11 +117,11 @@ const get_prices_start_to_end = async (tableName, valuesList, startDate, endDate
     var sql = "SELECT * FROM " + tableName + " WHERE date_column BETWEEN "+ startDate + " AND " + endDate;
     const connection = await mysql.createConnection
     ({
-        host: "localhost",
-        user: "root",
-        password: "Password1!",
-        database : "crypto_daily_price",
-    });
+      host: MY_HOST,
+      user: MY_USERNAME,
+      password: MY_PASSWORD,
+      database : MY_DATABASE,
+  });
     const [rows, fields] = await connection.query(sql, [valuesList]);
     console.log("end query get_prices_start_to_end()");
     return rows;
