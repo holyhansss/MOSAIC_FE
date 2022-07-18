@@ -1,108 +1,115 @@
-import { createConnection } from 'mysql';
-
-var connection = createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Password1!",
-  database : 'crypto_daily_price '
-});
-
-connection.connect(function(err) {
-  if (err) throw err;
-  else
-  console.log("Connected!");
-});
-
-connection.query({
-  sql: 'show tables',
-  timeout: 4000, // 4s
-}, function (error, results, fields) {
-  // error will be an Error if one occurred during the query
-  // results will contain the results of the query
-  // fields will contain information about the returned results fields (if any)
-});
+import mysql from 'mysql2/promise';
 
 
 //// dailyPrice QUERY LIST
 
-//Create category coins list
-export const insert_category_coins = (tableName, valuesList) => {
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "INSERT INTO " + tableName + " VALUES ?";
-    
-    connection.query(sql, [valuesList], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
+
+//Create categories coins list
+export const create_categories_coins_list = async () => {
+  var sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
+  const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
     });
-  });
+  const [rows, fields] = await connection.execute(sql);
+  console.log("end query create_categories_coins_list()");
+  return rows;
+}
+
+
+//Insert data into categories coins list
+export const insert_category_coins = async (tableName, valuesList) => {
+  var sql = "INSERT INTO " + tableName + " VALUES ? ";
+  const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
+    });
+  const [rows, fields] = await connection.execute(sql, [valuesList]);
+  console.log("end query insert_category_coins()");
+  return rows;
 }
 
 //Retrieve all coins from all categories
-export const getAllCoinsAllCategories = () => {
-  let result;
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "SELECT CoinSymbol FROM categories_coins_list";
-    
-    connection.query(sql, [valuesList], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
+export const get_all_coinID_all_categories = async () => {
+  var sql = "SELECT CoinSymbol, LOWER(CONCAT( CoinSymbol, '-', CoinName)) AS CoinSymbolAndName FROM categories_coins_list";
+  const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
     });
-  });
-  // return result;
+  const [rows, fields] = await connection.execute(sql);
+  console.log(rows);
+  console.log("end query get_all_coins_all_categories()");
+  return rows;
 }
 
-
+get_all_coinID_all_categories()
 
 //find table by name
-let coin_symbol = 'BTC';
-let tableName = 'dailyPrice_' + coin_symbol 
-
-const does_table_exit = (tableName) => {
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' AND table_schema= " + tableName;
-    
-    connection.query(sql, [valuesList], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
+export const does_table_exist = async (tableName) => {
+  // var sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' AND table_schema= " + tableName;
+  var sql = "SELECT EXISTS( \
+              SELECT * FROM information_schema.tables \
+              where table_name = '" + tableName + "' \
+            );"
+  const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
     });
-  });  
+  const [rows, fields] = await connection.execute(sql);
+  //retrieving result of query that is in json form
+  //does this really have to be this way..?
+  let firstKey=Object.keys(rows[0])[0];
+  let firstValueOfQueryResult= rows[0][firstKey];
+
+  console.log("end query does_table_exist()");
+  return firstValueOfQueryResult;
 }
+
 
 //Create table and insert data when coin table does NOT already exist
 //! may have to amend incoming date format
-const create_coin_table = (tableName) => {
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "CREATE TABLE " + tableName + " (Date DATE, PriceInDollar DECIMAL(10,1))"
-    
-    connection.query(sql, [valuesList], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
+export const create_coin_table = async (tableName) => {
+
+  var sql = "CREATE TABLE " + tableName + " (Date DATE, PriceInDollar DECIMAL(10,1))"
+  const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
     });
-  });  
+  const [rows, fields] = await connection.execute(sql);
+  console.log("end query create_coin_table()");
+  return rows;
 }
 
-//Insert when coin table already exists
-let valuesList = [];
 
-const insert_coin_price = (tableName, valuesList) => {
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "INSERT INTO " + tableName + " VALUES ?";
-    
-    connection.query(sql, [valuesList], function (err, result) {
-      if (err) throw err;
-      console.log("Number of records inserted: " + result.affectedRows);
+
+//Insert when coin table already exists
+const insert_coin_price = async (tableName, valuesList) => {
+  var sql = "INSERT INTO " + tableName + " VALUES ?";
+  const connection = await mysql.createConnection
+    ({
+        host: "localhost",
+        user: "root",
+        password: "Password1!",
+        database : "crypto_daily_price",
     });
-  });
+  const [rows, fields] = await connection.execute(sql, [valuesList]);
+  console.log("end query insert_coin_price()");
+  return rows;
 }
 
 //get data from startDate to endDate
@@ -120,6 +127,5 @@ const get_prices_start_to_end = (tableName, valuesList, startDate, endDate) => {
       console.log("Number of records inserted: " + result.affectedRows);
     });
   });
+  console.log("end query get_prices_start_to_end()");
 }
-
-//// queries for 

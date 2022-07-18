@@ -1,26 +1,29 @@
 import fetch from "node-fetch";
 import axios from "axios";
-import { insert_category_coins } from "./queries";
+import { insert_category_coins } from "./queries.js";
 
 const initialize_category_db = async () => {
   const data_to_insert_to_db = await getDataFromCoinpaprica();
   let insert_to_db = [];  
+  
   for (let i=0; i<data_to_insert_to_db.length; i++){
     for (let j=0; j<data_to_insert_to_db[i].list.length; j++){
       insert_to_db.push(
         [
           data_to_insert_to_db[i].list[j].Symbol, 
           data_to_insert_to_db[i].list[j]["Name"],
+          data_to_insert_to_db[i].list[j].id,
           data_to_insert_to_db[i].list[j]["Sector"],
           data_to_insert_to_db[i].list[j]["DACS Rank"]
         ]
       ); 
     }
   }
-  insert_category_coins("category_coins_list", insert_to_db);
+  // console.log('valuesList: ', insert_to_db);
+  // console.log("data to insert list: ", data_to_insert_to_db[0].list);
+  insert_category_coins("categories_coins_list", insert_to_db);
 }
 
-   
 let coinSectorList =  [
   {sector: 'Currency', list : []},
   {sector: 'Smart Contract Platform', list : []},
@@ -4534,6 +4537,7 @@ const coindesk_coins_list = [
   }
  ]
 
+//  //
 // fetch('coindesk_categories.json')
 //   .then(response => response.json())
 //   .then(jsonResponse => console.log(jsonResponse)) 
@@ -4557,7 +4561,7 @@ const coindesk_coins_list = [
 //     }
 
 // getData()
-
+// //
 
 
 const options = {
@@ -4568,13 +4572,14 @@ const options = {
 };
 
 
-export const getDataFromCoinpaprica = async () => {
+const getDataFromCoinpaprica = async () => {
   let la;  
   await axios.request(options)
     .then(
       async function (response) {  
         la = await sortCoindeskList(response.data);  
-        return(la);
+        // console.log("This is la: ", la);
+        return la;
       }
     )
     .catch(
@@ -4582,11 +4587,11 @@ export const getDataFromCoinpaprica = async () => {
             console.log(error);
           }
       )
+    
     return la;
 }
 
 
-getDataFromCoinpaprica();
 
 export async function sortCoindeskList  (current_coin_marketcap_list) {
 
@@ -4594,6 +4599,7 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
   
   for (let i=0; i < coindesk_coins_list.length; i++) {
     for (let j=0; j < current_coin_marketcap_list.length; j++) {
+      // for (let j=0; j < 10; j++) {
       if (coindesk_coins_list[i].Symbol == current_coin_marketcap_list[j].symbol){
         coindesk_coins_list[i]["DACS Rank"] = current_coin_marketcap_list[j].rank;
         dataSorted.push(coindesk_coins_list[i]);
@@ -4604,13 +4610,10 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
 
   dataSorted.sort((a, b) => a["DACS Rank"] - b["DACS Rank"]);
 
-
   let isAllFull = 0;
   for (let i = 0; i < dataSorted.length; i++) {
     for (let j = 0; j < coinSectorList.length; j++) {
       if (dataSorted[i].Sector == coinSectorList[j].sector){
-        // console.log("dataSorted[i]: "+ dataSorted[i]);
-        // console.log("coinSectorList[i]: "+ coinSectorList[i].sector);
         if (coinSectorList[j].list.length < 10) {
           coinSectorList[j].list.push(dataSorted[i]);
           isAllFull ++;
@@ -4626,3 +4629,6 @@ export async function sortCoindeskList  (current_coin_marketcap_list) {
   return coinSectorList;
 }
 
+
+
+initialize_category_db()
