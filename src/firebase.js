@@ -1,8 +1,4 @@
-// import React, { useState, useEffect } from 'react';
-
 // Import the functions you need from the SDKs you need
-import { useNavigate } from "react-router-dom";
-
 import { initializeApp } from "firebase/app";
 import {
           getAuth,
@@ -14,6 +10,8 @@ import {
           updateProfile
         } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+
+import profile from './img/profile.png';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -42,7 +40,6 @@ export const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
 
-
 // 구글로 로그인
 export const signInWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
@@ -55,7 +52,7 @@ export const signInWithGoogle = () => {
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("profilePic", profilePic);
       sessionStorage.setItem("isLogin", true);
-      window.location.replace("/");
+      window.location.replace('/');
     })
     .catch((error) => {
       console.log(error);
@@ -65,14 +62,22 @@ export const signInWithGoogle = () => {
 // 이메일로 회원가입
 export const signUpWithEmailAndPassword = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password, name)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       const user = userCredential.user;
-      updateProfile(auth.currentUser, { displayName: name })
+
+      await updateProfile(auth.currentUser, { displayName: name, photoURL: profile })
       window.location.replace("/login");
       alert("가입 완료");
     })
     .catch((error) => {
-      console.log(error);
+      const errorCode = error.code;
+      if (errorCode === "auth/email-already-in-use") {
+        alert("이미 가입된 이메일입니다.")
+      } else if (errorCode === "auth/invalid-email") {
+        alert("유효하지 않은 이메일 주소입니다.")
+      } else {
+        alert("회원 가입 실패")
+      }
     });
     
 };
@@ -83,14 +88,18 @@ export const signInWithEmail = (email, password) => {
     .then((result) => {
       const username = result.user.displayName;
       const email = result.user.email;
+      const profilePic = result.user.photoURL;
 
       sessionStorage.setItem("name", username);
       sessionStorage.setItem("email", email);
+      sessionStorage.setItem("profilePic", profilePic);
       sessionStorage.setItem("isLogin", true);
       window.location.replace("/");  
     })
     .catch((error) => {
-      console.log(error);
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage);
     });
 };
 
@@ -104,7 +113,9 @@ export const logout = () => {
       sessionStorage.setItem("isLogin", false);
       window.location.replace("/");  
   }).catch((error) => {
-    console.log(error);
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
   })
 }
 

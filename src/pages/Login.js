@@ -74,7 +74,7 @@ function Login() {
                         </Link>
                     </ButtonGroup> <br/><br/>
                     <Button variant="light" onClick={signInWithGoogle}>
-                        <img width={30} height={30} src={gooLogo} />
+                        <img alt="Google" width={30} height={30} src={gooLogo} />
                         구글 아이디로 로그인
                     </Button>
                 </Form>

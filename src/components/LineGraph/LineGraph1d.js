@@ -7,9 +7,9 @@ import {
 import { type } from '@testing-library/user-event/dist/type';
 
 
-// S&P 500 지수 와 CMC 200 지수를 그래프로
+// S&P 500 지수 와 CMC 200 지수를 그래프로(1일 기준)
 
-function Index() {
+function Index1d() {
   const axios = require('axios');
   const [time, setTime] = useState([]);
   const [index1, setIndex1] = useState([]);
@@ -26,23 +26,45 @@ function Index() {
       
       const IndexData = res.data.chart.result[0].indicators.quote[0].close.map((data, index) => (
         data && {
-          time:moment(res.data.chart.result[0].timestamp[index]*1000).format('HH:mm'),
+          time: res.data.chart.result[0].timestamp[index],
           SnP: data
       
           
         }));
        
        var SNP_first=IndexData[0].SnP
-        for (const item of IndexData){
-             
-            item.SnP=100/SNP_first*item.SnP
-            
-            //console.log(item)
-            
-        }
+      
+       for (let i=0;i<IndexData.length; i++){
+
+        if (IndexData[0] == null ){
+              
+              for (let j = 0; ; j++) {
+                if (IndexData[j] == null)
+                  continue;
+                IndexData[0]= IndexData[j];
+                break;
+              }
+              
+              
+          }
+          else if (IndexData[i] == null  ) {
+            IndexData[i]= {time: null, SnP: null};
+            IndexData[i].time = IndexData[i-1].time+60;
+            IndexData[i].SnP= IndexData[i-1].SnP
+            //IndexData2[i].CMC= ((IndexData2[i+1].CMC+IndexData2[i-1].CMC)/2) -  평균값일 경우
+          } 
+          else{  
+          };  
+      }
+      
+  for (let i=0;i<IndexData.length; i++){
+    IndexData[i].SnP=100/SNP_first*IndexData[i].SnP
+    IndexData[i].time=moment(IndexData[i].time*1000).format('HH:mm')
         
+  }
         
         setIndex1(IndexData)
+        
        
      
   });
@@ -57,22 +79,37 @@ function Index() {
           CMC: data
           
         }));
+        
+        
+
         var CMC_first=IndexData2[0].CMC
 
           for (let i=0;i<IndexData2.length; i++){
-            if (IndexData2[i] == null){
+
+            if (IndexData2[0] == null ){
                   
-                  IndexData2[i]= {time: null, CMC: null};
-                  IndexData2[i].time = IndexData2[i-1].time+60;
-                  IndexData2[i].CMC= ((IndexData2[i+1].CMC+IndexData2[i-1].CMC)/2)
+                  for (let j = 0; ; j++) {
+                    if (IndexData2[j] == null)
+                      continue;
+                    IndexData2[0]= IndexData2[j];
+                    break;
+                  }
+                  
+                  
               }
+              else if (IndexData2[i] == null  ) {
+                IndexData2[i]= {time: null, CMC: null};
+                IndexData2[i].time = IndexData2[i-1].time+60;
+                IndexData2[i].CMC= IndexData2[i-1].CMC
+                //IndexData2[i].CMC= ((IndexData2[i+1].CMC+IndexData2[i-1].CMC)/2) -  평균값일 경우
+              } 
               else{  
               };  
           }
           
       for (let i=0;i<IndexData2.length; i++){
         IndexData2[i].CMC=100/CMC_first*IndexData2[i].CMC
-        IndexData2[i].time=moment(res.data.chart.result[0].timestamp[IndexData2]*1000).format('HH:mm')
+        IndexData2[i].time=moment(IndexData2[i].time*1000).format('HH:mm')
             
       }
       
@@ -121,6 +158,6 @@ function Index() {
   );
 };
 
-export default Index;
+export default Index1d;
 
 
