@@ -1,12 +1,10 @@
 import React, { useRef } from 'react';
-import { Grid, Container, Paper, Tab, Box} from '@mui/material';
+import {Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Nav from 'react-bootstrap/Nav';
 
 
 function Reportcard({title, writer, date, inve, poli, mac}) {
-
-
 
   const inputinvest = useRef([]);
   const inputmacro = useRef([]);
