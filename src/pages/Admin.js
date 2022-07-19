@@ -5,8 +5,13 @@ import { Container, Row, Spinner } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { getFirestore, collection, addDoc, query, getDocs} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+
 // components
 import AdminTopicUploadForm from "../components/AdmimBox/AdmimBox";
+
+// constants
+import {FIREBASE_WEEKLY_REPORT_COLLECTION, FIREBASE_REPORT_SUBCOLLECTION, REPORT_TITLES} from "../constants/constants";
+
 
 const Admin = () => {
 
@@ -87,9 +92,9 @@ const Admin = () => {
                         }}
                         label=''/>  
                 </Container>
-                <AdminTopicUploadForm ref={childRef1} title="거시경제" firebaseCollectionName="weekly_report" firebaseSubCollectionName="macroeconomic" db={db}/>
-                <AdminTopicUploadForm ref={childRef2} title="크립토 규제/정책" firebaseCollectionName="weekly_report" firebaseSubCollectionName="policy" db={db}/>
-                <AdminTopicUploadForm ref={childRef3} title="크립토 기술/투자 이슈" firebaseCollectionName="weekly_report" firebaseSubCollectionName="investment" db={db}/>
+                <AdminTopicUploadForm ref={childRef1} title={REPORT_TITLES[0]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[0]} db={db}/>
+                <AdminTopicUploadForm ref={childRef2} title={REPORT_TITLES[1]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[1]} db={db}/>
+                <AdminTopicUploadForm ref={childRef3} title={REPORT_TITLES[2]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[0]} db={db}/>
                 <Container className="mt-5 align-item-center h3">
                     Insight
                     <Form.Control
