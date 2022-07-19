@@ -16,23 +16,15 @@ import profile from './img/profile.png';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_API_KEY,
-//   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-//   projectId: process.env.REACT_APP_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_MESSAGING_ID,
-//   appId: process.env.REACT_APP_API_ID,
-// };
-
 const firebaseConfig = {
-  apiKey: "AIzaSyD7wkWJoNEBKzWm41usHQU4s-B7lASwFCs",
-  authDomain: "mosaic-db1e4.firebaseapp.com",
-  projectId: "mosaic-db1e4",
-  storageBucket: "mosaic-db1e4.appspot.com",
-  messagingSenderId: "151055190349",
-  appId: "1:151055190349:web:08ad7e69f8dcc584954f04"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_ID,
+  appId: process.env.REACT_APP_API_ID,
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
