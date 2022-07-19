@@ -25,6 +25,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_API_ID,
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
