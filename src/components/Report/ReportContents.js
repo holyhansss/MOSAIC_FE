@@ -8,7 +8,8 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { getDocs, collection } from 'firebase/firestore';
 import { dbService } from '../../firebase.js';
-//componens
+
+//components
 import Comment from '../Comment/Comment.js';
 import Reportcard from './Reportcard.js';
 
@@ -59,9 +60,6 @@ function ReportContents() {
         });
     };
 
-    // console.log(investments);
-    // console.log(policies);
-    // console.log(marcro);
     useEffect(() => { getContents() }, []);
 
     return ( 
@@ -83,7 +81,7 @@ function ReportContents() {
                     </Grid> 
 
                     <Grid item xs={12}>
-                        <Comment />
+                        <Comment id={id} />
                     </Grid>
                 </Grid>
             </Container>
