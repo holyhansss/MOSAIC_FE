@@ -47,6 +47,7 @@ function Marketpage() {
           </div>
           
           {content !== null &&<div>{selectComponent[content]}</div>}
+          <div><FearandGreed/></div>
         </div>
         
       );
