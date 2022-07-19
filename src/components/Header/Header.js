@@ -3,8 +3,8 @@ import { Container, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { logout } from '../../firebase';
 
 function Header() {
-    let isLogin = sessionStorage.getItem("isLogin");
-    let profile = sessionStorage.getItem("profilePic");
+    const isLogin = sessionStorage.getItem("isLogin");
+    const profile = sessionStorage.getItem("profilePic");
 
     return (
         <>

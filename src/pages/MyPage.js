@@ -28,7 +28,6 @@ function MyPage() {
                                 </Row>
                             </Col>
                         </Row>
-                        <hr/>
                         <Row>
                             <Tabs
                                 defaultActiveKey="posts"
