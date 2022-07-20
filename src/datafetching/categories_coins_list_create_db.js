@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import axios from "axios";
-import { insert_category_coins } from "./queries.js";
+import { insert_to_db_table } from "./queries.js";
 
 const initialize_category_db = async () => {
   const data_to_insert_to_db = await getDataFromCoinpaprica();
@@ -21,7 +21,7 @@ const initialize_category_db = async () => {
     }
   }
   console.log("insert_to_db[0]: ", insert_to_db[0]); 
-  insert_category_coins("categories_coins_list", insert_to_db);
+  insert_to_db_table("categories_coins_list", insert_to_db);
 }
 
 let coinSectorList =  [
@@ -4537,6 +4537,8 @@ const coindesk_coins_list = [
   }
  ]
 
+
+ 
 //  //
 // fetch('coindesk_categories.json')
 //   .then(response => response.json())
@@ -4561,7 +4563,7 @@ const coindesk_coins_list = [
 //     }
 
 // getData()
-// //
+
 
 
 const options = {

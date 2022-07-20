@@ -1,11 +1,11 @@
 import mysql from 'mysql2/promise';
-import {MY_HOST, MY_USERNAME, MY_PASSWORD, MY_DATABASE} from querySecureInfo.js
+import {MY_HOST, MY_USERNAME, MY_PASSWORD, MY_DATABASE} from "./querySecureInfo.js"
 
 //// dailyPrice QUERY LIST
 
 //Create categories coins list
 export const create_categories_coins_list = async () => {
-  var sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
+  let sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
   const connection = await mysql.createConnection
     ({
         host: MY_HOST,
@@ -18,9 +18,9 @@ export const create_categories_coins_list = async () => {
   return rows;
 }
 
-//Insert data into categories coins list
-export const insert_category_coins = async (tableName, valuesList) => {
-  var sql = 'INSERT INTO ' + tableName + ' VALUES ?';
+//Insert data to table
+export const insert_to_db_table = async (tableName, valuesList) => {
+  let sql = 'INSERT INTO `' + tableName + '` VALUES ?';
   const connection = await mysql.createConnection
   ({
     host: MY_HOST,
@@ -29,13 +29,13 @@ export const insert_category_coins = async (tableName, valuesList) => {
     database : MY_DATABASE,
 });
   const [rows, fields] = await connection.query(sql, [valuesList]);
-  console.log("end query insert_category_coins()");
+  console.log("end query insert_to_db_table()");
   return rows;
 }
 
 //Retrieve all coins from all categories
 export const get_all_coinID_all_categories = async () => {
-  var sql = "SELECT CoinSymbol, CoinPapricaID FROM categories_coins_list";
+  let sql = "SELECT CoinSymbol, CoinPapricaID FROM categories_coins_list";
   const connection = await mysql.createConnection
   ({
     host: MY_HOST,
@@ -51,8 +51,7 @@ export const get_all_coinID_all_categories = async () => {
 
 //find table by name
 export const does_table_exist = async (tableName) => {
-  // var sql = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' AND table_schema= " + tableName;
-  var sql = "SELECT EXISTS( \
+  let sql = "SELECT EXISTS( \
               SELECT * FROM information_schema.tables \
               where table_name = '" + tableName + "' \
             );"
@@ -73,12 +72,11 @@ export const does_table_exist = async (tableName) => {
   return firstValueOfQueryResult;
 }
 
-
 //Create table and insert data when coin table does NOT already exist
 //! may have to amend incoming date format
 export const create_coin_table = async (tableName) => {
 
-  var sql = "CREATE TABLE " + tableName + " (Date DATE, PriceInDollar DECIMAL(10,1))"
+  let sql = "CREATE TABLE `" + tableName + "` (Date DATE, PriceInDollar DECIMAL(20, 6))"
   const connection = await mysql.createConnection
   ({
     host: MY_HOST,
@@ -91,30 +89,12 @@ export const create_coin_table = async (tableName) => {
   return rows;
 }
 
-
-
-//Insert when coin table already exists
-const insert_coin_price = async (tableName, valuesList) => {
-  var sql = "INSERT INTO " + tableName + " VALUES ?";
-  const connection = await mysql.createConnection
-  ({
-    host: MY_HOST,
-    user: MY_USERNAME,
-    password: MY_PASSWORD,
-    database : MY_DATABASE,
-});
-  const [rows, fields] = await connection.query(sql, [valuesList]);
-  console.log("end query insert_coin_price()");
-  return rows;
-}
-
 //get data from startDate to endDate
 let startDate = '';
 let endDate = '';
 
 const get_prices_start_to_end = async (tableName, valuesList, startDate, endDate) => {
-
-    var sql = "SELECT * FROM " + tableName + " WHERE date_column BETWEEN "+ startDate + " AND " + endDate;
+  let sql = "SELECT * FROM `" + tableName + "` WHERE date_column BETWEEN `"+ startDate + "` AND `" + endDate + "`";
     const connection = await mysql.createConnection
     ({
       host: MY_HOST,
@@ -125,5 +105,155 @@ const get_prices_start_to_end = async (tableName, valuesList, startDate, endDate
     const [rows, fields] = await connection.query(sql, [valuesList]);
     console.log("end query get_prices_start_to_end()");
     return rows;
-
 }
+
+export const create_temporary_tables_for_category = async () => {
+  let sql = "CREATE TEMPORARY TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
+  const connection = await mysql.createConnection
+    ({
+        host: MY_HOST,
+        user: MY_USERNAME,
+        password: MY_PASSWORD,
+        database : MY_DATABASE,
+    });
+  const [rows, fields] = await connection.execute(sql);
+  console.log("end query create_categories_coins_list()");
+  return rows;
+}
+
+export const fill_daterange_column = async (tableName, columnName, startDate, endDate) => {
+  
+  let subSql = 
+  "\
+    select gen_date from \
+    (select adddate('1970-01-01',t4*10000 + t3*1000 + t2*100 + t1*10 + t0) gen_date from \
+    (select 0 t0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0, \
+    (select 0 t1 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1, \
+    (select 0 t2 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2, \
+    (select 0 t3 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3, \
+    (select 0 t4 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v \
+    where gen_date between '" + startDate + "' and '" + endDate + "' order by gen_date asc \
+  "
+  
+  let sql = 
+  "\
+  insert into `"+tableName+"` (`"+columnName+"`)\
+    " + subSql
+
+  // on duplicate key \
+  // update `"+tableName+"` set `"+tableName+"`."+columnName+" = "+subSql+" \
+  // "
+
+
+
+
+// "  insert into `Smart Contract Platform_prices` (`Date`)        \
+//   select gen_date from     (select adddate('1970-01-01',t4*10000 + t3*1000 + t2*100 + t1*10 + t0) gen_date from     
+//   (select 0 t0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,     
+//   (select 0 t1 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,     
+//   (select 0 t2 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,     
+//   (select 0 t3 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,     
+//   (select 0 t4 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v     
+//   where gen_date between '2021-07-21' and '2022-07-20' order by gen_date asc     ;
+
+// on duplicate key   
+
+// update `Smart Contract Platform_prices` 
+// set `Smart Contract Platform_prices`.Date =     
+// (select gen_date from     (select adddate('1970-01-01',t4*10000 + t3*1000 + t2*100 + t1*10 + t0) gen_date from     (select 0 t0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,     (select 0 t1 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,     (select 0 t2 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,     (select 0 t3 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,     (select 0 t4 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v     where gen_date between '2021-07-21' and '2022-07-20' order by gen_date asc 
+//  ) ;"
+
+
+
+  const connection = await mysql.createConnection
+    ({
+        host: MY_HOST,
+        user: MY_USERNAME,
+        password: MY_PASSWORD,
+        database : MY_DATABASE,
+    });
+    console.log(sql);
+  const [rows, fields] = await connection.execute(sql);
+  console.log("end query fill_daterange_column()");
+}
+
+export const create_category_history = async (categoryName, startDate, endDate) => {
+  const tableName = categoryName + "_prices"
+  let categoryCoins = []
+  let findSymbolOfCategoryCoinsSQL = "select CoinSymbol from categories_coins_list where Category = '" + categoryName + "' "
+  let sqlCreate = "CREATE TABLE IF NOT EXISTS `" + tableName + "` (Date DATE" 
+    
+  const connection = await mysql.createConnection
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
+
+  const [categoryCoinsRows, categoryCoinsFields] = await connection.execute(findSymbolOfCategoryCoinsSQL);
+
+  for (let i=0; i<categoryCoinsRows.length; i++) {
+    sqlCreate = sqlCreate +", " + categoryCoinsRows[i].CoinSymbol;
+    sqlCreate = sqlCreate + " DECIMAL(20, 6) "
+  }
+  sqlCreate = sqlCreate + ")"
+
+  console.log(sqlCreate);
+  await connection.execute(sqlCreate);
+
+  await fill_daterange_column(tableName, "Date", startDate, endDate)
+  
+  for (let i=0; i<categoryCoinsRows.length; i++) {
+    categoryCoins.push(categoryCoinsRows[i].CoinSymbol);
+    const coinHistoryTable = categoryCoinsRows[i].CoinSymbol + "_1yr_history";
+
+    let sqlInsert = 
+      "update `" + tableName + "` as C \
+      set \
+      `" + categoryCoinsRows[i].CoinSymbol + 
+      "` = ( \
+      select PriceInDollar \
+      from `" + coinHistoryTable + "` \
+      where C.Date = `" + coinHistoryTable + "`.Date \
+      )"
+    
+    console.log(sqlInsert);
+
+    await connection.execute(sqlInsert);
+  }
+
+  return_calculated_prices(tableName, categoryCoins);
+  console.log("end query create_category_history()");
+}
+
+const return_calculated_prices = async (tableName, coinList) => {
+  let sql = "select round( ";
+  const coinNum = coinList.length
+  for (let i=0; i<coinNum; i++) {
+    if (i==0) {
+      sql = sql + "IFNULL ((`"+coinList[i]+"` * 100 / (select `"+coinList[i]+"` from `"+tableName+"` LIMIT 0,1) / "+coinNum+"), 0)";
+    } else {
+      sql = sql + " + IFNULL ((`"+coinList[i]+"` * 100 / (select `"+coinList[i]+"` from `"+tableName+"` LIMIT 0,1) / "+coinNum+"), 0)";
+    }
+  }
+  sql = sql + ", 1) as result from `" + tableName +"`"; 
+
+  const connection = await mysql.createConnection
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
+  const [rows, fields] = await connection.execute(sql);
+  console.log(rows);
+  console.log("end query return_calculated_prices()");
+  return rows;
+}
+
+create_category_history("Digitization", '2021-07-21' , '2022-07-20');
+
+// return_calculated_prices("currency_prices", ["BTC", "USDT", "USDC", "BUSD", "XRP", "DOGE", "SHIB", "DAI", "LEO", "LTC"])
+
+// fill_daterange_column("a", "a", '2021-07-25', '2022-07-20');
