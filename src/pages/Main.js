@@ -1,7 +1,10 @@
 import React from 'react';
 import Header from '../components/Header/Header';
+import { auth } from '../firebase';
 
 const MainPage = () => {
+    console.log(auth.currentUser);
+
     return (
         <div>
             <Header/>

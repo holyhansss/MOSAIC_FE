@@ -7,7 +7,7 @@ import {
           signOut,
           createUserWithEmailAndPassword,
           signInWithEmailAndPassword,
-          updateProfile
+          updateProfile,
         } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -16,42 +16,25 @@ import profile from './img/profile.png';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_API_KEY,
-//   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-//   projectId: process.env.REACT_APP_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_MESSAGING_ID,
-//   appId: process.env.REACT_APP_API_ID,
-// };
-
 const firebaseConfig = {
-  apiKey: "AIzaSyD7wkWJoNEBKzWm41usHQU4s-B7lASwFCs",
-  authDomain: "mosaic-db1e4.firebaseapp.com",
-  projectId: "mosaic-db1e4",
-  storageBucket: "mosaic-db1e4.appspot.com",
-  messagingSenderId: "151055190349",
-  appId: "1:151055190349:web:08ad7e69f8dcc584954f04"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_ID,
+  appId: process.env.REACT_APP_API_ID,
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
 const googleProvider = new GoogleAuthProvider();
 
 // 구글로 로그인
 export const signInWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
     .then((result) => {
-      const username = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-
-      sessionStorage.setItem("name",username);
-      sessionStorage.setItem("email", email);
-      sessionStorage.setItem("profilePic", profilePic);
-      sessionStorage.setItem("isLogin", true);
       window.location.replace('/');
     })
     .catch((error) => {
@@ -90,10 +73,6 @@ export const signInWithEmail = (email, password) => {
       const email = result.user.email;
       const profilePic = result.user.photoURL;
 
-      sessionStorage.setItem("name", username);
-      sessionStorage.setItem("email", email);
-      sessionStorage.setItem("profilePic", profilePic);
-      sessionStorage.setItem("isLogin", true);
       window.location.replace("/");  
     })
     .catch((error) => {
@@ -107,10 +86,6 @@ export const signInWithEmail = (email, password) => {
 export const logout = () => {
   signOut(auth)
     .then(()=> {
-      sessionStorage.removeItem("name");
-      sessionStorage.removeItem("email");
-      sessionStorage.removeItem("profilePic");
-      sessionStorage.setItem("isLogin", false);
       window.location.replace("/");  
   }).catch((error) => {
     const errorCode = error.code;
@@ -118,6 +93,10 @@ export const logout = () => {
     alert(errorMessage);
   })
 }
+
+export const updateProfileData = (name) => {
+  updateProfile(auth.currentUser, {displayName: name});
+};
 
 //Database
 export const dbService = getFirestore();

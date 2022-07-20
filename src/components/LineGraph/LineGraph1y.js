@@ -58,6 +58,28 @@ function Index1y() {
           }))
           
         var SNP_first=IndexData[0].SnP
+        for (let i=0;i<IndexData.length; i++){
+
+          if (IndexData[0] == null ){
+                
+                for (let j = 0; ; j++) {
+                  if (IndexData[j] == null)
+                    continue;
+                  IndexData[0]= IndexData[j];
+                  break;
+                }
+                
+                
+            }
+            else if (IndexData[i] == null  ) {
+              IndexData[i]= {time: null, SnP: null};
+              IndexData[i].time = IndexData[i-1].time+60;
+              IndexData[i].SnP= IndexData[i-1].SnP
+              //IndexData2[i].CMC= ((IndexData2[i+1].CMC+IndexData2[i-1].CMC)/2) -  평균값일 경우
+            } 
+            else{  
+            };  
+        }
         for (const item of IndexData){
                 
             item.SnP=100/SNP_first*item.SnP
@@ -79,6 +101,28 @@ function Index1y() {
             }))
   
           var CMC_first=IndexData2[0].CMC
+          for (let i=0;i<IndexData2.length; i++){
+
+            if (IndexData2[0] == null ){
+                  
+                  for (let j = 0; ; j++) {
+                    if (IndexData2[j] == null)
+                      continue;
+                    IndexData2[0]= IndexData2[j];
+                    break;
+                  }
+                  
+                  
+              }
+              else if (IndexData2[i] == null  ) {
+                IndexData2[i]= {time: null, CMC: null};
+                IndexData2[i].time = IndexData2[i-1].time+60;
+                IndexData2[i].CMC= IndexData2[i-1].CMC
+                //IndexData2[i].CMC= ((IndexData2[i+1].CMC+IndexData2[i-1].CMC)/2) -  평균값일 경우
+              } 
+              else{  
+              };  
+          }
           for (const item of IndexData2){
                   
               item.CMC=100/CMC_first*item.CMC

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { logout } from '../../firebase';
+import { Link } from "react-router-dom";
+import { logout, auth } from '../../firebase';
 
 function Header() {
-    let isLogin = sessionStorage.getItem("isLogin");
-    let profile = sessionStorage.getItem("profilePic");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [profileImg, setProfileImg] = useState(null);
+
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setIsLoggedIn(true);
+                setProfileImg(user.photoURL);
+            } else {
+                setIsLoggedIn(false);
+                setProfileImg(null);
+            }
+        })
+    }, [])
 
     return (
         <>
@@ -15,22 +28,22 @@ function Header() {
                     </Col>
                     <Col lg="4" md="6">
                         <Nav className="justify-content-around"> 
-                            <Nav.Link href="/">홈</Nav.Link>
-                            <Nav.Link href="/market">시장 동향</Nav.Link>
-                            <Nav.Link href="/reportList">리포트</Nav.Link>
+                            <Link to="/">홈</Link>
+                            <Link to="/market">시장 동향</Link>  
+                            <Link to="/reportList">리포트</Link>
                         </Nav>
                     </Col>
                     <Col lg="4" >
                         <Nav className="justify-content-end"> 
                             {
-                                isLogin ==='true' ? 
+                                isLoggedIn ? 
                                 (
-                                    <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={profile} width="30" height="30"/>} id="basic-nav-dropdown">
-                                        <NavDropdown.Item href="/profile">마이페이지</NavDropdown.Item>
+                                    <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={profileImg} width="30" height="30"/>} id="basic-nav-dropdown">
+                                        <Link to="/profile">마이페이지</Link>
                                         <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                     </NavDropdown>
                                 ) :
-                                <Nav.Link href="/login">로그인</Nav.Link>   
+                                <Link to="/login">로그인</Link>
                             }
                         </Nav>
                     </Col>
