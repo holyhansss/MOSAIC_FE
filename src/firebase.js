@@ -7,7 +7,7 @@ import {
           signOut,
           createUserWithEmailAndPassword,
           signInWithEmailAndPassword,
-          updateProfile
+          updateProfile,
         } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -29,21 +29,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
 const googleProvider = new GoogleAuthProvider();
 
 // 구글로 로그인
 export const signInWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
     .then((result) => {
-      const username = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-
-      sessionStorage.setItem("name",username);
-      sessionStorage.setItem("email", email);
-      sessionStorage.setItem("profilePic", profilePic);
-      sessionStorage.setItem("isLogin", true);
       window.location.replace('/');
     })
     .catch((error) => {
@@ -82,10 +73,6 @@ export const signInWithEmail = (email, password) => {
       const email = result.user.email;
       const profilePic = result.user.photoURL;
 
-      sessionStorage.setItem("name", username);
-      sessionStorage.setItem("email", email);
-      sessionStorage.setItem("profilePic", profilePic);
-      sessionStorage.setItem("isLogin", true);
       window.location.replace("/");  
     })
     .catch((error) => {
@@ -99,10 +86,6 @@ export const signInWithEmail = (email, password) => {
 export const logout = () => {
   signOut(auth)
     .then(()=> {
-      sessionStorage.removeItem("name");
-      sessionStorage.removeItem("email");
-      sessionStorage.removeItem("profilePic");
-      sessionStorage.setItem("isLogin", false);
       window.location.replace("/");  
   }).catch((error) => {
     const errorCode = error.code;
@@ -110,6 +93,10 @@ export const logout = () => {
     alert(errorMessage);
   })
 }
+
+export const updateProfileData = (name) => {
+  updateProfile(auth.currentUser, {displayName: name});
+};
 
 //Database
 export const dbService = getFirestore();
