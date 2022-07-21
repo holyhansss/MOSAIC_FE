@@ -49,6 +49,20 @@ export const get_all_coinID_all_categories = async () => {
   return rows;
 }
 
+export const get_coins_specific_category = async (thisCategory) => {
+  let sql = "SELECT CoinSymbol, CoinPapricaID FROM categories_coins_list where Category = '"+thisCategory+"' ";
+  const connection = await mysql.createConnection
+  ({
+    host: MY_HOST,
+    user: MY_USERNAME,
+    password: MY_PASSWORD,
+    database : MY_DATABASE,
+});
+  const [rows, fields] = await connection.execute(sql);
+  console.log("end query get_all_coins_all_categories()");
+  return rows;
+}
+
 //find table by name
 export const does_table_exist = async (tableName) => {
   let sql = "SELECT EXISTS( \
@@ -227,8 +241,9 @@ export const create_category_history = async (categoryName, startDate, endDate) 
   console.log("end query create_category_history()");
 }
 
-const return_calculated_prices = async (tableName, coinList) => {
+export const return_calculated_prices = async (tableName, coinList) => {
   let sql = "select round( ";
+  let categoryNameToReturn = tableName.slice(0, -7)
   const coinNum = coinList.length
   for (let i=0; i<coinNum; i++) {
     if (i==0) {
@@ -237,7 +252,7 @@ const return_calculated_prices = async (tableName, coinList) => {
       sql = sql + " + IFNULL ((`"+coinList[i]+"` * 100 / (select `"+coinList[i]+"` from `"+tableName+"` LIMIT 0,1) / "+coinNum+"), 0)";
     }
   }
-  sql = sql + ", 1) as result from `" + tableName +"`"; 
+  sql = sql + ", 1) as `"+ categoryNameToReturn+"` from `" + tableName +"`"; 
 
   const connection = await mysql.createConnection
   ({
@@ -247,12 +262,11 @@ const return_calculated_prices = async (tableName, coinList) => {
     database : MY_DATABASE,
 });
   const [rows, fields] = await connection.execute(sql);
-  console.log(rows);
   console.log("end query return_calculated_prices()");
   return rows;
 }
 
-create_category_history("Digitization", '2021-07-21' , '2022-07-20');
+// create_category_history("Culture & Entertainment", '2021-07-21' , '2022-07-20');
 
 // return_calculated_prices("currency_prices", ["BTC", "USDT", "USDC", "BUSD", "XRP", "DOGE", "SHIB", "DAI", "LEO", "LTC"])
 
