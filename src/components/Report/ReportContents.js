@@ -6,24 +6,42 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShareIcon from '@mui/icons-material/Share';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import { getDocs, collection } from 'firebase/firestore';
-import { dbService } from '../../firebase.js';
+import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc} from 'firebase/firestore';
+import { dbService, auth } from '../../firebase.js';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 //components
 import Comment from '../Comment/Comment.js';
 import Reportcard from './Reportcard.js';
+
 
 function ReportContents() {
     const location = useLocation();
     const id = location.state.id;
     const title = location.state.title;
     const writer = location.state.writer;
+    const likes = location.state.likes;
     const date = moment(location.state.date).format('YYYY.MM.DD');
     
     const [investments, setInvestments] = useState([]);
     const [policies, setPolicies] = useState([]);
     const [marcro, setMarcro] = useState([]);
 
+    const [useId, setUserId] = useState("");
+  
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUserId(user.displayName);
+            } else {
+                setUserId(null);
+            }
+        })
+
+    }, [])
+
+
+    
     const getContents = async() => {
         const invest = collection(dbService,'weekly_report', id,'investment');
         const policy = collection(dbService,'weekly_report', id,'policy');
@@ -33,7 +51,6 @@ function ReportContents() {
         const querySnasphot = await getDocs(macroeconomic);
 
         querySnapShot.forEach((collection)=> {
-            // console.log(collection.id)
             const investObj = {
                 title : collection.data().title,
                 content : collection.data().content,
@@ -42,7 +59,6 @@ function ReportContents() {
         });
 
         querySnaphot.forEach((collection)=> {
-            // console.log(collection.id)
             const poliObj = {
                 title : collection.data().title,
                 content : collection.data().content,
@@ -51,7 +67,6 @@ function ReportContents() {
         });
 
         querySnasphot.forEach((collection)=> {
-            // console.log(collection.id)
             const macroObj = {
                 title : collection.data().title,
                 content : collection.data().content,
@@ -61,6 +76,86 @@ function ReportContents() {
     };
 
     useEffect(() => { getContents() }, []);
+
+//코멘트 가져오기
+  const [reply, setReply] = useState([]);
+
+  const getReplies = async() => {
+    const repl = query(collection(dbService,'weekly_report', id,'comment'), orderBy("created_at","desc"));
+    const querySnapShot = await getDocs(repl);
+
+    querySnapShot.forEach((collection)=> {
+        const replyObj = {
+            subid: collection.id,
+            comment : collection.data().comment,
+            date : collection.data().created_at,
+            avatar: collection.data().avatar,
+            nickname: collection.data().nickname
+        };
+        setReply(prev => [replyObj, ...prev]);
+    });
+  };
+
+  useEffect(() => { getReplies() }, []);
+
+
+//좋아요 가져오기
+const [likenum, setLikenum] = useState([]);
+
+  const getLikes = async() => {
+    const likequ = query(collection(dbService,'weekly_report', id,'like'));
+    const querySnapShot = await getDocs(likequ);
+
+    querySnapShot.forEach((collection)=> {
+        const likeObj = {
+            likename : collection.data().likename,
+            likecount : collection.data().like_count
+        };
+        setLikenum(prev => [likeObj, ...prev]);
+    });
+  };
+
+  useEffect(() => { getLikes() }, []);
+//   console.log(likenum)
+//   console.log(likenum.length)
+
+
+  const [clickICon, setClickIcon] = useState(false);
+  const [likescount, setLikescount] = useState(likes);
+
+//   useEffect(() => {
+//     likenum.map(data => {
+//         if (data.likename === useId) {
+//             console.log("hey")
+//             setClickIcon(true);
+//     }
+//     else {
+//         setClickIcon(false);
+//     }
+//     })
+
+// },[]);
+
+
+const onclick = async() =>{
+    setClickIcon(!clickICon);
+    // console.log(clickICon)
+    if (clickICon === false) {
+        console.log("hey")
+        await setDoc(doc(dbService, "weekly_report", id, 'like', useId), {
+            likename : useId,
+            like_count: true
+        });
+        // setLikescount(likescount);
+        // console.log(likescount);
+        // setLike(like-1);
+    }
+    else {
+        await deleteDoc(doc(dbService, 'weekly_report', id,'like', useId));  
+        // setLike(like+1);
+    }
+
+}
 
     return ( 
         <div>
@@ -72,16 +167,17 @@ function ReportContents() {
                 </Grid>
                     <Grid item xs={4}>
                         <VisibilityIcon />
-                        <IconButton>
-                            <FavoriteBorderIcon />
+                        <IconButton onClick={onclick} >
+                            {clickICon === true ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
                         </IconButton>
                         <IconButton>
                             <ShareIcon />
                         </IconButton>
+
                     </Grid> 
 
                     <Grid item xs={12}>
-                        <Comment id={id} />
+                        <Comment id={id} rep={reply} likes={likes} />
                     </Grid>
                 </Grid>
             </Container>

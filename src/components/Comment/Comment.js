@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { query,addDoc, collection, getDocs, orderBy } from 'firebase/firestore';
-import { dbService } from '../../firebase.js';
+import { addDoc, collection} from 'firebase/firestore';
+import { dbService, auth } from '../../firebase.js';
 import { Avatar, TextField, Box, Button} from '@mui/material';
 
 //components
@@ -8,34 +8,31 @@ import SingleComment from './SingleComment.js';
 
 
 
-function Comment({id}) {
-  let isLogin = sessionStorage.getItem("isLogin");
+function Comment({id, rep, likes}) {
+  // let isLogin = sessionStorage.getItem("isLogin");
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [useId, setUserId] = useState("");
+  const [pic, setpic] = useState(sessionStorage.getItem("profilePic"));
 
-  //코멘트 가져오기
-  const [reply, setReply] = useState([]);
+  useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+          if (user) {
+              setIsLoggedIn(true);
+              setpic(user.photoURL);
+              setUserId(user.displayName);
+          } else {
+              setIsLoggedIn(false);
+              setpic(null);
+              setUserId(null);
+          }
+      })
+  }, [])
 
-  const getReplies = async() => {
-    const reply = query(collection(dbService,'weekly_report', id,'comment'), orderBy("created_at","desc"));
-    const querySnapShot = await getDocs(reply);
-
-    querySnapShot.forEach((collection)=> {
-        const replyObj = {
-            comment : collection.data().comment,
-            date : collection.data().created_at,
-            avatar: collection.data().avatar,
-            nickname: collection.data().nickname,
-        };
-        setReply(prev => [replyObj, ...prev]);
-    });
-  };
-  useEffect(() => { getReplies() }, []);
 
 
   //코멘트 저장하기
   const [comment, setComment] = useState('');
-  const [useId, setUserId] = useState(sessionStorage.getItem("name"));
-  const [pic, setpic] = useState(sessionStorage.getItem("profilePic"));
 
   const handleChange = (event) => {
     setComment(event.currentTarget.value);
@@ -43,11 +40,12 @@ function Comment({id}) {
 
   const onSubmit = async(event) => {
     event.preventDefault();
+    const time = Date;
     await addDoc(collection(dbService, "weekly_report", id, 'comment'), {
       comment: comment,
       avatar: pic,
       nickname: useId,
-      created_at: new Date()
+      created_at: time.now(),
     });
     window.location.reload();
     setComment("");
@@ -72,7 +70,7 @@ function Comment({id}) {
         
         <br />
         {
-          isLogin ==='true' ? 
+          isLoggedIn === true ? 
           (
             <Button variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onSubmit} >
               댓글
@@ -87,9 +85,9 @@ function Comment({id}) {
 
       {/* Comment Lists */}
       {
-        reply.map((rep,index) => (
+        rep.map((repl,index) => (
           <div key={index}>
-            <SingleComment comment={rep.comment} pic={rep.avatar} username={rep.nickname} value={index}/>
+            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id}/>
           </div>
         ))
       }

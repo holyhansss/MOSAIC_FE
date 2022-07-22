@@ -5,18 +5,6 @@ import { logout } from '../../firebase';
 
 function Header({ user }) {
 
-    // useEffect(() => {
-    //     auth.onAuthStateChanged((user) => {
-    //         if (user) {
-    //             setIsLoggedIn(true);
-    //             setProfileImg(user.photoURL);
-    //         } else {
-    //             setIsLoggedIn(false);
-    //             setProfileImg(null);
-    //         }
-    //     })
-    // }, [])
-
     return (
         <>
             <Navbar bg="light" variant="light">
