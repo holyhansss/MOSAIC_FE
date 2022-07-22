@@ -2,33 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Tab, Tabs } from 'react-bootstrap';
 import Header from '../components/Header/Header';
 import ProfileModal from '../components/Modal/ProfileModal';
-import { auth } from '../firebase';
 
-function MyPage() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [profileImg, setProfileImg] = useState(null);
-    const [userName, setUserName] = useState(null);
-
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                setIsLoggedIn(true);
-                setProfileImg(user.photoURL);
-                setUserName(user.displayName);
-                console.log(user);
-            } else {
-                setIsLoggedIn(false);
-                setProfileImg(null);
-                setUserName(null);
-            }
-        })
-    }, [])
-
+function MyPage({ user, refreshUser }) {
     return (
         <>
-            <Header/>
             {
-                isLoggedIn ? (
+                user !== null ? (
                     <Container>
                         <Row className="justify-content-md-center">
                             <Col xs lg="8">
@@ -36,15 +15,15 @@ function MyPage() {
                                     <Col xs md lg="4">
                                         <Row className="my-5">
                                             <Col xs md="6" lg="4" className="text-center">
-                                                <img alt="profile" src={profileImg} width='100' height='100'/>
+                                                <img alt="profile" src={user.photoURL} width='100' height='100'/>
                                             </Col>
                                             <Col
                                                 xs md="6" lg="8"
                                                 className="text-center"
                                                 style={{margin: 'auto'}}
                                             >
-                                                <div>{userName}</div><br/>
-                                                <ProfileModal name={userName}/>
+                                                <div>{user.displayName}</div><br/>
+                                                <ProfileModal user={user} refreshUser={refreshUser}/>
                                             </Col>
                                         </Row>
                                     </Col>

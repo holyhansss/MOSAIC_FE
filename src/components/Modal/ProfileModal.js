@@ -1,49 +1,44 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { auth, updateProfileData } from '../../firebase';
+import { auth } from '../../firebase';
+import { updateProfile, sendPasswordResetEmail } from "firebase/auth";
 
-function ProfileModal({ name }) {
+function ProfileModal({ user, refreshUser }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [newName, setNewName] = useState(null);
-    const [newPassword, setNewPassword] = useState(null);
-    const [passwordCheck, setPasswordCheck] = useState(null);
+    const [newName, setNewName] = useState("");
     
     const handleOnChange = (e) => {
         const type = e.target.name;
         if (type === 'name') {
             setNewName(e.target.value);
-        } else if (type === 'password') {
-            setNewPassword(e.target.value);
-        } else if (type === 'passwordCheck') {
-            setPasswordCheck(e.target.value);
         }
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault();
-        if (name !== newName) {
-            updateProfileData(newName);
+        if (user.displayName !== newName) {
+            await updateProfile(auth.currentUser, { displayName: newName });
         }
-        console.log(auth.currentUser);
-    }
+        refreshUser();
+    };
 
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
                 프로필 수정
             </Button>
-            <Form onSubmit={onSubmit}>
-                <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose}>
+                <Form onSubmit={onSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title>프로필 수정</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group
                             className="mb-3"
-                            controlId="exampleForm.ControlInput1"
+                            controlId="editName"
                         >
                             <Form.Label>이름</Form.Label>
                             <Form.Control
@@ -54,45 +49,18 @@ function ProfileModal({ name }) {
                                 onChange={handleOnChange}
                             />
                         </Form.Group>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlInput1"
-                        >
-                            <Form.Label>비밀번호</Form.Label>
-                            <Form.Control
-                                name="password"
-                                type="password"
-                                value={newPassword}
-                                placeholder="비밀번호"
-                                autoFocus
-                                onChange={handleOnChange}
-                            />
-                        </Form.Group>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlInput1"
-                        >
-                            <Form.Label>비밀번호 확인</Form.Label>
-                            <Form.Control
-                                name="passwordCheck"
-                                type="password"
-                                value={passwordCheck}
-                                placeholder="비밀번호 확인"
-                                autoFocus
-                                onChange={handleOnChange}
-                            />
-                        </Form.Group>
+                        <Button variant="primary" onClick={() => sendPasswordResetEmail(auth, user.email)}>비밀번호 재설정</Button>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             닫기
                         </Button>
-                        <Button variant="primary" type='submit' onClick={handleClose}>
+                        <Button variant="primary" type='submit'>
                             저장
                         </Button>
                     </Modal.Footer>
-                </Modal>
-            </Form>
+                </Form>
+            </Modal>          
         </>
     );
 };

@@ -61,18 +61,13 @@ export const signUpWithEmailAndPassword = (email, password, name) => {
       } else {
         alert("회원 가입 실패")
       }
-    });
-    
+    }); 
 };
   
 // 이메일로 로그인
 export const signInWithEmail = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
-      const username = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-
       window.location.replace("/");  
     })
     .catch((error) => {
@@ -92,11 +87,11 @@ export const logout = () => {
     const errorMessage = error.message;
     alert(errorMessage);
   })
-}
-
-export const updateProfileData = (name) => {
-  updateProfile(auth.currentUser, {displayName: name});
 };
+
+// export const updateProfileData = async(name) => {
+//   await updateProfile(auth.currentUser, {displayName: name});
+// };
 
 //Database
 export const dbService = getFirestore();

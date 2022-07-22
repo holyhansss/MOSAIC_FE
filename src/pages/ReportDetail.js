@@ -3,7 +3,6 @@ import {Box, Tab, Container} from '@mui/material';
 import {TabList, TabPanel, TabContext} from '@mui/lab';
 
 //components
-import Header from '../components/Header/Header';
 import ReportContents from '../components/Report/ReportContents';
 import Winner from '../components/Report/Winner';
 
@@ -16,7 +15,6 @@ export default function LabTabs() {
 
   return (
     <div>
-    <Header />
     <p />
       <TabContext value={value}>
         <Container maxWidth="md">
