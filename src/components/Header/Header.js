@@ -3,9 +3,11 @@ import { Container, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { logout, auth } from '../../firebase';
 
+
 function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [profileImg, setProfileImg] = useState(null);
+    
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
@@ -18,7 +20,6 @@ function Header() {
             }
         })
     }, [])
-
     return (
         <>
             <Navbar bg="light" variant="light">
