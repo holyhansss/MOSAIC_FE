@@ -4,6 +4,7 @@ export const FIREBASE_REPORT_SUBCOLLECTION = [
     "macroeconomic",
     "policy",
     "investment",
+    "WinnerLoser"
 ]
 export const REPORT_TITLES = [
     "거시경제",
