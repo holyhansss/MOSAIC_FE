@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import { logout, auth } from '../../firebase';
+import { logout } from '../../firebase';
 
-function Header() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [profileImg, setProfileImg] = useState(null);
+function Header({ user }) {
 
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                setIsLoggedIn(true);
-                setProfileImg(user.photoURL);
-            } else {
-                setIsLoggedIn(false);
-                setProfileImg(null);
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     auth.onAuthStateChanged((user) => {
+    //         if (user) {
+    //             setIsLoggedIn(true);
+    //             setProfileImg(user.photoURL);
+    //         } else {
+    //             setIsLoggedIn(false);
+    //             setProfileImg(null);
+    //         }
+    //     })
+    // }, [])
 
     return (
         <>
@@ -36,9 +34,9 @@ function Header() {
                     <Col lg="4" >
                         <Nav className="justify-content-end"> 
                             {
-                                isLoggedIn ? 
+                                user !== null ? 
                                 (
-                                    <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={profileImg} width="30" height="30"/>} id="basic-nav-dropdown">
+                                    <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={user.photoURL} width="30" height="30"/>} id="basic-nav-dropdown">
                                         <Link to="/profile">마이페이지</Link>
                                         <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                     </NavDropdown>

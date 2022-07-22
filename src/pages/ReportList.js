@@ -6,7 +6,6 @@ import { dbService } from '../firebase.js';
 
 //components
 import {Reportlistcard, Reportrecentcard} from '../components/Report/Reportlistcard.js';
-import Header from '../components/Header/Header.js';
 
 
 function ReportList() {
@@ -31,7 +30,6 @@ function ReportList() {
 
     return(
         <div>
-        <Header />
         <p />
         <Container>
             <Grid container spacing={3}>
