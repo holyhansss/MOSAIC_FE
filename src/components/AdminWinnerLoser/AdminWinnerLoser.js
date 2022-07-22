@@ -76,7 +76,7 @@ const AdminWinnerLoser = () => {
                                 onClick={()=> {
                                     onChangeDropDown(doc)
                                 }}>{doc.title}</Dropdown.Item>
-                        );``
+                        );
 
                     })}
                 </DropdownButton>
