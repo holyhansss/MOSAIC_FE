@@ -6,7 +6,6 @@ import { dbService } from '../firebase.js';
 
 //components
 import {Reportlistcard, Reportrecentcard} from '../components/Report/Reportlistcard.js';
-import Header from '../components/Header/Header.js';
 
 
 function ReportList() {
@@ -21,6 +20,7 @@ function ReportList() {
                 title : docs.data().title,
                 date : docs.data().date,
                 writer : docs.data().writer,
+                likes : 0
             };
             setReports(prev => [reportObj, ...prev])
             
@@ -31,7 +31,6 @@ function ReportList() {
 
     return(
         <div>
-        <Header />
         <p />
         <Container>
             <Grid container spacing={3}>
@@ -44,9 +43,8 @@ function ReportList() {
 
                     <div>
                         { result !== undefined ?
-                        // console.log(result?.writer)
-                        <Reportrecentcard id={result.id} title={result.title} writer={result.writer} date={result.date} />
-                    : console.log("no")}
+                        <Reportrecentcard id={result.id} title={result.title} writer={result.writer} date={result.date} likes={result.likes}/>
+                    : null}
 
                     </div>                
                 </Grid>
@@ -60,7 +58,7 @@ function ReportList() {
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {reports.slice(1).map((report,index) => (
                             <Grid item xs={2} sm={4} md={4} key={index} >
-                                <Reportlistcard id={report.id} title={report.title} date={report.date} writer={report.writer}/>
+                                <Reportlistcard id={report.id} title={report.title} date={report.date} writer={report.writer} likes={result.likes}/>
                             </Grid>
                             ))}
                         </Grid>

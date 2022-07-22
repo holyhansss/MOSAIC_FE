@@ -1,11 +1,10 @@
 import axios from "axios";
-import { create_coin_table, does_table_exist, get_all_coinID_all_categories } from "./queries.js";
+import { create_coin_table, does_table_exist, get_all_coinID_all_categories, insert_to_db_table } from "./queries.js";
 
 const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
   const allCategoryCoinsList = await get_all_coinID_all_categories();
   
   for (let i=0; i<allCategoryCoinsList.length; i++) {
-
 
     const thisCoinSymbol = allCategoryCoinsList[i].CoinSymbol;
 
@@ -13,7 +12,7 @@ const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
     const doesTableExist = await does_table_exist(tableName);
     
     if (doesTableExist == 0) {
-      // await create_coin_table(tableName);
+      await create_coin_table(tableName);
       const time_interval = '1d';
       const start_date = getPreviousYearDate();
       
@@ -21,8 +20,7 @@ const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
       const thisCoinHistoricalData = await getHistoricalData(thisCoinPapricaID, start_date, time_interval);
       if (thisCoinHistoricalData == null || thisCoinHistoricalData.length == undefined){
         nullHistoricalDataError(thisCoinPapricaID);
-        continue;
-        
+        continue; 
       }
 
       let historicalDataToInsert = [];  
@@ -36,6 +34,7 @@ const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
         )    
       }       
       console.log(historicalDataToInsert);
+      insert_to_db_table(tableName, historicalDataToInsert)
     } else if (doesTableExist == 1){
       console.log("table for " + thisCoinSymbol + " already exists");
     } else {
@@ -83,13 +82,4 @@ const nullHistoricalDataError = (thisCoinPapricaID) => {
 }
 
 
-// const time_interval = '1d';
-// const start_date = '2021-07-17'
-// const coin_id = 'eth-ethereum'
-
-// getHistoricalData(coin_id, start_date, time_interval)
-
 saveAllNonExistingCoinPricesOfAllCategoriesFor1Year();
-// getPreviousYearDate()
-
-

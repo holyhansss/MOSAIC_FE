@@ -3,9 +3,7 @@ import { Container, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { logout } from '../../firebase';
 
-function Header() {
-    let isLogin = sessionStorage.getItem("isLogin");
-    let profile = sessionStorage.getItem("profilePic");
+function Header({ user }) {
 
     return (
         <>
@@ -24,9 +22,9 @@ function Header() {
                     <Col lg="4" >
                         <Nav className="justify-content-end"> 
                             {
-                                isLogin ==='true' ? 
+                                user !== null ? 
                                 (
-                                    <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={profile} width="30" height="30"/>} id="basic-nav-dropdown">
+                                    <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={user.photoURL} width="30" height="30"/>} id="basic-nav-dropdown">
                                         <Link to="/profile">마이페이지</Link>
                                         <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                     </NavDropdown>

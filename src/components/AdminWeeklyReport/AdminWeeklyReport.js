@@ -73,7 +73,8 @@ const AdminWeeklyReport = () => {
     
     return ( 
         <Container>
-            {userEmail === null || !admin.includes(userEmail)
+            {//userEmail === null || !admin.includes(userEmail)
+            false
             ? navigate("/")
             : <div>
                 <Container className="my-5 h3">
