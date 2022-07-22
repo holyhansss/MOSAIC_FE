@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef} from "react";
 // react bootstrap
 import { Dropdown, DropdownButton, Button, Form, Container, Row} from "react-bootstrap";
-import { getFirestore, collection, query, getDocs, addDoc, doc} from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, addDoc, setDoc, doc} from "firebase/firestore";
+import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
 
+// react router dom
+import { useNavigate } from "react-router-dom";
 // components
 import AdminTopicUploadForm from "../AdmimBox/AdmimBox";
 
@@ -13,6 +16,10 @@ import {FIREBASE_WEEKLY_REPORT_COLLECTION, FIREBASE_REPORT_SUBCOLLECTION, REPORT
 const AdminWinnerLoser = () => {
 
     const db = getFirestore();
+    const storage = getStorage();
+
+    const navigate = useNavigate();
+
     const [docs, setDocs] = useState([]);
     const [selectedDoc, setSelectedDoc] = useState(null);
     const [selectedDocUid, setSelectedDocUid] = useState();
@@ -23,6 +30,7 @@ const AdminWinnerLoser = () => {
     const [desc1, setDesc1] = useState("");
     const [desc2, setDesc2] = useState("");
 
+    const [lock, setLock] = useState(false);
 
     useEffect(()=> {
         const getData = async () => {
@@ -39,12 +47,7 @@ const AdminWinnerLoser = () => {
         }
         getData();
     },[])
-
-    const onChangeDropDown = (selectedDoc) => {
-        console.log(selectedDoc)
-        setSelectedDoc(selectedDoc);
-    }
-
+    
     useEffect(()=> {
         if(img1){
             setImg1Url(URL.createObjectURL(img1));
@@ -54,16 +57,61 @@ const AdminWinnerLoser = () => {
         }
     },[img1, img2]);
 
+    const onChangeDropDown = (selectedDoc) => {
+        setSelectedDoc(selectedDoc);
+    }
+    const Unix_timestampConv = () => {
+        return Math.floor(new Date().getTime() / 1000);
+    }
+
     const handleSubmit = async () => { 
         const docRef = doc(db, FIREBASE_WEEKLY_REPORT_COLLECTION, selectedDocUid);
         const subColRef = collection(docRef, "WinnerLoser");
+        
+        if(lock === true) return;
+        else setLock(true);
+        
+        alert('1-2초 가량 기다려 주세요!');
 
-        await addDoc(subColRef, {
-            // img1: img1,
-            // img2: img2,
+        const currentTime = Unix_timestampConv();
+        let image1StorageRef = ref(
+            storage,
+            `winner&loser/${selectedDocUid}_1_${currentTime}`
+        );
+        let image2StorageRef = ref(
+            storage,
+            `winner&loser/${selectedDocUid}_2_${currentTime}`
+        );
+        await uploadBytes(image1StorageRef, img1);
+        await uploadBytes(image2StorageRef, img2);
+        const image1StorageURL = await getDownloadURL(image1StorageRef);
+        const image2StorageURL = await getDownloadURL(image2StorageRef);
+        
+        console.log(image1StorageURL);
+        console.log(image2StorageURL);
+        // await doc(db, "WinnerLoser", "winnerLoser");       
+        
+        console.log(docRef)
+        console.log(subColRef)
+
+        await setDoc(doc(db, `${FIREBASE_WEEKLY_REPORT_COLLECTION}/${selectedDocUid}/WinnerLoser`, "WinnerLoser"), {
+            img1: image1StorageURL,
+            img2: image1StorageURL,
             desc1: desc1,
             desc2: desc2,
         });
+          
+        // await addDoc(subColRef, {
+        //     img1: image1StorageURL,
+        //     img2: image1StorageURL,
+        //     desc1: desc1,
+        //     desc2: desc2,
+        // });
+
+        alert('upload success');
+        setLock(false);
+        navigate("/");
+
     }
 
     return(

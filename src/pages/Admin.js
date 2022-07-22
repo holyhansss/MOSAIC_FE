@@ -17,7 +17,7 @@ const Admin = () => {
             <TabContext value={value}>
             <Container maxWidth="md">
             <Box sx={{  borderColor: 'divider', position: "relative", left:"35%"}} >
-                <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{justifyContent: 'center'}}>
+                <TabList onChange={handleChange} aria-label="" sx={{justifyContent: 'center'}}>
                 
                 <Tab label="주간 리포트" value="1" />
                 <Tab label="Winner & Loser" value="2" />
