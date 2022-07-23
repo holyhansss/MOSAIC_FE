@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addDoc, collection} from 'firebase/firestore';
+import { addDoc, setDoc, doc, collection } from 'firebase/firestore';
 import { dbService, auth } from '../../firebase.js';
 import { Avatar, TextField, Box, Button} from '@mui/material';
 
@@ -8,7 +8,7 @@ import SingleComment from './SingleComment.js';
 
 
 
-function Comment({id, rep, likes}) {
+function Comment({ user, id, title, rep, likes, writer, date }) {
   // let isLogin = sessionStorage.getItem("isLogin");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,6 +47,14 @@ function Comment({id, rep, likes}) {
       nickname: useId,
       created_at: time.now(),
     });
+
+    // 유저별 '댓글 단 글' 저장
+    await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
+      title: title,
+      writer: writer,
+      date: date
+    });
+
     window.location.reload();
     setComment("");
     setUserId("");
@@ -87,7 +95,7 @@ function Comment({id, rep, likes}) {
       {
         rep.map((repl,index) => (
           <div key={index}>
-            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id}/>
+            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id} user={user} title={title} writer={writer} date={date}/>
           </div>
         ))
       }

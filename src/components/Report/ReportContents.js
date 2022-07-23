@@ -107,19 +107,25 @@ const [likescount, setLikescount] = useState('');
   };
   useEffect(() => { getLikes() }, [user]);
 
-const onclick = async() =>{
-    setClickIcon(!clickICon);
-    if (clickICon === false) {
-        await setDoc(doc(dbService, "weekly_report", id, 'like', user.displayName), {
-            likename : user.displayName,
-            like_count: true
-        });
-    }
-    else {
-        await deleteDoc(doc(dbService, 'weekly_report', id,'like', user.displayName));  
-    }
-
-}
+// 좋아요 클릭
+    const onclick = async() => {
+        setClickIcon(!clickICon);
+        if (clickICon === false) {
+            await setDoc(doc(dbService, "weekly_report", id, 'like', user.displayName), {
+                likename : user.displayName,
+                like_count: true
+            });
+            // 유저별 좋아요 정보 firestore에 저장
+            await setDoc(doc(dbService, "users", user.uid, 'liked', id), {
+                title: title,
+                writer: writer,
+                date: date
+            });
+        } else {
+            await deleteDoc(doc(dbService, 'weekly_report', id,'like', user.displayName));
+            await deleteDoc(doc(dbService, 'users', user.uid, 'liked', id));
+        };
+    };
 
     return ( 
         <div>
@@ -141,7 +147,7 @@ const onclick = async() =>{
                     </Grid> 
 
                     <Grid item xs={12}>
-                        <Comment id={id} rep={reply} likes={likes} />
+                        <Comment user={user} id={id} title={title} rep={reply} likes={likes} writer={writer} date={date}/>
                     </Grid>
                 </Grid>
             </Container>

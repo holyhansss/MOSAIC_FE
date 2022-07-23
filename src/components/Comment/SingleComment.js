@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, List, ListItem,Typography, ListItemText, ListItemAvatar, IconButton, TextField, Box, Button  } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
-import { query,addDoc, collection, getDocs, orderBy } from 'firebase/firestore';
+import { query, addDoc, collection, getDocs, orderBy, setDoc, doc } from 'firebase/firestore';
 import { dbService, auth } from '../../firebase.js';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import moment from 'moment';
@@ -10,7 +10,7 @@ import moment from 'moment';
 
 
 
-function SingleComment({comment, username, pic,value, subid, id, cdate}) {
+function SingleComment({comment, username, pic,value, subid, id, cdate, user, title, writer, date}) {
   // let isLogin = sessionStorage.getItem("isLogin");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [useId, setUserId] = useState("");
@@ -59,6 +59,14 @@ function SingleComment({comment, username, pic,value, subid, id, cdate}) {
         created_at: time.now(),
         // like : like
       });
+
+      // 유저별 '댓글 단 글' 저장
+      await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
+        title: title,
+        writer: writer,
+        date: date
+      });
+
       setReply("");
       setUserId("");
       setAva("");
