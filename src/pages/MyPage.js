@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Tab, Tabs } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import ProfileModal from '../components/Modal/ProfileModal';
 
 function MyPage({ user, refreshUser }) {
+    
     return (
         <>
             {
@@ -41,7 +43,7 @@ function MyPage({ user, refreshUser }) {
                                         <Tab eventKey="comments" title="댓글단 글">
                                             글 목록
                                         </Tab>
-                                        <Tab eventKey="scrap" title="스크랩">
+                                        <Tab eventKey="liked" title="좋아요한 글">
                                             글 목록
                                         </Tab>
                                     </Tabs>
