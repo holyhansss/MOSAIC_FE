@@ -8,6 +8,8 @@ import {
           createUserWithEmailAndPassword,
           signInWithEmailAndPassword,
           updateProfile,
+          setPersistence,
+          browserSessionPersistence
         } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -30,6 +32,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+
+setPersistence(auth, browserSessionPersistence);
 
 // 구글로 로그인
 export const signInWithGoogle = () => {
