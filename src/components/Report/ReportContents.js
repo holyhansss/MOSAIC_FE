@@ -7,8 +7,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc, where} from 'firebase/firestore';
-import { dbService, auth } from '../../firebase.js';
+import { dbService } from '../../firebase.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+
+
 
 //components
 import Comment from '../Comment/Comment.js';
@@ -16,11 +18,11 @@ import Reportcard from './Reportcard.js';
 
 
 function ReportContents({user}) {
+
     const location = useLocation();
     const id = location.state.id;
     const title = location.state.title;
     const writer = location.state.writer;
-    const likes = location.state.likes;
     const date = moment(location.state.date).format('YYYY.MM.DD');
     
     const [investments, setInvestments] = useState([]);
@@ -75,7 +77,8 @@ function ReportContents({user}) {
             comment : collection.data().comment,
             date : collection.data().created_at,
             avatar: collection.data().avatar,
-            nickname: collection.data().nickname
+            nickname: collection.data().nickname,
+            user_uid: collection.data().user_uid
         };
         setReply(prev => [replyObj, ...prev]);
     });
@@ -87,33 +90,48 @@ function ReportContents({user}) {
 //좋아요 가져오기
 const [likenum, setLikenum] = useState([]);
 const [clickICon, setClickIcon] = useState(false);
-const [likescount, setLikescount] = useState('');
+const [likescount, setLikescount] = useState([]);
+const [count, setCount] = useState(null);
 
   const getLikes = async() => {
     if (user !== null) {
-        const likequ = query(collection(dbService,'weekly_report', id,'like'), where("likename","==", user.displayName));
+        const likequ = query(collection(dbService,'weekly_report', id,'like'), where("likeuid","==", user.uid));
+        const Likes = query(collection(dbService,'weekly_report', id,'like'));
         const querySnapShot = await getDocs(likequ);
+        const QuerySnapShot = await getDocs(Likes);
     
         querySnapShot.forEach((collection)=> {
             const likeObj = {
                 likename : collection.data().likename,
-                likecount : collection.data().like_count
+                likeuid : collection.data().likeuid
             };
             setClickIcon(true);
             setLikenum(prev => [likeObj, ...prev]);
         });
 
+        QuerySnapShot.forEach((collection)=> {
+            const lkeObj = {
+                likename : collection.data().likename,
+                likeuid : collection.data().likeuid
+            };
+            setLikescount(prev => [lkeObj, ...prev]);
+            // setCount(likescount.length);
+        });
     };
+
   };
   useEffect(() => { getLikes() }, [user]);
+  useEffect(()=>{setCount(likescount.length);})
+
 
 // 좋아요 클릭
     const onclick = async() => {
         setClickIcon(!clickICon);
+
         if (clickICon === false) {
-            await setDoc(doc(dbService, "weekly_report", id, 'like', user.displayName), {
+            await setDoc(doc(dbService, "weekly_report", id, 'like', user.uid), {
                 likename : user.displayName,
-                like_count: true
+                likeuid: user.uid
             });
             // 유저별 좋아요 정보 firestore에 저장
             await setDoc(doc(dbService, "users", user.uid, 'liked', id), {
@@ -122,9 +140,11 @@ const [likescount, setLikescount] = useState('');
                 date: date
             });
         } else {
-            await deleteDoc(doc(dbService, 'weekly_report', id,'like', user.displayName));
+            await deleteDoc(doc(dbService, 'weekly_report', id,'like', user.uid));
             await deleteDoc(doc(dbService, 'users', user.uid, 'liked', id));
         };
+
+        window.location.reload();
     };
 
     return ( 
@@ -140,6 +160,7 @@ const [likescount, setLikescount] = useState('');
                         <IconButton onClick={onclick} >
                             {clickICon === true ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
                         </IconButton>
+                         {count}
                         <IconButton>
                             <ShareIcon />
                         </IconButton>
@@ -147,15 +168,11 @@ const [likescount, setLikescount] = useState('');
                     </Grid> 
 
                     <Grid item xs={12}>
-                        <Comment user={user} id={id} title={title} rep={reply} likes={likes} writer={writer} date={date}/>
+                        <Comment user={user} id={id} title={title} rep={reply} writer={writer} date={date}/>
                     </Grid>
                 </Grid>
             </Container>
         </div>
-
-
-
-
     )
 };
 
