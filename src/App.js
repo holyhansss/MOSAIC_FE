@@ -42,7 +42,6 @@ function App() {
       }
     })
   }, []);
-
   return (
     <>
       <Header user={userObj}/>
@@ -53,7 +52,7 @@ function App() {
         <Route path='admin' element={<Admin/>} ></Route>
         <Route path='/market' element={<MarketPage/>} ></Route>
         <Route path='/reportList' element={<ReportList/>} ></Route>
-        <Route path='/reportDetail' element={<ReportDetail/>} ></Route>
+        <Route path='/reportDetail' element={<ReportDetail user={userObj}/>} ></Route>
         <Route path='/profile' element={<MyPage user={userObj} refreshUser={refreshUser}/>} ></Route>
         {/* <Route path='/detailpages/*' > 
           <Route path=":id" element={<DetailPage />} />

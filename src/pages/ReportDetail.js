@@ -6,7 +6,7 @@ import {TabList, TabPanel, TabContext} from '@mui/lab';
 import ReportContents from '../components/Report/ReportContents';
 import Winner from '../components/Report/Winner';
 
-export default function LabTabs() {
+export default function ReportDetail({user}) {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -28,7 +28,7 @@ export default function LabTabs() {
           </Box> 
         </Container>
         <p/>
-        <TabPanel value="1"><ReportContents /></TabPanel>
+        <TabPanel value="1"><ReportContents user={user}/></TabPanel>
         <TabPanel value="2"><Winner /></TabPanel>
       </TabContext>
 
