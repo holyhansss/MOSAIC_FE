@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Tab, Tabs } from 'react-bootstrap';
-import Header from '../components/Header/Header';
+import React from 'react';
+import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
 import ProfileModal from '../components/Modal/ProfileModal';
+import PostList from '../components/MyPage/PostList';
 
-function MyPage({ user, refreshUser }) {
+function MyPage({ user, refreshUser }) {    
     return (
         <>
             {
@@ -36,13 +36,13 @@ function MyPage({ user, refreshUser }) {
                                         justify
                                     >
                                         <Tab eventKey="posts" title="작성한 글">
-                                            글 목록
+                                            <PostList user={user} kind="post" />
                                         </Tab>
                                         <Tab eventKey="comments" title="댓글단 글">
-                                            글 목록
+                                            <PostList user={user} kind="comment" />
                                         </Tab>
-                                        <Tab eventKey="scrap" title="스크랩">
-                                            글 목록
+                                        <Tab eventKey="liked" title="좋아요한 글">
+                                            <PostList user={user} kind="liked" />
                                         </Tab>
                                     </Tabs>
                                 </Row>

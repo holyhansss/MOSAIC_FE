@@ -10,7 +10,7 @@ function Reportrecentcard({id, title, writer, date, likes}) {
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
-        navigate('/reportDetail', {
+        navigate('/reportDetail/' + title, {
           state: {
             id : id,
             title: title,
@@ -54,7 +54,7 @@ function Reportlistcard({id,title, date, writer, likes}) {
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
-        navigate('/reportDetail', {
+        navigate('/reportDetail' + title, {
           state: {
             id: id,
             title: title,

@@ -55,7 +55,7 @@ function ProfileModal({ user, refreshUser }) {
                         <Button variant="secondary" onClick={handleClose}>
                             닫기
                         </Button>
-                        <Button variant="primary" type='submit'>
+                        <Button variant="primary" type='submit' onClick={handleClose}>
                             저장
                         </Button>
                     </Modal.Footer>

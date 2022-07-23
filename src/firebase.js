@@ -46,8 +46,6 @@ export const signInWithGoogle = () => {
 export const signUpWithEmailAndPassword = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password, name)
     .then(async (userCredential) => {
-      const user = userCredential.user;
-
       await updateProfile(auth.currentUser, { displayName: name, photoURL: profile })
       window.location.replace("/login");
       alert("가입 완료");
@@ -71,7 +69,6 @@ export const signInWithEmail = (email, password) => {
       window.location.replace("/");  
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorMessage);
     });
@@ -83,15 +80,10 @@ export const logout = () => {
     .then(()=> {
       window.location.replace("/");  
   }).catch((error) => {
-    const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage);
   })
 };
-
-// export const updateProfileData = async(name) => {
-//   await updateProfile(auth.currentUser, {displayName: name});
-// };
 
 //Database
 export const dbService = getFirestore();
