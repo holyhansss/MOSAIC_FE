@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import {CardActionArea} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-function Reportrecentcard({id, title, writer, date, likes}) {
+function Reportrecentcard({id, title, writer, date}) {
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -16,7 +16,6 @@ function Reportrecentcard({id, title, writer, date, likes}) {
             title: title,
             writer: writer,
             date: date,
-            likes : likes
           }
         });
       };
@@ -50,7 +49,7 @@ function Reportrecentcard({id, title, writer, date, likes}) {
 
 export {Reportrecentcard};
 
-function Reportlistcard({id,title, date, writer, likes}) {
+function Reportlistcard({id,title, date, writer}) {
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -60,7 +59,6 @@ function Reportlistcard({id,title, date, writer, likes}) {
             title: title,
             writer: writer,
             date: date,
-            likes : likes
           }
         });
       };

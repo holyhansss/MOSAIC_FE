@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, List, ListItem,Typography, ListItemText, ListItemAvatar, IconButton, TextField, Box, Button  } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
-import { query, addDoc, collection, getDocs, orderBy, setDoc, doc } from 'firebase/firestore';
-import { dbService, auth } from '../../firebase.js';
+import { query, addDoc, collection, getDocs, orderBy, setDoc, doc, deleteDoc } from 'firebase/firestore';
+import { dbService } from '../../firebase.js';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import moment from 'moment';
+import DeleteIcon from '@mui/icons-material/Delete';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
-
-
-
-function SingleComment({comment, username, pic,value, subid, id, cdate, user, title, writer, date}) {
+function SingleComment({comment, username, pic,value, subid, id, cdate, user, title, writer, date, user_uid}) {
   // let isLogin = sessionStorage.getItem("isLogin");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [useId, setUserId] = useState("");
   const [ava, setAva] = useState(null);
+  const [uid, setUid] = useState("")
 
   useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-          if (user) {
-              setIsLoggedIn(true);
-              setAva(user.photoURL);
-              setUserId(user.displayName);
-          } else {
-              setIsLoggedIn(false);
-              setAva(null);
-              setUserId(null);
-          }
-      })
-  }, [])
+    if (user !== null) {
+      setUserId(user.displayName);
+      setAva(user.photoURL);
+      setUid(user.uid);
+    }
+  }, [user])
 
   const [OpenReply, setOpenReply] = useState(false);
   const [Openlist, setOpenlist] = useState(false);
   const [reply, setReply] = useState('');
 
   const [sub_id, setSub_id ] = useState(subid);
-  // const [like, setLike] = useState(0);
 
+  //댓글 삭제하기(대댓글 삭제는 onclick 에 직접 들어있음)
+  const ondelete = async(event) => {
+    await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id)) ;
+    window.location.reload();
+  };
+
+  //대댓글 작성칸 open
   const onClickReplyOpen = () => {
     setOpenReply(!OpenReply);
   };
 
+  //대댓글 리스트 open
   const onClickReplylistOpen = () => {
     setOpenlist(!Openlist);
   };
@@ -49,6 +50,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
     setReply(event.currentTarget.value);
   };
 
+  //대댓글 저장하기
   const onsubmit = async(event) => {
       event.preventDefault();
       const time = Date;
@@ -74,8 +76,9 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
       // setLike(0);
      };
 
-  const [replylist, setReplylist] = useState([]);
 
+  //대댓글 정보 가져오기
+  const [replylist, setReplylist] = useState([]);
   const getReplies = async() => {
   const repl = query(collection(dbService,'weekly_report', id,'comment',sub_id, "reply" ), orderBy("created_at","desc"));
   const querySnapShot = await getDocs(repl);
@@ -91,21 +94,29 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
       setReplylist(prev => [replyObj, ...prev]);
   });
   };
-  
   useEffect(() => { getReplies() }, []);
+
+  // console.log(user_uid);
 
   return (
     <div>
+      {/* 댓글리스트 */}
       <List>
         <ListItem  alignItems="flex-start" 
                     secondaryAction={ 
-                      <div>
-                    <IconButton key={value} edge="end" aria-label="comments" onClick={onClickReplyOpen}>
+                      <div key={value}>
+                    {/* <IconButton  edge="end" aria-label="comments" onClick={onClickReplyOpen}>
                       <CommentIcon fontSize="small"/>
-                    </IconButton>
-                    <IconButton edge="end" aria-label="comment" onClick={onClickReplylistOpen}>
-                      <KeyboardArrowDownIcon fontSize="small" />
-                    </IconButton>
+                    </IconButton> */}
+                    {
+                      user_uid === uid ?
+                      (
+                        <IconButton edge="end" aria-label="comment" onClick={ondelete}>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      ) : null
+                    }
+
                     </div>
                   }>
           <ListItemAvatar>
@@ -127,13 +138,24 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
               <Typography variant="caption">
                 {moment(cdate).format('YYYY.MM.DD')}
               </Typography>
+                <IconButton  edge="end" aria-label="comments" onClick={onClickReplyOpen}>
+                      <CommentIcon fontSize="small"/>
+                </IconButton>
+              {
+                replylist.length !== 0 ?
+                  <IconButton edge="end" aria-label="comment" onClick={onClickReplylistOpen}>
+                    { Openlist === false ? <KeyboardArrowDownIcon fontSize="small" /> : <KeyboardArrowUpIcon fontSize="small"/>}
+                  </IconButton> 
+                  : null
+              }
             </React.Fragment>
+            
           }
         />
         </ListItem>
       </List>
 
-
+        {/* 대댓글 작성칸 */}
         {OpenReply && ( //openReply값이 true일때만 대댓글창을 보이게만듬
           <form style={{ display: 'flex' }} onSubmit={onsubmit}>
           <Box sx={{ display: 'flex', alignItems: 'flex-end', ml:'5%' }}>
@@ -143,7 +165,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
           
           <br />
           {
-            isLoggedIn === true ? 
+            user !== null ? 
             (
               <Button variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onsubmit} >
                 댓글
@@ -157,12 +179,29 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
           </form>
       )}
 
+      {/* 대댓글 목록 */}
       {Openlist && ( //openReply값이 true일때만 대댓글창을 보이게만듬
           <List >
             {
               replylist.map((rep,idx) => (
                 <div key={idx}>
-                <ListItem alignItems="flex-start" sx={{ml: '3%'}}>
+                <ListItem alignItems="flex-start" sx={{ml: '3%'}} secondaryAction={ 
+                      <div>
+                    {
+                      user_uid === uid ?
+                      (
+                        <IconButton edge="end" aria-label="comment" 
+                        onClick={async() => {
+                          await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id, "reply", rep.id)) ;
+                          window.location.reload();
+                        }}>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      ) : null
+                    }
+
+                    </div>
+                  }>
                   <ListItemAvatar>
                     <Avatar src={rep.avat} sx={{ color: 'action.active', mr: 1, my: 0.5, width: 24, height: 24 }}/>
                   </ListItemAvatar>
