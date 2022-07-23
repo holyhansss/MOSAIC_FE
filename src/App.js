@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
@@ -10,12 +10,15 @@ import ReportList from "./pages/ReportList";
 import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header/Header";
-import { auth, updateProfileData } from './firebase';
+import { auth } from './firebase';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   
+  const params = useParams();
+  // const id = Number(params.id);
+
   const refreshUser = () => {
     const user = auth.currentUser;
     setUserObj({
@@ -29,8 +32,6 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user){
-        console.log(user);
-        setIsLoggedIn(true);
         setUserObj({
           displayName: user.displayName,
           email: user.email,
@@ -52,7 +53,7 @@ function App() {
         <Route path='admin' element={<Admin/>} ></Route>
         <Route path='/market' element={<MarketPage/>} ></Route>
         <Route path='/reportList' element={<ReportList/>} ></Route>
-        <Route path='/reportDetail' element={<ReportDetail user={userObj}/>} ></Route>
+        <Route path='/reportDetail/:title' element={<ReportDetail user={userObj}/>} ></Route>
         <Route path='/profile' element={<MyPage user={userObj} refreshUser={refreshUser}/>} ></Route>
         {/* <Route path='/detailpages/*' > 
           <Route path=":id" element={<DetailPage />} />

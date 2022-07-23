@@ -1,14 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc} from 'firebase/firestore';
-import { dbService, auth } from '../../firebase.js';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { query, getDocs, collection } from 'firebase/firestore';
+import { dbService } from '../../firebase.js';
 
-function PostList() {
+function PostList({ user, kind }) {
+    const [posts, setPosts] = useState([]);
 
-    const getLists = async() => {
-        const likequ = query(collection(dbService,'weekly_report', id,'like'));
-        const querySnapShot = await getDocs(likequ);
-    }
+    const getPosts = async() => {
+        const q = query(collection(dbService, 'users', user.uid, kind));
+        const querySnapShot = await getDocs(q);
+
+        querySnapShot.forEach((collection) => {
+            const postObj = {
+                title: collection.data().title,
+                writer: collection.data().writer,
+                date: collection.data().date
+            };
+            setPosts(prev => [postObj, ...prev]);
+        });
+    };
+
+    useEffect(() => {getPosts()}, []);
+    
     return (
-
+        <>
+            {
+                posts.map((post, index) => (
+                    <Card key={index} style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>{post.title}</Card.Title>
+                            <Card.Text>
+                                {post.writer} {post.date}
+                            </Card.Text>
+                            {/* <Button variant="primary">Go somewhere</Button> */}
+                        </Card.Body>
+                    </Card>
+                ))
+            }
+        </>
     )
 }
+
+export default PostList;
