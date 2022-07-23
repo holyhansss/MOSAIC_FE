@@ -6,7 +6,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShareIcon from '@mui/icons-material/Share';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc} from 'firebase/firestore';
+import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc, where} from 'firebase/firestore';
 import { dbService, auth } from '../../firebase.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -15,7 +15,7 @@ import Comment from '../Comment/Comment.js';
 import Reportcard from './Reportcard.js';
 
 
-function ReportContents() {
+function ReportContents({user}) {
     const location = useLocation();
     const id = location.state.id;
     const title = location.state.title;
@@ -27,21 +27,6 @@ function ReportContents() {
     const [policies, setPolicies] = useState([]);
     const [marcro, setMarcro] = useState([]);
 
-    const [useId, setUserId] = useState("");
-  
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                setUserId(user.displayName);
-            } else {
-                setUserId(null);
-            }
-        })
-
-    }, [])
-
-
-    
     const getContents = async() => {
         const invest = collection(dbService,'weekly_report', id,'investment');
         const policy = collection(dbService,'weekly_report', id,'policy');
@@ -101,58 +86,37 @@ function ReportContents() {
 
 //좋아요 가져오기
 const [likenum, setLikenum] = useState([]);
+const [clickICon, setClickIcon] = useState(false);
+const [likescount, setLikescount] = useState('');
 
   const getLikes = async() => {
-    const likequ = query(collection(dbService,'weekly_report', id,'like'));
-    const querySnapShot = await getDocs(likequ);
+    if (user !== null) {
+        const likequ = query(collection(dbService,'weekly_report', id,'like'), where("likename","==", user.displayName));
+        const querySnapShot = await getDocs(likequ);
+    
+        querySnapShot.forEach((collection)=> {
+            const likeObj = {
+                likename : collection.data().likename,
+                likecount : collection.data().like_count
+            };
+            setClickIcon(true);
+            setLikenum(prev => [likeObj, ...prev]);
+        });
 
-    querySnapShot.forEach((collection)=> {
-        const likeObj = {
-            likename : collection.data().likename,
-            likecount : collection.data().like_count
-        };
-        setLikenum(prev => [likeObj, ...prev]);
-    });
+    };
   };
-
-  useEffect(() => { getLikes() }, []);
-//   console.log(likenum)
-//   console.log(likenum.length)
-
-
-  const [clickICon, setClickIcon] = useState(false);
-  const [likescount, setLikescount] = useState(likes);
-
-//   useEffect(() => {
-//     likenum.map(data => {
-//         if (data.likename === useId) {
-//             console.log("hey")
-//             setClickIcon(true);
-//     }
-//     else {
-//         setClickIcon(false);
-//     }
-//     })
-
-// },[]);
-
+  useEffect(() => { getLikes() }, [user]);
 
 const onclick = async() =>{
     setClickIcon(!clickICon);
-    // console.log(clickICon)
     if (clickICon === false) {
-        console.log("hey")
-        await setDoc(doc(dbService, "weekly_report", id, 'like', useId), {
-            likename : useId,
+        await setDoc(doc(dbService, "weekly_report", id, 'like', user.displayName), {
+            likename : user.displayName,
             like_count: true
         });
-        // setLikescount(likescount);
-        // console.log(likescount);
-        // setLike(like-1);
     }
     else {
-        await deleteDoc(doc(dbService, 'weekly_report', id,'like', useId));  
-        // setLike(like+1);
+        await deleteDoc(doc(dbService, 'weekly_report', id,'like', user.displayName));  
     }
 
 }
