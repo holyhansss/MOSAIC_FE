@@ -65,7 +65,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
         avatar: ava,
         nickname: useId,
         created_at: time.now(),
-        // like : like
+        user_uid_re : uid
       });
 
       // 유저별 '댓글 단 글' 저장
@@ -98,6 +98,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
             credate : collection.data().created_at,
             avat: collection.data().avatar,
             name: collection.data().nickname,
+            user_uid_re : collection.data().user_uid_re,
         };
         setReplyId(replyObj.id);
         setReplylist(prev => [replyObj, ...prev]);
@@ -108,8 +109,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
       comment: comment
     });
 
-    };
-
+  };
   useEffect(() => { getReplies() }, []);
 
   // console.log(user_uid);
@@ -121,9 +121,6 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
         <ListItem  alignItems="flex-start" 
                     secondaryAction={ 
                       <div key={value}>
-                    {/* <IconButton  edge="end" aria-label="comments" onClick={onClickReplyOpen}>
-                      <CommentIcon fontSize="small"/>
-                    </IconButton> */}
                     {
                       user_uid === uid ?
                       (
@@ -204,7 +201,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                 <ListItem alignItems="flex-start" sx={{ml: '3%'}} secondaryAction={ 
                       <div>
                     {
-                      user_uid === uid ?
+                      rep.user_uid_re === uid ?
                       (
                         <IconButton edge="end" aria-label="comment" 
                         onClick={async() => {
