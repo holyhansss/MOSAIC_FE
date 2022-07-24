@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, List, ListItem,Typography, ListItemText, ListItemAvatar, IconButton, TextField, Box, Button  } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
-import { query, addDoc, collection, getDocs, orderBy, setDoc, doc, deleteDoc } from 'firebase/firestore';
+import { query, addDoc, collection, getDocs, orderBy, setDoc, doc, deleteDoc, where } from 'firebase/firestore';
 import { dbService } from '../../firebase.js';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import moment from 'moment';
@@ -32,7 +32,13 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
 
   //댓글 삭제하기(대댓글 삭제는 onclick 에 직접 들어있음)
   const ondelete = async(event) => {
-    await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id)) ;
+    await deleteDoc(doc(dbService, 'weekly_report', id, 'comment', sub_id));
+    await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, sub_id));
+    const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
+    const querySnapShot = await getDocs(q);
+    if (querySnapShot.empty) {
+      await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+    };
     window.location.reload();
   };
 
@@ -79,21 +85,31 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
 
   //대댓글 정보 가져오기
   const [replylist, setReplylist] = useState([]);
+  const [replyId, setReplyId] = useState('');
+
   const getReplies = async() => {
-  const repl = query(collection(dbService,'weekly_report', id,'comment',sub_id, "reply" ), orderBy("created_at","desc"));
-  const querySnapShot = await getDocs(repl);
-  
-  querySnapShot.forEach((collection)=> {
-      const replyObj = {
-          id : collection.id,
-          recomment : collection.data().comment,
-          credate : collection.data().created_at,
-          avat: collection.data().avatar,
-          name: collection.data().nickname,
-      };
-      setReplylist(prev => [replyObj, ...prev]);
-  });
-  };
+    const repl = query(collection(dbService,'weekly_report', id,'comment',sub_id, "reply" ), orderBy("created_at","desc"));
+    const querySnapShot = await getDocs(repl);
+    
+    querySnapShot.forEach((collection)=> {
+        const replyObj = {
+            id : collection.id,
+            recomment : collection.data().comment,
+            credate : collection.data().created_at,
+            avat: collection.data().avatar,
+            name: collection.data().nickname,
+        };
+        setReplyId(replyObj.id);
+        setReplylist(prev => [replyObj, ...prev]);
+    });
+
+    // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
+    await setDoc(collection(dbService, 'weekly_report', id, 'users', user.uid, replyId), {
+      comment: comment
+    });
+
+    };
+
   useEffect(() => { getReplies() }, []);
 
   // console.log(user_uid);
@@ -193,6 +209,12 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                         <IconButton edge="end" aria-label="comment" 
                         onClick={async() => {
                           await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id, "reply", rep.id)) ;
+                          await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.id));
+                          const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
+                          const querySnapShot2 = await getDocs(q2);
+                          if (querySnapShot2.empty) {
+                            await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+                          };
                           window.location.reload();
                         }}>
                           <DeleteIcon fontSize="small" />

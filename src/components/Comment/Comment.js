@@ -25,7 +25,6 @@ function Comment({ user, id, title, rep, writer, date }) {
   }, [user])
 
 
-
   //코멘트 저장하기
   const [comment, setComment] = useState('');
 
@@ -49,6 +48,11 @@ function Comment({ user, id, title, rep, writer, date }) {
       title: title,
       writer: writer,
       date: date
+    });
+
+    // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
+    await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.subid), {
+      comment: comment
     });
 
     window.location.reload();
