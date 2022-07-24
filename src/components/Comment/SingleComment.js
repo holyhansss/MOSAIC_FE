@@ -90,7 +90,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   const getReplies = async() => {
     const repl = query(collection(dbService,'weekly_report', id,'comment',sub_id, "reply" ), orderBy("created_at","desc"));
     const querySnapShot = await getDocs(repl);
-    
+
     querySnapShot.forEach((collection)=> {
         const replyObj = {
             id : collection.id,
@@ -103,12 +103,10 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
         setReplyId(replyObj.id);
         setReplylist(prev => [replyObj, ...prev]);
     });
-
     // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
     await setDoc(collection(dbService, 'weekly_report', id, 'users', user.uid, replyId), {
       comment: comment
     });
-
   };
   useEffect(() => { getReplies() }, []);
 
