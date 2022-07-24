@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { addDoc, setDoc, doc, collection } from 'firebase/firestore';
-import { dbService, auth } from '../../firebase.js';
+import { dbService } from '../../firebase.js';
 import { Avatar, TextField, Box, Button} from '@mui/material';
 
 //components
@@ -8,26 +8,21 @@ import SingleComment from './SingleComment.js';
 
 
 
-function Comment({ user, id, title, rep, likes, writer, date }) {
+function Comment({ user, id, title, rep, writer, date }) {
   // let isLogin = sessionStorage.getItem("isLogin");
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState();
   const [useId, setUserId] = useState("");
-  const [pic, setpic] = useState(sessionStorage.getItem("profilePic"));
+  const [pic, setpic] = useState('');
+  const [Uid, setUid] = useState('');
 
   useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-          if (user) {
-              setIsLoggedIn(true);
-              setpic(user.photoURL);
-              setUserId(user.displayName);
-          } else {
-              setIsLoggedIn(false);
-              setpic(null);
-              setUserId(null);
-          }
-      })
-  }, [])
+    if (user !== null) {
+      setUserId(user.displayName);
+      setpic(user.photoURL);
+      setUid(user.uid);
+    }
+  }, [user])
 
 
 
@@ -46,6 +41,7 @@ function Comment({ user, id, title, rep, likes, writer, date }) {
       avatar: pic,
       nickname: useId,
       created_at: time.now(),
+      user_uid: Uid
     });
 
     // 유저별 '댓글 단 글' 저장
@@ -78,7 +74,7 @@ function Comment({ user, id, title, rep, likes, writer, date }) {
         
         <br />
         {
-          isLoggedIn === true ? 
+          user !== null  ? 
           (
             <Button variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onSubmit} >
               댓글
@@ -95,7 +91,7 @@ function Comment({ user, id, title, rep, likes, writer, date }) {
       {
         rep.map((repl,index) => (
           <div key={index}>
-            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id} user={user} title={title} writer={writer} date={date}/>
+            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id} user={user} title={title} writer={writer} date={date} user_uid={repl.user_uid}/>
           </div>
         ))
       }
