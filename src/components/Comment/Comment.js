@@ -34,6 +34,7 @@ function Comment({ user, id, title, rep, writer, date }) {
 
   const onSubmit = async(event) => {
     event.preventDefault();
+    console.log(">>>>")
     const time = Date;
     await addDoc(collection(dbService, "weekly_report", id, 'comment'), {
       comment: comment,
@@ -50,10 +51,10 @@ function Comment({ user, id, title, rep, writer, date }) {
       date: date
     });
 
-    // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-    await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.subid), {
-      comment: comment
-    });
+    // // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
+    // await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.subid), {
+    //   comment: comment
+    // });
 
     window.location.reload();
     setComment("");
