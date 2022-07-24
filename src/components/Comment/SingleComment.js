@@ -33,12 +33,12 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   //댓글 삭제하기(대댓글 삭제는 onclick 에 직접 들어있음)
   const ondelete = async(event) => {
     await deleteDoc(doc(dbService, 'weekly_report', id, 'comment', sub_id));
-    await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, sub_id));
-    const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
-    const querySnapShot = await getDocs(q);
-    if (querySnapShot.empty) {
-      await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
-    };
+    // await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, sub_id));
+    // const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
+    // const querySnapShot = await getDocs(q);
+    // if (querySnapShot.empty) {
+    //   await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+    // };
     window.location.reload();
   };
 
