@@ -3,7 +3,7 @@ import { Container, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { logout } from '../../firebase';
 
-function Header({ user }) {
+function Header({ user, admin }) {
 
     return (
         <>
@@ -25,7 +25,11 @@ function Header({ user }) {
                                 user !== null ? 
                                 (
                                     <NavDropdown title={<img alt="profile" style={{borderRadius:'50%'}} src={user.photoURL} width="30" height="30"/>} id="basic-nav-dropdown">
-                                        <Link to="/profile">마이페이지</Link>
+                                        <NavDropdown.Item><Link to="/profile">마이페이지</Link></NavDropdown.Item>
+                                        {
+                                            admin === true &&
+                                            <Link to="admin"> 관리자</Link>
+                                        }
                                         <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                     </NavDropdown>
                                 ) :
