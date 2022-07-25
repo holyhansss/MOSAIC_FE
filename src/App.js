@@ -10,12 +10,14 @@ import ReportList from "./pages/ReportList";
 import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header/Header";
-import { auth } from './firebase';
+import { auth, dbService } from './firebase';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  
+  const [admin, setAdmin] = useState(false);
+
   const params = useParams();
   // const id = Number(params.id);
 
@@ -29,6 +31,17 @@ function App() {
     });
   };
 
+  const getAdmin = async(email) => {
+    const q = query(collection(dbService, 'admin_info'), where('admin_email', '==', email));
+    const querySnapShot = await getDocs(q);
+    console.log(querySnapShot);
+    if (querySnapShot.empty) {
+      setAdmin(false);
+    } else {
+      setAdmin(true);
+    };
+  };
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user){
@@ -38,14 +51,16 @@ function App() {
           uid: user.uid,
           photoURL: user.photoURL,
         });
+        getAdmin(user.email);
       } else {
         setIsLoggedIn(false);
       }
     })
+    
   }, []);
   return (
     <>
-      <Header user={userObj}/>
+      <Header user={userObj} admin={admin}/>
       <Routes>
         <Route path='/' element={<MainPage/>} ></Route>
         <Route path='/login' element={<Login/>} ></Route>
