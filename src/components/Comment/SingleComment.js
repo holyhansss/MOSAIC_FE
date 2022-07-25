@@ -33,12 +33,12 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   //댓글 삭제하기(대댓글 삭제는 onclick 에 직접 들어있음)
   const ondelete = async(event) => {
     await deleteDoc(doc(dbService, 'weekly_report', id, 'comment', sub_id));
-    await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, sub_id));
-    const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
-    const querySnapShot = await getDocs(q);
-    if (querySnapShot.empty) {
-      await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
-    };
+    // await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, sub_id));
+    // const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
+    // const querySnapShot = await getDocs(q);
+    // if (querySnapShot.empty) {
+    //   await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+    // };
     window.location.reload();
   };
 
@@ -60,7 +60,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   const onsubmit = async(event) => {
       event.preventDefault();
       const time = Date;
-      await addDoc(collection(dbService, "weekly_report", id, 'comment', sub_id, "reply"), {
+      await setDoc(doc(dbService, "weekly_report", id, 'comment', sub_id, "reply", String(time.now())), {
         comment: reply,
         avatar: ava,
         nickname: useId,
@@ -103,10 +103,10 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
         setReplyId(replyObj.id);
         setReplylist(prev => [replyObj, ...prev]);
     });
-    // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-    await setDoc(collection(dbService, 'weekly_report', id, 'users', user.uid, replyId), {
-      comment: comment
-    });
+    // // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
+    // await setDoc(collection(dbService, 'weekly_report', id, 'users', user.uid, replyId), {
+    //   comment: comment
+    // });
   };
   useEffect(() => { getReplies() }, []);
 
@@ -204,12 +204,12 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                         <IconButton edge="end" aria-label="comment" 
                         onClick={async() => {
                           await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id, "reply", rep.id)) ;
-                          await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.id));
-                          const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
-                          const querySnapShot2 = await getDocs(q2);
-                          if (querySnapShot2.empty) {
-                            await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
-                          };
+                          // await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.id));
+                          // const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
+                          // const querySnapShot2 = await getDocs(q2);
+                          // if (querySnapShot2.empty) {
+                          //   await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+                          // };
                           window.location.reload();
                         }}>
                           <DeleteIcon fontSize="small" />
