@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, List, ListItem,Typography, ListItemText, ListItemAvatar, IconButton, TextField, Box, Button  } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
-import { updateDoc, deleteField, query, addDoc, collection, getDocs, orderBy, setDoc, doc, deleteDoc, where } from 'firebase/firestore';
+import { query, collection, getDocs, orderBy, setDoc, doc, deleteDoc } from 'firebase/firestore';
 import { dbService } from '../../firebase.js';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import moment from 'moment';
