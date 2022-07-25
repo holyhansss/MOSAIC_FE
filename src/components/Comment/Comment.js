@@ -34,9 +34,9 @@ function Comment({ user, id, title, rep, writer, date }) {
 
   const onSubmit = async(event) => {
     event.preventDefault();
-    console.log(">>>>")
     const time = Date;
-    await addDoc(collection(dbService, "weekly_report", id, 'comment'), {
+    const datenow = String(time.now());
+    await setDoc(doc(dbService, "weekly_report", id, 'comment', datenow), {
       comment: comment,
       avatar: pic,
       nickname: useId,
