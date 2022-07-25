@@ -134,6 +134,19 @@ function Index1y() {
               
         });
     }, []);
+    const NewIndex =(data1, data2) => {
+      const res=[];
+      
+      for (let i =0; i< data1.length; i++){
+        res.push({
+          time:data1[i].time,
+          SnP:data1[i].SnP,
+          CMC:data2[i].CMC
+        });
+      }
+      return res;
+    };
+    const index3=NewIndex(index1,index2);
   return(
 
     
@@ -141,12 +154,12 @@ function Index1y() {
       <div><h>S&P 500 vs CMC200  1 year ver </h></div>
 
     { 
-      index1 &&
+      index3 &&
       <div>
       <LineChart
         width={900}
         height={300}
-        data={index1}
+        data={index3}
         margin={{top: 5, right: 20, left: 20, bottom: 5}}
       >
         <CartesianGrid vertical={false} />
@@ -154,8 +167,8 @@ function Index1y() {
         <YAxis domain={[80, 120]}/>
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="SnP" data={index1} stroke="#8884d8" dot={false}/>
-        <Line type="monotone" dataKey="CMC" data={index2} stroke="#82ca9d" dot={false}/>
+        <Line type="monotone" dataKey="SnP"  stroke="#8884d8" dot={false}/>
+        <Line type="monotone" dataKey="CMC" stroke="#82ca9d" dot={false}/>
         
         
       </LineChart>
