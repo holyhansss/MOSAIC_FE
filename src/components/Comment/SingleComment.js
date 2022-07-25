@@ -60,7 +60,8 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   const onsubmit = async(event) => {
       event.preventDefault();
       const time = Date;
-      await addDoc(collection(dbService, "weekly_report", id, 'comment', sub_id, "reply"), {
+      const datenow = String(time.now());
+      await setDoc(doc(dbService, "weekly_report", id, 'comment', sub_id, "reply", datenow), {
         comment: reply,
         avatar: ava,
         nickname: useId,
@@ -204,12 +205,12 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                         <IconButton edge="end" aria-label="comment" 
                         onClick={async() => {
                           await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id, "reply", rep.id)) ;
-                          await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.id));
-                          const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
-                          const querySnapShot2 = await getDocs(q2);
-                          if (querySnapShot2.empty) {
-                            await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
-                          };
+                          // await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.id));
+                          // const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid));
+                          // const querySnapShot2 = await getDocs(q2);
+                          // if (querySnapShot2.empty) {
+                          //   await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+                          // };
                           window.location.reload();
                         }}>
                           <DeleteIcon fontSize="small" />
