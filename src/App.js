@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
@@ -18,9 +18,6 @@ function App() {
   const [userObj, setUserObj] = useState(null);
   const [admin, setAdmin] = useState(false);
 
-  const params = useParams();
-  // const id = Number(params.id);
-
   const refreshUser = () => {
     const user = auth.currentUser;
     setUserObj({
@@ -34,7 +31,7 @@ function App() {
   const getAdmin = async(email) => {
     const q = query(collection(dbService, 'admin_info'), where('admin_email', '==', email));
     const querySnapShot = await getDocs(q);
-    console.log(querySnapShot);
+
     if (querySnapShot.empty) {
       setAdmin(false);
     } else {

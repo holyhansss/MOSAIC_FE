@@ -15,7 +15,6 @@ function Comment({ user, id, title, rep, writer, date }) {
   const [useId, setUserId] = useState("");
   const [pic, setpic] = useState('');
   const [Uid, setUid] = useState('');
-
   useEffect(() => {
     if (user !== null) {
       setUserId(user.displayName);
@@ -34,12 +33,12 @@ function Comment({ user, id, title, rep, writer, date }) {
 
   const onSubmit = async(event) => {
     event.preventDefault();
-    const time = Date;
-    await setDoc(doc(dbService, "weekly_report", id, 'comment', String(time.now())), {
+    const time = Date.now();
+    await setDoc(doc(dbService, "weekly_report", id, 'comment', String(time)), {
       comment: comment,
       avatar: pic,
       nickname: useId,
-      created_at: time.now(),
+      created_at: time,
       user_uid: Uid
     });
 
@@ -50,10 +49,10 @@ function Comment({ user, id, title, rep, writer, date }) {
       date: date
     });
 
-    // // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-    // await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, rep.subid), {
-    //   comment: comment
-    // });
+    // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
+    await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, 'comments', String(time)), {
+      comment: comment
+    });
 
     window.location.reload();
     setComment("");
