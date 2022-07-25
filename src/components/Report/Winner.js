@@ -64,7 +64,7 @@ const Winner = ({user, id, title, writer, date}) => {
                         </Typography>
                         <p/>
                         <Box sx={ {width: '100%', height: '100%'}}>
-                            <img src={invem.img1} ></img>
+                            <img alt="pic1" src={invem.img1} ></img>
                         </Box>
                         <p/>
                         <Typography variant="body1" align="center" gutterBottom component="div">
@@ -72,7 +72,7 @@ const Winner = ({user, id, title, writer, date}) => {
                         </Typography>
                         <p/>
                         <Box sx={ {width: '100%', height: '100%'}}>
-                            <img src={invem.img2} ></img>
+                            <img alt="pic2" src={invem.img2} ></img>
                         </Box>
                         <p/>
                         </div>
