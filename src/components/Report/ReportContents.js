@@ -8,7 +8,6 @@ import Reportcard from './Reportcard.js';
 
 
 function ReportContents({user, id, title, writer, date}) {
-
     const [investments, setInvestments] = useState([]);
     const [policies, setPolicies] = useState([]);
     const [marcro, setMarcro] = useState([]);
@@ -47,7 +46,6 @@ function ReportContents({user, id, title, writer, date}) {
     };
 
     useEffect(() => { getContents() }, []);
-
     return ( 
         <div>
             <p />
