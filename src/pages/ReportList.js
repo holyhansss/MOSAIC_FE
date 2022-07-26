@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import {Container, Grid, Box} from '@mui/material';
 import { getDocs, query, collection, orderBy } from 'firebase/firestore';
 import { dbService } from '../firebase.js';
+import moment from 'moment';
 
 //components
 import {Reportlistcard, Reportrecentcard} from '../components/Report/Reportlistcard.js';
@@ -42,7 +43,7 @@ function ReportList() {
 
                     <div>
                         { result !== undefined ?
-                        <Reportrecentcard id={result.id} title={result.title} writer={result.writer} date={result.date}/>
+                        <Reportrecentcard id={result.id} title={result.title} writer={result.writer} date={moment(result.date).format('YYYY.MM.DD')}/>
                     : null}
 
                     </div>                

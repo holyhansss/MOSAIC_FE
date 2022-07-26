@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {Box, Tab, Container, Grid, Modal, Typography, TextField, Button} from '@mui/material';
+import {Box, Tab, Container, Grid, Modal, Typography, Button} from '@mui/material';
 import {TabList, TabPanel, TabContext} from '@mui/lab';
-import { useLocation } from 'react-router-dom';
-import moment from 'moment';
+import { useParams } from 'react-router-dom';
+// import moment from 'moment';
 import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc, where} from 'firebase/firestore';
 import { dbService } from '../firebase';
 import IconButton from '@mui/material/IconButton';
@@ -20,14 +20,8 @@ import Comment from '../components/Comment/Comment';
 
 export default function ReportDetail({user}) {
 
-  const location = useLocation();
-  const id = location.state.id;
-  const title = location.state.title;
-  const writer = location.state.writer;
-  const date = moment(location.state.date).format('YYYY.MM.DD');
   const [value, setValue] = React.useState('1');
-  
-
+  const {id, title, writer, date} = useParams();
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
 

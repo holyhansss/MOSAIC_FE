@@ -65,7 +65,7 @@ function App() {
         <Route path='admin' element={<Admin/>} ></Route>
         <Route path='/market' element={<MarketPage/>} ></Route>
         <Route path='/reportList' element={<ReportList/>} ></Route>
-        <Route path='/reportDetail/:title' element={<ReportDetail user={userObj}/>} ></Route>
+        <Route path='/reportDetail/:id/:title/:writer/:date' element={<ReportDetail user={userObj}/>} ></Route>
         <Route path='/profile' element={<MyPage user={userObj} refreshUser={refreshUser}/>} ></Route>
         {/* <Route path='/detailpages/*' > 
           <Route path=":id" element={<DetailPage />} />
