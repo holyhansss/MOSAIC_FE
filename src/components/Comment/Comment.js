@@ -6,16 +6,15 @@ import { Avatar, TextField, Box, Button} from '@mui/material';
 //components
 import SingleComment from './SingleComment.js';
 
-
-
 function Comment({ user, id, title, rep, writer, date }) {
   const [useId, setUserId] = useState("");
-  const [pic, setpic] = useState('');
-  const [Uid, setUid] = useState('');
+  const [pic, setPic] = useState('');
+  const [uid, setUid] = useState('');
+  
   useEffect(() => {
     if (user !== null) {
       setUserId(user.displayName);
-      setpic(user.photoURL);
+      setPic(user.photoURL);
       setUid(user.uid);
     }
   }, [user])
@@ -36,27 +35,22 @@ function Comment({ user, id, title, rep, writer, date }) {
       avatar: pic,
       nickname: useId,
       created_at: time,
-      user_uid: Uid,
+      user_uid: uid,
       show : true,
       isreply: false
     });
 
     // 유저별 '댓글 단 글' 저장
-    // await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
-    //   title: title,
-    //   writer: writer,
-    //   date: date
-    // });
-
-    // // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-    // await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, 'comments', String(time)), {
-    //   comment: comment
-    // });
+    await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
+      title: title,
+      writer: writer,
+      date: date
+    });
 
     window.location.reload();
     setComment("");
     setUserId("");
-    setpic("");
+    setPic("");
   };
 
   return (
