@@ -6,19 +6,15 @@ import { Avatar, TextField, Box, Button} from '@mui/material';
 //components
 import SingleComment from './SingleComment.js';
 
-
-
 function Comment({ user, id, title, rep, writer, date }) {
-  // let isLogin = sessionStorage.getItem("isLogin");
-
-  // const [isLoggedIn, setIsLoggedIn] = useState();
   const [useId, setUserId] = useState("");
-  const [pic, setpic] = useState('');
-  const [Uid, setUid] = useState('');
+  const [pic, setPic] = useState('');
+  const [uid, setUid] = useState('');
+  
   useEffect(() => {
     if (user !== null) {
       setUserId(user.displayName);
-      setpic(user.photoURL);
+      setPic(user.photoURL);
       setUid(user.uid);
     }
   }, [user])
@@ -33,13 +29,15 @@ function Comment({ user, id, title, rep, writer, date }) {
 
   const onSubmit = async(event) => {
     event.preventDefault();
-    const time = Date.now();
+    const time= Date.now();
     await setDoc(doc(dbService, "weekly_report", id, 'comment', String(time)), {
       comment: comment,
       avatar: pic,
       nickname: useId,
       created_at: time,
-      user_uid: Uid
+      user_uid: uid,
+      show : true,
+      isreply: false
     });
 
     // 유저별 '댓글 단 글' 저장
@@ -49,15 +47,10 @@ function Comment({ user, id, title, rep, writer, date }) {
       date: date
     });
 
-    // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-    await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, 'comments', String(time)), {
-      comment: comment
-    });
-
     window.location.reload();
     setComment("");
     setUserId("");
-    setpic("");
+    setPic("");
   };
 
   return (
@@ -87,14 +80,15 @@ function Comment({ user, id, title, rep, writer, date }) {
             댓글
           </Button>
         }
-
       </form>
 
       {/* Comment Lists */}
       {
         rep.map((repl,index) => (
           <div key={index}>
-            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id} user={user} title={title} writer={writer} date={date} user_uid={repl.user_uid}/>
+            {/* <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id} user={user} title={title} writer={writer} date={date} user_uid={repl.user_uid} subid/> */}
+            <SingleComment value={index} id={id} user={user} title={title} writer={writer} date={date} commentObj={repl}/>
+
           </div>
         ))
       }

@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, List, ListItem,Typography, ListItemText, ListItemAvatar, IconButton, TextField, Box, Button  } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
-import { query, collection, getDocs, orderBy, setDoc, doc, deleteDoc } from 'firebase/firestore';
+import { query, collection, getDocs, orderBy, setDoc, doc, deleteDoc,where, updateDoc } from 'firebase/firestore';
 import { dbService } from '../../firebase.js';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import moment from 'moment';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-
-function SingleComment({comment, username, pic,value, subid, id, cdate, user, title, writer, date, user_uid}) {
-  // let isLogin = sessionStorage.getItem("isLogin");
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+function SingleComment({value, id, user, title, writer, date, commentObj}) {
   const [useId, setUserId] = useState("");
   const [ava, setAva] = useState(null);
   const [uid, setUid] = useState("")
@@ -28,15 +25,17 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   const [Openlist, setOpenlist] = useState(false);
   const [reply, setReply] = useState('');
 
-  const [sub_id, setSub_id ] = useState(subid);
 
   //댓글 삭제하기(대댓글 삭제는 onclick 에 직접 들어있음)
   const ondelete = async(event) => {
-    await deleteDoc(doc(dbService, 'weekly_report', id, 'comment', sub_id));
-    await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, 'comments', sub_id));
-    const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid, 'comments'));
+    await updateDoc(doc(dbService, 'weekly_report', id, 'comment', commentObj.subid), {
+      show: false
+    });
+
+    const q = query(collection(dbService, 'weekly_report', id, 'comment'), where("user_uid", "==", uid), where("show", "==", true));
     const querySnapShot = await getDocs(q);
     if (querySnapShot.empty) {
+      console.log(querySnapShot);
       await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
     };
     window.location.reload();
@@ -59,14 +58,17 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   //대댓글 저장하기
   const onsubmit = async(event) => {
       event.preventDefault();
-      const time = Date.now()
+      const time= Date.now();
       // const timeString = time.toString();
-      await setDoc(doc(dbService, "weekly_report", id, 'comment', sub_id, "reply", String(time)), {
+      await setDoc(doc(dbService, "weekly_report", id, 'comment', String(time)), {
         comment: reply,
         avatar: ava,
         nickname: useId,
         created_at: time,
-        user_uid_re : uid
+        user_uid : uid,
+        show: true,
+        isreply: true,
+        replyid: commentObj.subid
       });
 
       // 유저별 '댓글 단 글' 저장
@@ -74,11 +76,6 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
         title: title,
         writer: writer,
         date: date
-      });
-
-      // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-      await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, 'comments', String(time)), {
-        comment: comment
       });
 
       setReply("");
@@ -95,7 +92,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
   const [replyId, setReplyId] = useState('');
 
   const getReplies = async() => {
-    const repl = query(collection(dbService,'weekly_report', id,'comment',sub_id, "reply" ), orderBy("created_at","desc"));
+    const repl = query(collection(dbService,'weekly_report', id,'comment'),where("isreply","==", true), where("replyid", "==", commentObj.subid), orderBy("created_at","desc"));
     const querySnapShot = await getDocs(repl);
 
     querySnapShot.forEach((collection)=> {
@@ -105,7 +102,8 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
             credate : collection.data().created_at,
             avat: collection.data().avatar,
             name: collection.data().nickname,
-            user_uid_re : collection.data().user_uid_re,
+            user_uid : collection.data().user_uid,
+            show: collection.data().show
         };
         setReplyId(replyObj.id);
         setReplylist(prev => [replyObj, ...prev]);
@@ -113,8 +111,6 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
     
   };
   useEffect(() => { getReplies() }, []);
-
-  // console.log(user_uid);
 
   return (
     <div>
@@ -124,7 +120,7 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                     secondaryAction={ 
                       <div key={value}>
                     {
-                      user_uid === uid ?
+                      commentObj.user_uid === uid && commentObj.show === true ?
                       (
                         <IconButton edge="end" aria-label="comment" onClick={ondelete}>
                           <DeleteIcon fontSize="small" />
@@ -135,23 +131,33 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                     </div>
                   }>
           <ListItemAvatar>
-            <Avatar src={pic}/>
+            <Avatar src={commentObj.avatar}/>
           </ListItemAvatar>
           <ListItemText
-          primary={username}
+          primary={commentObj.nickname}
           secondary={
             <React.Fragment>
-              <Typography
+              {commentObj.show === true ? (
+                <Typography
                 sx={{ display: 'inline' }}
                 component="span"
                 variant="body2"
                 color="text.primary"
               >
-               {comment}
-              </Typography>
+                {commentObj.comment}
+                </Typography>
+                ):
+                <Typography sx={{ display: 'inline', fontStyle: 'italic', color: 'text.disabled'}}
+                component="span"
+                variant="body2"
+                color="text.primary"
+                >
+                  삭제된 댓글입니다
+                </Typography>
+                }
               <br />
               <Typography variant="caption">
-                {moment(cdate).format('YYYY.MM.DD')}
+                {moment(commentObj.date).format('YYYY.MM.DD HH:mm:ss')}
               </Typography>
                 <IconButton  edge="end" aria-label="comments" onClick={onClickReplyOpen}>
                       <CommentIcon fontSize="small"/>
@@ -203,17 +209,19 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                 <ListItem alignItems="flex-start" sx={{ml: '3%'}} secondaryAction={ 
                       <div>
                     {
-                      rep.user_uid_re === uid ?
+                      rep.user_uid === uid && rep.show === true?
                       (
                         <IconButton edge="end" aria-label="comment" 
                         onClick={async() => {
-                          await deleteDoc(doc(dbService, 'weekly_report', id,'comment', sub_id, "reply", rep.id));
-                          await deleteDoc(doc(dbService, 'weekly_report', id,'users', user.uid, "comments", rep.id));
+                          await updateDoc(doc(dbService, 'weekly_report', id, 'comment', rep.id), {
+                            show: false
+                          });
                           const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid, 'comments'));
                           const querySnapShot2 = await getDocs(q2);
                           if (querySnapShot2.empty) {
                             await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
                           };
+                  
                           window.location.reload();
                         }}>
                           <DeleteIcon fontSize="small" />
@@ -230,17 +238,27 @@ function SingleComment({comment, username, pic,value, subid, id, cdate, user, ti
                   primary={rep.name}
                   secondary={
                     <React.Fragment>
+                      {rep.show === true? (
                       <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
+                      sx={{ display: 'inline' }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
                       {rep.recomment}
                       </Typography>
+                      ):
+                      <Typography sx={{ display: 'inline', fontStyle: 'italic', color: 'text.disabled'}}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                      >
+                        삭제된 댓글입니다
+                      </Typography>
+                      }
                       <br />
                       <Typography variant="caption">
-                        { moment(rep.credate).format('YYYY.MM.DD')}
+                        { moment(rep.credate).format('YYYY.MM.DD HH:mm:ss')}
                       </Typography>
                       
                     </React.Fragment>

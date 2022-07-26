@@ -11,9 +11,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
-
-
 //components
 import ReportContents from '../components/Report/ReportContents';
 import Winner from '../components/Report/Winner';
@@ -34,7 +31,7 @@ export default function ReportDetail({user}) {
   const [reply, setReply] = useState([]);
 
   const getReplies = async() => {
-    const repl = query(collection(dbService,'weekly_report', id,'comment'), orderBy("created_at","desc"));
+    const repl = query(collection(dbService,'weekly_report', id,'comment'), where("isreply","==", false), orderBy("created_at","desc"));
     const querySnapShot = await getDocs(repl);
 
     querySnapShot.forEach((collection)=> {
@@ -44,7 +41,8 @@ export default function ReportDetail({user}) {
             date : collection.data().created_at,
             avatar: collection.data().avatar,
             nickname: collection.data().nickname,
-            user_uid: collection.data().user_uid
+            user_uid: collection.data().user_uid,
+            show: collection.data().show,
         };
         setReply(prev => [replyObj, ...prev]);
     });
