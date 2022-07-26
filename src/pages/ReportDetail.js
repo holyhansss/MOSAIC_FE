@@ -11,9 +11,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
-
-
 //components
 import ReportContents from '../components/Report/ReportContents';
 import Winner from '../components/Report/Winner';

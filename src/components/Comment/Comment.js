@@ -9,9 +9,6 @@ import SingleComment from './SingleComment.js';
 
 
 function Comment({ user, id, title, rep, writer, date }) {
-  // let isLogin = sessionStorage.getItem("isLogin");
-
-  // const [isLoggedIn, setIsLoggedIn] = useState();
   const [useId, setUserId] = useState("");
   const [pic, setpic] = useState('');
   const [Uid, setUid] = useState('');
@@ -87,7 +84,6 @@ function Comment({ user, id, title, rep, writer, date }) {
             댓글
           </Button>
         }
-
       </form>
 
       {/* Comment Lists */}
