@@ -11,9 +11,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
-
-
 //components
 import ReportContents from '../components/Report/ReportContents';
 import Winner from '../components/Report/Winner';

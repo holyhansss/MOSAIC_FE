@@ -28,18 +28,16 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
 
   //댓글 삭제하기(대댓글 삭제는 onclick 에 직접 들어있음)
   const ondelete = async(event) => {
-    // await deleteDoc(doc(dbService, 'weekly_report', id, 'comment', commentObj.subid));
-    // await deleteDoc(doc(dbService, 'weekly_report', id, 'users', user.uid,commentObj.subid 'comments', commentObj.subid));
-    // const q = query(collection(dbService, 'weekly_report', id, 'users', user.uid, 'comments'));
-    // const querySnapShot = await getDocs(q);
-    // if (querySnapShot.empty) {
-    //   await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
-    // };
-        await updateDoc(doc(dbService, 'weekly_report', id, 'comment', commentObj.subid), {
-          show: false
-        });
+    await updateDoc(doc(dbService, 'weekly_report', id, 'comment', commentObj.subid), {
+      show: false
+    });
 
-
+    const q = query(collection(dbService, 'weekly_report', id, 'comment'), where("user_uid", "==", uid), where("show", "==", true));
+    const querySnapShot = await getDocs(q);
+    if (querySnapShot.empty) {
+      console.log(querySnapShot);
+      await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+    };
     window.location.reload();
   };
 
@@ -67,23 +65,18 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
         avatar: ava,
         nickname: useId,
         created_at: time,
-        user_uid_re : uid,
+        user_uid : uid,
         show: true,
         isreply: true,
         replyid: commentObj.subid
       });
 
       // 유저별 '댓글 단 글' 저장
-      // await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
-      //   title: title,
-      //   writer: writer,
-      //   date: date
-      // });
-
-      // // 유저가 리포트에 작성한 댓글을 저장 (하나도 없을 때 마이페이지에서 삭제되도록)
-      // await setDoc(doc(dbService, 'weekly_report', id, 'users', user.uid, 'comments', String(time)), {
-      //   comment: comment
-      // });
+      await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
+        title: title,
+        writer: writer,
+        date: date
+      });
 
       setReply("");
       setUserId("");
@@ -109,7 +102,7 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
             credate : collection.data().created_at,
             avat: collection.data().avatar,
             name: collection.data().nickname,
-            user_uid_re : collection.data().user_uid_re,
+            user_uid : collection.data().user_uid,
             show: collection.data().show
         };
         setReplyId(replyObj.id);
@@ -216,20 +209,18 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
                 <ListItem alignItems="flex-start" sx={{ml: '3%'}} secondaryAction={ 
                       <div>
                     {
-                      rep.user_uid_re === uid && rep.show === true?
+                      rep.user_uid === uid && rep.show === true?
                       (
                         <IconButton edge="end" aria-label="comment" 
                         onClick={async() => {
-                          // await deleteDoc(doc(dbService, 'weekly_report', id,'comment', commentObj.subid, "reply", rep.id));
-                          // await deleteDoc(doc(dbService, 'weekly_report', id,'users', user.uid, "comments", rep.id));
-                          // const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid, 'comments'));
-                          // const querySnapShot2 = await getDocs(q2);
-                          // if (querySnapShot2.empty) {
-                          //   await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
-                          // };
                           await updateDoc(doc(dbService, 'weekly_report', id, 'comment', rep.id), {
                             show: false
                           });
+                          const q2 = query(collection(dbService, 'weekly_report', id, 'users', user.uid, 'comments'));
+                          const querySnapShot2 = await getDocs(q2);
+                          if (querySnapShot2.empty) {
+                            await deleteDoc(doc(dbService, 'users', user.uid, 'comment', id));
+                          };
                   
                           window.location.reload();
                         }}>
