@@ -89,11 +89,11 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           {inve.map((invem, index) =>(
             <div key={index}>
               <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div">
+            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
               {invem.title}
             </Typography>
             <p/>
-            <Typography variant="body1" align="center" gutterBottom component="div">
+            <Typography variant="body1" align="left" gutterBottom component="div">
               {invem.content}
             </Typography>
             <p/>
@@ -118,11 +118,11 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           {poli.map((polic, index) =>(
             <div key={index}>
               <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div">
+            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
               {polic.title}
             </Typography>
             <p/>
-            <Typography variant="body1" align="center" gutterBottom component="div">
+            <Typography variant="body1" align="left" gutterBottom component="div">
               {polic.content}
             </Typography>
             <p/>
@@ -150,11 +150,11 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           {mac.map((ma, index) =>(
             <div key={index}>
               <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div">
+            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
               {ma.title}
             </Typography>
             <p/>
-            <Typography variant="body1" align="center" gutterBottom component="div">
+            <Typography variant="body1" align="left" gutterBottom component="div">
               {ma.content}
             </Typography>
             <p/>
