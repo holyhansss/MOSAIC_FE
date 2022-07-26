@@ -2,14 +2,13 @@ import React, { useRef } from 'react';
 import {Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Nav from 'react-bootstrap/Nav';
-
+import moment from 'moment';
 
 function Reportcard({title, writer, date, inve, poli, mac}) {
 
   const inputinvest = useRef([]);
   const inputmacro = useRef([]);
   const inputpolicy = useRef([]);
-
 
   return (
     <div>

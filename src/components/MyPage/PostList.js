@@ -28,7 +28,7 @@ function PostList({ user, kind }) {
             {
                 posts.map((post, index) => (
                     <Link
-                        to={`/reportDetail/${post.title}`}
+                        to={`/reportDetail/${post.id}/${post.title}/${post.writer}/${post.date}`}
                         state={{
                             id: post.id,
                             title: post.title,
