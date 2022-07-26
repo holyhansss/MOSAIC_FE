@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {Box, Tab, Container, Grid} from '@mui/material';
+import React, { useEffect, useState, useRef } from 'react';
+import {Box, Tab, Container, Grid, Modal, Typography, TextField, Button} from '@mui/material';
 import {TabList, TabPanel, TabContext} from '@mui/lab';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
@@ -8,11 +8,8 @@ import { dbService } from '../firebase';
 import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import VisibilityIcon from '@mui/icons-material/Visibility';
-import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
-
-
+import SendIcon from '@mui/icons-material/Send';
 
 //components
 import ReportContents from '../components/Report/ReportContents';
@@ -28,7 +25,7 @@ export default function ReportDetail({user}) {
   const writer = location.state.writer;
   const date = moment(location.state.date).format('YYYY.MM.DD');
   const [value, setValue] = React.useState('1');
-
+  
 
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
@@ -59,45 +56,53 @@ const [clickICon, setClickIcon] = useState(false);
 const [likescount, setLikescount] = useState([]);
 const [count, setCount] = useState(null);
 
-  const getLikes = async() => {
-    if (user !== null) {
-        const likequ = query(collection(dbService,'weekly_report', id,'like'), where("likeuid","==", user.uid));
-        const Likes = query(collection(dbService,'weekly_report', id,'like'));
-        const querySnapShot = await getDocs(likequ);
-        const QuerySnapShot = await getDocs(Likes);
-    
-        querySnapShot.forEach((collection)=> {
-            const likeObj = {
-                likename : collection.data().likename,
-                likeuid : collection.data().likeuid
-            };
-            setClickIcon(true);
-            setLikenum(prev => [likeObj, ...prev]);
-        });
 
-        QuerySnapShot.forEach((collection)=> {
-            const lkeObj = {
-                likename : collection.data().likename,
-                likeuid : collection.data().likeuid
-            };
-            setLikescount(prev => [lkeObj, ...prev]);
-            // setCount(likescount.length);
-        });
-    };
+//전체 좋아요 개수
+  const getLikes = async() => {
+    const Likes = query(collection(dbService,'weekly_report', id,'like'));
+    const QuerySnapShot = await getDocs(Likes);
+    QuerySnapShot.forEach((collection)=> {
+      const lkeObj = {
+          likename : collection.data().likename,
+          likeuid : collection.data().likeuid,
+      };
+      setLikescount(prev => [lkeObj, ...prev]);
+  });
+};
+useEffect(() => { getLikes() }, []);
+useEffect(()=>{setCount(likescount.length);})
+ 
+// user가 좋아요를 눌렀는지 안눌렀는지 확인
+const getUserLike = async() => {
+  if (user !== null) {
+    const likequ = query(collection(dbService,'weekly_report', id,'like'), where("likeuid","==", user.uid));
+    const querySnapShot = await getDocs(likequ);
+    querySnapShot.forEach((collection)=> {
+      const likeObj = {
+          likename : collection.data().likename,
+          likeuid : collection.data().likeuid,
+
+      };
+      setClickIcon(true);
+      setLikenum(prev => [likeObj, ...prev]);
+  });
 
   };
-  useEffect(() => { getLikes() }, [user]);
-  useEffect(()=>{setCount(likescount.length);})
+};
+
+useEffect(() => { getUserLike() }, [user]);
 
 
 // 좋아요 클릭
     const onclick = async() => {
+
+      if (user !== null) {
         setClickIcon(!clickICon);
 
         if (clickICon === false) {
             await setDoc(doc(dbService, "weekly_report", id, 'like', user.uid), {
                 likename : user.displayName,
-                likeuid: user.uid
+                likeuid: user.uid,
             });
             // 유저별 좋아요 정보 firestore에 저장
             await setDoc(doc(dbService, "users", user.uid, 'liked', id), {
@@ -111,10 +116,44 @@ const [count, setCount] = useState(null);
         };
 
         window.location.reload();
+      } else {
+        alert("로그인이 필요한 서비스입니다.")
+      }
+
     };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const copyLinkRef = useRef();
+  const copyTextUrl = () => {
+    copyLinkRef.current.focus();
+    // copyLinkRef.current.select();
+    navigator.clipboard.writeText(copyLinkRef.current.value).then(() => {
+      alert("링크를 복사했습니다.");
+  });
+  }
+
+
+
+
   return (
     <div>
     <p />
@@ -143,17 +182,30 @@ const [count, setCount] = useState(null);
                   {clickICon === true ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
               </IconButton>
                 {count}
-              <IconButton>
-                  <ShareIcon />
+              <IconButton onClick={handleOpen}>
+                  <SendIcon />
               </IconButton>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                    공유하기
+                  </Typography>
+                  <p/>
+                  <input type="text" value={window.location.href} ref={copyLinkRef} disabled />
+                  <Button variant="text" onClick={copyTextUrl}>복사</Button>
+                </Box>
+              </Modal>
           </Grid> 
           <Grid item xs={12}>
             <Comment user={user} id={id} title={title} rep={reply} writer={writer} date={date}/>
           </Grid>
         </Grid>
       </Container>
-
-
     </div>
 
   );
