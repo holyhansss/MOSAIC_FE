@@ -17,12 +17,20 @@ function ProfileModal({ user, refreshUser }) {
         }
     };
 
-    const onSubmit = async(e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         if (user.displayName !== newName) {
             await updateProfile(auth.currentUser, { displayName: newName });
         }
         refreshUser();
+    };
+
+    const handleOnClick = (e) => {
+        sendPasswordResetEmail(auth, user.email)
+            .then(() => alert("비밀번호 재설정 이메일이 발송되었습니다. \n이메일을 확인하지 못한 경우 스팸 메일함을 확인해주세요."))
+            .catch((error) => {
+                alert(error.message);
+            });
     };
 
     return (
@@ -49,13 +57,13 @@ function ProfileModal({ user, refreshUser }) {
                                 onChange={handleOnChange}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={() => sendPasswordResetEmail(auth, user.email)}>비밀번호 재설정</Button>
+                        <Button variant="primary" onClick={handleOnClick}>비밀번호 재설정</Button>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             닫기
                         </Button>
-                        <Button variant="primary" type='submit'>
+                        <Button variant="primary" type='submit' onClick={handleClose}>
                             저장
                         </Button>
                     </Modal.Footer>

@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { addDoc, collection} from 'firebase/firestore';
-import { dbService, auth } from '../../firebase.js';
+import { setDoc, doc } from 'firebase/firestore';
+import { dbService } from '../../firebase.js';
 import { Avatar, TextField, Box, Button} from '@mui/material';
 
 //components
 import SingleComment from './SingleComment.js';
 
-
-
-function Comment({id, rep, likes}) {
-  // let isLogin = sessionStorage.getItem("isLogin");
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Comment({ user, id, title, rep, writer, date }) {
   const [useId, setUserId] = useState("");
-  const [pic, setpic] = useState(sessionStorage.getItem("profilePic"));
-
+  const [pic, setPic] = useState('');
+  const [uid, setUid] = useState('');
+  
   useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-          if (user) {
-              setIsLoggedIn(true);
-              setpic(user.photoURL);
-              setUserId(user.displayName);
-          } else {
-              setIsLoggedIn(false);
-              setpic(null);
-              setUserId(null);
-          }
-      })
-  }, [])
-
+    if (user !== null) {
+      setUserId(user.displayName);
+      setPic(user.photoURL);
+      setUid(user.uid);
+    }
+  }, [user])
 
 
   //코멘트 저장하기
@@ -40,17 +29,28 @@ function Comment({id, rep, likes}) {
 
   const onSubmit = async(event) => {
     event.preventDefault();
-    const time = Date;
-    await addDoc(collection(dbService, "weekly_report", id, 'comment'), {
+    const time= Date.now();
+    await setDoc(doc(dbService, "weekly_report", id, 'comment', String(time)), {
       comment: comment,
       avatar: pic,
       nickname: useId,
-      created_at: time.now(),
+      created_at: time,
+      user_uid: uid,
+      show : true,
+      isreply: false
     });
+
+    // 유저별 '댓글 단 글' 저장
+    await setDoc(doc(dbService, 'users', user.uid, 'comment', id), {
+      title: title,
+      writer: writer,
+      date: date
+    });
+
     window.location.reload();
     setComment("");
     setUserId("");
-    setpic("");
+    setPic("");
   };
 
   return (
@@ -70,7 +70,7 @@ function Comment({id, rep, likes}) {
         
         <br />
         {
-          isLoggedIn === true ? 
+          user !== null  ? 
           (
             <Button variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onSubmit} >
               댓글
@@ -80,14 +80,15 @@ function Comment({id, rep, likes}) {
             댓글
           </Button>
         }
-
       </form>
 
       {/* Comment Lists */}
       {
         rep.map((repl,index) => (
           <div key={index}>
-            <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id}/>
+            {/* <SingleComment cdate={repl.created_at} comment={repl.comment} pic={repl.avatar} username={repl.nickname} value={index} subid={repl.subid} id={id} user={user} title={title} writer={writer} date={date} user_uid={repl.user_uid} subid/> */}
+            <SingleComment value={index} id={id} user={user} title={title} writer={writer} date={date} commentObj={repl}/>
+
           </div>
         ))
       }
