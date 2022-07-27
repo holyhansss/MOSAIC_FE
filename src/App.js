@@ -40,9 +40,9 @@ function App() {
   };
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user){
-        setUserObj({
+        await setUserObj({
           displayName: user.displayName,
           email: user.email,
           uid: user.uid,
