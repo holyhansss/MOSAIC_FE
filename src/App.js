@@ -12,11 +12,27 @@ import MyPage from "./pages/MyPage";
 import Header from "./components/Header/Header";
 import { auth, dbService } from './firebase';
 import { getDocs, collection, query, where } from 'firebase/firestore';
+import styled from "styled-components";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [admin, setAdmin] = useState(false);
+
+  const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(20, 20, 20, 0.1) 10%,
+    rgba(20, 20, 20, 0.7) 70%,
+    rgba(20, 20, 20, 1)
+  );
+  background-color: #0e0b1a;
+`;
 
   const refreshUser = () => {
     const user = auth.currentUser;
@@ -56,7 +72,7 @@ function App() {
     
   }, []);
   return (
-    <>
+    <Container>
       <Header user={userObj} admin={admin}/>
       <Routes>
         <Route path='/' element={<MainPage/>} ></Route>
@@ -71,7 +87,7 @@ function App() {
           <Route path=":id" element={<DetailPage />} />
         </Route>  */}
       </Routes>
-    </>
+    </Container>
   );
 }
 
