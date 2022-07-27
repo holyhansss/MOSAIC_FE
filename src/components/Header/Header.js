@@ -90,7 +90,10 @@ function Header({ user, admin }) {
                                 <NavDropdown.Item><Link to="/profile">마이페이지</Link></NavDropdown.Item>
                                 {
                                     admin === true &&
-                                    <NavDropdown.Item><Link to="admin"> 관리자</Link></NavDropdown.Item>
+                                    <NavDropdown.Item><Link to={{
+                                        pathname: "/admin",
+                                        state: {user: user}
+                                    }}>관리자</Link></NavDropdown.Item>
                                 }
                                 <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                             </NavDropdown>
