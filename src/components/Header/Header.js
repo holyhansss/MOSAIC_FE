@@ -10,7 +10,6 @@ const Container = styled.div`
     justify-content: center;
     width: 100vw;
     height: 15vh;
-    background-color: navy;
 `;
 
 const Navbar = styled.div`
