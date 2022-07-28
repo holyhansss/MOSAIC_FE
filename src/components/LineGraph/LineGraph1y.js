@@ -18,10 +18,7 @@ function Index1y() {
     url: "https://yfapi.net/v8/finance/chart/^GSPC?comparisons=MSFT%2C%5EVIX&range=1y&region=US&interval=1d&lang=en&events=div%2Csplit",
  
     params: {
-
       modules: 'defaultKeyStatistics,assetProfile', 
-  
-  
   },
     headers: {
       'x-api-key': process.env.REACT_APP_COIN_API_KEY
@@ -41,7 +38,6 @@ function Index1y() {
       'x-api-key': process.env.REACT_APP_COIN_API_KEY
     }
   };
-  
   
   async function getSNP() {
     let returnValue;
