@@ -54,13 +54,13 @@ function CategoryLineGraph_1d(props) {
             <XAxis dataKey="time" />
             <YAxis type="number" domain={[0, 400]} />
             <Tooltip />
-            <Legend />
+            {/* <Legend /> */}
             <Line type="monotone" dataKey="Currency" stroke="green" dot={false}/>
-            <Line type="monotone" dataKey="Smart Contract Platform" stroke="orange" dot={false}/>
+            <Line type="monotone" dataKey="Smart Contract Platform" stroke="grey" dot={false}/>
             <Line type="monotone" dataKey="Computing"  stroke="skyblue" dot={false}/>
             <Line type="monotone" dataKey="DeFi"  stroke="pink" dot={false}/>
-            <Line type="monotone" dataKey="Culture & Entertainment" stroke="ligthbrown" dot={false}/>
-            <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/> 
+            <Line type="monotone" dataKey="Culture & Entertainment" stroke="orange" dot={false}/>
+            {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
           </LineChart>
         </div>
           

@@ -9,8 +9,12 @@ import { type } from '@testing-library/user-event/dist/type';
 
 
 
+
+
 // import { type } from '@testing-library/user-event/dist/type/index.js';
 // import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
+
+
 
 function CategoryLineGraph_1y( props ) {
   const dateRange= props.dateRange;
@@ -19,11 +23,18 @@ function CategoryLineGraph_1y( props ) {
   console.log("dateRange should not be null", dateRange);
   console.log("categoryArray should not be null", categoryArray);
 
+  const [datesAndPrices, setDatesAndPrices] = useState([])
+    
 
   let dates = []
   
-  const [datesAndPrices, setDatesAndPrices] = useState([])
-    
+  const getCategoryData_1yr = async () => {
+    const response = await axios.get('http://localhost:5000/market/category/1yr',
+      {params: {dateRange: dateRange, categoryArray: categoryArray}}
+    )
+    console.log(response.data);
+    setDatesAndPrices(response.data)
+  }
 
   useEffect(() => {
     console.log("1yyyyyyy"); 
@@ -40,13 +51,6 @@ function CategoryLineGraph_1y( props ) {
   //   })
   // }
 
-  const getCategoryData_1yr = async () => {
-    const response = await axios.get('http://localhost:5000/market/category/1yr',
-      {params: {dateRange: dateRange, categoryArray: categoryArray}}
-    )
-    console.log(response.data);
-    setDatesAndPrices(response.data)
-  }
 
     return(
         <div>
@@ -65,12 +69,12 @@ function CategoryLineGraph_1y( props ) {
             <XAxis dataKey="time" />
             <YAxis type="number" domain={[0, 400]} />
             <Tooltip />
-            <Legend />
+            {/* <Legend /> */}
             <Line type="monotone" dataKey="Currency" stroke="green" dot={false}/>
-            <Line type="monotone" dataKey="Smart Contract Platform" stroke="orange" dot={false}/>
+            <Line type="monotone" dataKey="Smart Contract Platform" stroke="grey" dot={false}/>
             <Line type="monotone" dataKey="Computing"  stroke="skyblue" dot={false}/>
             <Line type="monotone" dataKey="DeFi"  stroke="pink" dot={false}/>
-            <Line type="monotone" dataKey="Culture & Entertainment" stroke="ligthbrown" dot={false}/>
+            <Line type="monotone" dataKey="Culture & Entertainment" stroke="orange" dot={false}/>
             {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
           </LineChart>
 
