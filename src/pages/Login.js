@@ -1,13 +1,42 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-
-import { Container, Form, Button, ButtonGroup } from 'react-bootstrap';
-
+import { FormControl, Button, ButtonGroup } from '@mui/material';
 import { signInWithGoogle, signInWithEmail } from '../firebase';
+// import { Box } from '@mui/material';
+import styled from 'styled-components';
 import gooLogo from '../img/logo_google.png';
 
-function Login() {
+const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
+const Box = styled(Container)`
+    width: 450px;
+    height: 450px;
+    border-radius: 10px;
+    margin-top: 2rem;
+    border: 1px solid white;
+    display: flex;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-contents: center;
+    align-items: center;
+`;
+
+const Input = styled.input`
+    border-style: hidden hidden solid;
+    border-bottom: 1px solid white;
+    width: 13rem;
+    background-color: transparent;
+    margin: 1.0rem 0;
+`;
+
+function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -28,49 +57,43 @@ function Login() {
     return(
         <>
             <Container>
-                <Form
-                    onSubmit={onSubmit}
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContents: 'center',
-                        alignItems: 'center'  
-                    }}
-                    className="mt-5"
-                >
-                    <Form.Label>로그인</Form.Label>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
+                <Box>
+                    <Form onSubmit={onSubmit}>
+                        <label style={{
+                            fontSize: '1.5rem',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            marginBottom: '1.5rem'
+                        }}>로그인</label>
+                        <Input
                             name="email"
                             value={email}
                             onChange={handleOnChange}
-                            placeholder='아이디(이메일)'
+                            id="input-id"
+                            placeholder="아이디(이메일)"
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
+                        <Input
                             name="password"
                             type="password"
                             value={password}
                             onChange={handleOnChange}
-                            placeholder='비밀번호'
+                            id="input-password"
+                            placeholder="비밀번호"
                             required
                         />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" >로그인</Button> <br/>
-                    <ButtonGroup aria-label="Basic example">
-                        <Button variant="light">아이디 찾기</Button>
-                        <Button variant="light">비밀번호 찾기</Button>
-                        <Link to='/join'>
-                            <Button variant="primary">회원가입</Button>
-                        </Link>
-                    </ButtonGroup> <br/><br/>
-                    <Button variant="light" onClick={signInWithGoogle}>
-                        <img alt="Google" width={30} height={30} src={gooLogo} />
-                        구글 아이디로 로그인
-                    </Button>
-                </Form>
+                        <Button sx={{margin:'0.1rem'}} variant="contained" type="submit" >로그인</Button>
+                        <ButtonGroup sx={{margin:'0.8rem'}} variant="contained" aria-label="login page button group">
+                            <Button sx={{color:'white'}} size='small' variant='text'>아이디 찾기</Button>
+                            <Button sx={{color:'white'}} size='small' variant='text'>비밀번호 찾기</Button>
+                            <Button sx={{color:'white'}} size='small' variant='text'><Link to='/join'>회원가입</Link></Button>
+                        </ButtonGroup>
+                        <Button sx={{margin:'0.8rem', backgroundColor: 'white', color: 'black', borderColor:'white'}} size="large" variant="outlined" onClick={signInWithGoogle}>
+                            <img alt="Google" width={30} height={30} src={gooLogo} />
+                            구글 아이디로 로그인
+                        </Button>
+                    </Form>
+                </Box>
             </Container>
         </>
     );
