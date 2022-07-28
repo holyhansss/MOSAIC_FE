@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Container} from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ShareIcon from '@mui/icons-material/Share';
-import { useLocation } from 'react-router-dom';
-import moment from 'moment';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection} from 'firebase/firestore';
 import { dbService } from '../../firebase.js';
 
 //components
-import Comment from '../Comment/Comment.js';
 import Reportcard from './Reportcard.js';
 
-function ReportContents() {
-    const location = useLocation();
-    const id = location.state.id;
-    const title = location.state.title;
-    const writer = location.state.writer;
-    const date = moment(location.state.date).format('YYYY.MM.DD');
-    
+
+function ReportContents({user, id, title, writer, date}) {
     const [investments, setInvestments] = useState([]);
     const [policies, setPolicies] = useState([]);
     const [marcro, setMarcro] = useState([]);
@@ -33,7 +21,6 @@ function ReportContents() {
         const querySnasphot = await getDocs(macroeconomic);
 
         querySnapShot.forEach((collection)=> {
-            // console.log(collection.id)
             const investObj = {
                 title : collection.data().title,
                 content : collection.data().content,
@@ -42,7 +29,6 @@ function ReportContents() {
         });
 
         querySnaphot.forEach((collection)=> {
-            // console.log(collection.id)
             const poliObj = {
                 title : collection.data().title,
                 content : collection.data().content,
@@ -51,7 +37,6 @@ function ReportContents() {
         });
 
         querySnasphot.forEach((collection)=> {
-            // console.log(collection.id)
             const macroObj = {
                 title : collection.data().title,
                 content : collection.data().content,
@@ -61,7 +46,6 @@ function ReportContents() {
     };
 
     useEffect(() => { getContents() }, []);
-
     return ( 
         <div>
             <p />
@@ -70,26 +54,9 @@ function ReportContents() {
                     <Grid item xs={12}>
                     <Reportcard id={id} title={title} writer={writer} date={date} inve={investments} poli={policies} mac={marcro}/>
                 </Grid>
-                    <Grid item xs={4}>
-                        <VisibilityIcon />
-                        <IconButton>
-                            <FavoriteBorderIcon />
-                        </IconButton>
-                        <IconButton>
-                            <ShareIcon />
-                        </IconButton>
-                    </Grid> 
-
-                    <Grid item xs={12}>
-                        <Comment id={id} />
-                    </Grid>
                 </Grid>
             </Container>
         </div>
-
-
-
-
     )
 };
 

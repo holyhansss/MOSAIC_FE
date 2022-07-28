@@ -5,42 +5,49 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {CardActionArea} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+
+
 
 function Reportrecentcard({id, title, writer, date}) {
+    const StyleCard = styled(Card)`
+        color: white;
+        border-radius: 20px;
+        `;
+
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
-        navigate('/reportDetail', {
+        navigate('/reportDetail/' + id + "/" + title + "/" + writer + '/' + date, {
           state: {
             id : id,
             title: title,
             writer: writer,
-            date: date
+            date: date,
           }
         });
       };
 
       return(
-            <Card sx={{ width: 1, height: 250 }}>
-                    <CardActionArea
-                        onClick={move}
-                        >
-                        <CardMedia
-                            component="img"
-                            height="170"
-                            image="https://cdn.dribbble.com/users/30229/screenshots/17690501/media/4bdd09efb22a073c1f89fc60a8ec59b4.png?compress=1&resize=400x300"
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="h6" component="div">
-                            {title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {writer}
-                        </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
+            <CardActionArea onClick={move}>
+                <StyleCard sx={() => ({
+                    height: "280px",
+                    py: "32px",
+                    backgroundImage: `url(${"https://cdn.dribbble.com/users/30229/screenshots/17690501/media/4bdd09efb22a073c1f89fc60a8ec59b4.png?compress=1&resize=400x300"})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "50%"
+                })}>
+                            <CardContent>
+                            <Typography gutterBottom variant="h4" component="div">
+                                {title}
+                            </Typography>
+                            <Typography variant="h6">
+                                {writer}
+                            </Typography>
+                            </CardContent>
+                    </StyleCard>
+            </CardActionArea>
         
     )
 };
@@ -50,21 +57,23 @@ function Reportrecentcard({id, title, writer, date}) {
 export {Reportrecentcard};
 
 function Reportlistcard({id,title, date, writer}) {
+    const StyleCard = styled(Card)`
+    border-radius: 10px;
+    `;
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
-        navigate('/reportDetail', {
+        navigate('/reportDetail/' + id + "/" + title + "/" + writer + '/' + date, {
           state: {
             id: id,
             title: title,
             writer: writer,
-            date: date
+            date: date,
           }
         });
       };
-
     return(
-            <Card sx={{ width: 1, height: 180, margin:1 }}>
+            <StyleCard sx={{ width: 1, height: 180, margin:1 }}>
                 <CardActionArea
                     onClick={move}
                     >
@@ -83,7 +92,7 @@ function Reportlistcard({id,title, date, writer}) {
                     </Typography>
                     </CardContent>
                 </CardActionArea>
-            </Card>
+            </StyleCard>
         )
 };
 

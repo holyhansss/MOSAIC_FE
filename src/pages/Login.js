@@ -1,8 +1,3 @@
-// import styles from '../styles/header.module.css';
-// import Header from '../components/Header.js';
-// import Footer from '../components/Footer.js';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { brands } from '@fortawesome/fontawesome-svg-core/import.macro'
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -10,7 +5,6 @@ import { Container, Form, Button, ButtonGroup } from 'react-bootstrap';
 
 import { signInWithGoogle, signInWithEmail } from '../firebase';
 import gooLogo from '../img/logo_google.png';
-import Header from '../components/Header/Header';
 
 function Login() {
 
@@ -33,7 +27,6 @@ function Login() {
 
     return(
         <>
-            <Header />
             <Container>
                 <Form
                     onSubmit={onSubmit}

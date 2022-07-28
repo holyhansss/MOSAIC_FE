@@ -8,6 +8,8 @@ import {
           createUserWithEmailAndPassword,
           signInWithEmailAndPassword,
           updateProfile,
+          setPersistence,
+          browserSessionPersistence
         } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -31,6 +33,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
+setPersistence(auth, browserSessionPersistence);
+
 // 구글로 로그인
 export const signInWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
@@ -46,8 +50,6 @@ export const signInWithGoogle = () => {
 export const signUpWithEmailAndPassword = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password, name)
     .then(async (userCredential) => {
-      const user = userCredential.user;
-
       await updateProfile(auth.currentUser, { displayName: name, photoURL: profile })
       window.location.replace("/login");
       alert("가입 완료");
@@ -61,22 +63,16 @@ export const signUpWithEmailAndPassword = (email, password, name) => {
       } else {
         alert("회원 가입 실패")
       }
-    });
-    
+    }); 
 };
   
 // 이메일로 로그인
 export const signInWithEmail = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
-      const username = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-
       window.location.replace("/");  
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorMessage);
     });
@@ -88,14 +84,9 @@ export const logout = () => {
     .then(()=> {
       window.location.replace("/");  
   }).catch((error) => {
-    const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage);
   })
-}
-
-export const updateProfileData = (name) => {
-  updateProfile(auth.currentUser, {displayName: name});
 };
 
 //Database

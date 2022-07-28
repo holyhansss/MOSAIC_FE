@@ -3,10 +3,10 @@ import Typography from '@mui/material/Typography';
 import {Container, Grid, Box} from '@mui/material';
 import { getDocs, query, collection, orderBy } from 'firebase/firestore';
 import { dbService } from '../firebase.js';
+import moment from 'moment';
 
 //components
 import {Reportlistcard, Reportrecentcard} from '../components/Report/Reportlistcard.js';
-import Header from '../components/Header/Header.js';
 
 
 function ReportList() {
@@ -31,7 +31,6 @@ function ReportList() {
 
     return(
         <div>
-        <Header />
         <p />
         <Container>
             <Grid container spacing={3}>
@@ -44,9 +43,8 @@ function ReportList() {
 
                     <div>
                         { result !== undefined ?
-                        // console.log(result?.writer)
-                        <Reportrecentcard id={result.id} title={result.title} writer={result.writer} date={result.date} />
-                    : console.log("no")}
+                        <Reportrecentcard id={result.id} title={result.title} writer={result.writer} date={moment(result.date).format('YYYY.MM.DD')}/>
+                    : null}
 
                     </div>                
                 </Grid>
