@@ -36,7 +36,6 @@ function Join() {
 
     return(
         <>
-        <Header/>
             <Container>
                 <Form
                     onSubmit={onSubmit}
