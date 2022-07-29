@@ -1,40 +1,53 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { FormControl, Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signInWithGoogle, signInWithEmail } from '../firebase';
-// import { Box } from '@mui/material';
 import styled from 'styled-components';
 import gooLogo from '../img/logo_google.png';
 
-const Container = styled.div`
+export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
-const Box = styled(Container)`
+export const Box = styled(Container)`
     width: 450px;
     height: 450px;
     border-radius: 10px;
     margin-top: 2rem;
     border: 1px solid white;
     display: flex;
+    box-shadow: 1px 1px 10px grey;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-contents: center;
     align-items: center;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
     border-style: hidden hidden solid;
     border-bottom: 1px solid white;
     width: 13rem;
+    height: 2rem;
     background-color: transparent;
-    margin: 1.0rem 0;
+    margin: 0.8rem 0;
+    color: white;
+    font-weight: lighter;
 `;
+
+export const theme = createTheme({
+	palette: {
+		primary: {
+            main: '#ffffff',
+            contrastText: '#000000',
+        },
+	},
+});
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -65,33 +78,37 @@ function Login() {
                             fontWeight: 'bold',
                             marginBottom: '1.5rem'
                         }}>로그인</label>
-                        <Input
-                            name="email"
-                            value={email}
-                            onChange={handleOnChange}
-                            id="input-id"
-                            placeholder="아이디(이메일)"
-                            required
-                        />
-                        <Input
-                            name="password"
-                            type="password"
-                            value={password}
-                            onChange={handleOnChange}
-                            id="input-password"
-                            placeholder="비밀번호"
-                            required
-                        />
-                        <Button sx={{margin:'0.1rem'}} variant="contained" type="submit" >로그인</Button>
-                        <ButtonGroup sx={{margin:'0.8rem'}} variant="contained" aria-label="login page button group">
-                            <Button sx={{color:'white'}} size='small' variant='text'>아이디 찾기</Button>
-                            <Button sx={{color:'white'}} size='small' variant='text'>비밀번호 찾기</Button>
-                            <Button sx={{color:'white'}} size='small' variant='text'><Link to='/join'>회원가입</Link></Button>
-                        </ButtonGroup>
-                        <Button sx={{margin:'0.8rem', backgroundColor: 'white', color: 'black', borderColor:'white'}} size="large" variant="outlined" onClick={signInWithGoogle}>
-                            <img alt="Google" width={30} height={30} src={gooLogo} />
-                            구글 아이디로 로그인
-                        </Button>
+                        <ThemeProvider theme={theme}>
+                            <Input
+                                sx={{color:'white'}}
+                                name="email"
+                                value={email}
+                                onChange={handleOnChange}
+                                id="input-id"
+                                placeholder="아이디(이메일)"
+                                required
+                            />
+                            <Input
+                                sx={{color:'white'}}
+                                name="password"
+                                type="password"
+                                value={password}
+                                onChange={handleOnChange}
+                                id="input-password"
+                                placeholder="비밀번호"
+                                required
+                            />                      
+                            <Button sx={{margin:'0.5rem 0.1rem 0.1rem'}} variant="contained" type="submit" >로그인</Button>
+                            <ButtonGroup sx={{margin:'0.8rem'}} variant='text' aria-label="login page button group">
+                                <Button sx={{color:'white'}} size='small'>아이디 찾기</Button>
+                                <Button sx={{color:'white'}} size='small'>비밀번호 찾기</Button>
+                                <Button sx={{color:'white'}} size='small'><Link to='/join'>회원 가입</Link></Button>
+                            </ButtonGroup>
+                            <Button sx={{margin:'1.8rem', borderColor:'white', height:'3.5rem'}} size="large" variant="contained" onClick={signInWithGoogle}>
+                                <img alt="Google" width={30} height={30} src={gooLogo} />
+                                구글 아이디로 로그인
+                            </Button>
+                        </ThemeProvider>
                     </Form>
                 </Box>
             </Container>
