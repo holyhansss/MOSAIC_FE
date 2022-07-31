@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from "react";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 // react bootstrap
 import { Container, Row, Spinner } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
@@ -13,12 +13,12 @@ import AdminTopicUploadForm from "../AdmimBox/AdmimBox";
 import {FIREBASE_WEEKLY_REPORT_COLLECTION, FIREBASE_REPORT_SUBCOLLECTION, REPORT_TITLES} from "../../constants/constants";
 
 
-const AdminWeeklyReport = () => {
+const AdminWeeklyReport = (props) => {
 
     const db = getFirestore();
     const auth = getAuth();
     const navigate = useNavigate();
-    let userEmail = sessionStorage.getItem("email");
+    const { state } = useLocation()
 
     let childRef1 = useRef(null);
     let childRef2 = useRef(null);
@@ -73,8 +73,7 @@ const AdminWeeklyReport = () => {
     
     return ( 
         <Container>
-            {//userEmail === null || !admin.includes(userEmail)
-            false
+            {state === null || !admin.includes(state.user.emial)
             ? navigate("/")
             : <div>
                 <Container className="my-5 h3">
@@ -95,7 +94,7 @@ const AdminWeeklyReport = () => {
                 </Container>
                 <AdminTopicUploadForm ref={childRef1} title={REPORT_TITLES[0]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[0]} db={db}/>
                 <AdminTopicUploadForm ref={childRef2} title={REPORT_TITLES[1]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[1]} db={db}/>
-                <AdminTopicUploadForm ref={childRef3} title={REPORT_TITLES[2]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[0]} db={db}/>
+                <AdminTopicUploadForm ref={childRef3} title={REPORT_TITLES[2]} firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION} firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[2]} db={db}/>
                 <Container className="mt-5 align-item-center h3">
                     Insight
                     <Form.Control

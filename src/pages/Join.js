@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
 import { signUpWithEmailAndPassword } from '../firebase';
-import Header from '../components/Header/Header';
-
+import { Button } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { Container, Box, Form, Input, theme } from './Login';
 
 function Join() {
     const [name, setName] = useState("");
@@ -36,65 +36,60 @@ function Join() {
 
     return(
         <>
-        <Header/>
             <Container>
-                <Form
-                    onSubmit={onSubmit}
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContents: 'center',
-                        alignItems: 'center'
-                    }}
-                    className="mt-5"
-                >
-                    <Form.Label>회원가입</Form.Label>
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Control
+                <Box>
+                    <Form onSubmit={onSubmit}>
+                        <label style={{
+                                fontSize: '1.5rem',
+                                color: 'white',
+                                fontWeight: 'bold',
+                                marginBottom: '1.2rem'
+                        }}>회원가입</label>
+                        <Input
+                            sx={{color:'white'}}
                             name="name"
                             value={name}
                             onChange={handleOnChange}
-                            type="text"
+                            id='input-name'
                             placeholder="이름"
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
+                        <Input
+                            sx={{color:'white'}}
                             name="email"
                             value={email}
                             onChange={handleOnChange}
-                            type="text"
+                            id="input-email"
                             placeholder="이메일"
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
+                        <Input
+                            sx={{color:'white'}}
                             name="password"
                             value={password}
                             onChange={handleOnChange}
                             type="password"
+                            id="input-password"
                             placeholder="비밀번호"
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPasswordCheck">
-                        <Form.Control
+                        <Input
+                            sx={{color:'white'}}
                             name="passwordCheck"
                             value={passwordCheck}
                             onChange={handleOnChange}
                             type="password"
+                            id="input-password-check"
                             placeholder="비밀번호 확인"
                             required
                         />
-                    </Form.Group>
-                    {
-                        passwordError ?
-                        <Button variant="primary" onClick={() => alert("비밀번호 확인란을 정확히 입력해주세요.")}>회원가입</Button>
-                        : <Button variant="primary" type="submit">회원가입</Button>
-                    }
-                </Form>
+                        <ThemeProvider theme={theme}> {
+                            passwordError ?
+                            <Button sx={{marginTop:'1.2rem'}} variant="contained" onClick={() => alert("비밀번호 확인란을 정확히 입력해주세요.")}>회원가입</Button>
+                            : <Button variant="contained" type="submit">회원가입</Button>
+                        }</ThemeProvider>
+                    </Form>
+                </Box>
             </Container>
         </>
     );

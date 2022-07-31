@@ -20,6 +20,7 @@ function App() {
   const [admin, setAdmin] = useState(false);
 
   const Container = styled.div`
+
   background: linear-gradient(-45deg, #3E2EB2 10%, #10061E 90%);
   position: absolute;
   top: 0;
