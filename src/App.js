@@ -20,19 +20,15 @@ function App() {
   const [admin, setAdmin] = useState(false);
 
   const Container = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(20, 20, 20, 0.1) 10%,
-      rgba(20, 20, 20, 0.7) 70%,
-      rgba(20, 20, 20, 1)
-    );
-    background-color: #0e0b1a;
-  `;
+
+  background: linear-gradient(-45deg, #3E2EB2 10%, #10061E 90%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+`;
 
   const refreshUser = () => {
     const user = auth.currentUser;

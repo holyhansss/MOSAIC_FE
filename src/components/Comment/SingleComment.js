@@ -7,6 +7,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import moment from 'moment';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { grey } from '@mui/material/colors';
+import styled from "styled-components";
 
 function SingleComment({value, id, user, title, writer, date, commentObj}) {
   const [useId, setUserId] = useState("");
@@ -112,6 +114,10 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
   };
   useEffect(() => { getReplies() }, []);
 
+  const StyleButton = styled(Button)`
+  background: linear-gradient(-45deg, #0B062D 5%, #230B65 90%);
+      `;
+
   return (
     <div>
       {/* 댓글리스트 */}
@@ -123,7 +129,7 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
                       commentObj.user_uid === uid && commentObj.show === true ?
                       (
                         <IconButton edge="end" aria-label="comment" onClick={ondelete}>
-                          <DeleteIcon fontSize="small" />
+                          <DeleteIcon fontSize="small" sx={{color: grey[50]}} />
                         </IconButton>
                       ) : null
                     }
@@ -139,33 +145,31 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
             <React.Fragment>
               {commentObj.show === true ? (
                 <Typography
-                sx={{ display: 'inline' }}
+                sx={{ display: 'inline' , color: grey[50]}}
                 component="span"
                 variant="body2"
-                color="text.primary"
               >
                 {commentObj.comment}
                 </Typography>
                 ):
-                <Typography sx={{ display: 'inline', fontStyle: 'italic', color: 'text.disabled'}}
+                <Typography sx={{ display: 'inline', fontStyle: 'italic', color: grey[500]}}
                 component="span"
                 variant="body2"
-                color="text.primary"
                 >
                   삭제된 댓글입니다
                 </Typography>
                 }
               <br />
-              <Typography variant="caption">
+              <Typography variant="caption" sx={{color: grey[50]}}>
                 {moment(commentObj.date).format('YYYY.MM.DD HH:mm:ss')}
               </Typography>
                 <IconButton  edge="end" aria-label="comments" onClick={onClickReplyOpen}>
-                      <CommentIcon fontSize="small"/>
+                      <CommentIcon fontSize="small" sx={{color: grey[50]}}/>
                 </IconButton>
               {
                 replylist.length !== 0 ?
                   <IconButton edge="end" aria-label="comment" onClick={onClickReplylistOpen}>
-                    { Openlist === false ? <KeyboardArrowDownIcon fontSize="small" /> : <KeyboardArrowUpIcon fontSize="small"/>}
+                    { Openlist === false ? <KeyboardArrowDownIcon fontSize="small" sx={{color:grey[50]}} /> : <KeyboardArrowUpIcon fontSize="small" sx={{color:grey[50]}}/>}
                   </IconButton> 
                   : null
               }
@@ -182,15 +186,15 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
           <Box sx={{ display: 'flex', alignItems: 'flex-end', ml:'5%' }}>
             <Avatar src={ava} sx={{ color: 'action.active', mr: 1, my: 0.5, width: 24, height: 24 }} />
           </Box>
-          <TextField id="input-with-sx" label="코멘트를 작성해 주세요" variant="standard" sx={{ color: 'action.active', width: '80%'}} onChange={onHandleChange} />
+          <TextField id="input-with-sx" label="코멘트를 작성해 주세요" variant="standard" sx={{ color: 'action.active', width: '80%'}} onChange={onHandleChange} inputProps={{ style: { color: "white" } }} />
           
           <br />
           {
             user !== null ? 
             (
-              <Button variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onsubmit} >
+              <StyleButton variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onsubmit} >
                 댓글
-              </Button>
+              </StyleButton>
             ) :
             <Button disabled variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }}>
               댓글
@@ -224,7 +228,7 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
                   
                           window.location.reload();
                         }}>
-                          <DeleteIcon fontSize="small" />
+                          <DeleteIcon fontSize="small" sx={{color: grey[50]}} />
                         </IconButton>
                       ) : null
                     }
@@ -240,15 +244,14 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
                     <React.Fragment>
                       {rep.show === true? (
                       <Typography
-                      sx={{ display: 'inline' }}
+                      sx={{ display: 'inline', color: grey[50]}}
                       component="span"
                       variant="body2"
-                      color="text.primary"
                     >
                       {rep.recomment}
                       </Typography>
                       ):
-                      <Typography sx={{ display: 'inline', fontStyle: 'italic', color: 'text.disabled'}}
+                      <Typography sx={{ display: 'inline', fontStyle: 'italic', color: grey[500]}}
                       component="span"
                       variant="body2"
                       color="text.primary"
@@ -257,7 +260,7 @@ function SingleComment({value, id, user, title, writer, date, commentObj}) {
                       </Typography>
                       }
                       <br />
-                      <Typography variant="caption">
+                      <Typography variant="caption" sx={{color: grey[50]}}>
                         { moment(rep.credate).format('YYYY.MM.DD HH:mm:ss')}
                       </Typography>
                       

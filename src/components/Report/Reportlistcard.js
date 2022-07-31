@@ -6,14 +6,13 @@ import Typography from '@mui/material/Typography';
 import {CardActionArea} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 
 function Reportrecentcard({id, title, writer, date}) {
     const StyleCard = styled(Card)`
-        color: white;
-        border-radius: 20px;
+    background: linear-gradient(-45deg, #0B062D 10%, #230B65 90%);
         `;
 
     const navigate = useNavigate();
@@ -34,9 +33,8 @@ function Reportrecentcard({id, title, writer, date}) {
                 <StyleCard sx={() => ({
                     height: "280px",
                     py: "32px",
-                    backgroundImage: `url(${"https://cdn.dribbble.com/users/30229/screenshots/17690501/media/4bdd09efb22a073c1f89fc60a8ec59b4.png?compress=1&resize=400x300"})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "50%"
+                    borderRadius: '20px',
+                    color: 'white'
                 })}>
                             <CardContent>
                             <Typography gutterBottom variant="h4" component="div">
@@ -45,6 +43,12 @@ function Reportrecentcard({id, title, writer, date}) {
                             <Typography variant="h6">
                                 {writer}
                             </Typography>
+                            <p/>
+                            <Typography variant="caption">
+                                더보기
+                                <ArrowForwardIcon fontSize='small'/>
+                            </Typography>
+
                             </CardContent>
                     </StyleCard>
             </CardActionArea>
@@ -58,8 +62,9 @@ export {Reportrecentcard};
 
 function Reportlistcard({id,title, date, writer}) {
     const StyleCard = styled(Card)`
-    border-radius: 10px;
+    background: linear-gradient(-45deg, #0B062D 10%, #2E1C72 90%);
     `;
+
     const navigate = useNavigate();
     const move = () => {
         // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -73,26 +78,19 @@ function Reportlistcard({id,title, date, writer}) {
         });
       };
     return(
-            <StyleCard sx={{ width: 1, height: 180, margin:1 }}>
-                <CardActionArea
-                    onClick={move}
-                    >
-                    <CardMedia
-                    component="img"
-                    height="80"
-                    image="https://cdn.dribbble.com/users/6882852/screenshots/15667389/media/05682979755d010953d3a3ebca245455.png?compress=1&resize=400x300"
-                    alt="green iguana"
-                    />
+        <CardActionArea onClick={move}>
+            <StyleCard sx={{ width: 1, height: 180, margin:1, borderRadius: '10px', color: 'white' }}>
+                    <CardMedia/>
                     <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
                         {title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2">
                         {writer}
                     </Typography>
                     </CardContent>
-                </CardActionArea>
             </StyleCard>
+        </CardActionArea>
         )
 };
 
