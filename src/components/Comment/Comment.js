@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { setDoc, doc } from 'firebase/firestore';
 import { dbService } from '../../firebase.js';
 import { Avatar, TextField, Box, Button} from '@mui/material';
+import styled from "styled-components";
+
 
 //components
 import SingleComment from './SingleComment.js';
@@ -53,6 +55,11 @@ function Comment({ user, id, title, rep, writer, date }) {
     setPic("");
   };
 
+  const StyleButton = styled(Button)`
+  background: linear-gradient(-45deg, #0B062D 5%, #230B65 90%);
+      `;
+
+
   return (
     <div>
       <br />
@@ -66,15 +73,15 @@ function Comment({ user, id, title, rep, writer, date }) {
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
           <Avatar src={pic} sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
         </Box>
-        <TextField id="input-with-sx" label="코멘트를 작성해 주세요" variant="standard" sx={{ color: 'action.active', width: '80%'}} onChange={handleChange} />
+        <TextField id="input-with-sx" label="코멘트를 작성해 주세요" variant="standard" sx={{ color: 'primary', width: '80%'}} onChange={handleChange} inputProps={{ style: { color: "white"} }} />
         
         <br />
         {
           user !== null  ? 
           (
-            <Button variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onSubmit} >
+            <StyleButton variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }} onClick={onSubmit} >
               댓글
-            </Button>
+            </StyleButton>
           ) :
           <Button disabled variant="contained" sx={{ width: '10%', height: '40px', borderRadius: '5px' }}>
             댓글

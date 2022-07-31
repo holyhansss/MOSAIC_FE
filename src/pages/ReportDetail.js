@@ -2,14 +2,14 @@ import React, { useEffect, useState, useRef } from 'react';
 import {Box, Tab, Container, Grid, Modal, Typography, Button} from '@mui/material';
 import {TabList, TabPanel, TabContext} from '@mui/lab';
 import { useParams } from 'react-router-dom';
-// import moment from 'moment';
 import { query, getDocs, collection, orderBy, deleteDoc, setDoc, doc, where} from 'firebase/firestore';
 import { dbService } from '../firebase';
 import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SendIcon from '@mui/icons-material/Send';
+import styled from "styled-components";
+import { pink, grey } from '@mui/material/colors';
 
 
 //components
@@ -128,9 +128,10 @@ useEffect(() => { getUserLike() }, [user]);
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '2px #000',
     boxShadow: 24,
     p: 4,
+    borderRadius: '10px'
   };
 
 
@@ -146,19 +147,22 @@ useEffect(() => { getUserLike() }, [user]);
   });
   }
 
-
-
+  const Wrapper = styled.div`
+  background: linear-gradient(-45deg, #3E2EB2 1%, #10061E 100%);
+  width: 100vw;
+  color: white;
+`;
 
   return (
-    <div>
+    <Wrapper>
     <p />
       <TabContext value={value}>
         <Container maxWidth="md">
           <Box sx={{  borderColor: 'divider', position: "relative", left:"35%"}} >
             <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{justifyContent: 'center'}}>
               
-              <Tab label="주간이슈" value="1" />
-              <Tab label="Winner & Loser" value="2" />
+              <Tab label="주간이슈" value="1" sx={{color: 'white'}}/>
+              <Tab label="Winner & Loser" value="2" sx={{color: 'white'}} />
             
             </TabList>
           </Box> 
@@ -174,20 +178,18 @@ useEffect(() => { getUserLike() }, [user]);
           <Grid item xs={4}>
               {/* <VisibilityIcon /> */}
               <IconButton onClick={onclick} >
-                  {clickICon === true ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
+                  {clickICon === true ? <FavoriteIcon sx={{ color: pink[500] }} /> : <FavoriteBorderIcon sx={{ color: pink[500] }} /> }
               </IconButton>
                 {count}
               <IconButton onClick={handleOpen}>
-                  <SendIcon />
+                  <SendIcon sx={{ color: grey[50] }} />
               </IconButton>
               <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                  <Typography variant="h6" component="h2">
                     공유하기
                   </Typography>
                   <p/>
@@ -201,7 +203,7 @@ useEffect(() => { getUserLike() }, [user]);
           </Grid>
         </Grid>
       </Container>
-    </div>
+    </Wrapper>
 
   );
 }
