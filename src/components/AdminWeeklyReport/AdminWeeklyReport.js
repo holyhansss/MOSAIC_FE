@@ -18,7 +18,7 @@ const AdminWeeklyReport = (props) => {
     const db = getFirestore();
     const auth = getAuth();
     const navigate = useNavigate();
-    const { state } = useLocation()
+    const location = useLocation()
 
     let childRef1 = useRef(null);
     let childRef2 = useRef(null);
@@ -73,9 +73,11 @@ const AdminWeeklyReport = (props) => {
     
     return ( 
         <Container>
-            {state === null || !admin.includes(state.user.emial)
-            ? navigate("/")
-            : <div>
+            {/* {console.log(location.state)}
+            {location.state === null || !admin.includes(location.state.user.emial) 
+            ? navigate("/") 
+            :  */}
+            <div>
                 <Container className="my-5 h3">
                     Title
                     <Form.Control
@@ -132,7 +134,7 @@ const AdminWeeklyReport = (props) => {
 
                 </Row>
             </div>
-            }
+            {/* } */}
         </Container>
 
     );
