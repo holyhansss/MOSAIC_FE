@@ -2,13 +2,18 @@ import React, { useRef } from 'react';
 import {Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Nav from 'react-bootstrap/Nav';
-import moment from 'moment';
+import styled from "styled-components";
 
 function Reportcard({title, writer, date, inve, poli, mac}) {
 
   const inputinvest = useRef([]);
   const inputmacro = useRef([]);
   const inputpolicy = useRef([]);
+
+  const StyleBox = styled(Box)`
+  background: linear-gradient(-45deg, #1A1A40 5%, #270082 90%);
+  border-radius: 10px;
+      `;
 
   return (
     <div>
@@ -61,8 +66,13 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           </Nav>
         </div>
       </Box>
-      
 
+
+
+
+
+      
+      {/* {contents} */}
           <Typography variant="h3" align='center'>
             {title}
           </Typography>
@@ -73,6 +83,59 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           <p/>            
 
           <Box sx={{
+            paddingTop: 10
+          }}/>
+
+      {/* {Table of contents} */}
+        <StyleBox>
+          <Typography variant="h5" align="center">
+            목차
+          </Typography>
+          <div>
+            <Nav className="flex-column">
+              <Nav.Link onClick={()=>{inputinvest.current.scrollIntoView({behavior: "smooth"})}}>
+                <Typography variant="h6" sx={{paddingBottom: '5px' }}>
+                  거시경제
+                </Typography>
+              {inve.map((invem, index) =>(
+                        <div key={index}>
+                  <Typography variant="body1">
+                    - {invem.title}
+                  </Typography>
+                        </div>
+                      ))}
+              </Nav.Link>
+
+              <Nav.Link onClick={()=>{inputpolicy.current.scrollIntoView({behavior: "smooth"})}}>
+                <Typography variant="h6" sx={{paddingBottom: '5px' }}>
+                  크립토 규제/정책
+                </Typography>
+              {poli.map((polic, index) =>(
+                        <div key={index}>
+                  <Typography variant="body1" >
+                    - {polic.title}
+                  </Typography>
+                        </div>
+                      ))}
+              </Nav.Link>
+
+              <Nav.Link onClick={()=>{inputmacro.current.scrollIntoView({behavior: "smooth"})}}>
+                <Typography variant="h6" sx={{paddingBottom: '5px' }} >
+                  크립토 기술/투자 이슈
+                </Typography>
+              {mac.map((ma, index) =>(
+                        <div key={index}>
+                  <Typography variant="body1" >
+                  - {ma.title}
+                  </Typography>
+                        </div>
+                      ))}
+              </Nav.Link>
+            </Nav>
+          </div>
+        </StyleBox>
+
+        <Box sx={{
             paddingTop: 10
           }}/>
 
@@ -88,7 +151,7 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           {inve.map((invem, index) =>(
             <div key={index}>
               <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
+            <Typography variant="h6" align="left" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
               {invem.title}
             </Typography>
             <p/>
@@ -96,6 +159,9 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
               {invem.content}
             </Typography>
             <p/>
+            <Box sx={{
+            paddingTop: 3
+          }}/>
             </div>
           ))}
           </div>
@@ -117,7 +183,7 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           {poli.map((polic, index) =>(
             <div key={index}>
               <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
+            <Typography variant="h6" align="left" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
               {polic.title}
             </Typography>
             <p/>
@@ -125,6 +191,9 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
               {polic.content}
             </Typography>
             <p/>
+            <Box sx={{
+            paddingTop: 3
+          }}/>
             </div>
           ))}
           </div>
@@ -149,7 +218,7 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
           {mac.map((ma, index) =>(
             <div key={index}>
               <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
+            <Typography variant="h6" align="left" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
               {ma.title}
             </Typography>
             <p/>
@@ -157,6 +226,9 @@ function Reportcard({title, writer, date, inve, poli, mac}) {
               {ma.content}
             </Typography>
             <p/>
+            <Box sx={{
+            paddingTop: 3
+          }}/>
             </div>
           ))}
           </div>
