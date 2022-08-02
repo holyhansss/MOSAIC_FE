@@ -154,56 +154,55 @@ useEffect(() => { getUserLike() }, [user]);
 `;
 
   return (
-    <Wrapper>
-    <p />
-      <TabContext value={value}>
-        <Container maxWidth="md">
-          <Box sx={{  borderColor: 'divider', position: "relative", left:"35%"}} >
-            <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{justifyContent: 'center'}}>
+    <div>
+        <TabContext value={value}>
+          <Container maxWidth="md">
+            <Box sx={{  borderColor: 'divider', position: "relative", left:"35%"}} >
+              <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{justifyContent: 'center'}}>
+                
+                <Tab label="주간이슈" value="1" sx={{color: 'white'}}/>
+                <Tab label="Winner & Loser" value="2" sx={{color: 'white'}} />
               
-              <Tab label="주간이슈" value="1" sx={{color: 'white'}}/>
-              <Tab label="Winner & Loser" value="2" sx={{color: 'white'}} />
-            
-            </TabList>
-          </Box> 
-        </Container>
-        <p/>
-        <TabPanel value="1"><ReportContents user={user} id={id} title={title} writer={writer} date={date}/></TabPanel>
-        <TabPanel value="2"><Winner user={user} id={id} title={title} writer={writer} date={date}/></TabPanel>
-      </TabContext>
+              </TabList>
+            </Box> 
+          </Container>
+          <p/>
+          <TabPanel value="1"><ReportContents user={user} id={id} title={title} writer={writer} date={date}/></TabPanel>
+          <TabPanel value="2"><Winner user={user} id={id} title={title} writer={writer} date={date}/></TabPanel>
+        </TabContext>
 
-      <Container maxWidth="md" >
-        <Grid container spacing={1}>
-          
-          <Grid item xs={4}>
-              {/* <VisibilityIcon /> */}
-              <IconButton onClick={onclick} >
-                  {clickICon === true ? <FavoriteIcon sx={{ color: pink[500] }} /> : <FavoriteBorderIcon sx={{ color: pink[500] }} /> }
-              </IconButton>
-                {count}
-              <IconButton onClick={handleOpen}>
-                  <SendIcon sx={{ color: grey[50] }} />
-              </IconButton>
-              <Modal
-                open={open}
-                onClose={handleClose}
-              >
-                <Box sx={style}>
-                  <Typography variant="h6" component="h2">
-                    공유하기
-                  </Typography>
-                  <p/>
-                  <input type="text" value={window.location.href} ref={copyLinkRef} disabled />
-                  <Button variant="text" onClick={copyTextUrl}>복사</Button>
-                </Box>
-              </Modal>
-          </Grid> 
-          <Grid item xs={12}>
-            <Comment user={user} id={id} title={title} rep={reply} writer={writer} date={date}/>
+        <Container maxWidth="md" >
+          <Grid container spacing={1}>
+            
+            <Grid item xs={4}>
+                {/* <VisibilityIcon /> */}
+                <IconButton onClick={onclick} >
+                    {clickICon === true ? <FavoriteIcon sx={{ color: pink[500] }} /> : <FavoriteBorderIcon sx={{ color: pink[500] }} /> }
+                </IconButton>
+                  {count}
+                <IconButton onClick={handleOpen}>
+                    <SendIcon sx={{ color: grey[50] }} />
+                </IconButton>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <Box sx={style}>
+                    <Typography variant="h6" component="h2">
+                      공유하기
+                    </Typography>
+                    <p/>
+                    <input type="text" value={window.location.href} ref={copyLinkRef} disabled />
+                    <Button variant="text" onClick={copyTextUrl}>복사</Button>
+                  </Box>
+                </Modal>
+            </Grid> 
+            <Grid item xs={12}>
+              <Comment user={user} id={id} title={title} rep={reply} writer={writer} date={date}/>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Wrapper>
+        </Container>
+      </div>
 
   );
 }

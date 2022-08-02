@@ -20,14 +20,14 @@ function App() {
   const [admin, setAdmin] = useState(false);
 
   const Container = styled.div`
-
-  background: linear-gradient(-45deg, #3E2EB2 10%, #10061E 90%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  color: white;
+  @media screen {
+    background: linear-gradient(-45deg, #3E2EB2 10%, #10061E 90%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    color: white;
+  };
 `;
 
   const refreshUser = () => {
