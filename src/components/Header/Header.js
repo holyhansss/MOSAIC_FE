@@ -84,7 +84,7 @@ function Header({ user, admin }) {
                         (
                             <NavDropdown
                                 menuVariant="dark"
-                                title={<img alt="profile" style={{borderRadius:'50%'}} src={user.photoURL} width="30" height="30"/>}
+                                title={<img alt={user.photoURL} style={{borderRadius:'50%'}} src={user.photoURL} width="30" height="30"/>}
                                 id="basic-nav-dropdown"
                             >
                                 <NavDropdown.Item><Link to="/profile">마이페이지</Link></NavDropdown.Item>
