@@ -71,8 +71,8 @@ function App() {
     <Container>
       <Header user={userObj} admin={admin}/>
       <Routes>
-        <Route path='/' element={<MainPage/>} ></Route>
-        <Route path='/login' element={<Login/>} ></Route>
+        <Route exact path='/' element={<MainPage/>} ></Route>
+        <Route exact path='/login' element={<Login/>} ></Route>
         <Route path='/join' element={<Join/>} ></Route>
         <Route path='admin' element={<Admin/>} ></Route>
         <Route path='/market' element={<MarketPage/>} ></Route>

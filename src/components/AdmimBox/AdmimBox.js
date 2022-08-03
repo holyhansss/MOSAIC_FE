@@ -12,7 +12,7 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
         uploadtoDatabase(uid){
             uploadtoDatabaseInternal(uid);
         },
-      }));
+    }));
 
     const newContent = {
         id: 0,
