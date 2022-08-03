@@ -12,10 +12,15 @@ function MyPage({ user, refreshUser }) {
                         <Row className="justify-content-md-center">
                             <Col xs lg="8">
                                 <Row className="justify-content-md-center">
-                                    <Col xs md lg="4">
+                                    <Col xs md lg="6">
                                         <Row className="my-5">
                                             <Col xs md="6" lg="4" className="text-center">
-                                                <img alt="profile" src={user.photoURL} width='100' height='100'/>
+                                                <img
+                                                    alt={user.photoURL}
+                                                    src={user.photoURL}
+                                                    width='100'
+                                                    height='100'
+                                                    style={{borderRadius:'50%', }}/>
                                             </Col>
                                             <Col
                                                 xs md="6" lg="8"

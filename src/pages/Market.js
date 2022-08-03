@@ -35,15 +35,16 @@ function Marketpage() {
         <Index1y />,
     ];
 
-
     const StyleButton = styled(Button)`
-    background: linear-gradient(-45deg, #0B062D 5%, #230B65 90%);
-        `;
-
-      
-      return (
-
-        <Container maxWidth="md" >
+        background: linear-gradient(-45deg, #0B062D 5%, #230B65 90%);
+    `;
+    const MainContainer = styled(Container)`
+        position: relative;
+        z-index: 1;
+    `;
+  
+    return (
+        <MainContainer maxWidth="md" >
           <Grid container spacing={10}>
             <Grid item xs={12}>
               <Typography variant="h5" gutterBottom component="div">
@@ -75,8 +76,7 @@ function Marketpage() {
               <FearandGreed />
             </Grid>
           </Grid>
-        </Container>
-        
+        </MainContainer>  
       );
   };
 export default  Marketpage;
