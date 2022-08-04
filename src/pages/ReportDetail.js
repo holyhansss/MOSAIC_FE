@@ -25,7 +25,6 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SendIcon from "@mui/icons-material/Send";
-import styled from "styled-components";
 import { pink, grey } from "@mui/material/colors";
 
 //components
@@ -167,12 +166,6 @@ export default function ReportDetail({ user }) {
       alert("링크를 복사했습니다.");
     });
   };
-
-  const Wrapper = styled.div`
-    background: linear-gradient(-45deg, #3e2eb2 1%, #10061e 100%);
-    width: 100vw;
-    color: white;
-  `;
 
   return (
     <div>
