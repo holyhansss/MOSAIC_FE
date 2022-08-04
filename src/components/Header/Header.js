@@ -93,9 +93,9 @@ function Header({ user, admin }) {
               menuVariant="dark"
               title={
                 <img
-                  alt={user.photoURL}
-                  style={{ borderRadius: "50%" }}
                   src={user.photoURL}
+                  alt=""
+                  style={{ borderRadius: "50%" }}
                   width="30"
                   height="30"
                 />
