@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { dbService } from "../../firebase.js";
-import { Grid, Container, Box, Typography } from "@mui/material";
+import { Grid, Container, Box, Typography, Avatar } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 const Winner = ({ user, id, title, writer, date }) => {
   const [winner, setWinner] = useState([]);
@@ -71,29 +72,25 @@ const Winner = ({ user, id, title, writer, date }) => {
                   <p />
                   <Typography
                     variant="body1"
-                    align="center"
+                    align="left"
                     gutterBottom
                     component="div"
                   >
                     {invem.desc1}
                   </Typography>
                   <p />
-                  <Box sx={{ width: "100%", height: "100%" }}>
-                    <img alt="pic1" src={invem.img1}></img>
-                  </Box>
+                  <Avatar alt='pic1' src={invem.img1} variant="square" sx={{ width: '53rem', height: '40rem' }} />
                   <p />
                   <Typography
                     variant="body1"
-                    align="center"
+                    align="left"
                     gutterBottom
                     component="div"
                   >
                     {invem.desc2}
                   </Typography>
                   <p />
-                  <Box sx={{ width: "100%", height: "100%" }}>
-                    <img alt="pic2" src={invem.img2}></img>
-                  </Box>
+                  <Avatar alt='pic2' src={invem.img2} variant="square" sx={{ width: '53rem', height: '40rem' }}/>
                   <p />
                 </div>
               ))}

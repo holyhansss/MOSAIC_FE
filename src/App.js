@@ -14,21 +14,21 @@ import { auth, dbService } from './firebase';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import styled from "styled-components";
 
+const Container = styled.div`
+@media screen {
+  background: linear-gradient(-45deg, #3E2EB2 10%, #10061E 90%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  color: white;
+};
+`;
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [admin, setAdmin] = useState(false);
-
-  const Container = styled.div`
-  @media screen {
-    background: linear-gradient(-45deg, #3E2EB2 10%, #10061E 90%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    color: white;
-  };
-`;
 
   const refreshUser = () => {
     const user = auth.currentUser;

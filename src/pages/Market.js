@@ -1,4 +1,4 @@
-import React ,{useState, useEffect}from "react";
+import React ,{useState}from "react";
 import {Box,Container, Grid, Typography, Button} from '@mui/material';
 import styled from "styled-components";
 
@@ -14,6 +14,15 @@ import Index1y from "../components/LineGraph/LineGraph1y";
 //공포탐욕지수 이미지 불러옴
 //카테고리별 그래프 불러옴
 // 위너 코인 (카테고리별 ) 리스트 나타냄
+
+//style
+const StyleButton = styled(Button)`
+background: linear-gradient(-45deg, #0B062D 5%, #230B65 90%);
+`;
+const MainContainer = styled(Container)`
+position: relative;
+z-index: 1;
+`;
 
 function Marketpage() {
     const range = ["1d","1mo", "1y"];
@@ -34,14 +43,6 @@ function Marketpage() {
         <Index1mo />,
         <Index1y />,
     ];
-
-    const StyleButton = styled(Button)`
-        background: linear-gradient(-45deg, #0B062D 5%, #230B65 90%);
-    `;
-    const MainContainer = styled(Container)`
-        position: relative;
-        z-index: 1;
-    `;
   
     return (
         <MainContainer maxWidth="md" >

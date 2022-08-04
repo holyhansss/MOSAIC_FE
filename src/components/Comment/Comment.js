@@ -7,6 +7,12 @@ import styled from "styled-components";
 //components
 import SingleComment from "./SingleComment.js";
 
+
+//style
+const StyleButton = styled(Button)`
+background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+`;
+
 function Comment({ user, id, title, rep, writer, date }) {
   const [useId, setUserId] = useState("");
   const [pic, setPic] = useState("");
@@ -52,10 +58,6 @@ function Comment({ user, id, title, rep, writer, date }) {
     setUserId("");
     setPic("");
   };
-
-  const StyleButton = styled(Button)`
-    background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-  `;
 
   return (
     <div>
