@@ -4,6 +4,12 @@ import ReactSpeedometer from "react-d3-speedometer";
 import { Typography, Box, Grid, Container } from "@mui/material";
 import styled from "styled-components";
 
+//style
+const StyleBox = styled(Box)`
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+  border-radius: 10px;
+`;
+
 //공포탐욕지수
 function FearandGreed() {
   const [FearNGreed, setFearNGreed] = useState([]);
@@ -16,13 +22,6 @@ function FearandGreed() {
   useEffect(() => {
     getFeerNGreed();
   }, []);
-
-  // console.log(FearNGreed,",",FnGState)
-
-  const StyleBox = styled(Box)`
-    background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-    border-radius: 10px;
-  `;
 
   return (
     <>
