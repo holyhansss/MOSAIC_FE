@@ -1,4 +1,5 @@
-import React ,{useState}from "react";
+import React, { useState, useEffect } from "react";
+import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import FearandGreed from "../components/FearAndGreed/FearandGreed.js";
 import Index1d from "../components/LineGraph/LineGraph1d.js";
 import Index1mo from "../components/LineGraph/LineGraph1mo.js";
@@ -9,31 +10,42 @@ import CategoryLineGraph_1d from "../components/CategoryLineGraph/CategoryLineGr
 import axios from 'axios';
 
 // import CategoryButton from "../components/CategoryLineGraph/CategoryButton.js"
+import styled from "styled-components";
+
+
 // 시장동향
 // S&P 500 지수와 CMC 200 그래프(line) 불러옴
-//공포탐욕지수 이미지 불러옴
-//카테고리별 그래프 불러옴
+// 공포탐욕지수 이미지 불러옴
+// 카테고리별 그래프 불러옴
 // 위너 코인 (카테고리별 ) 리스트 나타냄
 
-function Marketpage() 
-{
-  const range = ["1d","1mo", "1y"];
-  const [content, setContent] = useState(null);
-  const [dateRange, setDateRange] = useState("1y");
-  const [categoryIndex, setCategoryIndex] = useState(null);
-  const [categoryArray, setCategoryArray] = useState([true,true,true,true,true]);
-  const [props, setProps] = useState({})
+// Style
+const StyleButton = styled(Button)`
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+`;
+const MainContainer = styled(Container)`
+  position: relative;
+  z-index: 1;
+`;
 
-  const buttonValueSetting = e => {
-      e.preventDefault();
-      if (e.target.name === "1d") {   
-        setContent(0)
-      } else if (e.target.name === "1mo") {
-        setContent(1)
-      } else if (e.target.name === "1y") {
-        setContent(2)
-      }
-    };
+function Marketpage() {
+    const range = ["1d","1mo", "1y"];
+    const [content, setContent] = useState(null);
+    const [dateRange, setDateRange] = useState("1y");
+    const [categoryIndex, setCategoryIndex] = useState(null);
+    const [categoryArray, setCategoryArray] = useState([true,true,true,true,true]);
+    const [props, setProps] = useState({})
+  
+  const buttonValueSetting = (e) => {
+    if (e.target.name === "1d") {
+      setContent(0);
+    } else if (e.target.name === "1mo") {
+      setContent(1);
+    } else if (e.target.name === "1y") {
+      setContent(2);
+    }
+  };
+
     
   const buttonCategorySettings = e => {
     e.preventDefault();
@@ -162,25 +174,38 @@ function Marketpage()
     <CategoryLineGraph_1d {...props}/>,
   ]
   
-    return (
-      <div>
-          <div>Market page</div>
-        <div>
-          <h5>S&P vs coinmarket cap</h5>
-          { range.map((data, idx) => {
-            return (
-              <button onClick={buttonValueSetting} name={data} key={idx}>
-                {data}
-              </button>
-            );
-          })}
-        </div>
 
-        {content !== null &&<div>{selectComponent[content]}</div>}
-        
+  return (
+    <MainContainer maxWidth="md">
+      <Grid container spacing={10}>
+        <Grid item xs={12}>
+          <Typography variant="h5" gutterBottom component="div">
+            시장 동향
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 6, sm: 12, md: 12 }}
+            >
+              {range.map((data, idx) => (
+                <Grid item xs={2} sm={4} md={4} key={idx}>
+                  <StyleButton onClick={buttonValueSetting} name={data}>
+                    {data}
+                  </StyleButton>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          {content !== null && <div>{selectComponent[content]}</div>}
+        </Grid>
+
         <h5>Coin categories</h5>
-        
-        <div>
+        <Grid item xs={12}>
           <button onClick={buttonCategorySettings} name= "1d">
             1d
           </button>
@@ -202,10 +227,18 @@ function Marketpage()
           </div>
 
           <CategoryButton/>
-        </div>
+        </Grid>
         
-        <div><FearandGreed/></div>
-      </div>
-    );
-};
-export default  Marketpage;
+        <Grid item xs={12}>
+          <Typography variant="h5" gutterBottom component="div">
+            공포 탐욕 지수
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <FearandGreed />
+        </Grid>
+      </Grid>
+    </MainContainer>
+  );
+}
+export default Marketpage;
