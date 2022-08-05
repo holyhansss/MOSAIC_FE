@@ -8,11 +8,11 @@ import styled from "styled-components";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const StyleCard = styled(Card)`
-background: linear-gradient(-45deg, #0b062d 10%, #230b65 90%);
+  background: linear-gradient(-45deg, #0b062d 10%, #230b65 90%);
 `;
 
 const StyleCardSmall = styled(Card)`
-background: linear-gradient(-45deg, #0b062d 10%, #2e1c72 90%);
+  background: linear-gradient(-45deg, #0b062d 10%, #2e1c72 90%);
 `;
 
 function Reportrecentcard({ id, title, writer, date }) {
@@ -66,7 +66,7 @@ function Reportlistcard({ id, title, date, writer }) {
         id: id,
         title: title,
         writer: writer,
-        date: date
+        date: date,
       },
     });
   };

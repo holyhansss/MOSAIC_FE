@@ -1,7 +1,18 @@
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
+import { Button } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../../firebase";
 import { updateProfile, sendPasswordResetEmail } from "firebase/auth";
+
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ffffff",
+      contrastText: "#000000",
+    },
+  },
+});
 
 function ProfileModal({ user, refreshUser }) {
   const [show, setShow] = useState(false);
@@ -38,8 +49,8 @@ function ProfileModal({ user, refreshUser }) {
   };
 
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
+    <ThemeProvider theme={theme}>
+      <Button variant="contained" type="submit" onClick={handleShow}>
         프로필 수정
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -72,7 +83,7 @@ function ProfileModal({ user, refreshUser }) {
           </Modal.Footer>
         </Form>
       </Modal>
-    </>
+    </ThemeProvider>
   );
 }
 

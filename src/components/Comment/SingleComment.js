@@ -31,10 +31,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { grey } from "@mui/material/colors";
 import styled from "styled-components";
 
-
 //style
 const StyleButton = styled(Button)`
-background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
 `;
 
 function SingleComment({ value, id, user, title, writer, date, commentObj }) {

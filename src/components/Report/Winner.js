@@ -79,7 +79,12 @@ const Winner = ({ user, id, title, writer, date }) => {
                     {invem.desc1}
                   </Typography>
                   <p />
-                  <Avatar alt='pic1' src={invem.img1} variant="square" sx={{ width: '53rem', height: '40rem' }} />
+                  <Avatar
+                    alt="pic1"
+                    src={invem.img1}
+                    variant="square"
+                    sx={{ width: "53rem", height: "40rem" }}
+                  />
                   <p />
                   <Typography
                     variant="body1"
@@ -90,7 +95,12 @@ const Winner = ({ user, id, title, writer, date }) => {
                     {invem.desc2}
                   </Typography>
                   <p />
-                  <Avatar alt='pic2' src={invem.img2} variant="square" sx={{ width: '53rem', height: '40rem' }}/>
+                  <Avatar
+                    alt="pic2"
+                    src={invem.img2}
+                    variant="square"
+                    sx={{ width: "53rem", height: "40rem" }}
+                  />
                   <p />
                 </div>
               ))}

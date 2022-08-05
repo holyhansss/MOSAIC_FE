@@ -7,10 +7,9 @@ import styled from "styled-components";
 //components
 import SingleComment from "./SingleComment.js";
 
-
 //style
 const StyleButton = styled(Button)`
-background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
 `;
 
 function Comment({ user, id, title, rep, writer, date }) {

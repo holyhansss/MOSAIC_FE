@@ -6,8 +6,8 @@ import styled from "styled-components";
 
 //style
 const StyleBox = styled(Box)`
-background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-border-radius: 10px;
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+  border-radius: 10px;
 `;
 
 //공포탐욕지수
@@ -22,7 +22,6 @@ function FearandGreed() {
   useEffect(() => {
     getFeerNGreed();
   }, []);
-
 
   return (
     <>

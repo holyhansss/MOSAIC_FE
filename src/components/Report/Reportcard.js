@@ -6,12 +6,12 @@ import styled from "styled-components";
 import { grey } from "@mui/material/colors";
 
 const StyleBox = styled(Box)`
-background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
-border-radius: 10px;
+  background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
+  border-radius: 10px;
 `;
 
 const Styleli = styled.li`
-color: white;
+  color: white;
 `;
 
 function Reportcard({ title, writer, date, inve, poli, mac }) {
@@ -37,9 +37,11 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
           top: 160,
           left: 15,
           width: 1 / 6,
-          whiteSpace: 'normal',
+          whiteSpace: "normal",
         }}
-        onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut} >
+        onMouseEnter={handleMouseOver}
+        onMouseLeave={handleMouseOut}
+      >
         <div>
           <Nav className="flex-column">
             <Nav.Link
@@ -47,21 +49,22 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                 inputinvest.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{color: grey[50]}} >거시경제</Typography>
-              {
-                isHovering === true ?
-                inve.map((invem, index) => (
-                  <div key={index}>
-                    <ul>
-                      <Styleli>
-                        <Typography variant="caption" sx={{ lineHeight: 0}}>
-                         {invem.title}
-                        </Typography>
-                      </Styleli>
-                    </ul>
-                  </div>
-                )) : null
-              }
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+                거시경제
+              </Typography>
+              {isHovering === true
+                ? inve.map((invem, index) => (
+                    <div key={index}>
+                      <ul>
+                        <Styleli>
+                          <Typography variant="caption" sx={{ lineHeight: 0 }}>
+                            {invem.title}
+                          </Typography>
+                        </Styleli>
+                      </ul>
+                    </div>
+                  ))
+                : null}
             </Nav.Link>
 
             <Nav.Link
@@ -69,21 +72,22 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                 inputpolicy.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{color: grey[50]}} >크립토 규제/정책</Typography>
-              {
-                isHovering === true? 
-                  poli.map((polic, index) => (
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+                크립토 규제/정책
+              </Typography>
+              {isHovering === true
+                ? poli.map((polic, index) => (
                     <div key={index}>
                       <ul>
                         <Styleli>
-                          <Typography variant="caption"  sx={{ lineHeight: 0 }}>
+                          <Typography variant="caption" sx={{ lineHeight: 0 }}>
                             {polic.title}
                           </Typography>
                         </Styleli>
                       </ul>
                     </div>
-                  )) : null
-              }
+                  ))
+                : null}
             </Nav.Link>
 
             <Nav.Link
@@ -91,10 +95,11 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                 inputmacro.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{color: grey[50]}} >크립토 기술/투자 이슈</Typography>
-              {
-                isHovering === true ?
-                  mac.map((ma, index) => (
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+                크립토 기술/투자 이슈
+              </Typography>
+              {isHovering === true
+                ? mac.map((ma, index) => (
                     <div key={index}>
                       <ul>
                         <Styleli>
@@ -104,8 +109,8 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                         </Styleli>
                       </ul>
                     </div>
-                  )) : null
-              }
+                  ))
+                : null}
             </Nav.Link>
           </Nav>
         </div>
@@ -139,18 +144,19 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                 inputinvest.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="h6" sx={{ paddingBottom: "5px", color: grey[50] }}>
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
                 거시경제
               </Typography>
               {inve.map((invem, index) => (
                 <div key={index}>
                   <ul>
-                      <Styleli>
-                        <Typography variant="body1">
-                         {invem.title}
-                        </Typography>
-                      </Styleli>
-                    </ul>
+                    <Styleli>
+                      <Typography variant="body1">{invem.title}</Typography>
+                    </Styleli>
+                  </ul>
                 </div>
               ))}
             </Nav.Link>
@@ -160,18 +166,19 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                 inputpolicy.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="h6" sx={{ paddingBottom: "5px", color: grey[50] }}>
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
                 크립토 규제/정책
               </Typography>
               {poli.map((polic, index) => (
                 <div key={index}>
                   <ul>
-                      <Styleli>
-                          <Typography variant="body1">
-                            {polic.title}
-                          </Typography>
-                        </Styleli>
-                      </ul>
+                    <Styleli>
+                      <Typography variant="body1">{polic.title}</Typography>
+                    </Styleli>
+                  </ul>
                 </div>
               ))}
             </Nav.Link>
@@ -181,18 +188,19 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                 inputmacro.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="h6" sx={{ paddingBottom: "5px", color: grey[50] }}>
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
                 크립토 기술/투자 이슈
               </Typography>
               {mac.map((ma, index) => (
                 <div key={index}>
-                    <ul>
-                      <Styleli>
-                        <Typography variant="body1">
-                          {ma.title}
-                        </Typography>
-                      </Styleli>
-                    </ul>
+                  <ul>
+                    <Styleli>
+                      <Typography variant="body1">{ma.title}</Typography>
+                    </Styleli>
+                  </ul>
                 </div>
               ))}
             </Nav.Link>
