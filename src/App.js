@@ -73,14 +73,20 @@ function App() {
     <Container>
       <Header user={userObj} admin={admin} />
       <Routes>
-        <Route exact path='/' element={<MainPage/>} ></Route>
-        <Route exact path='/login' element={<Login/>} ></Route>
-        <Route path='/join' element={<Join/>} ></Route>
-        <Route path='admin' element={<Admin/>} ></Route>
-        <Route path='/market' element={<MarketPage/>} ></Route>
-        <Route path='/reportList' element={<ReportList/>} ></Route>
-        <Route path='/reportDetail/:id/:title/:writer/:date' element={<ReportDetail user={userObj}/>} ></Route>
-        <Route path='/profile' element={<MyPage user={userObj} refreshUser={refreshUser}/>} ></Route>
+        <Route path="/" element={<MainPage />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/join" element={<Join />}></Route>
+        <Route path="admin" element={<Admin />}></Route>
+        <Route path="/market" element={<MarketPage />}></Route>
+        <Route path="/reportList" element={<ReportList />}></Route>
+        <Route
+          path="/reportDetail/:id/:title/:writer/:date"
+          element={<ReportDetail user={userObj} />}
+        ></Route>
+        <Route
+          path="/profile"
+          element={<MyPage user={userObj} refreshUser={refreshUser} />}
+        ></Route>
         {/* <Route path='/detailpages/*' > 
           <Route path=":id" element={<DetailPage />} />
         </Route>  */}
