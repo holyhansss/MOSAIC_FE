@@ -1,178 +1,403 @@
-import React, { useRef } from 'react';
-import {Box} from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Nav from 'react-bootstrap/Nav';
-import moment from 'moment';
+import React, { useRef, useState } from "react";
+import { Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Nav from "react-bootstrap/Nav";
+import styled from "styled-components";
+import { grey } from "@mui/material/colors";
 
-function Reportcard({title, writer, date, inve, poli, mac}) {
+const StyleBox = styled(Box)`
+  background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
+  border-radius: 10px;
+`;
 
+const Styleli = styled.li`
+  color: white;
+`;
+
+function Reportcard({ title, writer, date, inve, poli, mac }) {
   const inputinvest = useRef([]);
   const inputmacro = useRef([]);
   const inputpolicy = useRef([]);
 
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   return (
     <div>
-      <Box sx={{
-        position: 'fixed',
-        top: 160,
-        left: 15,
-        width: 1/6 
-      }}>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 160,
+          left: 15,
+          width: 1 / 6,
+          whiteSpace: "normal",
+        }}
+        onMouseEnter={handleMouseOver}
+        onMouseLeave={handleMouseOut}
+      >
         <div>
           <Nav className="flex-column">
-            <Nav.Link onClick={()=>{inputinvest.current.scrollIntoView({behavior: "smooth"})}}>
-              <Typography variant="subtitle2"  >
+            <Nav.Link
+              onClick={() => {
+                inputinvest.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
                 거시경제
               </Typography>
-            {inve.map((invem, index) =>(
-                      <div key={index}>
-                <Typography variant="caption" sx={{ lineHeight: 0}}>
-                  - {invem.title}
-                </Typography>
-                      </div>
-                    ))}
+              {isHovering === true
+                ? inve.map((invem, index) => (
+                    <div key={index}>
+                      <ul>
+                        <Styleli>
+                          <Typography variant="caption" sx={{ lineHeight: 0 }}>
+                            {invem.title}
+                          </Typography>
+                        </Styleli>
+                      </ul>
+                    </div>
+                  ))
+                : null}
             </Nav.Link>
 
-            <Nav.Link onClick={()=>{inputpolicy.current.scrollIntoView({behavior: "smooth"})}}>
-              <Typography variant="subtitle2">
+            <Nav.Link
+              onClick={() => {
+                inputpolicy.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
                 크립토 규제/정책
               </Typography>
-            {poli.map((polic, index) =>(
-                      <div key={index}>
-                <Typography variant="caption" sx={{ lineHeight: 0}}>
-                  - {polic.title}
-                </Typography>
-                      </div>
-                    ))}
+              {isHovering === true
+                ? poli.map((polic, index) => (
+                    <div key={index}>
+                      <ul>
+                        <Styleli>
+                          <Typography variant="caption" sx={{ lineHeight: 0 }}>
+                            {polic.title}
+                          </Typography>
+                        </Styleli>
+                      </ul>
+                    </div>
+                  ))
+                : null}
             </Nav.Link>
 
-            <Nav.Link onClick={()=>{inputmacro.current.scrollIntoView({behavior: "smooth"})}}>
-              <Typography variant="subtitle2"  >
+            <Nav.Link
+              onClick={() => {
+                inputmacro.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
                 크립토 기술/투자 이슈
               </Typography>
-            {mac.map((ma, index) =>(
-                      <div key={index}>
-                <Typography variant="caption" sx={{ lineHeight: 0}} >
-                 - {ma.title}
-                </Typography>
-                      </div>
-                    ))}
+              {isHovering === true
+                ? mac.map((ma, index) => (
+                    <div key={index}>
+                      <ul>
+                        <Styleli>
+                          <Typography variant="caption" sx={{ lineHeight: 0 }}>
+                            {ma.title}
+                          </Typography>
+                        </Styleli>
+                      </ul>
+                    </div>
+                  ))
+                : null}
             </Nav.Link>
           </Nav>
         </div>
       </Box>
-      
 
-          <Typography variant="h3" align='center'>
-            {title}
-          </Typography>
-          <p/>
-          <Typography variant="caption" display="block" align="center" gutterBottom>
-            {date}
-          </Typography>
-          <p/>            
+      {/* {contents} */}
+      <Typography variant="h3" align="center">
+        {title}
+      </Typography>
+      <p />
+      <Typography variant="caption" display="block" align="center" gutterBottom>
+        {date}
+      </Typography>
+      <p />
 
-          <Box sx={{
-            paddingTop: 10
-          }}/>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
 
-          <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold', m: 1 }} ref={inputinvest}>
-            거시경제
-          </Typography>
-          <Box sx={{
-            paddingTop: 6
-          }}/>
+      {/* {Table of contents} */}
+      <StyleBox>
+        <Typography variant="h4" align="center">
+          목차
+        </Typography>
+        <div>
+          <Nav className="flex-column">
+            <Nav.Link
+              onClick={() => {
+                inputinvest.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
+                거시경제
+              </Typography>
+              {inve.map((invem, index) => (
+                <div key={index}>
+                  <ul>
+                    <Styleli>
+                      <Typography variant="body1">{invem.title}</Typography>
+                    </Styleli>
+                  </ul>
+                </div>
+              ))}
+            </Nav.Link>
 
-          <p/>            
-          <div>
-          {inve.map((invem, index) =>(
-            <div key={index}>
-              <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
+            <Nav.Link
+              onClick={() => {
+                inputpolicy.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
+                크립토 규제/정책
+              </Typography>
+              {poli.map((polic, index) => (
+                <div key={index}>
+                  <ul>
+                    <Styleli>
+                      <Typography variant="body1">{polic.title}</Typography>
+                    </Styleli>
+                  </ul>
+                </div>
+              ))}
+            </Nav.Link>
+
+            <Nav.Link
+              onClick={() => {
+                inputmacro.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
+                크립토 기술/투자 이슈
+              </Typography>
+              {mac.map((ma, index) => (
+                <div key={index}>
+                  <ul>
+                    <Styleli>
+                      <Typography variant="body1">{ma.title}</Typography>
+                    </Styleli>
+                  </ul>
+                </div>
+              ))}
+            </Nav.Link>
+          </Nav>
+        </div>
+      </StyleBox>
+
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", m: 1 }}
+        ref={inputinvest}
+      >
+        거시경제
+      </Typography>
+      <Box
+        sx={{
+          paddingTop: 6,
+        }}
+      />
+
+      <p />
+      <div>
+        {inve.map((invem, index) => (
+          <div key={index}>
+            <p />
+            <Typography
+              variant="h6"
+              align="left"
+              gutterBottom
+              component="div"
+              sx={{ fontWeight: "bold" }}
+            >
               {invem.title}
             </Typography>
-            <p/>
-            <Typography variant="body1" align="left" gutterBottom component="div">
+            <p />
+            <Typography
+              variant="body1"
+              align="left"
+              gutterBottom
+              component="div"
+            >
               {invem.content}
             </Typography>
-            <p/>
-            </div>
-          ))}
+            <p />
+            <Box
+              sx={{
+                paddingTop: 3,
+              }}
+            />
           </div>
-          <Box sx={{
-            paddingTop: 10
-          }}/>
+        ))}
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
 
+      <p />
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", m: 1 }}
+        ref={inputpolicy}
+      >
+        크립토 규제/정책
+      </Typography>
+      <Box
+        sx={{
+          paddingTop: 6,
+        }}
+      />
 
-          <p/>
-          <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold', m: 1 }} ref={inputpolicy}>
-            크립토 규제/정책
-          </Typography>
-          <Box sx={{
-            paddingTop: 6
-          }}/>
-
-          <p/>
-          <div>
-          {poli.map((polic, index) =>(
-            <div key={index}>
-              <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
+      <p />
+      <div>
+        {poli.map((polic, index) => (
+          <div key={index}>
+            <p />
+            <Typography
+              variant="h6"
+              align="left"
+              gutterBottom
+              component="div"
+              sx={{ fontWeight: "bold" }}
+            >
               {polic.title}
             </Typography>
-            <p/>
-            <Typography variant="body1" align="left" gutterBottom component="div">
+            <p />
+            <Typography
+              variant="body1"
+              align="left"
+              gutterBottom
+              component="div"
+            >
               {polic.content}
             </Typography>
-            <p/>
-            </div>
-          ))}
+            <p />
+            <Box
+              sx={{
+                paddingTop: 3,
+              }}
+            />
           </div>
-          <p/>
+        ))}
+      </div>
+      <p />
 
-          <Box sx={{
-            paddingTop: 10
-          }}/>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
 
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", m: 1 }}
+        ref={inputmacro}
+      >
+        크립토 기술/투자 이슈
+      </Typography>
 
-          <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold', m: 1 }} ref={inputmacro}>
-            크립토 기술/투자 이슈
-          </Typography>
+      <Box
+        sx={{
+          paddingTop: 6,
+        }}
+      />
 
-          <Box sx={{
-            paddingTop: 6
-          }}/>
-
-
-          <p/>
-          <div>
-          {mac.map((ma, index) =>(
-            <div key={index}>
-              <p/>
-            <Typography variant="h6" align="center" gutterBottom component="div" sx={{fontWeight: 'bold'}}>
+      <p />
+      <div>
+        {mac.map((ma, index) => (
+          <div key={index}>
+            <p />
+            <Typography
+              variant="h6"
+              align="left"
+              gutterBottom
+              component="div"
+              sx={{ fontWeight: "bold" }}
+            >
               {ma.title}
             </Typography>
-            <p/>
-            <Typography variant="body1" align="left" gutterBottom component="div">
+            <p />
+            <Typography
+              variant="body1"
+              align="left"
+              gutterBottom
+              component="div"
+            >
               {ma.content}
             </Typography>
-            <p/>
-            </div>
-          ))}
+            <p />
+            <Box
+              sx={{
+                paddingTop: 3,
+              }}
+            />
           </div>
-          <p/>
-          <Box sx={{
-            paddingTop: 10
-          }}/>
+        ))}
+      </div>
+      <p />
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
 
-          <div>
-          <Typography variant="subtitle1" align="center" gutterBottom component="div" sx={{textDecoration: 'underline'}}>
-            Credit
-          </Typography>
-          </div>
-          <Typography variant="subtitle2" align="center" gutterBottom component="div" sx={{ fontWeight: 'bold', m: 1 }}>
-            {writer}
-          </Typography>
+      <div>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ textDecoration: "underline" }}
+        >
+          Credit
+        </Typography>
+      </div>
+      <Typography
+        variant="subtitle2"
+        align="center"
+        gutterBottom
+        component="div"
+        sx={{ fontWeight: "bold", m: 1 }}
+      >
+        {writer}
+      </Typography>
     </div>
   );
 }

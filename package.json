@@ -27,6 +27,7 @@
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
     "react-bootstrap": "^2.4.0",
+    "react-d3-speedometer": "^1.0.2",
     "react-dom": "^18.2.0",
     "react-papaparse": "^4.0.2",
     "react-router-dom": "^6.3.0",
@@ -59,5 +60,17 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://query2.finance.yahoo.com"
+  "proxy": "https://query2.finance.yahoo.com",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holyhansss/MOSAIC_FE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/holyhansss/MOSAIC_FE/issues"
+  },
+  "homepage": "https://github.com/holyhansss/MOSAIC_FE#readme"
 }

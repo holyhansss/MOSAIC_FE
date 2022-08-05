@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const MainPage = () => {
-    return (
-        <div>
-            <div>Main</div>
-        </div>
-    );
-}
+  return (
+    <div>
+      <div>Main</div>
+    </div>
+  );
+};
 
 export default MainPage;
 // 1. 주간 이슈: 뉴스 헤드라인 식으로 한줄로 작성
