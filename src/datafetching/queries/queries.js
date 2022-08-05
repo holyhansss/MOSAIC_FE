@@ -18,6 +18,7 @@ export const create_categories_coins_list = async () => {
   return rows;
 }
 
+
 //Insert data to table
 export const insert_to_db_table = async (tableName, valuesList) => {
   let sql = 'INSERT INTO `' + tableName + '` VALUES ?';

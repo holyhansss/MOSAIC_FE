@@ -5,9 +5,7 @@ const saveAllNonExistingCoinPricesOfAllCategoriesFor1Year = async () => {
   const allCategoryCoinsList = await get_all_coinID_all_categories();
   
   for (let i=0; i<allCategoryCoinsList.length; i++) {
-
     const thisCoinSymbol = allCategoryCoinsList[i].CoinSymbol;
-
     const tableName = thisCoinSymbol + '_1yr_history'
     const doesTableExist = await does_table_exist(tableName);
     
