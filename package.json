@@ -60,5 +60,17 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://query2.finance.yahoo.com"
+  "proxy": "https://query2.finance.yahoo.com",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holyhansss/MOSAIC_FE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/holyhansss/MOSAIC_FE/issues"
+  },
+  "homepage": "https://github.com/holyhansss/MOSAIC_FE#readme"
 }
