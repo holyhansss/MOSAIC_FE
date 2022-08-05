@@ -11,6 +11,7 @@ import {
   Legend,
 } from "recharts";
 import { type } from "@testing-library/user-event/dist/type";
+import { Typography } from "@mui/material";
 
 // S&P 500 지수 와 CMC 200 지수를 그래프로(1일 기준)
 
@@ -131,9 +132,6 @@ function Index1d() {
 
   return (
     <div>
-      <div>
-        <h>S&P 500 vs CMC200 1 day ver (22:30~05:00)</h>
-      </div>
       {res && (
         <div>
           <LineChart

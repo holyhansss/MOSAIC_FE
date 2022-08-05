@@ -136,10 +136,6 @@ function Index1y() {
   };
   return (
     <div>
-      <div>
-        <h>S&P 500 vs CMC200 1 year ver </h>
-      </div>
-
       {res && (
         <div>
           <LineChart

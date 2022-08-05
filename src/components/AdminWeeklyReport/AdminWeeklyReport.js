@@ -51,6 +51,13 @@ const AdminWeeklyReport = (props) => {
     await childRef2.current.uploadtoDatabase(docRef.id);
     await childRef3.current.uploadtoDatabase(docRef.id);
 
+    const insightCol = collection(docRef, "insight");
+
+    await addDoc(insightCol, {
+      content: insight,
+      includedDoc: docRef,
+    });
+
     setTimeout(() => {
       alert("uploaded to database!!");
       setLoading(false);
