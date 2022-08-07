@@ -71,7 +71,7 @@ function ReportList() {
                     <Reportlistcard
                       id={report.id}
                       title={report.title}
-                      date={report.date}
+                      date={moment(report.date).format("YYYY.MM.DD") }
                       writer={report.writer}
                     />
                   </Grid>
