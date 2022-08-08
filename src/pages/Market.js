@@ -27,13 +27,13 @@ const theme = createTheme({
   components: {
     MuiToggleButton: {
       selected: {
-        disable: 'true'
+        disable: "true",
       },
       styleOverrides: {
         root: {
           "&.Mui-selected": {
             color: "#fff",
-            fontWeight: 'bold',
+            fontWeight: "bold",
             backgroundColor: "rgba(0,0,0,0)",
           },
         },
