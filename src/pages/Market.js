@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+
+import React ,{useState}from "react";
+
+
+//components
 
 import {
   Container,
@@ -11,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
 
 // Components
+
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
 import Index1mo from "../components/LineGraph/LineGraph1mo";
@@ -54,6 +59,7 @@ const MainContainer = styled(Container)`
 `;
 
 function Marketpage() {
+
     const [range, setRange] = useState("1d");
 
     const [content, setContent] = useState(0);
@@ -213,7 +219,7 @@ function Marketpage() {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" component="div">
-            S&P 500 vs CMC 200 (22:30~05:00)
+            S&P 500 vs CMC 200 
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -286,3 +292,4 @@ function Marketpage() {
   );
 }
 export default Marketpage;
+
