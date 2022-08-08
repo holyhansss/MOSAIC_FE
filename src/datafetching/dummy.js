@@ -1,5 +1,23 @@
-import return_calculated_prices from "./queries.js"
+import axios from "axios";
 
-const returnCategoryPrice = async () => {
-    return_calculated_prices("Smart Contract Platform_prices", );
+const dummy = async () => {
+    let response;
+    const saveProduct = async () => {
+        // e.preventDefault();
+        await axios.get('http://localhost:3000/products',{
+            response: response
+        });
+        history.push("/");
+        console.log(response);
+    }
+    saveProduct();
 }
+
+// const dummy = async () => {
+//     let response;
+//     await axios.get('http://localhost:5000/products',{
+//         res: response
+//     });
+//     console.log(response);
+// }
+dummy();

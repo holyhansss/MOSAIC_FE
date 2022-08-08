@@ -14,10 +14,11 @@ const Styleli = styled.li`
   color: white;
 `;
 
-function Reportcard({ title, writer, date, inve, poli, mac }) {
+function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
   const inputinvest = useRef([]);
   const inputmacro = useRef([]);
   const inputpolicy = useRef([]);
+  const inputinsight = useRef([]);
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -112,6 +113,15 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                   ))
                 : null}
             </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                inputinsight.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+                인사이트
+              </Typography>
+            </Nav.Link>
           </Nav>
         </div>
       </Box>
@@ -203,6 +213,18 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
                   </ul>
                 </div>
               ))}
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                inputinsight.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ paddingBottom: "5px", color: grey[50] }}
+              >
+                인사이트
+              </Typography>
             </Nav.Link>
           </Nav>
         </div>
@@ -345,16 +367,6 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
           <div key={index}>
             <p />
             <Typography
-              variant="h6"
-              align="left"
-              gutterBottom
-              component="div"
-              sx={{ fontWeight: "bold" }}
-            >
-              {ma.title}
-            </Typography>
-            <p />
-            <Typography
               variant="body1"
               align="left"
               gutterBottom
@@ -377,7 +389,51 @@ function Reportcard({ title, writer, date, inve, poli, mac }) {
           paddingTop: 10,
         }}
       />
+<Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", m: 1 }}
+        ref={inputinsight}
+      >
+        인사이트
+      </Typography>
 
+      <Box
+        sx={{
+          paddingTop: 6,
+        }}
+      />
+
+      <p />
+      <div>
+        {insi.map((ins, index) => (
+          <div key={index}>
+            <p />
+            <Typography
+              variant="body1"
+              align="left"
+              gutterBottom
+              component="div"
+            >
+              {ins.content}
+            </Typography>
+            <p />
+            <Box
+              sx={{
+                paddingTop: 3,
+              }}
+            />
+          </div>
+        ))}
+      </div>
+      <p />
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      
       <div>
         <Typography
           variant="subtitle1"
