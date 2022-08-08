@@ -66,17 +66,5 @@
   "proxy": "https://query2.finance.yahoo.com",
   "devDependencies": {
     "nodemon": "^2.0.19"
-  },
-  "description": "",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/holyhansss/MOSAIC_FE.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/holyhansss/MOSAIC_FE/issues"
-  },
-  "homepage": "https://github.com/holyhansss/MOSAIC_FE#readme"
+  }
 }
