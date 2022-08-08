@@ -10,19 +10,17 @@ function ReportContents({ user, id, title, writer, date }) {
   const [investments, setInvestments] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [marcro, setMarcro] = useState([]);
+  const [insights, setInsights] = useState([]);
 
   const getContents = async () => {
     const invest = collection(dbService, "weekly_report", id, "investment");
     const policy = collection(dbService, "weekly_report", id, "policy");
-    const macroeconomic = collection(
-      dbService,
-      "weekly_report",
-      id,
-      "macroeconomic"
-    );
+    const macroeconomic = collection(dbService, "weekly_report", id, "macroeconomic");
+    const insight = collection(dbService, "weekly_report", id, "insight");
     const querySnapShot = await getDocs(invest);
     const querySnaphot = await getDocs(policy);
     const querySnasphot = await getDocs(macroeconomic);
+    const querySnasphotS = await getDocs(insight);
 
     querySnapShot.forEach((collection) => {
       const investObj = {
@@ -47,6 +45,14 @@ function ReportContents({ user, id, title, writer, date }) {
       };
       setMarcro((prev) => [macroObj, ...prev]);
     });
+
+    querySnasphotS.forEach((collection) => {
+      const insiObj = {
+        includedDoc: collection.data().includedDoc,
+        content: collection.data().content,
+      };
+      setInsights((prev) => [insiObj, ...prev]);
+    });
   };
 
   useEffect(() => {
@@ -66,6 +72,7 @@ function ReportContents({ user, id, title, writer, date }) {
               inve={investments}
               poli={policies}
               mac={marcro}
+              insi={insights}
             />
           </Grid>
         </Grid>

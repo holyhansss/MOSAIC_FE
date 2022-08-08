@@ -5,7 +5,7 @@ import {MY_HOST, MY_USERNAME, MY_PASSWORD, MY_DATABASE} from "./querySecureInfo.
 
 //Create categories coins list
 export const create_categories_coins_list = async () => {
-  let sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
+  let sql = "CREATE TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int, CONSTRAINT PRIMARY KEY (CoinSymbol) )"
   const connection = await mysql.createConnection
     ({
         host: MY_HOST,
@@ -18,9 +18,11 @@ export const create_categories_coins_list = async () => {
   return rows;
 }
 
+
 //Insert data to table
 export const insert_to_db_table = async (tableName, valuesList) => {
   let sql = 'INSERT INTO `' + tableName + '` VALUES ?';
+  
   const connection = await mysql.createConnection
   ({
     host: MY_HOST,
@@ -90,7 +92,7 @@ export const does_table_exist = async (tableName) => {
 //! may have to amend incoming date format
 export const create_coin_table = async (tableName) => {
 
-  let sql = "CREATE TABLE `" + tableName + "` (Date DATE, PriceInDollar DECIMAL(20, 6))"
+  let sql = "CREATE TABLE `" + tableName + "` (Date DATE, PriceInDollar DECIMAL(20, 6), CONSTRAINT PRIMARY KEY (Date))"
   const connection = await mysql.createConnection
   ({
     host: MY_HOST,
@@ -122,7 +124,7 @@ const get_prices_start_to_end = async (tableName, valuesList, startDate, endDate
 }
 
 export const create_temporary_tables_for_category = async () => {
-  let sql = "CREATE TEMPORARY TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int)"
+  let sql = "CREATE TEMPORARY TABLE categories_coins_list (CoinSymbol varchar(10), CoinName varchar(50), CoinPapricaID varchar(50), Category varchar(30), CoinRank int, CONSTRAINT PRIMARY KEY (CoinSymbol))"
   const connection = await mysql.createConnection
     ({
         host: MY_HOST,
@@ -211,7 +213,7 @@ export const create_category_history = async (categoryName, startDate, endDate) 
     sqlCreate = sqlCreate +", " + categoryCoinsRows[i].CoinSymbol;
     sqlCreate = sqlCreate + " DECIMAL(20, 6) "
   }
-  sqlCreate = sqlCreate + ")"
+  sqlCreate = sqlCreate + ", CONSTRAINT PRIMARY KEY (Date))"
 
   console.log(sqlCreate);
   await connection.execute(sqlCreate);
@@ -236,13 +238,12 @@ export const create_category_history = async (categoryName, startDate, endDate) 
 
     await connection.execute(sqlInsert);
   }
-
   return_calculated_prices(tableName, categoryCoins);
   console.log("end query create_category_history()");
 }
 
 export const return_calculated_prices = async (tableName, coinList) => {
-  let sql = "select round( ";
+  let sql = "select DATE_FORMAT(date, '%Y-%m-%d') as date , round( ";
   let categoryNameToReturn = tableName.slice(0, -7)
   const coinNum = coinList.length
   for (let i=0; i<coinNum; i++) {
@@ -266,8 +267,3 @@ export const return_calculated_prices = async (tableName, coinList) => {
   return rows;
 }
 
-// create_category_history("Culture & Entertainment", '2021-07-21' , '2022-07-20');
-
-// return_calculated_prices("currency_prices", ["BTC", "USDT", "USDC", "BUSD", "XRP", "DOGE", "SHIB", "DAI", "LEO", "LTC"])
-
-// fill_daterange_column("a", "a", '2021-07-25', '2022-07-20');
