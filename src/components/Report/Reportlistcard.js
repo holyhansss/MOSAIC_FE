@@ -37,6 +37,7 @@ function Reportrecentcard({ id, title, writer, date }) {
           py: "32px",
           borderRadius: "20px",
           color: "white",
+          boxShadow: 3
         })}
       >
         <CardContent>
@@ -79,6 +80,7 @@ function Reportlistcard({ id, title, date, writer }) {
           margin: 1,
           borderRadius: "10px",
           color: "white",
+          boxShadow: 3
         }}
       >
         <CardContent>

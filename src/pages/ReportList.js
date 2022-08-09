@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Typography from "@mui/material/Typography";
 import { Container, Grid, Box } from "@mui/material";
-import { getDocs, query, collection, orderBy } from "firebase/firestore";
-import { dbService } from "../firebase.js";
 import moment from "moment";
+import styled from "styled-components";
+
 
 //components
 import {
@@ -11,32 +11,21 @@ import {
   Reportrecentcard,
 } from "../components/Report/Reportlistcard.js";
 
-function ReportList() {
-  const [reports, setReports] = useState([]);
+const MainContainer = styled(Container)`
+  position: relative;
+  z-index: 1;
+`;
 
-  const getReports = async () => {
-    const q = query(collection(dbService, "weekly_report"), orderBy("date"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((docs) => {
-      const reportObj = {
-        id: docs.id,
-        title: docs.data().title,
-        date: docs.data().date,
-        writer: docs.data().writer,
-      };
-      setReports((prev) => [reportObj, ...prev]);
-    });
-  };
-  let result = reports[0];
-  useEffect(() => {
-    getReports();
-  }, []);
+function ReportList({result, reports}) {
 
   return (
     <div>
       <p />
-      <Container>
+      <MainContainer maxWidth="md">
         <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Box sx={{paddingTop: 3}}/>
+          </Grid>
           <Grid item xs={12}>
             <Typography variant="h5" gutterBottom component="div">
               최신리포트
@@ -67,7 +56,7 @@ function ReportList() {
                 columns={{ xs: 4, sm: 8, md: 20 }}
               >
                 {reports.slice(1).map((report, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+                  <Grid item xs={2} sm={4} md={5} key={index}>
                     <Reportlistcard
                       id={report.id}
                       title={report.title}
@@ -80,7 +69,7 @@ function ReportList() {
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </MainContainer>
     </div>
   );
 }
