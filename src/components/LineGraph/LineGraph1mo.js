@@ -20,9 +20,13 @@ function Index1mo() {
     const getSNPCMC_1mo = async () => {
         const response = await axios.get('http://localhost:5000/market/snpcmc/1mo'
         )
+        for (let i = 0; i < response.data.length; i++) {
+          response.data[i].Time = moment.unix(response.data[i].Time).format("MM/DD");  
+        }
         console.log(response.data);
         setRes(response.data)
       }
+    
 
     useEffect(() => {
         getSNPCMC_1mo();
@@ -39,7 +43,7 @@ function Index1mo() {
           >
             <CartesianGrid vertical={false} />
             <XAxis dataKey="Time" />
-            <YAxis domain={[80, 120]} />
+            <YAxis domain={[50,150]} />
             <Tooltip />
             <Legend />
             <Line type="monotone" dataKey="SNP" stroke="#8884d8" dot={false} />

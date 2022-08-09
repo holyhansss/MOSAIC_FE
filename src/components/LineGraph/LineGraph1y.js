@@ -20,6 +20,9 @@ function Index1y() {
     const getSNPCMC_1yr = async () => {
         const response = await axios.get('http://localhost:5000/market/snpcmc/1yr'
         )
+        for (let i = 0; i < response.data.length; i++) {
+          response.data[i].Time = moment.unix(response.data[i].Time).format("MM/DD/YYYY");  
+        }
         console.log(response.data);
         setRes(response.data)
       }
@@ -39,7 +42,7 @@ function Index1y() {
           >
             <CartesianGrid vertical={false} />
             <XAxis dataKey="Time" />
-            <YAxis domain={[80, 120]} />
+            <YAxis domain={[0, 200]} />
             <Tooltip />
             <Legend />
             <Line type="monotone" dataKey="SNP" stroke="#8884d8" dot={false} />
