@@ -18,6 +18,8 @@ import { Typography } from "@mui/material";
 function Index1d() {
   const [time, setTime] = useState([]);
   const [res, setRes] = useState([]);
+  const [maxData, setMaxData] = useState(0);
+  const [minData, setMinData] = useState(1000);
 
   async function getSNP() {
     console.log("SNP");
@@ -30,6 +32,12 @@ function Index1d() {
             SnP: data,
           }
       );
+
+      // const maxSnp = Math.max.apply(null, res.data.chart.result[0].indicators.quote[0].close);
+      // console.log(maxSnp);
+      // if (maxSnp > maxData){
+      //   setMaxData(maxSnp)
+      // };
 
       var SNP_first = IndexData[0].SnP;
 
@@ -52,7 +60,14 @@ function Index1d() {
       for (let i = 0; i < IndexData.length; i++) {
         IndexData[i].SnP = (100 / SNP_first) * IndexData[i].SnP;
         IndexData[i].time = moment(IndexData[i].time * 1000).format("HH:mm");
+        if (IndexData[i].SnP > maxData){
+          setMaxData(IndexData[i].SnP);
+        }
+        if (IndexData[i].SnP < minData){
+          setMinData(IndexData[i].SnP);
+        }
       }
+
       returnValue = IndexData;
     });
     return returnValue;
@@ -69,6 +84,10 @@ function Index1d() {
             CMC: data,
           }
       );
+
+      if (Math.max(res.data.chart.result[0].indicators.quote[0].close) > maxData){
+        setMaxData(Math.max(res.data.chart.result[0].indicators.quote[0].close))
+      };
 
       var CMC_first = IndexData2[0].CMC;
 
@@ -91,6 +110,12 @@ function Index1d() {
       for (let i = 0; i < IndexData2.length; i++) {
         IndexData2[i].CMC = (100 / CMC_first) * IndexData2[i].CMC;
         IndexData2[i].time = moment(IndexData2[i].time * 1000).format("HH:mm");
+        if (IndexData2[i].CMC > maxData){
+          setMaxData(IndexData2[i].CMC);
+        };
+        if (IndexData2[i].CMC < minData){
+          setMinData(IndexData2[i].CMC);
+        };
       }
 
       returnValue = IndexData2;
@@ -110,6 +135,7 @@ function Index1d() {
     console.log("In NewIndex!");
     console.log("data1:", data1);
     console.log("data2:", data2);
+    console.log("max:", maxData);
 
     for (let i = 0; i < data1.length; i++) {
       let CMC;
@@ -140,13 +166,13 @@ function Index1d() {
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
             <XAxis dataKey="time" domain={["22:30", "05:00"]} />
-            <YAxis domain={[70, 130]} />
+            <YAxis domain={[Math.ceil(minData)-2, Math.ceil(maxData)+2]} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="SnP" stroke="#8884d8" dot={false} />
-            <Line type="monotone" dataKey="CMC" stroke="#82ca9d" dot={false} />
+            <Line type="monotone" isAnimationActive={false} dataKey="SnP" stroke="#8884d8" dot={false} />
+            <Line type="monotone" isAnimationActive={false} dataKey="CMC" stroke="#82ca9d" dot={false} />
           </LineChart>
         </div>
       )}
