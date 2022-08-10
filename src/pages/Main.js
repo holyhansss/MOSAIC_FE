@@ -57,9 +57,32 @@ const move = keyframes`
   }
 `;
 
-const SildeText = styled(Typography)`
+const SildeBox = styled(Box)`
   animation: ${move} 10s linear infinite;
 `;
+
+const scale = keyframes`
+  0% {
+      opacity: 0;
+      transform: translateY(80%);
+  }
+  20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+`
+
+const WelcomText = styled(Typography)`
+  animation:2s ${scale} ease-out;
+  `
+
 
 
 const MainPage = ({result}) => {
@@ -82,9 +105,11 @@ const MainPage = ({result}) => {
                 maxHeight: "10px",
                 width: 4/5
               }}>
-                <SildeText variant="caption" >
-                  welcome to Mosaic
-                </SildeText>
+                <SildeBox>
+                  <Typography variant="caption" >
+                    매주 새로운 모자익 리포트를 확인하세요!
+                  </Typography>
+                </SildeBox>
             </Box>
           </Box>
         </Grid>
@@ -92,9 +117,9 @@ const MainPage = ({result}) => {
           <Box sx={{paddingTop: 5}}/>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h3" >
+          <WelcomText variant="h3" >
             Welcome Mosaic
-          </Typography>
+          </WelcomText>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{paddingTop: 5}}/>
