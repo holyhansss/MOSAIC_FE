@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+
+import React ,{useState}from "react";
+
+
+//components
 
 import {
-  Box,
   Container,
   Grid,
   Typography,
   ToggleButtonGroup,
   ToggleButton,
-  Button
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
 
 // Components
+
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
 import Index1mo from "../components/LineGraph/LineGraph1mo";
@@ -50,16 +53,13 @@ const theme = createTheme({
   },
 });
 
-// const StyleButton = styled(ToggleButton)`
-//   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-// `;
-
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
 `;
 
 function Marketpage() {
+
     const [range, setRange] = useState("1d");
 
     const [content, setContent] = useState(0);
@@ -219,16 +219,17 @@ function Marketpage() {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" component="div">
-            S&P 500 vs CMC 200 (22:30~05:00)
+            S&P 500 vs CMC 200 
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
             <ToggleButtonGroup
-              size="small"
+              size="large"
               value={range}
               onChange={buttonValueSetting}
               exclusive
+              color="primary"
             >
               <ToggleButton sx={{ color: "gray" }} value="1d">
                 1D
@@ -241,23 +242,33 @@ function Marketpage() {
               </ToggleButton>
             </ToggleButtonGroup>
           </ThemeProvider>
+          <p />
           {content !== null && <div>{selectComponent[content]}</div>}
         </Grid>
-
-        <h5>Coin categories</h5>
         <Grid item xs={12}>
-          <button onClick={buttonCategorySettings} name= "1d">
-            1d
-          </button>
-          <button onClick={buttonCategorySettings} name= "1mo">
-            1mo
-          </button>
-          <button onClick={buttonCategorySettings} name= "1y">
-            1y
-          </button>
+          <Typography variant="h5" gutterBottom component="div">
+            코인 카테고리
+          </Typography>
+          <ThemeProvider theme={theme}>
+            <ToggleButtonGroup
+                size="large"
+                value={range}
+                onChange={buttonValueSetting}
+                exclusive
+              >
+                <ToggleButton onClick={buttonCategorySettings} name= "1d" sx={{ color: "gray" }}>
+                  1d
+                </ToggleButton>
+                <ToggleButton onClick={buttonCategorySettings} name= "1mo" sx={{ color: "gray" }}>
+                  1mo
+                </ToggleButton>
+                <ToggleButton onClick={buttonCategorySettings} name= "1y" sx={{ color: "gray" }}>
+                  1y
+                </ToggleButton>
+            </ToggleButtonGroup>
+          </ThemeProvider>
           {/* <div>{categoryComponent[categoryIndex]}</div> */}
           <div>
-
             {categoryIndex == 0 && <CategoryLineGraph_1y {...props}/>}
             {categoryIndex == 1 && <CategoryLineGraph_1mo {...props}/>}
             {categoryIndex == 2 && <CategoryLineGraph_1d {...props}/>}
@@ -265,7 +276,6 @@ function Marketpage() {
             {categoryIndex == 4 && <CategoryLineGraph_1mo {...props}/>}
             {categoryIndex == 5 && <CategoryLineGraph_1d {...props}/>}
           </div>
-
           <CategoryButton/>
         </Grid>
         
@@ -282,3 +292,4 @@ function Marketpage() {
   );
 }
 export default Marketpage;
+
