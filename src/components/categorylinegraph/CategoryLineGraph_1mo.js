@@ -52,7 +52,7 @@ function CategoryLineGraph_1mo(props) {
           >
             <CartesianGrid vertical={false} />
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={[0, 400]} />
+            <YAxis type="number" domain={['dataMin - 10', 'dataMax + 10']} />
             <Tooltip />
             {/* <Legend /> */}
             <Line type="monotone" dataKey="Currency" stroke="green" dot={false}/>

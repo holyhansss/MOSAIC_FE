@@ -17,9 +17,6 @@ import Index1y from "../components/LineGraph/LineGraph1y";
 import CategoryLineGraph_1y from "../components/CategoryLineGraph/CategoryLineGraph_1y.js"
 import CategoryLineGraph_1mo from "../components/CategoryLineGraph/CategoryLineGraph_1mo.js"
 import CategoryLineGraph_1d from "../components/CategoryLineGraph/CategoryLineGraph_1d.js"
-
-
-
 import axios from 'axios';
 
 // 시장동향
@@ -54,11 +51,8 @@ const MainContainer = styled(Container)`
 `;
 
 function Marketpage() {
-
     const [range, setRange] = useState("1d");
-
     const [content, setContent] = useState(0);
-
     const [dateRange, setDateRange] = useState("1y");
     const [categoryIndex, setCategoryIndex] = useState(null);
     const [categoryArray, setCategoryArray] = useState([true,true,true,true,true]);
@@ -75,7 +69,7 @@ function Marketpage() {
     }
   };
 
-    
+
   const buttonCategorySettings = e => {
     e.preventDefault();
     if (e.target.name === "1y") { 
