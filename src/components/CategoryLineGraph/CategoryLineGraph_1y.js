@@ -16,7 +16,7 @@ import { type } from '@testing-library/user-event/dist/type';
 
 
 
-function CategoryLineGraph_1y( props ) {
+function CategoryLineGraph_1y( props ) {  
   const dateRange= props.dateRange;
   const categoryArray= props.categoryArray;
 

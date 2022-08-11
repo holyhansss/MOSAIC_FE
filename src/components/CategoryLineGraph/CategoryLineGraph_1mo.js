@@ -10,7 +10,7 @@ import { type } from '@testing-library/user-event/dist/type';
 // import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
 
 function CategoryLineGraph_1mo(props) {
-
+  
   const dateRange= props.dateRange;
   const categoryArray= props.categoryArray;
 

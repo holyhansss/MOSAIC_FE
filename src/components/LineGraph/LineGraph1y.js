@@ -22,6 +22,8 @@ function Index1y() {
         )
         for (let i = 0; i < response.data.length; i++) {
           response.data[i].Time = moment.unix(response.data[i].Time).format("MM/DD/YYYY");  
+          response.data[i].SNP=Math.ceil(response.data[i].SNP * 100) / 100;
+          response.data[i].CMC=Math.ceil(response.data[i].CMC* 100) / 100;
         }
         console.log(response.data);
         setRes(response.data)
