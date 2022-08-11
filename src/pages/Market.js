@@ -1,9 +1,5 @@
-
 import React ,{useState}from "react";
-
-
 //components
-
 import {
   Container,
   Grid,
@@ -13,19 +9,18 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
-
 // Components
-
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
 import Index1mo from "../components/LineGraph/LineGraph1mo";
 import Index1y from "../components/LineGraph/LineGraph1y";
+import CategoryLineGraph_1y from "../components/CategoryLineGraph/CategoryLineGraph_1y.js"
+import CategoryLineGraph_1mo from "../components/CategoryLineGraph/CategoryLineGraph_1mo.js"
+import CategoryLineGraph_1d from "../components/CategoryLineGraph/CategoryLineGraph_1d.js"
 
-import CategoryLineGraph_1y from "../components/categorylinegraph/CategoryLineGraph_1y.js"
-import CategoryLineGraph_1mo from "../components/categorylinegraph/CategoryLineGraph_1mo.js"
-import CategoryLineGraph_1d from "../components/categorylinegraph/CategoryLineGraph_1d.js"
+
+
 import axios from 'axios';
-
 
 // 시장동향
 // S&P 500 지수와 CMC 200 그래프(line) 불러옴
