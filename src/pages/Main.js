@@ -13,7 +13,7 @@ import moment from "moment";
 import {
   Reportrecentcard,
 } from "../components/Report/Reportlistcard.js";
-
+import MainSNPCMC from "../components/LineGraph/MainLineGraph1d";
 
 // Style
 const theme = createTheme({
@@ -157,7 +157,7 @@ const MainPage = ({result}) => {
                 boxShadow: 3
               }}
               >
-              ?
+              <MainSNPCMC/>
             </StyleBox>
             <Box 
               sx={{
