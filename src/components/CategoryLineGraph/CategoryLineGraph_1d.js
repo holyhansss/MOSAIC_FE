@@ -42,10 +42,6 @@ function CategoryLineGraph_1d(props) {
 
   return (
     <div>
-      <div>
-        <h>Category data {dateRange} ver </h>
-      </div>
-
       {datesAndPrices && (
         <div>
           <LineChart
@@ -54,35 +50,44 @@ function CategoryLineGraph_1d(props) {
             data={datesAndPrices}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={[0, 400]} />
+            <YAxis type="number" domain={["dataMin-10", "dataMax+5"]} />
             <Tooltip />
-            {/* <Legend /> */}
             <Line
               type="monotone"
               dataKey="Currency"
               stroke="green"
               dot={false}
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Smart Contract Platform"
               stroke="grey"
               dot={false}
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Computing"
               stroke="skyblue"
               dot={false}
+              isAnimationActive={false}
             />
-            <Line type="monotone" dataKey="DeFi" stroke="pink" dot={false} />
+            <Line
+              type="monotone"
+              dataKey="DeFi"
+              stroke="pink"
+              dot={false}
+              isAnimationActive={false}
+            />
             <Line
               type="monotone"
               dataKey="Culture & Entertainment"
               stroke="orange"
               dot={false}
+              isAnimationActive={false}
             />
             {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
           </LineChart>
