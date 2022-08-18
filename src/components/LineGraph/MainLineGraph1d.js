@@ -15,7 +15,7 @@ import { Typography } from "@mui/material";
 
 // S&P 500 지수 와 CMC 200 지수를 그래프로(1일 기준)
 
-function Index1d() {
+function MainLineGraph() {
   const [time, setTime] = useState([]);
   const [res, setRes] = useState([]);
   const [maxData, setMaxData] = useState(0);
@@ -31,12 +31,6 @@ function Index1d() {
             SnP: data,
           }
       );
-
-      const maxSnp = Math.max.apply(null, res.data.chart.result[0].indicators.quote[0].close);
-      console.log(maxSnp);
-      if (maxSnp > maxData){
-        setMaxData(maxSnp)
-      };
 
       var SNP_first = IndexData[0].SnP;
 
@@ -138,9 +132,9 @@ function Index1d() {
     for (let i = 0; i < data1.length; i++) {
       let CMC;
       if (data2[i] == null) {
-        CMC = 7;
+        CMC =  data2[i+1].CMC;
       } else {
-        if (data2[i].CMC == null) CMC = 7;
+        if (data2[i].CMC == null);
         CMC = data2[i].CMC;
       }
       resTemp.push({
@@ -149,7 +143,7 @@ function Index1d() {
         CMC: Math.ceil(CMC * 100) / 100,
       });
     }
-    console.log("res: ", res);
+
     setRes(resTemp);
     return res;
   };
@@ -159,18 +153,16 @@ function Index1d() {
       {res && (
         <div>
           <LineChart
-            width={900}
-            height={300}
+            width={300}
+            height={200}
             data={res}
-            margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
+            margin={{ top: 3, right: 1, left: 1, bottom: 1}}
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-            <XAxis dataKey="time" stroke="#8884d8" />
-            <YAxis domain={[Math.ceil(minData)-2, Math.ceil(maxData)+2]} />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" isAnimationActive={false} dataKey="SnP" stroke="#8884d8" dot={false} />
-            <Line type="monotone" isAnimationActive={false} dataKey="CMC" stroke="#82ca9d" dot={false} />
+            <XAxis dataKey="time" wrapperStyle={{ backgroundColor: '#ccc' }}/>
+            <YAxis domain={[98, 102]} wrapperStyle={{ width: 100, backgroundColor: '#ccc' }}/>
+            <Line type="monotone" isAnimationActive={true} dataKey="SnP" stroke="#8884d8" dot={false} />
+            <Line type="monotone" isAnimationActive={true} dataKey="CMC" stroke="#82ca9d" dot={false} />
+            <Legend/>
           </LineChart>
         </div>
       )}
@@ -178,4 +170,4 @@ function Index1d() {
   );
 }
 
-export default Index1d;
+export default MainLineGraph;
