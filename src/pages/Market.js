@@ -6,6 +6,7 @@ import {
   Typography,
   ToggleButtonGroup,
   ToggleButton,
+  Button,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
@@ -150,83 +151,101 @@ function Marketpage() {
     };
 
     return (
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginLeft: 20 }}>
         {categoryArray[0] ? (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="contained"
+            size="small"
             name="Currency"
-            color="green"
           >
-            Currency hide
-          </button>
+            Currency
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="outlined"
+            size="small"
             name="Currency"
-            color="green"
           >
-            Currency show
-          </button>
+            Currency
+          </Button>
         )}{" "}
         {categoryArray[1] ? (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="contained"
+            size="small"
             name="Smart Contract Platform"
-            theme="grey"
           >
-            Smart Contract Platform hide
-          </button>
+            Smart Contract Platform
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="outlined"
+            size="small"
             name="Smart Contract Platform"
-            theme="grey"
           >
-            Smart Contract Platform show
-          </button>
+            Smart Contract Platform
+          </Button>
         )}
         {categoryArray[2] ? (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="contained"
+            size="small"
             name="Computing"
-            theme="skyblue"
           >
-            Computing hide
-          </button>
+            Computing
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="outlined"
+            size="small"
             name="Computing"
-            theme="skyblue"
           >
-            Computing show
-          </button>
+            Computing
+          </Button>
         )}
         {categoryArray[3] ? (
-          <button onClick={buttonToggleArrayElement} name="DeFi" theme="pink">
-            DeFi hide
-          </button>
+          <Button
+            onClick={buttonToggleArrayElement}
+            size="small"
+            variant="contained"
+            name="DeFi"
+          >
+            DeFi
+          </Button>
         ) : (
-          <button onClick={buttonToggleArrayElement} name="DeFi" theme="pink">
-            DeFi show
-          </button>
+          <Button
+            onClick={buttonToggleArrayElement}
+            variant="outlined"
+            size="small"
+            name="DeFi"
+          >
+            DeFi
+          </Button>
         )}
         {categoryArray[4] ? (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="contained"
+            size="small"
             name="Culture & Entertainment"
-            theme="orange"
           >
-            Culture & Entertainment hide
-          </button>
+            Culture & Entertainment
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={buttonToggleArrayElement}
+            variant="outlined"
+            size="small"
             name="Culture & Entertainment"
-            theme="orange"
           >
-            Culture & Entertainment show
-          </button>
+            Culture & Entertainment
+          </Button>
         )}
       </div>
     );
