@@ -132,7 +132,7 @@ function MainLineGraph() {
     for (let i = 0; i < data1.length; i++) {
       let CMC;
       if (data2[i] == null) {
-        CMC =  data2[i+1].CMC;
+        CMC =  data2[i-1].CMC;
       } else {
         if (data2[i].CMC == null);
         CMC = data2[i].CMC;
@@ -158,7 +158,7 @@ function MainLineGraph() {
             data={res}
             margin={{ top: 3, right: 1, left: 1, bottom: 1}}
           >
-            <XAxis dataKey="time" wrapperStyle={{ backgroundColor: '#ccc' }}/>
+            <XAxis dataKey="time" />
             <YAxis domain={[98, 102]} wrapperStyle={{ width: 100, backgroundColor: '#ccc' }}/>
             <Line type="monotone" isAnimationActive={true} dataKey="SnP" stroke="#8884d8" dot={false} />
             <Line type="monotone" isAnimationActive={true} dataKey="CMC" stroke="#82ca9d" dot={false} />
