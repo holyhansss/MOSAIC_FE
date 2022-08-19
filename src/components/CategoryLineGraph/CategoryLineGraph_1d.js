@@ -22,9 +22,8 @@ function CategoryLineGraph_1d(props) {
   console.log("dateRange should not be null", dateRange);
   console.log("categoryArray should not be null", categoryArray);
 
-  let dates = [];
-
   const [datesAndPrices, setDatesAndPrices] = useState([]);
+  const [minMax, setMinMax] = useState([])
 
   useEffect(() => {
     console.log("1ddddddat");
@@ -36,8 +35,10 @@ function CategoryLineGraph_1d(props) {
       "http://localhost:5000/market/category/1d",
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
-    console.log(response.data);
-    setDatesAndPrices(response.data);
+    const thisResponse = response.data;
+    console.log(thisResponse);
+    setDatesAndPrices(thisResponse[0])
+    setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])
   };
 
   return (
@@ -56,7 +57,7 @@ function CategoryLineGraph_1d(props) {
           >
             <CartesianGrid vertical={false} />
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={[0, 400]} />
+            <YAxis type="number" domain={minMax} />
             <Tooltip />
             {/* <Legend /> */}
             <Line
