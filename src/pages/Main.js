@@ -14,6 +14,7 @@ import {
   Reportrecentcard,
 } from "../components/Report/Reportlistcard.js";
 import MainSNPCMC from "../components/LineGraph/MainLineGraph1d";
+import MainCategoryLineGraph from "../components/CategoryLineGraph/MainCategoryLineGraph.js"
 
 // Style
 const theme = createTheme({
@@ -175,7 +176,7 @@ const MainPage = ({result}) => {
                 boxShadow: 3
               }}
               >
-              ?
+              <MainCategoryLineGraph/>
             </StyleBox>
           </Box>
         </Grid>
