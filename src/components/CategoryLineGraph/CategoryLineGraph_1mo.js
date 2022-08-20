@@ -34,7 +34,7 @@ function CategoryLineGraph_1mo(props) {
     console.log(thisResponse);
     setDatesAndPrices(thisResponse[0])
     console.log("this response 1mo min max: ", thisResponse[1]);
-    setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])
+    setMinMax([parseInt(thisResponse[1][0])-10, parseInt(thisResponse[1][1])+10])
   }
 
 
@@ -53,7 +53,7 @@ function CategoryLineGraph_1mo(props) {
           >
             <CartesianGrid vertical={false} />
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={'25.000000', '150.000000'} />
+            <YAxis type="number" domain={minMax} />
             <Tooltip />
             {/* <Legend /> */}
             <Line type="monotone" dataKey="Currency" stroke="green" dot={false}/>

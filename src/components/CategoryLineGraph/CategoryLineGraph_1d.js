@@ -12,8 +12,6 @@ import {
 } from "recharts";
 import { type } from "@testing-library/user-event/dist/type";
 
-// import { type } from '@testing-library/user-event/dist/type/index.js';
-// import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
 
 function CategoryLineGraph_1d(props) {
   const dateRange = props.dateRange;
@@ -36,9 +34,14 @@ function CategoryLineGraph_1d(props) {
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
     const thisResponse = response.data;
-    console.log(thisResponse);
-    setDatesAndPrices(thisResponse[0])
-    setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])
+    console.log("day thisResponse: ", thisResponse);
+    console.log("day thisResponse[1]: ", thisResponse[1]);
+    if (thisResponse==null || thisResponse[1][0]==undefined){
+      setMinMax([0, 100])
+    } else {
+      console.log("day range: ", thisResponse[1][0], thisResponse[1][1]);
+      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])  
+    }
   };
 
   return (

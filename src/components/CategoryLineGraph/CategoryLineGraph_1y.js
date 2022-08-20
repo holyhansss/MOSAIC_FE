@@ -6,8 +6,6 @@ import {
 } from 'recharts';
 import { type } from '@testing-library/user-event/dist/type';
 
-// import { type } from '@testing-library/user-event/dist/type/index.js';
-// import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
 
 
 function CategoryLineGraph_1y( props ) {  
@@ -35,7 +33,7 @@ function CategoryLineGraph_1y( props ) {
     setDatesAndPrices(thisResponse[0])
     console.log("this response 1y min max: ", thisResponse[1]);
     console.log("this response 1y min max in int : ", parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1]));
-    setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])
+    setMinMax([parseInt(thisResponse[1][0])-20, parseInt(thisResponse[1][1])+20])
   }
 
   
