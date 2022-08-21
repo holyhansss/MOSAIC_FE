@@ -46,47 +46,52 @@ function CategoryLineGraph_1d(props) {
 
   return (
     <div>
-      <div>
-        <h>Category data {dateRange} ver </h>
-      </div>
-
       {datesAndPrices && (
         <div>
           <LineChart
-            width={900}
+            width={800}
             height={300}
             data={datesAndPrices}
-            margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
+            margin={{ top: 25, left: 20, right: 40 }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
             <XAxis dataKey="time" />
             <YAxis type="number" domain={minMax} />
             <Tooltip />
-            {/* <Legend /> */}
             <Line
               type="monotone"
               dataKey="Currency"
-              stroke="green"
+              stroke="#F2789F"
               dot={false}
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Smart Contract Platform"
-              stroke="grey"
+              stroke="#F999B7"
               dot={false}
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Computing"
-              stroke="skyblue"
+              stroke="#F9C5D5"
               dot={false}
+              isAnimationActive={false}
             />
-            <Line type="monotone" dataKey="DeFi" stroke="pink" dot={false} />
+            <Line
+              type="monotone"
+              dataKey="DeFi"
+              stroke="#794C74"
+              dot={false}
+              isAnimationActive={false}
+            />
             <Line
               type="monotone"
               dataKey="Culture & Entertainment"
-              stroke="orange"
+              stroke="#867AE9"
               dot={false}
+              isAnimationActive={false}
             />
             {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
           </LineChart>

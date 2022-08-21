@@ -6,6 +6,7 @@ import {
   Typography,
   ToggleButtonGroup,
   ToggleButton,
+  Button,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
@@ -49,6 +50,10 @@ const theme = createTheme({
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
+`;
+
+const StyleButton = styled(Button)`
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
 `;
 
 function Marketpage() {
@@ -150,85 +155,183 @@ function Marketpage() {
     };
 
     return (
-      <div>
-        {categoryArray[0] ? (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Currency"
-            color="green"
-          >
-            Currency hide
-          </button>
-        ) : (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Currency"
-            color="green"
-          >
-            Currency show
-          </button>
-        )}{" "}
-        {categoryArray[1] ? (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Smart Contract Platform"
-            theme="grey"
-          >
-            Smart Contract Platform hide
-          </button>
-        ) : (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Smart Contract Platform"
-            theme="grey"
-          >
-            Smart Contract Platform show
-          </button>
-        )}
-        {categoryArray[2] ? (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Computing"
-            theme="skyblue"
-          >
-            Computing hide
-          </button>
-        ) : (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Computing"
-            theme="skyblue"
-          >
-            Computing show
-          </button>
-        )}
-        {categoryArray[3] ? (
-          <button onClick={buttonToggleArrayElement} name="DeFi" theme="pink">
-            DeFi hide
-          </button>
-        ) : (
-          <button onClick={buttonToggleArrayElement} name="DeFi" theme="pink">
-            DeFi show
-          </button>
-        )}
-        {categoryArray[4] ? (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Culture & Entertainment"
-            theme="orange"
-          >
-            Culture & Entertainment hide
-          </button>
-        ) : (
-          <button
-            onClick={buttonToggleArrayElement}
-            name="Culture & Entertainment"
-            theme="orange"
-          >
-            Culture & Entertainment show
-          </button>
-        )}
-      </div>
+      <>
+        <div>
+          {categoryArray[0] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Currency"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontWeight: "bold",
+                fontSize: "8px",
+                color: '#F2789F'
+              }}
+            >
+              Currency
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Currency"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Currency
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[1] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Smart Contract Platform"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: '#F999B7'
+              }}
+            >
+              Smart Contract Platform
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Smart Contract Platform"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Smart Contract Platform
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[2] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Computing"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: '#F9C5D5'
+              }}
+            >
+              Computing
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Computing"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Computing
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[3] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              size="small"
+              variant="contained"
+              name="DeFi"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: '#794C74'
+              }}
+            >
+              DeFi
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="DeFi"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              DeFi
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[4] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Culture & Entertainment"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: "#867AE9"
+              }}
+            >
+              Culture & Entertainment
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Culture & Entertainment"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Culture & Entertainment
+            </Button>
+          )}
+        </div>
+      </>
     );
   };
 
@@ -298,8 +401,7 @@ function Marketpage() {
               </ToggleButton>
             </ToggleButtonGroup>
           </ThemeProvider>
-          <div>
-            {/* <div>{categoryComponent[categoryIndex]}</div> */}
+          <div style={{ display: "flex", flexDirection: "row" }}>
             <div>
               {categoryIndex == 0 && <CategoryLineGraph_1d {...props} />}
               {categoryIndex == 1 && <CategoryLineGraph_1mo {...props} />}
@@ -308,8 +410,16 @@ function Marketpage() {
               {categoryIndex == 4 && <CategoryLineGraph_1mo {...props} />}
               {categoryIndex == 5 && <CategoryLineGraph_1y {...props} />}
             </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <CategoryButton />
+            </div>
           </div>
-          <CategoryButton />
         </Grid>
 
         <Grid item xs={12}>
