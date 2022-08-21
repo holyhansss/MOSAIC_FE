@@ -21,10 +21,8 @@ function CategoryLineGraph_1mo(props) {
 
   console.log("dateRange should not be null", dateRange);
   console.log("categoryArray should not be null", categoryArray);
-
-  let dates = [];
-
-  const [datesAndPrices, setDatesAndPrices] = useState([]);
+  const [datesAndPrices, setDatesAndPrices] = useState([])
+  const [minMax, setMinMax] = useState([])
 
   useEffect(() => {
     console.log("1mmmmmmonth");
@@ -32,13 +30,15 @@ function CategoryLineGraph_1mo(props) {
   }, []);
 
   const getCategoryData_1mo = async () => {
-    const response = await axios.get(
-      "http://localhost:5000/market/category/1mo",
-      { params: { dateRange: dateRange, categoryArray: categoryArray } }
-    );
-    console.log(response.data);
-    setDatesAndPrices(response.data);
-  };
+    const response = await axios.get('http://localhost:5000/market/category/1mo',
+    {params: {dateRange: dateRange, categoryArray: categoryArray}}
+    )
+    const thisResponse = response.data;
+    console.log(thisResponse);
+    setDatesAndPrices(thisResponse[0])
+    console.log("this response 1mo min max: ", thisResponse[1]);
+    setMinMax([parseInt(thisResponse[1][0])-10, parseInt(thisResponse[1][1])+10])
+  }
 
   return (
     <div>
@@ -52,7 +52,7 @@ function CategoryLineGraph_1mo(props) {
           >
             <CartesianGrid vertical={false} strokeDasharray="3 3"/>
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={("dataMin-10", "dataMax+5")} />
+            <YAxis type="number" domain={minMax} />
             <Tooltip />
             {/* <Legend /> */}
             <Line

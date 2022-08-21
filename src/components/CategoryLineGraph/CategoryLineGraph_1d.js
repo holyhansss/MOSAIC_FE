@@ -12,8 +12,6 @@ import {
 } from "recharts";
 import { type } from "@testing-library/user-event/dist/type";
 
-// import { type } from '@testing-library/user-event/dist/type/index.js';
-// import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
 
 function CategoryLineGraph_1d(props) {
   const dateRange = props.dateRange;
@@ -22,9 +20,8 @@ function CategoryLineGraph_1d(props) {
   console.log("dateRange should not be null", dateRange);
   console.log("categoryArray should not be null", categoryArray);
 
-  let dates = [];
-
   const [datesAndPrices, setDatesAndPrices] = useState([]);
+  const [minMax, setMinMax] = useState([])
 
   useEffect(() => {
     console.log("1ddddddat");
@@ -36,8 +33,15 @@ function CategoryLineGraph_1d(props) {
       "http://localhost:5000/market/category/1d",
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
-    console.log(response.data);
-    setDatesAndPrices(response.data);
+    const thisResponse = response.data;
+    console.log("day thisResponse: ", thisResponse);
+    console.log("day thisResponse[1]: ", thisResponse[1]);
+    if (thisResponse==null || thisResponse[1][0]==undefined){
+      setMinMax([0, 100])
+    } else {
+      console.log("day range: ", thisResponse[1][0], thisResponse[1][1]);
+      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])  
+    }
   };
 
   return (
@@ -52,7 +56,7 @@ function CategoryLineGraph_1d(props) {
           >
             <CartesianGrid vertical={false} strokeDasharray="3 3"/>
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={["dataMin-10", "dataMax+5"]} />
+            <YAxis type="number" domain={minMax} />
             <Tooltip />
             <Line
               type="monotone"
