@@ -132,7 +132,7 @@ function MainLineGraph() {
     for (let i = 0; i < data1.length; i++) {
       let CMC;
       if (data2[i] == null) {
-        CMC =  data2[i+1].CMC;
+        CMC =  data2[i-1].CMC;
       } else {
         if (data2[i].CMC == null);
         CMC = data2[i].CMC;
