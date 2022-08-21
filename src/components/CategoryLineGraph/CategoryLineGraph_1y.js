@@ -87,7 +87,8 @@ function CategoryLineGraph_1y( props ) {
             </LineChart>
            </div>
          } 
-    <div>
+    </div>
   );
+}
 
 export default CategoryLineGraph_1y;
