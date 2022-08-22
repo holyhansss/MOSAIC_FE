@@ -23,7 +23,7 @@ function MainLineGraph() {
 
   async function getSNP() {
     let returnValue;
-    await axios.get("/v8/finance/chart/%5EGSPC").then((res: any) => {
+    await axios.get("/v8/finance/chart/%5EGSPC").then((res) => {
       const IndexData = res.data.chart.result[0].indicators.quote[0].close.map(
         (data, index) =>
           data && {
@@ -68,7 +68,7 @@ function MainLineGraph() {
 
   async function getCMC() {
     let returnValue;
-    await axios.get("/v8/finance/chart/%5ECMC200").then((res: any) => {
+    await axios.get("/v8/finance/chart/%5ECMC200").then((res) => {
       const IndexData2 = res.data.chart.result[0].indicators.quote[0].close.map(
         (data, index) =>
           data && {
