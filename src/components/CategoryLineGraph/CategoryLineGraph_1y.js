@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import moment from 'moment';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import moment from "moment";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import { type } from '@testing-library/user-event/dist/type';
-
-
 
 function CategoryLineGraph_1y( props ) {  
   const dateRange= props.dateRange;
@@ -36,38 +34,61 @@ function CategoryLineGraph_1y( props ) {
     setMinMax([parseInt(thisResponse[1][0])-20, parseInt(thisResponse[1][1])+20])
   }
 
-  
-    return(
-        <div style={{ width: "300px;", height: "200px;" }}>
-          <div><h>Category data {dateRange} ver </h></div>
+  return (
+    <div style={{ width: "300px;", height: "200px;" }}>
         { 
            datesAndPrices &&
            <div> 
-           {/* <ResponsiveContainer width="100%" height="100%"> */}
             <LineChart
-              width={900}
+              width={800}
               height={300}
               data={datesAndPrices}
-              margin={{top: 5, right: 20, left: 20, bottom: 5}}
+              margin={{ top: 25, left: 20, right: 40 }}
             >
-              <CartesianGrid vertical={false} />
+              <CartesianGrid vertical={false} strokeDasharray="3 3" />
               <XAxis dataKey="time" />
               <YAxis type="number" domain={minMax} />
-              {/* <YAxis /> */}
-
               <Tooltip />
-              <Line type="monotone" dataKey="Currency" stroke="green" dot={false}/>
-              <Line type="monotone" dataKey="Smart Contract Platform" stroke="grey" dot={false}/>
-              <Line type="monotone" dataKey="Computing"  stroke="skyblue" dot={false}/>
-              <Line type="monotone" dataKey="DeFi"  stroke="pink" dot={false}/>
-              <Line type="monotone" dataKey="Culture & Entertainment" stroke="orange" dot={false}/>
+              <Line
+              type="monotone"
+              dataKey="Currency"
+              stroke="#F2789F"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Smart Contract Platform"
+              stroke="#F999B7"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Computing"
+              stroke="#F9C5D5"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="DeFi"
+              stroke="#794C74"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Culture & Entertainment"
+              stroke="#867AE9"
+              dot={false}
+              isAnimationActive={false}
+            />
             </LineChart>
-          {/* </ResponsiveContainer> */}
            </div>
          } 
-      </div>
-      
-      );
+    </div>
+  );
 }
 
 export default CategoryLineGraph_1y;
