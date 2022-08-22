@@ -9,58 +9,54 @@ import { type } from '@testing-library/user-event/dist/type';
 // import { type } from '@testing-library/user-event/dist/type/index.js';
 // import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
 
-function CategoryLineGraph_1d(props) {
-
-  const dateRange= props.dateRange;
-  const categoryArray= props.categoryArray;
-
-  console.log("dateRange should not be null", dateRange);
-  console.log("categoryArray should not be null", categoryArray);
-
-
-  let dates = []
-  
+function MainCategoryLineGraph() {  
   const [datesAndPrices, setDatesAndPrices] = useState([])
-    
+  const [minMax, setMinMax] = useState([])
 
   useEffect(() => {
-    console.log("1ddddddat");
-    getCategoryData_1d();
+    const dateRange= "1mo";
+    const categoryArray= [true, true, true, true, true]
+    console.log("dateRange should not be null", dateRange);
+    console.log("categoryArray should not be null", categoryArray);
+    console.log("1mmmmmmonth");
+    getCategoryData_1mo(dateRange, categoryArray);
   }, []);
   
-  const getCategoryData_1d = async () => {
-    const response = await axios.get('http://localhost:5000/market/category/1d',
+  const getCategoryData_1mo = async (dateRange, categoryArray) => {
+
+    const response = await axios.get('http://localhost:5000/market/category/1mo',
     {params: {dateRange: dateRange, categoryArray: categoryArray}}
     )
-    console.log(response.data);
-    setDatesAndPrices(response.data)
+    const thisResponse = response.data;
+    console.log(thisResponse);
+    setDatesAndPrices(thisResponse[0])
+    console.log("this response 1mo min max: ", thisResponse[1]);
+    setMinMax([parseInt(thisResponse[1][0])-10, parseInt(thisResponse[1][1])+10])
   }
 
 
     return(
-        <div>
-          <div><h>Category data {dateRange} ver </h></div>
-    
+        <div>    
         { 
           datesAndPrices &&
           <div>
           <LineChart
-            width={900}
-            height={300}
+            width={300}
+            height={180}
             data={datesAndPrices}
-            margin={{top: 5, right: 20, left: 20, bottom: 5}}
+            margin={{ top: 3, right: 1, left: 1, bottom: 1}}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} horizontal={false}/>
             <XAxis dataKey="time" />
-            <YAxis type="number" domain={[0, 400]} />
+            <YAxis domain={minMax} wrapperStyle={{ width: 100, backgroundColor: '#ccc' }}/>
             <Tooltip />
-            {/* <Legend /> */}
             <Line type="monotone" dataKey="Currency" stroke="green" dot={false}/>
             <Line type="monotone" dataKey="Smart Contract Platform" stroke="grey" dot={false}/>
             <Line type="monotone" dataKey="Computing"  stroke="skyblue" dot={false}/>
             <Line type="monotone" dataKey="DeFi"  stroke="pink" dot={false}/>
             <Line type="monotone" dataKey="Culture & Entertainment" stroke="orange" dot={false}/>
-            {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
+            <Legend wrapperStyle={{fontSize: "9px"}}/>
+            
           </LineChart>
         </div>
           
@@ -71,4 +67,4 @@ function CategoryLineGraph_1d(props) {
       );
 }
 
-export default CategoryLineGraph_1d;
+export default MainCategoryLineGraph;

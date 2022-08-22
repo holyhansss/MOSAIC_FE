@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
+//components
 import {
-  Box,
   Container,
   Grid,
   Typography,
   ToggleButtonGroup,
   ToggleButton,
-  Button
+  Button,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
-
 // Components
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
 import Index1mo from "../components/LineGraph/LineGraph1mo";
 import Index1y from "../components/LineGraph/LineGraph1y";
+import CategoryLineGraph_1y from "../components/CategoryLineGraph/CategoryLineGraph_1y.js";
+import CategoryLineGraph_1mo from "../components/CategoryLineGraph/CategoryLineGraph_1mo.js";
+import CategoryLineGraph_1d from "../components/CategoryLineGraph/CategoryLineGraph_1d.js";
 
-import CategoryLineGraph_1y from "../components/categorylinegraph/CategoryLineGraph_1y.js"
-import CategoryLineGraph_1mo from "../components/categorylinegraph/CategoryLineGraph_1mo.js"
-import CategoryLineGraph_1d from "../components/categorylinegraph/CategoryLineGraph_1d.js"
-import axios from 'axios';
-
+import axios from "axios";
 
 // 시장동향
 // S&P 500 지수와 CMC 200 그래프(line) 불러옴
@@ -35,13 +32,13 @@ const theme = createTheme({
   components: {
     MuiToggleButton: {
       selected: {
-        disable: 'true'
+        disable: "true",
       },
       styleOverrides: {
         root: {
           "&.Mui-selected": {
             color: "#fff",
-            fontWeight: 'bold',
+            fontWeight: "bold",
             backgroundColor: "rgba(0,0,0,0)",
           },
         },
@@ -50,164 +47,301 @@ const theme = createTheme({
   },
 });
 
-// const StyleButton = styled(ToggleButton)`
-//   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-// `;
-
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
 `;
 
+const StyleButton = styled(Button)`
+  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
+`;
+
 function Marketpage() {
-    const [range, setRange] = useState("1d");
+  const [snpRange, setSnpRange] = useState("1d");
+  const [snpIndex, setSnpIndex] = useState(0);
 
-    const [content, setContent] = useState(0);
+  const [categoryRange, setCategoryRange] = useState("1d");
+  const [categoryIndex, setCategoryIndex] = useState(0);
+  const [categoryArray, setCategoryArray] = useState([
+    true,
+    true,
+    true,
+    true,
+    true,
+  ]);
+  const [props, setProps] = useState({
+    dateRange: "1d",
+    categoryArray: categoryArray,
+  });
 
-    const [dateRange, setDateRange] = useState("1y");
-    const [categoryIndex, setCategoryIndex] = useState(null);
-    const [categoryArray, setCategoryArray] = useState([true,true,true,true,true]);
-    const [props, setProps] = useState({})
-  
-    const buttonValueSetting = (e, newValue) => {
-      setRange(newValue);
-      if (newValue === "1d") {
-      setContent(0);
+  const snpButtonChange = (e, newValue) => {
+    setSnpRange(newValue);
+    if (newValue === "1d") {
+      setSnpIndex(0);
     } else if (newValue === "1mo") {
-      setContent(1);
+      setSnpIndex(1);
     } else if (newValue === "1y") {
-      setContent(2);
+      setSnpIndex(2);
+    }
+  };
+  const categoryButtonChange = (e, newValue) => {
+    setCategoryRange(newValue);
+    if (newValue === "1d") {
+      setProps({
+        dateRange: newValue,
+        categoryArray: categoryArray,
+      });
+      setCategoryIndex(0);
+    } else if (newValue === "1mo") {
+      setProps({
+        dateRange: newValue,
+        categoryArray: categoryArray,
+      });
+      setCategoryIndex(1);
+    } else if (newValue === "1y") {
+      setProps({
+        dateRange: newValue,
+        categoryArray: categoryArray,
+      });
+      setCategoryIndex(2);
     }
   };
 
-    
-  const buttonCategorySettings = e => {
-    e.preventDefault();
-    if (e.target.name === "1y") { 
-      console.log("1y clicked!"); 
-      setDateRange("1y")
-      setProps( {
-        dateRange: dateRange,
-        categoryArray: categoryArray
-      })
-      setCategoryIndex(0)
-
-    } else if (e.target.name === "1mo") {
-      console.log("1mo clicked!");
-      setDateRange("1mo")
-      setProps( {
-        dateRange: dateRange,
-        categoryArray: categoryArray
-      })
-      setCategoryIndex(1)
-
-    } else if (e.target.name === "1d") {
-      console.log("1d clicked!");
-      setDateRange("1d")
-      setProps( {
-        dateRange: dateRange,
-        categoryArray: categoryArray
-      })
-      setCategoryIndex(2)
-    }
-  }
-
   const CategoryButton = () => {
-    const buttonToggleArrayElement = e => {
+    const buttonToggleArrayElement = (e) => {
       e.preventDefault();
       const arrayToReplace = [...categoryArray];
-      if (e.target.name === "Currency" ){
+      if (e.target.name === "Currency") {
         arrayToReplace[0] = !arrayToReplace[0];
-      }else if (e.target.name === "Smart Contract Platform" ){
+      } else if (e.target.name === "Smart Contract Platform") {
         arrayToReplace[1] = !arrayToReplace[1];
-      }else if (e.target.name === "Computing" ){
+      } else if (e.target.name === "Computing") {
         arrayToReplace[2] = !arrayToReplace[2];
-      }else if (e.target.name === "DeFi" ){
+      } else if (e.target.name === "DeFi") {
         arrayToReplace[3] = !arrayToReplace[3];
-      }else if (e.target.name === "Culture & Entertainment" ){
+      } else if (e.target.name === "Culture & Entertainment") {
         arrayToReplace[4] = !arrayToReplace[4];
       } else {
-        console.log("wrong category name '" + e.target.name + "' at buttonAddCategoryArray");
+        console.log(
+          "wrong category name '" +
+            e.target.name +
+            "' at buttonAddCategoryArray"
+        );
       }
       setCategoryArray(arrayToReplace);
-      if (categoryIndex === 0)
-        setCategoryIndex(3);
+      if (categoryIndex === 0) setCategoryIndex(3);
       else if (categoryIndex === 3) {
         setCategoryIndex(0);
-      } else if (categoryIndex === 1)
-        setCategoryIndex(4);
-      else if (categoryIndex === 4){
+      } else if (categoryIndex === 1) setCategoryIndex(4);
+      else if (categoryIndex === 4) {
         setCategoryIndex(1);
-      } else if (categoryIndex === 2)
-        setCategoryIndex(5);
-      else if (categoryIndex === 5){
+      } else if (categoryIndex === 2) setCategoryIndex(5);
+      else if (categoryIndex === 5) {
         setCategoryIndex(2);
       } else {
         console.error("Wrong categoryIndex; out of bounds");
       }
-  
 
-      // console.log("Category Index:", categoryIndex);  
-      setProps( {
+      // console.log("Category Index:", categoryIndex);
+      setProps({
         ...props,
-        dateRange: dateRange,
-        categoryArray: arrayToReplace
-      })
+        dateRange: categoryRange,
+        categoryArray: arrayToReplace,
+      });
 
       console.log("props categoryIndex checkwise:", categoryIndex);
       console.log("props dateRange checkwise:", props.dateRange);
       console.log("props categoryArray checkwise:", props.categoryArray);
-    }
-  
-  return (
-    <div>
-    {
-      categoryArray[0] ? (
-        <button onClick={buttonToggleArrayElement} name = "Currency" color="green"> Currency hide </button>
-        ):(
-          <button onClick={buttonToggleArrayElement} name= "Currency" color="green">Currency show </button>
-        )
-      } {
-      categoryArray[1] ? (
-        <button onClick={buttonToggleArrayElement} name = "Smart Contract Platform" theme="grey">Smart Contract Platform hide </button>
-        ):(
-          <button onClick={buttonToggleArrayElement} name= "Smart Contract Platform" theme="grey">Smart Contract Platform show </button>
-        )
-    }{
-      categoryArray[2] ? (
-        <button onClick={buttonToggleArrayElement} name = "Computing" theme="skyblue">Computing hide </button>
-        ):(
-          <button onClick={buttonToggleArrayElement} name= "Computing" theme="skyblue">Computing show </button>
-        )
-    }{
-      categoryArray[3] ? (
-        <button onClick={buttonToggleArrayElement} name = "DeFi" theme="pink">DeFi hide </button>
-        ):(
-          <button onClick={buttonToggleArrayElement} name= "DeFi" theme="pink">DeFi show </button>
-        )
-    }{
-      categoryArray[4] ? (
-        <button onClick={buttonToggleArrayElement} name = "Culture & Entertainment" theme="orange">Culture & Entertainment hide </button>
-        ):(
-          <button onClick={buttonToggleArrayElement} name= "Culture & Entertainment" theme="orange">Culture & Entertainment show </button>
-        )
-    }
-    </div> 
-  )
-}
-  
-  const selectComponent = [
-      <Index1d />,
-      <Index1mo />,
-      <Index1y />,
-  ];
+    };
 
-  const categoryComponent = [
-    <CategoryLineGraph_1y {...props}/>,
-    <CategoryLineGraph_1mo {...props}/>,
-    <CategoryLineGraph_1d {...props}/>,
-  ]
-  
+    return (
+      <>
+        <div>
+          {categoryArray[0] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Currency"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontWeight: "bold",
+                fontSize: "8px",
+                color: '#F2789F'
+              }}
+            >
+              Currency
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Currency"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Currency
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[1] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Smart Contract Platform"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: '#F999B7'
+              }}
+            >
+              Smart Contract Platform
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Smart Contract Platform"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Smart Contract Platform
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[2] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Computing"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: '#F9C5D5'
+              }}
+            >
+              Computing
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Computing"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Computing
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[3] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              size="small"
+              variant="contained"
+              name="DeFi"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: '#794C74'
+              }}
+            >
+              DeFi
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="DeFi"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              DeFi
+            </Button>
+          )}
+        </div>
+        <div>
+          {categoryArray[4] ? (
+            <StyleButton
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Culture & Entertainment"
+              sx={{
+                width: "15.5em",
+                fontWeight: "bold",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                color: "#867AE9"
+              }}
+            >
+              Culture & Entertainment
+            </StyleButton>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Culture & Entertainment"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+              }}
+            >
+              Culture & Entertainment
+            </Button>
+          )}
+        </div>
+      </>
+    );
+  };
+
+  const selectComponent = [<Index1d />, <Index1mo />, <Index1y />];
+
+  // const categoryComponent = [
+  //   <CategoryLineGraph_1d {...props} />,
+  //   <CategoryLineGraph_1mo {...props} />,
+  //   <CategoryLineGraph_1y {...props} />,
+  // ];
 
   return (
     <MainContainer maxWidth="md">
@@ -219,15 +353,41 @@ function Marketpage() {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" component="div">
-            S&P 500 vs CMC 200 (22:30~05:00)
+            S&P 500 vs CMC 200
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
             <ToggleButtonGroup
-              size="small"
-              value={range}
-              onChange={buttonValueSetting}
+              size="large"
+              value={snpRange}
+              onChange={snpButtonChange}
+              exclusive
+              color="primary"
+            >
+              <ToggleButton sx={{ color: "gray" }} value="1d">
+                1D
+              </ToggleButton>
+              <ToggleButton sx={{ color: "gray" }} value="1mo">
+                1M
+              </ToggleButton>
+              <ToggleButton sx={{ color: "gray" }} value="1y">
+                1Y
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </ThemeProvider>
+          <p />
+          {snpIndex !== null && <div>{selectComponent[snpIndex]}</div>}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h5" gutterBottom component="div">
+            코인 카테고리
+          </Typography>
+          <ThemeProvider theme={theme}>
+            <ToggleButtonGroup
+              size="large"
+              value={categoryRange}
+              onChange={categoryButtonChange}
               exclusive
             >
               <ToggleButton sx={{ color: "gray" }} value="1d">
@@ -241,34 +401,27 @@ function Marketpage() {
               </ToggleButton>
             </ToggleButtonGroup>
           </ThemeProvider>
-          {content !== null && <div>{selectComponent[content]}</div>}
-        </Grid>
-
-        <h5>Coin categories</h5>
-        <Grid item xs={12}>
-          <button onClick={buttonCategorySettings} name= "1d">
-            1d
-          </button>
-          <button onClick={buttonCategorySettings} name= "1mo">
-            1mo
-          </button>
-          <button onClick={buttonCategorySettings} name= "1y">
-            1y
-          </button>
-          {/* <div>{categoryComponent[categoryIndex]}</div> */}
-          <div>
-
-            {categoryIndex == 0 && <CategoryLineGraph_1y {...props}/>}
-            {categoryIndex == 1 && <CategoryLineGraph_1mo {...props}/>}
-            {categoryIndex == 2 && <CategoryLineGraph_1d {...props}/>}
-            {categoryIndex == 3 && <CategoryLineGraph_1y {...props}/>}
-            {categoryIndex == 4 && <CategoryLineGraph_1mo {...props}/>}
-            {categoryIndex == 5 && <CategoryLineGraph_1d {...props}/>}
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div>
+              {categoryIndex == 0 && <CategoryLineGraph_1d {...props} />}
+              {categoryIndex == 1 && <CategoryLineGraph_1mo {...props} />}
+              {categoryIndex == 2 && <CategoryLineGraph_1y {...props} />}
+              {categoryIndex == 3 && <CategoryLineGraph_1d {...props} />}
+              {categoryIndex == 4 && <CategoryLineGraph_1mo {...props} />}
+              {categoryIndex == 5 && <CategoryLineGraph_1y {...props} />}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <CategoryButton />
+            </div>
           </div>
-
-          <CategoryButton/>
         </Grid>
-        
+
         <Grid item xs={12}>
           <Typography variant="h5" component="div">
             공포 탐욕 지수
