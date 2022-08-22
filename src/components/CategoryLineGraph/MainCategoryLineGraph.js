@@ -18,7 +18,6 @@ function MainCategoryLineGraph() {
     const categoryArray= [true, true, true, true, true]
     console.log("dateRange should not be null", dateRange);
     console.log("categoryArray should not be null", categoryArray);
-  
     console.log("1mmmmmmonth");
     getCategoryData_1mo(dateRange, categoryArray);
   }, []);
