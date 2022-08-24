@@ -133,9 +133,8 @@ function Index1d() {
     // console.log("In NewIndex!");
     // console.log("data1:", data1);
     // console.log("data2:", data2);
-    console.log("max:", maxData);
 
-    for (let i = 0; i < data1.length; i++) {
+    for (let i = 0; i < data2.length; i++) {
       let CMC;
       if (data2[i] == null) {
         CMC = data2[i-1].CMC;
