@@ -249,7 +249,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
             id="input-with-sx"
             label="코멘트를 작성해 주세요"
             variant="standard"
-            sx={{ color: "action.active", width: "80%" }}
+            sx={{ color: "action.active", width: "80%", "& label": {color: grey[600]} }}
             onChange={onHandleChange}
             inputProps={{ style: { color: "white" } }}
           />
