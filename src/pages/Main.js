@@ -5,9 +5,10 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import styled, {keyframes} from "styled-components";
 import moment from "moment";
+import Marquee from "react-fast-marquee";
 
 //components
 import {
@@ -44,22 +45,6 @@ const MainContainer = styled(Container)`
 const StyleBox = styled(Box)`
   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
   border-radius: 10px;
-`;
-
-const move = keyframes`
-  0% {
-    margin-left: 100%;
-    width: 300%
-  }
-
-  100% {
-    margin-left: 0%;
-    width: 100%;
-  }
-`;
-
-const SildeBox = styled(Box)`
-  animation: ${move} 10s linear infinite;
 `;
 
 const scale = keyframes`
@@ -106,11 +91,11 @@ const MainPage = ({result}) => {
                 maxHeight: "10px",
                 width: 4/5
               }}>
-                <SildeBox>
-                  <Typography variant="caption" >
+              <Marquee gradientColor speed={40}>
+                <Typography variant="caption" >
                     매주 새로운 모자익 리포트를 확인하세요!
                   </Typography>
-                </SildeBox>
+              </Marquee>
             </Box>
           </Box>
         </Grid>

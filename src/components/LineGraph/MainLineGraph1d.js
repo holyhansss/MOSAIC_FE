@@ -126,15 +126,14 @@ function MainLineGraph() {
     const data2 = await getCMC();
     // console.log("In NewIndex!");
     // console.log("data1:", data1);
-    // console.log("data2:", data2);
-    console.log("max:", maxData);
+    console.log("data2:", data2);
 
-    for (let i = 0; i < data1.length; i++) {
+    for (let i = 0; i < data2.length; i++) {
       let CMC;
       if (data2[i] == null) {
-        CMC =  data2[i-1].CMC;
+        CMC = data2[i-1].CMC;
       } else {
-        if (data2[i].CMC == null);
+        if (data2[i].CMC == null) ;
         CMC = data2[i].CMC;
       }
       resTemp.push({
@@ -143,7 +142,7 @@ function MainLineGraph() {
         CMC: Math.ceil(CMC * 100) / 100,
       });
     }
-
+    console.log("res: ", res);
     setRes(resTemp);
     return res;
   };
