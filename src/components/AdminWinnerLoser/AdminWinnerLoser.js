@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 // react bootstrap
 import {
   Dropdown,
@@ -6,14 +6,13 @@ import {
   Button,
   Form,
   Container,
-  Row,
+  Spinner,
 } from "react-bootstrap";
 import {
   getFirestore,
   collection,
   query,
   getDocs,
-  addDoc,
   setDoc,
   doc,
 } from "firebase/firestore";
@@ -25,11 +24,7 @@ import { useNavigate } from "react-router-dom";
 import AdminTopicUploadForm from "../AdmimBox/AdmimBox";
 
 // constants
-import {
-  FIREBASE_WEEKLY_REPORT_COLLECTION,
-  FIREBASE_REPORT_SUBCOLLECTION,
-  REPORT_TITLES,
-} from "../../constants/constants";
+import { FIREBASE_WEEKLY_REPORT_COLLECTION } from "../../constants/constants";
 
 const AdminWinnerLoser = () => {
   const db = getFirestore();
@@ -38,6 +33,7 @@ const AdminWinnerLoser = () => {
   const navigate = useNavigate();
 
   const [docs, setDocs] = useState([]);
+  const [docsUID, setDocsUID] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [selectedDocUid, setSelectedDocUid] = useState();
   const [img1, setImg1] = useState();
@@ -48,15 +44,15 @@ const AdminWinnerLoser = () => {
   const [desc2, setDesc2] = useState("");
 
   const [lock, setLock] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getData = async () => {
       const q = query(collection(db, FIREBASE_WEEKLY_REPORT_COLLECTION));
 
       const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
+      await querySnapshot.forEach((doc) => {
         setDocs((current) => [...current, doc.data()]);
-        setSelectedDocUid(doc.id);
+        setDocsUID((current) => [...current, doc.id]);
       });
     };
     getData();
@@ -71,8 +67,10 @@ const AdminWinnerLoser = () => {
     }
   }, [img1, img2]);
 
-  const onChangeDropDown = (selectedDoc) => {
+  const onChangeDropDown = (selectedDoc, uid) => {
+    console.log(uid);
     setSelectedDoc(selectedDoc);
+    setSelectedDocUid(uid);
   };
   const Unix_timestampConv = () => {
     return Math.floor(new Date().getTime() / 1000);
@@ -84,8 +82,6 @@ const AdminWinnerLoser = () => {
 
     if (lock === true) return;
     else setLock(true);
-
-    alert("1-2초 가량 기다려 주세요!");
 
     const currentTime = Unix_timestampConv();
     let image1StorageRef = ref(
@@ -103,7 +99,6 @@ const AdminWinnerLoser = () => {
 
     console.log(image1StorageURL);
     console.log(image2StorageURL);
-    // await doc(db, "WinnerLoser", "winnerLoser");
 
     console.log(docRef);
     console.log(subColRef);
@@ -144,7 +139,7 @@ const AdminWinnerLoser = () => {
                 key={index}
                 eventKey={doc}
                 onClick={() => {
-                  onChangeDropDown(doc);
+                  onChangeDropDown(doc, docsUID[index]);
                 }}
               >
                 {doc.title}
@@ -228,7 +223,21 @@ const AdminWinnerLoser = () => {
         />
       </Container>
       <Container>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button
+          onClick={() => {
+            handleSubmit();
+            setLoading(true);
+          }}
+        >
+          Submit
+        </Button>
+        {loading === true ? (
+          <Spinner className="ms-2" animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        ) : (
+          <div></div>
+        )}
       </Container>
     </div>
   );
