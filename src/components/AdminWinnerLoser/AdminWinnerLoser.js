@@ -111,7 +111,7 @@ const AdminWinnerLoser = () => {
       ),
       {
         img1: image1StorageURL,
-        img2: image1StorageURL,
+        img2: image2StorageURL,
         desc1: desc1,
         desc2: desc2,
       }
