@@ -43,13 +43,13 @@ function Index1mo() {
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" />
             <XAxis dataKey="Time" />
             <YAxis domain={[50,150]} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="SNP" stroke="#8884d8" dot={false} />
-            <Line type="monotone" dataKey="CMC" stroke="#82ca9d" dot={false} />
+            <Line type="monotone" isAnimationActive={false} dataKey="SNP" stroke="#8884d8" dot={false} />
+            <Line type="monotone" isAnimationActive={false} dataKey="CMC" stroke="#82ca9d" dot={false} />
           </LineChart>
         </div>
       )}

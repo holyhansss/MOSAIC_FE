@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import styled from "styled-components";
+import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
+import { auth, dbService } from "./firebase";
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
@@ -10,9 +12,7 @@ import ReportList from "./pages/ReportList";
 import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header/Header";
-import { auth, dbService } from "./firebase";
-import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
-import styled from "styled-components";
+import GlobalStyle from "./style/global";
 
 const Container = styled.div`
   @media screen {
@@ -70,7 +70,7 @@ function App() {
     });
   }, []);
 
-  //리포트 리스트 db 불러오기 
+  //리포트 리스트 db 불러오기
   const [reports, setReports] = useState([]);
 
   const getReports = async () => {
@@ -91,32 +91,35 @@ function App() {
     getReports();
   }, []);
 
-
-
-
   return (
-    <Container>
-      <Header user={userObj} admin={admin} />
-      <Routes>
-        <Route path="/" element={<MainPage result={result} />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/join" element={<Join />}></Route>
-        <Route path="admin" element={<Admin />}></Route>
-        <Route path="/market" element={<MarketPage />}></Route>
-        <Route path="/reportList" element={<ReportList result={result} reports={reports} />}></Route>
-        <Route
-          path="/reportDetail/:id/:title/:writer/:date"
-          element={<ReportDetail user={userObj} />}
-        ></Route>
-        <Route
-          path="/profile"
-          element={<MyPage user={userObj} refreshUser={refreshUser} />}
-        ></Route>
-        {/* <Route path='/detailpages/*' > 
+    <>
+      <GlobalStyle />
+      <Container>
+        <Header user={userObj} admin={admin} />
+        <Routes>
+          <Route path="/" element={<MainPage result={result} />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/join" element={<Join />}></Route>
+          <Route path="admin" element={<Admin />}></Route>
+          <Route path="/market" element={<MarketPage />}></Route>
+          <Route
+            path="/reportList"
+            element={<ReportList result={result} reports={reports} />}
+          ></Route>
+          <Route
+            path="/reportDetail/:id/:title/:writer/:date"
+            element={<ReportDetail user={userObj} />}
+          ></Route>
+          <Route
+            path="/profile"
+            element={<MyPage user={userObj} refreshUser={refreshUser} />}
+          ></Route>
+          {/* <Route path='/detailpages/*' > 
           <Route path=":id" element={<DetailPage />} />
         </Route>  */}
-      </Routes>
-    </Container>
+        </Routes>
+      </Container>
+    </>
   );
 }
 
