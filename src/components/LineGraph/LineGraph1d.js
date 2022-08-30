@@ -164,8 +164,8 @@ function Index1d() {
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
             <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-            <XAxis dataKey="time"  />
-            <YAxis  domain={[96, 102]}  />
+            <XAxis dataKey="time" />
+            <YAxis domain={[Math.floor(minData), Math.ceil(maxData)]}  />
             <Tooltip />
             <Legend />
             <Line type="monotone" isAnimationActive={false} dataKey="SnP" stroke="#8884d8" dot={false} />
