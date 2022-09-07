@@ -61,7 +61,7 @@ function ReportContents({ user, id, title, writer, date }) {
   return (
     <div>
       <p />
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Reportcard
