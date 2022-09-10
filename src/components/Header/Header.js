@@ -85,8 +85,8 @@ function Header({ user, admin }) {
         </NavSideContainer>
         <NavCenterContainer>
           <NavMenuContainer>
-            <StyledLink to="/">
-              <NavMenu>홈</NavMenu>
+            <StyledLink to="/promising">
+              <NavMenu>유망 코인</NavMenu>
             </StyledLink>
           </NavMenuContainer>
           <NavMenuContainer>

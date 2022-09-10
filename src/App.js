@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Admin from "./pages/Admin";
 import MarketPage from "./pages/Market";
+import PromisingCoins from "./pages/PromisingCoins";
 import ReportList from "./pages/ReportList";
 import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
@@ -102,6 +103,7 @@ function App() {
           <Route path="/join" element={<Join />}></Route>
           <Route path="admin" element={<Admin />}></Route>
           <Route path="/market" element={<MarketPage />}></Route>
+          <Route path="/promising" element={<PromisingCoins />}></Route>
           <Route
             path="/reportList"
             element={<ReportList result={result} reports={reports} />}
