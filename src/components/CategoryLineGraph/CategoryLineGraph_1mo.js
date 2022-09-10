@@ -22,8 +22,8 @@ function CategoryLineGraph_1mo(props) {
 
   console.log("dateRange should not be null", dateRange);
   console.log("categoryArray should not be null", categoryArray);
-  const [datesAndPrices, setDatesAndPrices] = useState([])
-  const [minMax, setMinMax] = useState([])
+  const [datesAndPrices, setDatesAndPrices] = useState([]);
+  const [minMax, setMinMax] = useState([]);
 
   useEffect(() => {
     console.log("1mmmmmmonth");
@@ -31,15 +31,19 @@ function CategoryLineGraph_1mo(props) {
   }, []);
 
   const getCategoryData_1mo = async () => {
-    const response = await axios.get('http://localhost:5000/market/category/1mo',
-    {params: {dateRange: dateRange, categoryArray: categoryArray}}
-    )
+    const response = await axios.get(
+      "http://localhost:5000/market/category/1mo",
+      { params: { dateRange: dateRange, categoryArray: categoryArray } }
+    );
     const thisResponse = response.data;
     console.log(thisResponse);
-    setDatesAndPrices(thisResponse[0])
+    setDatesAndPrices(thisResponse[0]);
     console.log("this response 1mo min max: ", thisResponse[1]);
-    setMinMax([parseInt(thisResponse[1][0])-10, parseInt(thisResponse[1][1])+10])
-  }
+    setMinMax([
+      parseInt(thisResponse[1][0]) - 10,
+      parseInt(thisResponse[1][1]) + 10,
+    ]);
+  };
 
   return (
     <div>
@@ -51,8 +55,21 @@ function CategoryLineGraph_1mo(props) {
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}
           >
-            <XAxis dataKey="time" minTickGap={60} tickSize={0} tickMargin={10} tick={{fontSize: 12}} />
-            <YAxis type="number" domain={minMax} tickSize={0} tickMargin={10} tick={{fontSize: 12}} />
+            <CartesianGrid opacity={0.1} />
+            <XAxis
+              dataKey="time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              type="number"
+              domain={minMax}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Line
               type="monotone"

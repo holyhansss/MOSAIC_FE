@@ -21,7 +21,7 @@ function CategoryLineGraph_1d(props) {
   console.log("categoryArray should not be null", categoryArray);
 
   const [datesAndPrices, setDatesAndPrices] = useState([]);
-  const [minMax, setMinMax] = useState([])
+  const [minMax, setMinMax] = useState([]);
 
   useEffect(() => {
     console.log("1ddddddat");
@@ -36,11 +36,11 @@ function CategoryLineGraph_1d(props) {
     const thisResponse = response.data;
     console.log("day thisResponse: ", thisResponse);
     console.log("day thisResponse[1]: ", thisResponse[1]);
-    if (thisResponse==null || thisResponse[1][0]==undefined){
-      setMinMax([0, 100])
+    if (thisResponse == null || thisResponse[1][0] == undefined) {
+      setMinMax([0, 100]);
     } else {
       console.log("day range: ", thisResponse[1][0], thisResponse[1][1]);
-      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])  
+      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])]);
     }
   };
 
@@ -54,8 +54,21 @@ function CategoryLineGraph_1d(props) {
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}
           >
-            <XAxis dataKey="time" minTickGap={60} tickSize={0} tickMargin={10} tick={{fontSize: 12}} />
-            <YAxis type="number" domain={minMax} tickSize={0} tickMargin={10} tick={{fontSize: 12}} />
+            <CartesianGrid opacity={0.1} />
+            <XAxis
+              dataKey="time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              type="number"
+              domain={minMax}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Line
               type="monotone"
