@@ -44,17 +44,18 @@ function Index1mo() {
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
+            <CartesianGrid opacity={0.1} />
             <XAxis
               dataKey="Time"
               minTickGap={60}
-              tickSize={0}
-              tickMargin={10}
+              tickSize={5}
+              tickMargin={5}
               tick={{ fontSize: 12 }}
             />
             <YAxis
-              tickSize={0}
+              tickSize={5}
               domain={[50, 150]}
-              tickMargin={10}
+              tickMargin={5}
               tick={{ fontSize: 12 }}
             />
             <Tooltip content={<CustomTooltip />} />
