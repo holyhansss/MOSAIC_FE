@@ -11,28 +11,29 @@ import {
   Legend,
 } from "recharts";
 import { type } from "@testing-library/user-event/dist/type";
+import { CustomTooltip } from "./LineGraph1d";
 
-// S&P 500 지수 와 CMC 200 지수를 그래프로(한달)
+// S&P 500 지수 와 CMC 200 지수를 그래프로(한 달)
 
 function Index1mo() {
   const [res, setRes] = useState([]);
 
-    const getSNPCMC_1mo = async () => {
-        const response = await axios.get('http://localhost:5000/market/snpcmc/1mo'
-        )
-        for (let i = 0; i < response.data.length; i++) {
-          response.data[i].Time = moment.unix(response.data[i].Time).format("MM/DD");  
-          response.data[i].SNP=Math.ceil(response.data[i].SNP * 100) / 100;
-          response.data[i].CMC=Math.ceil(response.data[i].CMC* 100) / 100;
-        }
-        console.log(response.data);
-        setRes(response.data)
-      }
-    
+  const getSNPCMC_1mo = async () => {
+    const response = await axios.get("http://localhost:5000/market/snpcmc/1mo");
+    for (let i = 0; i < response.data.length; i++) {
+      response.data[i].Time = moment
+        .unix(response.data[i].Time)
+        .format("MM/DD");
+      response.data[i].SNP = Math.ceil(response.data[i].SNP * 100) / 100;
+      response.data[i].CMC = Math.ceil(response.data[i].CMC * 100) / 100;
+    }
+    console.log(response.data);
+    setRes(response.data);
+  };
 
-    useEffect(() => {
-        getSNPCMC_1mo();
-      }, []);
+  useEffect(() => {
+    getSNPCMC_1mo();
+  }, []);
   return (
     <div>
       {res && (
@@ -43,13 +44,37 @@ function Index1mo() {
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3" />
-            <XAxis dataKey="Time" />
-            <YAxis domain={[50,150]} />
-            <Tooltip />
+            <CartesianGrid opacity={0.1} />
+            <XAxis
+              dataKey="Time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              tickSize={5}
+              domain={[50, 150]}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
             <Legend />
-            <Line type="monotone" isAnimationActive={false} dataKey="SNP" stroke="#8884d8" dot={false} />
-            <Line type="monotone" isAnimationActive={false} dataKey="CMC" stroke="#82ca9d" dot={false} />
+            <Line
+              name="S&P"
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="SNP"
+              stroke="#8884d8"
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="CMC"
+              stroke="#82ca9d"
+              dot={false}
+            />
           </LineChart>
         </div>
       )}

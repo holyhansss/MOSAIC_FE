@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   * {
-    /* font-family: 'NanumSquare', sans-serif; */
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
   }
 `
 

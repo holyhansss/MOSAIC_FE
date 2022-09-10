@@ -14,6 +14,13 @@ import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header/Header";
 import GlobalStyle from "./style/global";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Spoqa Han Sans Neo'
+  }
+});
 
 const Container = styled.div`
   @media screen {
@@ -93,7 +100,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Container>
         <Header user={userObj} admin={admin} />
@@ -121,7 +128,7 @@ function App() {
         </Route>  */}
         </Routes>
       </Container>
-    </>
+    </ThemeProvider>
   );
 }
 

@@ -106,6 +106,7 @@ function Header({ user, admin }) {
               menuVariant="dark"
               title={
                 <img
+                  referrerpolicy="no-referrer"
                   src={user.photoURL}
                   alt=""
                   style={{ borderRadius: "50%" }}

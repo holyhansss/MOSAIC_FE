@@ -93,7 +93,7 @@ const MainPage = ({result}) => {
               }}>
               <Marquee gradientColor speed={40}>
                 <Typography variant="caption" >
-                    매주 새로운 모자익 리포트를 확인하세요!
+                    매주 새로운 Mosaic 리포트를 확인하세요!
                   </Typography>
               </Marquee>
             </Box>
@@ -112,7 +112,7 @@ const MainPage = ({result}) => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" gutterBottom component="div">
-            모자익 위클리 리서치
+            Mosaic Weekly Report
           </Typography>
         </Grid>
         <Grid item xs={12}>
