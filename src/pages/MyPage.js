@@ -38,21 +38,21 @@ function MyPage({ user, refreshUser }) {
                   </Row>
                 </Col>
               </Row>
-              <Row>
+              <Row style={{ marginBottom: "50.5vh" }}>
                 <Tabs
-                  defaultActiveKey="posts"
+                  defaultActiveKey="liked"
                   id="uncontrolled-tab"
                   className="mb-3"
                   justify
                 >
-                  <Tab eventKey="posts" title="작성한 글">
+                  {/* <Tab eventKey="posts" title="작성한 글">
                     <PostList user={user} kind="post" />
+                  </Tab> */}
+                  <Tab eventKey="liked" title="좋아요한 글">
+                    <PostList user={user} kind="liked" />
                   </Tab>
                   <Tab eventKey="comments" title="댓글단 글">
                     <PostList user={user} kind="comment" />
-                  </Tab>
-                  <Tab eventKey="liked" title="좋아요한 글">
-                    <PostList user={user} kind="liked" />
                   </Tab>
                 </Tabs>
               </Row>

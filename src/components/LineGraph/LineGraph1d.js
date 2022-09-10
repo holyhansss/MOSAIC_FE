@@ -15,6 +15,26 @@ import { Typography } from "@mui/material";
 
 // S&P 500 지수 와 CMC 200 지수를 그래프로(1일 기준)
 
+export const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          borderRadius: "10px",
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          padding: 10,
+        }}
+      >
+        <div style={{ color: "black", marginBottom: 5 }}>{label}</div>
+        <div style={{ color: "#8884d8" }}>{`S&P : ${payload[0].value}`}</div>
+        <div style={{ color: "#82ca9d" }}>{`CMC : ${payload[1].value}`}</div>
+      </div>
+    );
+  }
+
+  return null;
+};
+
 function Index1d() {
   const [time, setTime] = useState([]);
   const [res, setRes] = useState([]);
@@ -23,20 +43,23 @@ function Index1d() {
 
   async function getSNP() {
     let returnValue;
-    await axios.get("/v8/finance/chart/%5EGSPC").then((res: any) => {
+    await axios.get("/v8/finance/chart/%5EGSPC").then((res) => {
       const IndexData = res.data.chart.result[0].indicators.quote[0].close.map(
         (data, index) =>
           data && {
-            time: res.data.chart.result[0].timestamp[index]+32400,
+            time: res.data.chart.result[0].timestamp[index] + 32400,
             SnP: data,
           }
       );
 
-      const maxSnp = Math.max.apply(null, res.data.chart.result[0].indicators.quote[0].close);
+      const maxSnp = Math.max.apply(
+        null,
+        res.data.chart.result[0].indicators.quote[0].close
+      );
       console.log(maxSnp);
-      if (maxSnp > maxData){
-        setMaxData(maxSnp)
-      };
+      if (maxSnp > maxData) {
+        setMaxData(maxSnp);
+      }
 
       var SNP_first = IndexData[0].SnP;
 
@@ -59,10 +82,10 @@ function Index1d() {
       for (let i = 0; i < IndexData.length; i++) {
         IndexData[i].SnP = (100 / SNP_first) * IndexData[i].SnP;
         IndexData[i].time = moment(IndexData[i].time * 1000).format("HH:mm");
-        if (IndexData[i].SnP > maxData){
+        if (IndexData[i].SnP > maxData) {
           setMaxData(IndexData[i].SnP);
         }
-        if (IndexData[i].SnP < minData){
+        if (IndexData[i].SnP < minData) {
           setMinData(IndexData[i].SnP);
         }
       }
@@ -74,18 +97,22 @@ function Index1d() {
 
   async function getCMC() {
     let returnValue;
-    await axios.get("/v8/finance/chart/%5ECMC200").then((res: any) => {
+    await axios.get("/v8/finance/chart/%5ECMC200").then((res) => {
       const IndexData2 = res.data.chart.result[0].indicators.quote[0].close.map(
         (data, index) =>
           data && {
-            time: res.data.chart.result[0].timestamp[index]+32400,
+            time: res.data.chart.result[0].timestamp[index] + 32400,
             CMC: data,
           }
       );
 
-      if (Math.max(res.data.chart.result[0].indicators.quote[0].close) > maxData){
-        setMaxData(Math.max(res.data.chart.result[0].indicators.quote[0].close))
-      };
+      if (
+        Math.max(res.data.chart.result[0].indicators.quote[0].close) > maxData
+      ) {
+        setMaxData(
+          Math.max(res.data.chart.result[0].indicators.quote[0].close)
+        );
+      }
 
       var CMC_first = IndexData2[0].CMC;
 
@@ -108,12 +135,12 @@ function Index1d() {
       for (let i = 0; i < IndexData2.length; i++) {
         IndexData2[i].CMC = (100 / CMC_first) * IndexData2[i].CMC;
         IndexData2[i].time = moment(IndexData2[i].time * 1000).format("HH:mm");
-        if (IndexData2[i].CMC > maxData){
+        if (IndexData2[i].CMC > maxData) {
           setMaxData(IndexData2[i].CMC);
-        };
-        if (IndexData2[i].CMC < minData){
+        }
+        if (IndexData2[i].CMC < minData) {
           setMinData(IndexData2[i].CMC);
-        };
+        }
       }
 
       returnValue = IndexData2;
@@ -122,7 +149,6 @@ function Index1d() {
   }
 
   useEffect(() => {
-
     NewIndex();
   }, []);
 
@@ -137,9 +163,9 @@ function Index1d() {
     for (let i = 0; i < data2.length; i++) {
       let CMC;
       if (data2[i] == null) {
-        CMC = data2[i-1].CMC;
+        CMC = data2[i - 1].CMC;
       } else {
-        if (data2[i].CMC == null) ;
+        if (data2[i].CMC == null);
         CMC = data2[i].CMC;
       }
       resTemp.push({
@@ -163,13 +189,36 @@ function Index1d() {
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-            <XAxis dataKey="time" />
-            <YAxis domain={[Math.floor(minData), Math.ceil(maxData)]}  />
-            <Tooltip />
+            <XAxis
+              dataKey="time"
+              minTickGap={60}
+              tickSize={0}
+              tickMargin={10}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              tickSize={0}
+              domain={[Math.floor(minData), Math.ceil(maxData)]}
+              tickMargin={10}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
             <Legend />
-            <Line type="monotone" isAnimationActive={false} dataKey="SnP" stroke="#8884d8" dot={false} />
-            <Line type="monotone" isAnimationActive={false} dataKey="CMC" stroke="#82ca9d" dot={false} />
+            <Line
+              name="S&P"
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="SnP"
+              stroke="#8884d8"
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="CMC"
+              stroke="#82ca9d"
+              dot={false}
+            />
           </LineChart>
         </div>
       )}
