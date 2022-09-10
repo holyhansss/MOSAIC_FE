@@ -11,7 +11,7 @@ import {
   Legend,
 } from "recharts";
 import { type } from "@testing-library/user-event/dist/type";
-
+import { CustomTooltip } from "../LineGraph/LineGraph1d";
 
 function CategoryLineGraph_1d(props) {
   const dateRange = props.dateRange;
@@ -54,10 +54,9 @@ function CategoryLineGraph_1d(props) {
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-            <XAxis dataKey="time" />
-            <YAxis type="number" domain={minMax} />
-            <Tooltip />
+            <XAxis dataKey="time" minTickGap={60} tickSize={0} tickMargin={10} tick={{fontSize: 12}} />
+            <YAxis type="number" domain={minMax} tickSize={0} tickMargin={10} tick={{fontSize: 12}} />
+            <Tooltip content={<CustomTooltip />} />
             <Line
               type="monotone"
               dataKey="Currency"
