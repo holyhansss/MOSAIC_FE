@@ -13,6 +13,7 @@ import Header from "./components/Header/Header";
 import { auth, dbService } from "./firebase";
 import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import styled from "styled-components";
+import Intro from "./pages/Intro";
 
 const Container = styled.div`
   @media screen {
@@ -101,9 +102,10 @@ function App() {
         <Route path="/" element={<MainPage result={result} />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/join" element={<Join />}></Route>
-        <Route path="admin" element={<Admin />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
         <Route path="/market" element={<MarketPage />}></Route>
         <Route path="/reportList" element={<ReportList result={result} reports={reports} />}></Route>
+        <Route path="/intro" element={<Intro/>}></Route>
         <Route
           path="/reportDetail/:id/:title/:writer/:date"
           element={<ReportDetail user={userObj} />}
