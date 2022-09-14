@@ -70,15 +70,6 @@ const Winner = ({ user, id, title, writer, date }) => {
               {winner.map((invem, index) => (
                 <div key={index}>
                   <p />
-                  <Typography
-                    variant="body1"
-                    align="left"
-                    gutterBottom
-                    component="div"
-                  >
-                    {invem.desc1}
-                  </Typography>
-                  <p />
                   <Avatar
                     alt="pic1"
                     src={invem.img1}
@@ -92,7 +83,7 @@ const Winner = ({ user, id, title, writer, date }) => {
                     gutterBottom
                     component="div"
                   >
-                    {invem.desc2}
+                    {invem.desc1}
                   </Typography>
                   <p />
                   <Avatar
@@ -102,6 +93,15 @@ const Winner = ({ user, id, title, writer, date }) => {
                     sx={{ width: "53rem", height: "40rem" }}
                   />
                   <p />
+                  <p />
+                  <Typography
+                    variant="body1"
+                    align="left"
+                    gutterBottom
+                    component="div"
+                  >
+                    {invem.desc2}
+                  </Typography>
                 </div>
               ))}
             </div>

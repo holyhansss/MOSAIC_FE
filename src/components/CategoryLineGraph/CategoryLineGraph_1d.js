@@ -11,7 +11,7 @@ import {
   Legend,
 } from "recharts";
 import { type } from "@testing-library/user-event/dist/type";
-
+import { CustomTooltip } from "../LineGraph/LineGraph1d";
 
 function CategoryLineGraph_1d(props) {
   const dateRange = props.dateRange;
@@ -21,7 +21,7 @@ function CategoryLineGraph_1d(props) {
   console.log("categoryArray should not be null", categoryArray);
 
   const [datesAndPrices, setDatesAndPrices] = useState([]);
-  const [minMax, setMinMax] = useState([])
+  const [minMax, setMinMax] = useState([]);
 
   useEffect(() => {
     console.log("1ddddddat");
@@ -55,10 +55,22 @@ function CategoryLineGraph_1d(props) {
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-            <XAxis dataKey="time" />
-            <YAxis type="number" domain={minMax} />
-            <Tooltip />
+            <CartesianGrid opacity={0.1} />
+            <XAxis
+              dataKey="time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              type="number"
+              domain={minMax}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
             <Line
               type="monotone"
               dataKey="Currency"

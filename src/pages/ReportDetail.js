@@ -7,6 +7,7 @@ import {
   Modal,
   Typography,
   Button,
+  ButtonGroup
 } from "@mui/material";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
 import { useParams } from "react-router-dom";
@@ -69,6 +70,8 @@ export default function ReportDetail({ user }) {
   const [clickICon, setClickIcon] = useState(false);
   const [likescount, setLikescount] = useState([]);
   const [count, setCount] = useState(null);
+  const [countValue, setCountValue] = useState(null);
+
 
   //전체 좋아요 개수
   const getLikes = async () => {
@@ -87,9 +90,10 @@ export default function ReportDetail({ user }) {
   }, []);
   useEffect(() => {
     setCount(likescount.length);
+    setCountValue(likescount.length);
   });
 
-  // user가 좋아요를 눌렀는지 안눌렀는지 확인
+  // user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
   const getUserLike = async () => {
     if (user !== null) {
       const likequ = query(
@@ -133,7 +137,7 @@ export default function ReportDetail({ user }) {
         await deleteDoc(doc(dbService, "users", user.uid, "liked", id));
       }
 
-      window.location.reload();
+      // window.location.reload();
     } else {
       alert("로그인이 필요한 서비스입니다.");
     }
@@ -208,18 +212,25 @@ export default function ReportDetail({ user }) {
       <Container maxWidth="md">
         <Grid container spacing={1}>
           <Grid item xs={4}>
-            {/* <VisibilityIcon /> */}
-            <IconButton onClick={onclick}>
-              {clickICon === true ? (
-                <FavoriteIcon sx={{ color: pink[500] }} />
-              ) : (
-                <FavoriteBorderIcon sx={{ color: pink[500] }} />
-              )}
-            </IconButton>
-            {count}
-            <IconButton onClick={handleOpen}>
-              <SendIcon sx={{ color: grey[50] }} />
-            </IconButton>
+            <ButtonGroup variant="outlined">
+              <IconButton onClick={onclick}>
+                {clickICon === true ? (
+                  <>
+                    <FavoriteIcon sx={{ color: pink[500] }} />
+                    <Typography variant="body1" sx={{ color: grey[50]}}>{countValue}</Typography>
+                  </>
+                ) : (
+                  <>
+                    <FavoriteBorderIcon sx={{ color: pink[500] }} />
+                    <Typography variant="body1" sx={{ color: grey[50] }}>{countValue}</Typography>
+                  </>
+                )}
+              </IconButton>
+              
+              <IconButton onClick={handleOpen}>
+                <SendIcon sx={{ color: grey[50] }} />
+              </IconButton>
+            </ButtonGroup>
             <Modal open={open} onClose={handleClose}>
               <Box sx={style}>
                 <Typography variant="h6" component="h2">

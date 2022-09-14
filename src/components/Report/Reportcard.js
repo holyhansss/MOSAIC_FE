@@ -144,7 +144,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
 
       {/* {Table of contents} */}
       <StyleBox>
-        <Typography variant="h4" align="center">
+        <Typography variant="h6" align="center">
           목차
         </Typography>
         <div>
@@ -155,7 +155,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               }}
             >
               <Typography
-                variant="h6"
+                variant="body1"
                 sx={{ paddingBottom: "5px", color: grey[50] }}
               >
                 거시경제
@@ -164,7 +164,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 <div key={index}>
                   <ul>
                     <Styleli>
-                      <Typography variant="body1">{invem.title}</Typography>
+                      <Typography variant="body2">{invem.title}</Typography>
                     </Styleli>
                   </ul>
                 </div>
@@ -177,7 +177,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               }}
             >
               <Typography
-                variant="h6"
+                variant="body1"
                 sx={{ paddingBottom: "5px", color: grey[50] }}
               >
                 크립토 규제/정책
@@ -186,7 +186,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 <div key={index}>
                   <ul>
                     <Styleli>
-                      <Typography variant="body1">{polic.title}</Typography>
+                      <Typography variant="body2">{polic.title}</Typography>
                     </Styleli>
                   </ul>
                 </div>
@@ -199,7 +199,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               }}
             >
               <Typography
-                variant="h6"
+                variant="body1"
                 sx={{ paddingBottom: "5px", color: grey[50] }}
               >
                 크립토 기술/투자 이슈
@@ -208,7 +208,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 <div key={index}>
                   <ul>
                     <Styleli>
-                      <Typography variant="body1">{ma.title}</Typography>
+                      <Typography variant="body2">{ma.title}</Typography>
                     </Styleli>
                   </ul>
                 </div>
@@ -220,7 +220,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               }}
             >
               <Typography
-                variant="h6"
+                variant="body1"
                 sx={{ paddingBottom: "5px", color: grey[50] }}
               >
                 인사이트
@@ -235,6 +235,13 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
           paddingTop: 10,
         }}
       />
+
+     {/* {Table of contents} */}
+
+
+
+
+    {/* {contents} */}
 
       <Typography
         variant="h4"
@@ -271,6 +278,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
+              sx={{lineHeight: 2, letterSpacing: 0.25}}
             >
               {invem.content}
             </Typography>
@@ -325,6 +333,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
+              sx={{lineHeight: 2, letterSpacing: 0.25}}
             >
               {polic.content}
             </Typography>
@@ -371,6 +380,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
+              sx={{lineHeight: 2, letterSpacing: 0.25}}
             >
               {ma.content}
             </Typography>
@@ -415,6 +425,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
+              sx={{lineHeight: 2, letterSpacing: 0.25}}
             >
               {ins.content}
             </Typography>

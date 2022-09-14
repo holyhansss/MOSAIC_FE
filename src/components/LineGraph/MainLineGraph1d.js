@@ -27,7 +27,7 @@ function MainLineGraph() {
       const IndexData = res.data.chart.result[0].indicators.quote[0].close.map(
         (data, index) =>
           data && {
-            time: res.data.chart.result[0].timestamp[index]+32400,
+            time: res.data.chart.result[0].timestamp[index] + 32400,
             SnP: data,
           }
       );
@@ -53,10 +53,10 @@ function MainLineGraph() {
       for (let i = 0; i < IndexData.length; i++) {
         IndexData[i].SnP = (100 / SNP_first) * IndexData[i].SnP;
         IndexData[i].time = moment(IndexData[i].time * 1000).format("HH:mm");
-        if (IndexData[i].SnP > maxData){
+        if (IndexData[i].SnP > maxData) {
           setMaxData(IndexData[i].SnP);
         }
-        if (IndexData[i].SnP < minData){
+        if (IndexData[i].SnP < minData) {
           setMinData(IndexData[i].SnP);
         }
       }
@@ -72,14 +72,18 @@ function MainLineGraph() {
       const IndexData2 = res.data.chart.result[0].indicators.quote[0].close.map(
         (data, index) =>
           data && {
-            time: res.data.chart.result[0].timestamp[index]+32400,
+            time: res.data.chart.result[0].timestamp[index] + 32400,
             CMC: data,
           }
       );
 
-      if (Math.max(res.data.chart.result[0].indicators.quote[0].close) > maxData){
-        setMaxData(Math.max(res.data.chart.result[0].indicators.quote[0].close))
-      };
+      if (
+        Math.max(res.data.chart.result[0].indicators.quote[0].close) > maxData
+      ) {
+        setMaxData(
+          Math.max(res.data.chart.result[0].indicators.quote[0].close)
+        );
+      }
 
       var CMC_first = IndexData2[0].CMC;
 
@@ -102,12 +106,12 @@ function MainLineGraph() {
       for (let i = 0; i < IndexData2.length; i++) {
         IndexData2[i].CMC = (100 / CMC_first) * IndexData2[i].CMC;
         IndexData2[i].time = moment(IndexData2[i].time * 1000).format("HH:mm");
-        if (IndexData2[i].CMC > maxData){
+        if (IndexData2[i].CMC > maxData) {
           setMaxData(IndexData2[i].CMC);
-        };
-        if (IndexData2[i].CMC < minData){
+        }
+        if (IndexData2[i].CMC < minData) {
           setMinData(IndexData2[i].CMC);
-        };
+        }
       }
 
       returnValue = IndexData2;
@@ -116,7 +120,6 @@ function MainLineGraph() {
   }
 
   useEffect(() => {
-
     NewIndex();
   }, []);
 
@@ -126,13 +129,12 @@ function MainLineGraph() {
     const data2 = await getCMC();
     // console.log("In NewIndex!");
     // console.log("data1:", data1);
-    // console.log("data2:", data2);
-    console.log("max:", maxData);
+    console.log("data2:", data2);
 
-    for (let i = 0; i < data1.length; i++) {
+    for (let i = 0; i < data2.length; i++) {
       let CMC;
       if (data2[i] == null) {
-        CMC =  data2[i-1].CMC;
+        CMC = data2[i - 1].CMC;
       } else {
         if (data2[i].CMC == null);
         CMC = data2[i].CMC;
@@ -143,7 +145,7 @@ function MainLineGraph() {
         CMC: Math.ceil(CMC * 100) / 100,
       });
     }
-
+    console.log("res: ", res);
     setRes(resTemp);
     return res;
   };
@@ -154,15 +156,39 @@ function MainLineGraph() {
         <div>
           <LineChart
             width={300}
-            height={200}
+            height={180}
             data={res}
-            margin={{ top: 3, right: 1, left: 1, bottom: 1}}
+            margin={{ top: 3, right: 1, left: 1, bottom: 1 }}
           >
-            <XAxis dataKey="time" />
-            <YAxis domain={[98, 102]} wrapperStyle={{ width: 100, backgroundColor: '#ccc' }}/>
-            <Line type="monotone" isAnimationActive={true} dataKey="SnP" stroke="#8884d8" dot={false} />
-            <Line type="monotone" isAnimationActive={true} dataKey="CMC" stroke="#82ca9d" dot={false} />
-            <Legend/>
+            <XAxis
+              dataKey="time"
+              tickSize={0}
+              tickMargin={10}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              domain={[98, 102]}
+              wrapperStyle={{ width: 100, backgroundColor: "#ccc" }}
+              tickSize={0}
+              tickMargin={10}
+              tick={{ fontSize: 12 }}
+            />
+            <Line
+              name="S&P"
+              type="monotone"
+              isAnimationActive={true}
+              dataKey="SnP"
+              stroke="#8884d8"
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              isAnimationActive={true}
+              dataKey="CMC"
+              stroke="#82ca9d"
+              dot={false}
+            />
+            <Legend wrapperStyle={{ fontSize: "9px" }} />
           </LineChart>
         </div>
       )}

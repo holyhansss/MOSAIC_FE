@@ -29,8 +29,8 @@ function Join() {
     e.preventDefault();
     if (password !== passwordCheck) {
       setPasswordError(true);
-    } else {
-      email !== "" && signUpWithEmailAndPassword(email, password, name);
+    } else if (email !== "") {
+      signUpWithEmailAndPassword(email, password, name);
     }
   };
 
@@ -100,7 +100,11 @@ function Join() {
                   회원가입
                 </Button>
               ) : (
-                <Button variant="contained" type="submit">
+                <Button
+                  sx={{ marginTop: "1.2rem" }}
+                  variant="contained"
+                  type="submit"
+                >
                   회원가입
                 </Button>
               )}

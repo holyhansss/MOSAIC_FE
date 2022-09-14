@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { logout } from "../../firebase";
 
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
 const Container = styled.div`
   position: relative;
   display: flex;
@@ -62,37 +74,39 @@ const NavProfile = styled.img`
 `;
 
 function Header({ user, admin }) {
+  console.log(user)
   return (
     <Container>
       <Navbar>
         <NavSideContainer>
-          <Link to="/">
+          <StyledLink to="/">
             <NavMain>MOSAIC</NavMain>
-          </Link>
+          </StyledLink>
         </NavSideContainer>
         <NavCenterContainer>
           <NavMenuContainer>
-            <Link to="/">
-              <NavMenu>홈</NavMenu>
-            </Link>
+            <StyledLink to="/promising">
+              <NavMenu>유망 코인</NavMenu>
+            </StyledLink>
           </NavMenuContainer>
           <NavMenuContainer>
-            <Link to="/market">
+            <StyledLink to="/market">
               <NavMenu>시장 동향</NavMenu>
-            </Link>
+            </StyledLink>
           </NavMenuContainer>
           <NavMenuContainer>
-            <Link to="/reportList">
+            <StyledLink to="/reportList">
               <NavMenu>리포트</NavMenu>
-            </Link>
+            </StyledLink>
           </NavMenuContainer>
         </NavCenterContainer>
         <NavSideContainer>
-          {user !== null ? (
+          {user != null ? (
             <NavDropdown
               menuVariant="dark"
               title={
                 <img
+                  referrerpolicy="no-referrer"
                   src={user.photoURL}
                   alt=""
                   style={{ borderRadius: "50%" }}
@@ -103,24 +117,24 @@ function Header({ user, admin }) {
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item>
-                <Link to="/profile">마이페이지</Link>
+                <StyledLink to="/profile">마이페이지</StyledLink>
               </NavDropdown.Item>
               {admin === true && (
                 <NavDropdown.Item>
-                  <Link
+                  <StyledLink
                     to={{
                       pathname: "/admin",
                       state: { user: user },
                     }}
                   >
                     관리자
-                  </Link>
+                  </StyledLink>
                 </NavDropdown.Item>
               )}
               <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
             </NavDropdown>
           ) : (
-            <Link to="/login">로그인</Link>
+            <StyledLink to="/login">로그인</StyledLink>
           )}
         </NavSideContainer>
       </Navbar>

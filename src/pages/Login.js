@@ -5,18 +5,20 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { signInWithGoogle, signInWithEmail } from "../firebase";
 import styled from "styled-components";
 import gooLogo from "../img/logo_google.png";
+import { StyledLink } from "../components/Header/Header"
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 85vh;
 `;
 
 export const Box = styled(Container)`
   width: 450px;
   height: 450px;
   border-radius: 10px;
-  margin-top: 2rem;
+  margin: 2rem 0 4rem 0;
   border: 1px solid white;
   display: flex;
   box-shadow: 1px 1px 10px grey;
@@ -55,7 +57,7 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signInWithEmail(email, password);
+    const signInResult = signInWithEmail(email, password);
   };
 
   const handleOnChange = (e) => {
@@ -121,7 +123,7 @@ function Login() {
                   비밀번호 찾기
                 </Button>
                 <Button sx={{ color: "white" }} size="small">
-                  <Link to="/join">회원 가입</Link>
+                  <StyledLink to="/join">회원 가입</StyledLink>
                 </Button>
               </ButtonGroup>
               <Button
