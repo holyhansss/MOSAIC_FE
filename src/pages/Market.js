@@ -60,7 +60,7 @@ function Marketpage() {
   const [snpRange, setSnpRange] = useState("1d");
   const [snpIndex, setSnpIndex] = useState(0);
 
-  const [categoryRange, setCategoryRange] = useState("1d");
+  const [categoryRange, setCategoryRange] = useState("1mo");
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [categoryArray, setCategoryArray] = useState([
     true,

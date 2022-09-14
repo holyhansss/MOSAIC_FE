@@ -36,6 +36,7 @@ function CategoryLineGraph_1d(props) {
     const thisResponse = response.data;
     console.log("day thisResponse: ", thisResponse);
     console.log("day thisResponse[1]: ", thisResponse[1]);
+    setDatesAndPrices(thisResponse[0])
     if (thisResponse==null || thisResponse[1][0]==undefined){
       setMinMax([0, 100])
     } else {
