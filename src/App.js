@@ -14,24 +14,14 @@ import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header/Header";
 import GlobalStyle from "./style/global";
+import { Container, Grid } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Spoqa Han Sans Neo'
-  }
+    fontFamily: "Spoqa Han Sans Neo",
+  },
 });
-
-const Container = styled.div`
-  @media screen {
-    background: linear-gradient(-45deg, #191240 10%, #06020d 90%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    color: white;
-  } ;
-`;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -102,32 +92,35 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Container>
-        <Header user={userObj} admin={admin} />
-        <Routes>
-          <Route path="/" element={<MainPage result={result} />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/join" element={<Join />}></Route>
-          <Route path="admin" element={<Admin />}></Route>
-          <Route path="/market" element={<MarketPage />}></Route>
-          <Route path="/promising" element={<PromisingCoins />}></Route>
-          <Route
-            path="/reportList"
-            element={<ReportList result={result} reports={reports} />}
-          ></Route>
-          <Route
-            path="/reportDetail/:id/:title/:writer/:date"
-            element={<ReportDetail user={userObj} />}
-          ></Route>
-          <Route
-            path="/profile"
-            element={<MyPage user={userObj} refreshUser={refreshUser} />}
-          ></Route>
-          {/* <Route path='/detailpages/*' > 
-          <Route path=":id" element={<DetailPage />} />
-        </Route>  */}
-        </Routes>
-      </Container>
+      <Grid container direction="column" spacing={2}>
+        <Grid item md={2}>
+          <Header user={userObj} admin={admin} />
+        </Grid>
+        <Grid item md={10}>
+          <Container maxWidth="lg">
+            <Routes>
+              <Route path="/" element={<MainPage result={result} />}></Route>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/join" element={<Join />}></Route>
+              <Route path="admin" element={<Admin />}></Route>
+              <Route path="/market" element={<MarketPage />}></Route>
+              <Route path="/promising" element={<PromisingCoins />}></Route>
+              <Route
+                path="/reportList"
+                element={<ReportList result={result} reports={reports} />}
+              ></Route>
+              <Route
+                path="/reportDetail/:id/:title/:writer/:date"
+                element={<ReportDetail user={userObj} />}
+              ></Route>
+              <Route
+                path="/profile"
+                element={<MyPage user={userObj} refreshUser={refreshUser} />}
+              ></Route>
+            </Routes>
+          </Container>
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 }
