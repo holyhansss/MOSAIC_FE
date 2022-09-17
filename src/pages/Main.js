@@ -1,34 +1,27 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Container, Grid, Typography, Box } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
 
 //components
-import {
-  Reportrecentcard,
-} from "../components/Report/Reportlistcard.js";
+import { Reportrecentcard } from "../components/Report/Reportlistcard.js";
 import MainSNPCMC from "../components/LineGraph/MainLineGraph1d";
-import MainCategoryLineGraph from "../components/CategoryLineGraph/MainCategoryLineGraph.js"
+import MainCategoryLineGraph from "../components/CategoryLineGraph/MainCategoryLineGraph.js";
 
 // Style
 const theme = createTheme({
   components: {
     MuiToggleButton: {
       selected: {
-        disable: 'true'
+        disable: "true",
       },
       styleOverrides: {
         root: {
           "&.Mui-selected": {
             color: "#fff",
-            fontWeight: 'bold',
+            fontWeight: "bold",
             backgroundColor: "rgba(0,0,0,0)",
           },
         },
@@ -36,11 +29,6 @@ const theme = createTheme({
     },
   },
 });
-
-const MainContainer = styled(Container)`
-  position: relative;
-  z-index: 1;
-`;
 
 const StyleBox = styled(Box)`
   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
@@ -63,52 +51,48 @@ const scale = keyframes`
     opacity: 1;
     transform: translateY(0%);
   }
-`
+`;
 
 const WelcomText = styled(Typography)`
-  animation:2s ${scale} ease-out;
-  `
+  animation: 2s ${scale} ease-out;
+`;
 
-
-
-const MainPage = ({result}) => {
+const MainPage = ({ result }) => {
   return (
-    <MainContainer maxWidth="md">
+    <>
       <Grid container spacing={5}>
         <Grid item xs={12}>
-          <Box sx={{ display: "flex"}}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <Box
               sx={{
-                maxHeight: "10px",
-                width: 1/5
-              }}>
-                <Typography variant="caption" >
-                  Mosaic 공지
-                </Typography>
+                maxHeight: "3rem",
+                width: 1 / 5,
+              }}
+            >
+              <Typography variant="caption">Mosaic 공지</Typography>
             </Box>
             <Box
               sx={{
-                maxHeight: "10px",
-                width: 4/5
-              }}>
+                maxHeight: "3rem",
+                width: 4 / 5,
+              }}
+            >
               <Marquee gradientColor speed={40}>
-                <Typography variant="caption" >
-                    매주 새로운 Mosaic 리포트를 확인하세요!
-                  </Typography>
+                <Typography variant="caption">
+                  매주 새로운 Mosaic 리포트를 확인하세요!
+                </Typography>
               </Marquee>
             </Box>
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{paddingTop: 5}}/>
+          <Box sx={{ paddingTop: 5 }} />
         </Grid>
         <Grid item xs={12}>
-          <WelcomText variant="h3" >
-            Welcome Mosaic
-          </WelcomText>
+          <WelcomText variant="h3">Welcome Mosaic</WelcomText>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{paddingTop: 5}}/>
+          <Box sx={{ paddingTop: 5 }} />
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" gutterBottom component="div">
@@ -129,61 +113,61 @@ const MainPage = ({result}) => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" gutterBottom component="div">
-              시장 동향
-            </Typography>
+            시장 동향
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ display: "flex"}}>
-            <StyleBox 
+          <Box sx={{ display: "flex" }}>
+            <StyleBox
               sx={{
                 height: 180,
-                width: 2/5,
+                width: 2 / 5,
                 borderRadius: "10px",
                 color: "white",
-                boxShadow: 3
+                boxShadow: 3,
               }}
-              >
-              <MainSNPCMC/>
+            >
+              <MainSNPCMC />
             </StyleBox>
-            <Box 
+            <Box
               sx={{
                 height: 180,
-                width: 1/5,
+                width: 1 / 5,
               }}
-              >
-            </Box>
-            <StyleBox 
+            ></Box>
+            <StyleBox
               sx={{
                 height: 180,
-                width: 2/5,
+                width: 2 / 5,
                 borderRadius: "10px",
                 color: "white",
-                boxShadow: 3
+                boxShadow: 3,
               }}
-              >
-              <MainCategoryLineGraph/>
+            >
+              <MainCategoryLineGraph />
             </StyleBox>
           </Box>
         </Grid>
-        <Grid item xs={12}> 
+        <Grid item xs={12}>
           <Typography variant="h5" gutterBottom component="div">
-              발굴 코인
-            </Typography>
+            발굴 코인
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <StyleBox
             sx={{
               height: 500,
-              width:1,
+              width: 1,
               borderRadius: "20px",
               color: "white",
-              boxShadow: 3
-            }}>
+              boxShadow: 3,
+            }}
+          >
             발굴 코인 내용
           </StyleBox>
         </Grid>
       </Grid>
-    </MainContainer>
+    </>
   );
 };
 

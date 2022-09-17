@@ -38,7 +38,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 inputinvest.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+              <Typography variant="subtitle2" sx={{ color: "black" }}>
                 거시경제
               </Typography>
             </Nav.Link>
@@ -48,7 +48,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 inputpolicy.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+              <Typography variant="subtitle2" sx={{ color: "black" }}>
                 크립토 규제/정책
               </Typography>
             </Nav.Link>
@@ -58,7 +58,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 inputmacro.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+              <Typography variant="subtitle2" sx={{ color: "black" }}>
                 크립토 기술/투자 이슈
               </Typography>
             </Nav.Link>
@@ -67,7 +67,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
                 inputinsight.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography variant="subtitle2" sx={{ color: grey[50] }}>
+              <Typography variant="subtitle2" sx={{ color: "black" }}>
                 인사이트
               </Typography>
             </Nav.Link>
@@ -185,12 +185,9 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
         }}
       />
 
-     {/* {Table of contents} */}
+      {/* {Table of contents} */}
 
-
-
-
-    {/* {contents} */}
+      {/* {contents} */}
 
       <Typography
         variant="h4"
@@ -227,7 +224,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
-              sx={{lineHeight: 2, letterSpacing: 0.25}}
+              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
               {invem.content}
             </Typography>
@@ -282,7 +279,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
-              sx={{lineHeight: 2, letterSpacing: 0.25}}
+              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
               {polic.content}
             </Typography>
@@ -329,7 +326,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
-              sx={{lineHeight: 2, letterSpacing: 0.25}}
+              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
               {ma.content}
             </Typography>
@@ -348,7 +345,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
           paddingTop: 10,
         }}
       />
-<Typography
+      <Typography
         variant="h4"
         align="center"
         gutterBottom
@@ -374,7 +371,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               align="left"
               gutterBottom
               component="div"
-              sx={{lineHeight: 2, letterSpacing: 0.25}}
+              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
               {ins.content}
             </Typography>
@@ -393,7 +390,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
           paddingTop: 10,
         }}
       />
-      
+
       <div>
         <Typography
           variant="subtitle1"
