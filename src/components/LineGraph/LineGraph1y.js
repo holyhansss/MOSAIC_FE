@@ -44,7 +44,7 @@ function Index1y() {
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid opacity={0.1} />
+            <CartesianGrid opacity={0.4} />
             <XAxis
               dataKey="Time"
               minTickGap={60}

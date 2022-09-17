@@ -18,14 +18,10 @@ function CategoryLineGraph_1y(props) {
   const dateRange = props.dateRange;
   const categoryArray = props.categoryArray;
 
-  console.log("dateRange should not be null", dateRange);
-  console.log("categoryArray should not be null", categoryArray);
-
   const [datesAndPrices, setDatesAndPrices] = useState([]);
   const [minMax, setMinMax] = useState([]);
 
   useEffect(() => {
-    console.log("1yyyyyyy");
     getCategoryData_1yr();
   }, []);
 
@@ -35,14 +31,7 @@ function CategoryLineGraph_1y(props) {
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
     const thisResponse = response.data;
-    console.log(thisResponse);
     setDatesAndPrices(thisResponse[0]);
-    console.log("this response 1y min max: ", thisResponse[1]);
-    console.log(
-      "this response 1y min max in int : ",
-      parseInt(thisResponse[1][0]),
-      parseInt(thisResponse[1][1])
-    );
     setMinMax([
       parseInt(thisResponse[1][0]) - 20,
       parseInt(thisResponse[1][1]) + 20,
@@ -59,7 +48,7 @@ function CategoryLineGraph_1y(props) {
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}
           >
-            <CartesianGrid opacity={0.1} />
+            <CartesianGrid opacity={0.4} />
             <XAxis
               dataKey="time"
               minTickGap={60}
