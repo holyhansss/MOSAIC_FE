@@ -39,12 +39,12 @@ function Index1y() {
       {res && (
         <div>
           <LineChart
-            width={900}
+            width={1000}
             height={300}
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
           >
-            <CartesianGrid opacity={0.1} />
+            <CartesianGrid opacity={0.4} />
             <XAxis
               dataKey="Time"
               minTickGap={60}

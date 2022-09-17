@@ -4,12 +4,6 @@ import ReactSpeedometer from "react-d3-speedometer";
 import { Typography, Box, Grid, Container } from "@mui/material";
 import styled from "styled-components";
 
-//style
-const StyleBox = styled(Box)`
-  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-  border-radius: 10px;
-`;
-
 //공포탐욕지수
 function FearandGreed() {
   const [FearNGreed, setFearNGreed] = useState([]);
@@ -17,38 +11,46 @@ function FearandGreed() {
   const getFeerNGreed = async () => {
     const response = await axios.get("https://api.alternative.me/fng/");
     setFearNGreed(response.data.data[0].value);
-    setFnGState(response.data.data[0].value_classification);
+    if (response.data.data[0].value_classification === "Extreme Fear") {
+      setFnGState("매우 공포");
+    } else if (response.data.data[0].value_classification === "Fear") {
+      setFnGState("공포");
+    } else if (response.data.data[0].value_classification === "Neutral") {
+      setFnGState("중립");
+    } else if (response.data.data[0].value_classification === "Greed") {
+      setFnGState("탐욕");
+    } else if (response.data.data[0].value_classification === "Extreme Greed") {
+      setFnGState("매우 탐욕");
+    }
   };
   useEffect(() => {
     getFeerNGreed();
   }, []);
 
   return (
-    <>
-      <Box sx={{ display: "flex" }}>
-        <StyleBox sx={{ paddingTop: "10%", paddingLeft: "12%", flexGrow: 1 }}>
-          <ReactSpeedometer
-            needleColor="grey"
-            textColor="white"
-            width={300}
-            height={270}
-            needleTransition="easeBounceInOut"
-            minValue={0}
-            maxValue={100}
-            customSegmentStops={[0, 24, 50, 75, 100]}
-            segmentColors={["#DBDFFD", "#9BA3EB", "#646FD4", "#242F9B"]}
-            value={Number(FearNGreed)}
-          />
-        </StyleBox>
-        <Box sx={{ paddingRight: "7%" }}></Box>
-
-        <StyleBox sx={{ paddingTop: "20%", paddingLeft: "12%", flexGrow: 1 }}>
-          <Typography variant="h6" gutterBottom component="div">
-            {FnGState}
-          </Typography>
-        </StyleBox>
-      </Box>
-    </>
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <Grid item md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <ReactSpeedometer
+          needleColor="grey"
+          paddingVertical={50}
+          paddingHorizontal={30}
+          width={300}
+          height={250}
+          needleTransition="easeBounceInOut"
+          minValue={0}
+          maxValue={100}
+          customSegmentStops={[0, 24, 50, 75, 100]}
+          segmentColors={["#DBDFFD", "#9BA3EB", "#646FD4", "#242F9B"]}
+          value={Number(FearNGreed)}
+        />
+      </Grid>
+      <Grid item md={6} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <Typography variant="h6" gutterBottom>
+          {FnGState}
+        </Typography>
+        <Typography>[설명]</Typography>
+      </Grid>
+    </Grid>
   );
 }
 export default FearandGreed;

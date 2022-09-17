@@ -183,8 +183,8 @@ export default function ReportDetail({ user }) {
               aria-label="lab API tabs example"
               sx={{ justifyContent: "center" }}
             >
-              <Tab label="주간이슈" value="1" sx={{ color: "white" }} />
-              <Tab label="Winner & Loser" value="2" sx={{ color: "white" }} />
+              <Tab label="주간이슈" value="1" />
+              <Tab label="Winner & Loser" value="2" />
             </TabList>
           </Box>
         </Container>
