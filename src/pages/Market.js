@@ -329,6 +329,16 @@ function Marketpage() {
           <Typography variant="h5" sx={{ marginTop: 5 }}>
             S&P 500 vs CMC 200
           </Typography>
+          <Typography
+                  variant="body1"
+                  align="left"
+                  gutterBottom
+                  component="div"
+                  sx={{lineHeight: 2, letterSpacing: 0.25}}
+                >
+                  미국 주식 시장 대표 지수인 SNP 500 Index와 암호화폐 시장을 대표하는 Crypto 200 Index를 동시에 비교 분석한 그래프입니다.
+
+          </Typography> 
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
