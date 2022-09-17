@@ -37,12 +37,12 @@ function Header({ user, admin }) {
         sx={{ diplay: "flex", alignItems: "center" }}
       >
         <Grid container alignItems="center">
-          <Grid item md={2} alignItems="center">
+          <Grid item xs md={2} alignItems="center">
             <StyledLink to="/">
               <NavMain>MOSAIC</NavMain>
             </StyledLink>
           </Grid>
-          <Grid container direction="row" alignItems="center" md={8} spacing={7}>
+          <Grid container direction="row" alignItems="center" xs={6} md={8} spacing={{xs: 2, md: 7}}>
             <Grid item>
               <StyledLink to="/ranking">Mosaic 순위</StyledLink>
             </Grid>
@@ -56,7 +56,7 @@ function Header({ user, admin }) {
               <StyledLink to="/reportList">리포트</StyledLink>
             </Grid>
           </Grid>
-          <Grid container md={2} alignItems="center" justifyContent="flex-end">
+          <Grid container xs md={2} alignItems="center" justifyContent="flex-end">
             <Grid item>
               {user != null ? (
                 <NavDropdown
