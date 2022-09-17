@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 
 import CryptoReport from "../components/PromisingCoin/CryptoReport";
+import CryptoTable from "../components/PromisingCoin/CryptoTable";
 
 const PromisingCoins = () => {
     return (
