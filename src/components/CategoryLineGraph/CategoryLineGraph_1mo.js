@@ -50,7 +50,7 @@ function CategoryLineGraph_1mo(props) {
       {datesAndPrices && (
         <div>
           <LineChart
-            width={800}
+            width={1000}
             height={300}
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}

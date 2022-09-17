@@ -39,7 +39,7 @@ function Index1mo() {
       {res && (
         <div>
           <LineChart
-            width={900}
+            width={1000}
             height={300}
             data={res}
             margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
