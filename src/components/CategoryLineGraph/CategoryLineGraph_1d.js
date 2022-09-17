@@ -17,14 +17,10 @@ function CategoryLineGraph_1d(props) {
   const dateRange = props.dateRange;
   const categoryArray = props.categoryArray;
 
-  console.log("dateRange should not be null", dateRange);
-  console.log("categoryArray should not be null", categoryArray);
-
   const [datesAndPrices, setDatesAndPrices] = useState([]);
   const [minMax, setMinMax] = useState([]);
 
   useEffect(() => {
-    console.log("1ddddddat");
     getCategoryData_1d();
   }, []);
 
@@ -34,13 +30,10 @@ function CategoryLineGraph_1d(props) {
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
     const thisResponse = response.data;
-    console.log("day thisResponse: ", thisResponse);
-    console.log("day thisResponse[1]: ", thisResponse[1]);
     setDatesAndPrices(thisResponse[0])
     if (thisResponse==null || thisResponse[1][0]==undefined){
       setMinMax([0, 100])
     } else {
-      console.log("day range: ", thisResponse[1][0], thisResponse[1][1]);
       setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])  
     }
   };
@@ -50,12 +43,12 @@ function CategoryLineGraph_1d(props) {
       {datesAndPrices && (
         <div>
           <LineChart
-            width={800}
+            width={1000}
             height={300}
             data={datesAndPrices}
             margin={{ top: 25, left: 20, right: 40 }}
           >
-            <CartesianGrid opacity={0.1} />
+            <CartesianGrid opacity={0.4} />
             <XAxis
               dataKey="time"
               minTickGap={60}

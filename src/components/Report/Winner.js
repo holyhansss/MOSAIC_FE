@@ -57,7 +57,7 @@ const Winner = ({ user, id, title, writer, date }) => {
               gutterBottom
               sx={{ fontWeight: "bold", m: 1 }}
             >
-              Winner&Loser
+              Winner & Loser
             </Typography>
             <Box
               sx={{
