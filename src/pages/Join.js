@@ -42,7 +42,6 @@ function Join() {
             <label
               style={{
                 fontSize: "1.5rem",
-                color: "white",
                 fontWeight: "bold",
                 marginBottom: "1.2rem",
               }}
@@ -50,7 +49,6 @@ function Join() {
               회원가입
             </label>
             <Input
-              sx={{ color: "white" }}
               name="name"
               value={name}
               onChange={handleOnChange}
@@ -59,7 +57,6 @@ function Join() {
               required
             />
             <Input
-              sx={{ color: "white" }}
               name="email"
               value={email}
               onChange={handleOnChange}
@@ -68,7 +65,6 @@ function Join() {
               required
             />
             <Input
-              sx={{ color: "white" }}
               name="password"
               value={password}
               onChange={handleOnChange}
@@ -78,7 +74,6 @@ function Join() {
               required
             />
             <Input
-              sx={{ color: "white" }}
               name="passwordCheck"
               value={passwordCheck}
               onChange={handleOnChange}
@@ -96,6 +91,7 @@ function Join() {
                   onClick={() =>
                     alert("비밀번호 확인란을 정확히 입력해주세요.")
                   }
+                  color="secondary"
                 >
                   회원가입
                 </Button>
@@ -104,6 +100,7 @@ function Join() {
                   sx={{ marginTop: "1.2rem" }}
                   variant="contained"
                   type="submit"
+                  color="secondary"
                 >
                   회원가입
                 </Button>
