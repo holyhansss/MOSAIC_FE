@@ -12,6 +12,7 @@ import PromisingCoins from "./pages/PromisingCoins";
 import ReportList from "./pages/ReportList";
 import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
+import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
 import GlobalStyle from "./style/global";
 import { Container, Grid } from "@mui/material";
@@ -117,6 +118,7 @@ function App() {
                 path="/profile"
                 element={<MyPage user={userObj} refreshUser={refreshUser} />}
               ></Route>
+              <Route path="/ranking" element={<Ranking />} />
             </Routes>
           </Container>
         </Grid>
