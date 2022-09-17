@@ -42,14 +42,17 @@ function Header({ user, admin }) {
               <NavMain>MOSAIC</NavMain>
             </StyledLink>
           </Grid>
-          <Grid container direction="row" alignItems="center" md={8}>
-            <Grid item md={2}>
+          <Grid container direction="row" alignItems="center" md={8} spacing={7}>
+            <Grid item>
+              <StyledLink to="/ranking">Mosaic 순위</StyledLink>
+            </Grid>
+            <Grid item>
               <StyledLink to="/promising">유망 코인</StyledLink>
             </Grid>
-            <Grid item md={2}>
+            <Grid item>
               <StyledLink to="/market">시장 동향</StyledLink>
             </Grid>
-            <Grid item md={2}>
+            <Grid item>
               <StyledLink to="/reportList">리포트</StyledLink>
             </Grid>
           </Grid>
