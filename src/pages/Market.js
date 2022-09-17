@@ -36,8 +36,9 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
+          // Selected button style
           "&.Mui-selected": {
-            color: "#fff",
+            color: "#000",
             fontWeight: "bold",
             backgroundColor: "rgba(0,0,0,0)",
           },
@@ -46,11 +47,6 @@ const theme = createTheme({
     },
   },
 });
-
-const MainContainer = styled(Container)`
-  position: relative;
-  z-index: 1;
-`;
 
 const StyleButton = styled(Button)`
   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
@@ -121,12 +117,6 @@ function Marketpage() {
         arrayToReplace[3] = !arrayToReplace[3];
       } else if (e.target.name === "Culture & Entertainment") {
         arrayToReplace[4] = !arrayToReplace[4];
-      } else {
-        console.log(
-          "wrong category name '" +
-            e.target.name +
-            "' at buttonAddCategoryArray"
-        );
       }
       setCategoryArray(arrayToReplace);
       if (categoryIndex === 0) setCategoryIndex(3);
@@ -142,16 +132,11 @@ function Marketpage() {
         console.error("Wrong categoryIndex; out of bounds");
       }
 
-      // console.log("Category Index:", categoryIndex);
       setProps({
         ...props,
         dateRange: categoryRange,
         categoryArray: arrayToReplace,
       });
-
-      console.log("props categoryIndex checkwise:", categoryIndex);
-      console.log("props dateRange checkwise:", props.dateRange);
-      console.log("props categoryArray checkwise:", props.categoryArray);
     };
 
     return (
@@ -169,7 +154,7 @@ function Marketpage() {
                 margin: "0.3rem 0",
                 fontWeight: "bold",
                 fontSize: "8px",
-                color: '#F2789F'
+                color: "#F2789F",
               }}
             >
               Currency
@@ -204,7 +189,7 @@ function Marketpage() {
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: '#F999B7'
+                color: "#F999B7",
               }}
             >
               Smart Contract Platform
@@ -239,7 +224,7 @@ function Marketpage() {
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: '#F9C5D5'
+                color: "#F9C5D5",
               }}
             >
               Computing
@@ -274,7 +259,7 @@ function Marketpage() {
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: '#794C74'
+                color: "#794C74",
               }}
             >
               DeFi
@@ -309,7 +294,7 @@ function Marketpage() {
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: "#867AE9"
+                color: "#867AE9",
               }}
             >
               Culture & Entertainment
@@ -337,41 +322,29 @@ function Marketpage() {
 
   const selectComponent = [<Index1d />, <Index1mo />, <Index1y />];
 
-  // const categoryComponent = [
-  //   <CategoryLineGraph_1d {...props} />,
-  //   <CategoryLineGraph_1mo {...props} />,
-  //   <CategoryLineGraph_1y {...props} />,
-  // ];
-
   return (
-    <MainContainer maxWidth="md">
+    <>
       <Grid container spacing={5}>
         <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom component="div">
-            시장 동향
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" sx={{ marginTop: 5 }}>
             S&P 500 vs CMC 200
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
             <ToggleButtonGroup
-              size="large"
               value={snpRange}
               onChange={snpButtonChange}
               exclusive
-              color="primary"
+              sx={{ height: "2.5em" }}
             >
-              <ToggleButton sx={{ color: "gray" }} value="1d">
+              <ToggleButton sx={{ color: "darkgrey" }} value="1d">
                 1D
               </ToggleButton>
-              <ToggleButton sx={{ color: "gray" }} value="1mo">
+              <ToggleButton sx={{ color: "darkgrey" }} value="1mo">
                 1M
               </ToggleButton>
-              <ToggleButton sx={{ color: "gray" }} value="1y">
+              <ToggleButton sx={{ color: "darkgrey" }} value="1y">
                 1Y
               </ToggleButton>
             </ToggleButtonGroup>
@@ -380,15 +353,17 @@ function Marketpage() {
           {snpIndex !== null && <div>{selectComponent[snpIndex]}</div>}
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom component="div">
+          <Typography variant="h5">
             코인 카테고리
           </Typography>
+        </Grid>
+        <Grid item xs={12}>
           <ThemeProvider theme={theme}>
             <ToggleButtonGroup
-              size="large"
               value={categoryRange}
               onChange={categoryButtonChange}
               exclusive
+              sx={{ height: "2.5em" }}
             >
               <ToggleButton sx={{ color: "gray" }} value="1d">
                 1D
@@ -421,7 +396,6 @@ function Marketpage() {
             </div>
           </div>
         </Grid>
-
         <Grid item xs={12}>
           <Typography variant="h5" component="div">
             공포 탐욕 지수
@@ -431,7 +405,7 @@ function Marketpage() {
           <FearandGreed />
         </Grid>
       </Grid>
-    </MainContainer>
+    </>
   );
 }
 export default Marketpage;
