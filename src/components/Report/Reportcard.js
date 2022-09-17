@@ -20,16 +20,6 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
   const inputpolicy = useRef([]);
   const inputinsight = useRef([]);
 
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
-
   return (
     <div>
       <Box
@@ -40,8 +30,6 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
           width: 1 / 6,
           whiteSpace: "normal",
         }}
-        onMouseEnter={handleMouseOver}
-        onMouseLeave={handleMouseOut}
       >
         <div>
           <Nav className="flex-column">
@@ -53,17 +41,6 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               <Typography variant="subtitle2" sx={{ color: "black" }}>
                 거시경제
               </Typography>
-              {isHovering === true
-                ? inve.map((invem, index) => (
-                    <div key={index}>
-                      <ul>
-                        <Typography variant="caption" sx={{ lineHeight: 0 }}>
-                          {invem.title}
-                        </Typography>
-                      </ul>
-                    </div>
-                  ))
-                : null}
             </Nav.Link>
 
             <Nav.Link
@@ -74,17 +51,6 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               <Typography variant="subtitle2" sx={{ color: "black" }}>
                 크립토 규제/정책
               </Typography>
-              {isHovering === true
-                ? poli.map((polic, index) => (
-                    <div key={index}>
-                      <ul>
-                        <Typography variant="caption" sx={{ lineHeight: 0 }}>
-                          {polic.title}
-                        </Typography>
-                      </ul>
-                    </div>
-                  ))
-                : null}
             </Nav.Link>
 
             <Nav.Link
@@ -95,17 +61,6 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               <Typography variant="subtitle2" sx={{ color: "black" }}>
                 크립토 기술/투자 이슈
               </Typography>
-              {isHovering === true
-                ? mac.map((ma, index) => (
-                    <div key={index}>
-                      <ul>
-                        <Typography variant="caption" sx={{ lineHeight: 0 }}>
-                          {ma.title}
-                        </Typography>
-                      </ul>
-                    </div>
-                  ))
-                : null}
             </Nav.Link>
             <Nav.Link
               onClick={() => {
