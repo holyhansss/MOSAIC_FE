@@ -22,6 +22,10 @@ import {
   REPORT_TITLES,
 } from "../../constants/constants";
 
+//Editor
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+
 const AdminWeeklyReport = (props) => {
   const db = getFirestore();
   const auth = getAuth();
@@ -84,6 +88,8 @@ const AdminWeeklyReport = (props) => {
     getAdminFromDatabase();
   }, []);
 
+  const insightRef = useRef();
+
   return (
     <Container>
       {/* {console.log(location.state)}
@@ -131,7 +137,7 @@ const AdminWeeklyReport = (props) => {
         />
         <Container className="mt-5 align-item-center h3">
           Insight
-          <Form.Control
+          {/* <Form.Control
             key={"insight"}
             className="mt-3"
             type=""
@@ -144,6 +150,18 @@ const AdminWeeklyReport = (props) => {
               // width: '67%',
               height: "200px",
             }}
+          /> */}
+
+          <Editor
+              ref={insightRef}
+              initialEditType="WYSIWYG"
+              initialValue="내용을 입력하세요"
+              previewStyle="vertical"
+              height="300px"
+              useCommandShortcut={false}
+              onChange={(e) => {
+                handleOnChangeInsight(insightRef.current.getInstance().getMarkdown());
+              }}
           />
         </Container>
         <Row className="justify-content-md-center my-5">

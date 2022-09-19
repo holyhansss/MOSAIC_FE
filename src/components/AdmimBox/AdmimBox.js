@@ -1,8 +1,11 @@
-import React, { forwardRef, useState, useImperativeHandle } from "react";
+import React, { forwardRef, useState, useImperativeHandle, useRef } from "react";
 
 import { Container, Row } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
+//Editor
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 // props: title, firebaseCollectionName, firebaseSubCollectionName, db
 const AdminTopicUploadForm = forwardRef((props, ref) => {
@@ -79,6 +82,8 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
     }
   };
 
+  const editorRef = useRef();
+
   return (
     <Container>
       {props.title}
@@ -99,23 +104,21 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
               }}
               label=""
             />
-            <Form.Control
-              key={"desc" + index}
-              className="me-1 col-9"
-              type=""
-              as="textarea"
-              placeholder="설명"
+
+            <Editor
+              ref={editorRef}
+              initialEditType="WYSIWYG"
+              initialValue="내용을 입력하세요"
+              previewStyle="vertical"
+              height="300px"
+              useCommandShortcut={false}
               onChange={(e) => {
-                handleDescChange(index, e.target.value);
-              }}
-              style={{
-                width: "67%",
-                height: "150px",
+                handleDescChange(index, editorRef.current.getInstance().getMarkdown());
               }}
             />
           </Row>
         );
-      })}
+      })} 
       <Row className="justify-content-md-center">
         <Button
           variant="outline-secondary"

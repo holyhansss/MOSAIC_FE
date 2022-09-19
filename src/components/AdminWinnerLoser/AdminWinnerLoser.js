@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // react bootstrap
 import {
   Dropdown,
@@ -26,6 +26,10 @@ import AdminTopicUploadForm from "../AdmimBox/AdmimBox";
 // constants
 import { FIREBASE_WEEKLY_REPORT_COLLECTION } from "../../constants/constants";
 
+//Editor
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+
 const AdminWinnerLoser = () => {
   const db = getFirestore();
   const storage = getStorage();
@@ -45,6 +49,10 @@ const AdminWinnerLoser = () => {
 
   const [lock, setLock] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const content1Ref = useRef();
+  const content2Ref = useRef();
+
   useEffect(() => {
     const getData = async () => {
       const q = query(collection(db, FIREBASE_WEEKLY_REPORT_COLLECTION));
@@ -172,7 +180,7 @@ const AdminWinnerLoser = () => {
         ) : (
           <div></div>
         )}
-
+{/* 
         <Form.Control
           key={"desc1"}
           className="me-1 col-9"
@@ -186,7 +194,21 @@ const AdminWinnerLoser = () => {
             width: "67%",
             height: "150px",
           }}
-        />
+        /> */}
+
+          <Editor
+            ref={content1Ref}
+            initialEditType="WYSIWYG"
+            initialValue="내용을 입력하세요"
+            previewStyle="vertical"
+            height="300px"
+            useCommandShortcut={false}
+            onChange={(e) => {
+              setDesc1(content1Ref.current.getInstance().getMarkdown());
+            }}
+          />
+
+
       </Container>
       <Container className="my-5">
         <input
@@ -207,7 +229,7 @@ const AdminWinnerLoser = () => {
           <div></div>
         )}
 
-        <Form.Control
+        {/* <Form.Control
           key={"desc2"}
           className="me-1 col-9"
           type=""
@@ -219,6 +241,18 @@ const AdminWinnerLoser = () => {
           style={{
             width: "67%",
             height: "150px",
+          }}
+        /> */}
+
+        <Editor
+          ref={content2Ref}
+          initialEditType="WYSIWYG"
+          initialValue="내용을 입력하세요"
+          previewStyle="vertical"
+          height="300px"
+          useCommandShortcut={false}
+          onChange={(e) => {
+            setDesc2(content2Ref.current.getInstance().getMarkdown());
           }}
         />
       </Container>

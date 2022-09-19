@@ -5,6 +5,10 @@ import Nav from "react-bootstrap/Nav";
 import styled from "styled-components";
 import { grey } from "@mui/material/colors";
 
+//Viewer
+import { Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+
 const StyleBox = styled(Box)`
   background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
   border-radius: 10px;
@@ -35,7 +39,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
           <Nav className="flex-column">
             <Nav.Link
               onClick={() => {
-                inputinvest.current.scrollIntoView({ behavior: "smooth" });
+                inputmacro.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
               <Typography variant="subtitle2" sx={{ color: "black" }}>
@@ -55,7 +59,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
 
             <Nav.Link
               onClick={() => {
-                inputmacro.current.scrollIntoView({ behavior: "smooth" });
+                inputinvest.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
               <Typography variant="subtitle2" sx={{ color: "black" }}>
@@ -75,7 +79,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
         </div>
       </Box>
 
-      {/* {contents} */}
+      {/* {Table of contents} */}
       <Typography variant="h3" align="center">
         {title}
       </Typography>
@@ -91,7 +95,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
         }}
       />
 
-      {/* {Table of contents} */}
+      {/* {Table of contents} 시작 */}
       <StyleBox>
         <Typography variant="h6" align="center">
           목차
@@ -100,7 +104,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
           <Nav className="flex-column">
             <Nav.Link
               onClick={() => {
-                inputinvest.current.scrollIntoView({ behavior: "smooth" });
+                inputmacro.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
               <Typography
@@ -109,11 +113,11 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               >
                 거시경제
               </Typography>
-              {inve.map((invem, index) => (
+              {mac.map((ma, index) => (
                 <div key={index}>
                   <ul>
                     <Styleli>
-                      <Typography variant="body2">{invem.title}</Typography>
+                      <Typography variant="body2">{ma.title}</Typography>
                     </Styleli>
                   </ul>
                 </div>
@@ -144,7 +148,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
 
             <Nav.Link
               onClick={() => {
-                inputmacro.current.scrollIntoView({ behavior: "smooth" });
+                inputinvest.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
               <Typography
@@ -153,11 +157,11 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               >
                 크립토 기술/투자 이슈
               </Typography>
-              {mac.map((ma, index) => (
+              {inve.map((invem, index) => (
                 <div key={index}>
                   <ul>
                     <Styleli>
-                      <Typography variant="body2">{ma.title}</Typography>
+                      <Typography variant="body2">{invem.title}</Typography>
                     </Styleli>
                   </ul>
                 </div>
@@ -185,16 +189,16 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
         }}
       />
 
-      {/* {Table of contents} */}
+      {/* {Table of contents}  끝*/}
 
-      {/* {contents} */}
+      {/* {contents} 시작 */}
 
       <Typography
         variant="h4"
         align="center"
         gutterBottom
         sx={{ fontWeight: "bold", m: 1 }}
-        ref={inputinvest}
+        ref={inputmacro}
       >
         거시경제
       </Typography>
@@ -206,7 +210,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
 
       <p />
       <div>
-        {inve.map((invem, index) => (
+        {mac.map((ma, index) => (
           <div key={index}>
             <p />
             <Typography
@@ -216,18 +220,10 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               component="div"
               sx={{ fontWeight: "bold" }}
             >
-              {invem.title}
+              {ma.title}
             </Typography>
             <p />
-            <Typography
-              variant="body1"
-              align="left"
-              gutterBottom
-              component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
-            >
-              {invem.content}
-            </Typography>
+            <Viewer initialValue={ma.content} />
             <p />
             <Box
               sx={{
@@ -274,7 +270,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               {polic.title}
             </Typography>
             <p />
-            <Typography
+            {/* <Typography
               variant="body1"
               align="left"
               gutterBottom
@@ -282,7 +278,8 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
               {polic.content}
-            </Typography>
+            </Typography> */}
+            <Viewer initialValue={polic.content} />
             <p />
             <Box
               sx={{
@@ -305,7 +302,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
         align="center"
         gutterBottom
         sx={{ fontWeight: "bold", m: 1 }}
-        ref={inputmacro}
+        ref={inputinvest}
       >
         크립토 기술/투자 이슈
       </Typography>
@@ -318,18 +315,29 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
 
       <p />
       <div>
-        {mac.map((ma, index) => (
+        {inve.map((invem, index) => (
           <div key={index}>
             <p />
             <Typography
+              variant="h6"
+              align="left"
+              gutterBottom
+              component="div"
+              sx={{ fontWeight: "bold" }}
+            >
+              {invem.title}
+            </Typography>
+            <p />
+            {/* <Typography
               variant="body1"
               align="left"
               gutterBottom
               component="div"
               sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
-              {ma.content}
-            </Typography>
+              {invem.content}
+            </Typography> */}
+            <Viewer initialValue={invem.content} />
             <p />
             <Box
               sx={{
@@ -366,7 +374,7 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
         {insi.map((ins, index) => (
           <div key={index}>
             <p />
-            <Typography
+            {/* <Typography
               variant="body1"
               align="left"
               gutterBottom
@@ -374,7 +382,8 @@ function Reportcard({ title, writer, date, inve, poli, mac, insi }) {
               sx={{ lineHeight: 2, letterSpacing: 0.25 }}
             >
               {ins.content}
-            </Typography>
+            </Typography> */}
+            <Viewer initialValue={ins.content} />
             <p />
             <Box
               sx={{
