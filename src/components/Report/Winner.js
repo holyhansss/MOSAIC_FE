@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { dbService } from "../../firebase.js";
 import { Grid, Container, Box, Typography, Avatar } from "@mui/material";
-import { grey } from "@mui/material/colors";
+
+//Viewer
+import { Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
 const Winner = ({ user, id, title, writer, date }) => {
   const [winner, setWinner] = useState([]);
@@ -77,14 +80,15 @@ const Winner = ({ user, id, title, writer, date }) => {
                     sx={{ width: "53rem", height: "40rem" }}
                   />
                   <p />
-                  <Typography
+                  {/* <Typography
                     variant="body1"
                     align="left"
                     gutterBottom
                     component="div"
                   >
                     {invem.desc1}
-                  </Typography>
+                  </Typography> */}
+                  <Viewer initialValue={invem.desc1} />
                   <p />
                   <Avatar
                     alt="pic2"
@@ -94,14 +98,15 @@ const Winner = ({ user, id, title, writer, date }) => {
                   />
                   <p />
                   <p />
-                  <Typography
+                  {/* <Typography
                     variant="body1"
                     align="left"
                     gutterBottom
                     component="div"
                   >
                     {invem.desc2}
-                  </Typography>
+                  </Typography> */}
+                  <Viewer initialValue={invem.desc2} />
                 </div>
               ))}
             </div>
