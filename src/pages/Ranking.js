@@ -1,8 +1,6 @@
 import React from "react";
-import { Box, Container,Grid,Typography, } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
-import { grey } from "@mui/material/colors";
-
 import CryptoTable from "../components/PromisingCoin/CryptoTable";
 
 const StyleBox = styled(Box)`
@@ -19,32 +17,27 @@ const MainContainer = styled(Container)`
 `;
 
 export default function Ranking() {
-
-
   return (
-    <MainContainer maxWidth="lg">
-      <Grid container direction="row" spacing ={3}>
-      <Grid item xs={12}>
-        <Box sx={{ paddingTop: 2,}}/>
-          <Typography
-            variant="h5"
-            align="left"
-            gutterBottom
-          >
-            MOSAIC Ranking
-          </Typography>
-          <Box sx={{ paddingTop: 2,}}/>
-          <Typography
-            variant="body1"
-            align="left"
-            gutterBottom
-          >
-            [설명]
-          </Typography>
+    <>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          backgroundColor: "rgba(0,0,0,0.1)",
+          width: "calc(100vw - (100vw - 100%))",
+          height: "20em",
+        }}
+      ></div>
+      <MainContainer maxWidth="lg">
+        <Grid container direction="row" spacing={3}>
+          <Grid item xs={12}>
+            <Box sx={{ height: "20em" }} />
+          </Grid>
+          <Grid item xs={12}>
+            <CryptoTable />
+          </Grid>
         </Grid>
-        <Grid item xs={12}><CryptoTable/></Grid>
-      </Grid>
-    </MainContainer>
-    
+      </MainContainer>
+    </>
   );
 }
