@@ -37,7 +37,7 @@ function ReportList({ result, reports }) {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ flexGrow: 1 }}>
+          {/* <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
               spacing={{ xs: 2, md: 3 }}
@@ -54,7 +54,17 @@ function ReportList({ result, reports }) {
                 </Grid>
               ))}
             </Grid>
-          </Box>
+          </Box> */}
+            {reports.slice(1).map((report, index) => (
+              <div key={index}>
+                  <Reportlistcard
+                    id={report.id}
+                    title={report.title}
+                    date={moment(report.date).format("YYYY.MM.DD")}
+                    writer={report.writer}
+                  />
+                  </div>
+              ))}
         </Grid>
       </Grid>
     </>
