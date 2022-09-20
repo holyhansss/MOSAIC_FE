@@ -80,7 +80,7 @@ function App() {
         id: docs.id,
         title: docs.data().title,
         date: docs.data().date,
-        writer: docs.data().writer,
+        writer: docs.data().writer
       };
       setReports((prev) => [reportObj, ...prev]);
     });
