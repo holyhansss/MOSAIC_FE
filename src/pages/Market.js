@@ -7,6 +7,7 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   Button,
+  Box,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
@@ -324,21 +325,33 @@ function Marketpage() {
 
   return (
     <>
-      <Grid container spacing={5}>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          backgroundColor: "rgba(0,0,0,0.1)",
+          width: "calc(100vw - (100vw - 100%))",
+          height: "20em",
+        }}
+      ></div>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography variant="h5" sx={{ marginTop: 5 }}>
+          <Box sx={{ height: "20em" }} />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h5">
             S&P 500 vs CMC 200
           </Typography>
           <Typography
-                  variant="body1"
-                  align="left"
-                  gutterBottom
-                  component="div"
-                  sx={{lineHeight: 2, letterSpacing: 0.25}}
-                >
-                  미국 주식 시장 대표 지수인 SNP 500 Index와 암호화폐 시장을 대표하는 Crypto 200 Index를 동시에 비교 분석한 그래프입니다.
-
-          </Typography> 
+            variant="body1"
+            align="left"
+            gutterBottom
+            component="div"
+            sx={{ lineHeight: 2, letterSpacing: 0.25 }}
+          >
+            미국 주식 시장 대표 지수인 S&P 500 Index와 암호화폐 시장을 대표하는
+            Crypto 200 Index를 동시에 비교 분석한 그래프입니다.
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
@@ -363,9 +376,7 @@ function Marketpage() {
           {snpIndex !== null && <div>{selectComponent[snpIndex]}</div>}
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h5">
-            코인 카테고리
-          </Typography>
+          <Typography variant="h5">코인 카테고리</Typography>
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>

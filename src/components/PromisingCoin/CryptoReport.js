@@ -24,7 +24,7 @@ const MainContainer = styled(Container)`
 `;
 function CryptoReport() {
   return (
-    <MainContainer maxWidth="md">
+    <MainContainer maxWidth="md" disableGutters="true">
       <Grid container direction="row" spacing={3}>
         <Grid item xs={12}>
           <Grid

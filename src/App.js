@@ -98,26 +98,26 @@ function App() {
           <Header user={userObj} admin={admin} />
         </Grid>
         <Grid item md={10}>
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" disableGutters="true">
             <Routes>
-              <Route path="/" element={<MainPage result={result} />}></Route>
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/join" element={<Join />}></Route>
-              <Route path="admin" element={<Admin />}></Route>
-              <Route path="/market" element={<MarketPage />}></Route>
-              <Route path="/promising" element={<PromisingCoins />}></Route>
+              <Route path="/" element={<MainPage result={result} />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/join" element={<Join />} />
+              <Route path="admin" element={<Admin />} />
+              <Route path="/market" element={<MarketPage />} />
+              <Route path="/promising" element={<PromisingCoins />} />
               <Route
                 path="/reportList"
                 element={<ReportList result={result} reports={reports} />}
-              ></Route>
+              />
               <Route
                 path="/reportDetail/:id/:title/:writer/:date"
                 element={<ReportDetail user={userObj} />}
-              ></Route>
+              />
               <Route
                 path="/profile"
                 element={<MyPage user={userObj} refreshUser={refreshUser} />}
-              ></Route>
+              />
               <Route path="/ranking" element={<Ranking />} />
             </Routes>
           </Container>

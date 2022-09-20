@@ -18,6 +18,8 @@ export const StyledLink = styled(Link)`
 `;
 
 const HeaderContainer = styled.div`
+  position: relative;
+  z-index: 200;
   background-color: #f2f2f2;
   height: 4rem;
   display: flex;
@@ -60,7 +62,6 @@ function Header({ user, admin }) {
             <Grid item>
               {user != null ? (
                 <NavDropdown
-                  menuVariant="dark"
                   title={
                     <img
                       referrerpolicy="no-referrer"
@@ -96,65 +97,6 @@ function Header({ user, admin }) {
             </Grid>
           </Grid>
         </Grid>
-        {/* <NavSideContainer>
-          <StyledLink to="/">
-            <NavMain>MOSAIC</NavMain>
-          </StyledLink>
-        </NavSideContainer>
-        <NavCenterContainer>
-          <NavMenuContainer>
-            <StyledLink to="/promising">
-              유망 코인
-            </StyledLink>
-          </NavMenuContainer>
-          <NavMenuContainer>
-            <StyledLink to="/market">
-              시장 동향
-            </StyledLink>
-          </NavMenuContainer>
-          <NavMenuContainer>
-            <StyledLink to="/reportList">
-              리포트
-            </StyledLink>
-          </NavMenuContainer>
-        </NavCenterContainer>
-        <NavSideContainer>
-          {user != null ? (
-            <NavDropdown
-              menuVariant="dark"
-              title={
-                <img
-                  referrerpolicy="no-referrer"
-                  src={user.photoURL}
-                  alt=""
-                  style={{ borderRadius: "50%" }}
-                  width="30"
-                  height="30"
-                />
-              }
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item>
-                <StyledLink to="/profile">마이페이지</StyledLink>
-              </NavDropdown.Item>
-              {admin === true && (
-                <NavDropdown.Item>
-                  <StyledLink
-                    to={{
-                      pathname: "/admin",
-                      state: { user: user },
-                    }}
-                  >
-                    관리자
-                  </StyledLink>
-                </NavDropdown.Item>
-              )}
-              <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
-            </NavDropdown>
-          ) : (
-            <StyledLink to="/login">로그인</StyledLink>
-          )}
-        </NavSideContainer> */}
       </Container>
     </HeaderContainer>
   );

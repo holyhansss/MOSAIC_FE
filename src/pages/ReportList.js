@@ -13,9 +13,21 @@ import {
 function ReportList({ result, reports }) {
   return (
     <>
-      <Grid container spacing={5}>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          backgroundColor: "rgba(0,0,0,0.1)",
+          width: "calc(100vw - (100vw - 100%))",
+          height: "20em",
+        }}
+      ></div>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom sx={{ marginTop: 5 }}>
+          <Box sx={{ height: "20em" }} />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h5" gutterBottom>
             최신리포트
           </Typography>
         </Grid>
