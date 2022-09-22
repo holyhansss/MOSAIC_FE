@@ -18,13 +18,7 @@ import {
 function ReportMain({ result, reports }) {
     let subreports = reports.slice(0,4);
     let dailyports = reports.slice(0,3);
-    console.log(result);
-    
-    // const navigate = useNavigate();
-    // const onclick = () => {
-    //     navigate("/reportList", {
-    //       });
-    // }; 
+
   return (
     <>
       <div
