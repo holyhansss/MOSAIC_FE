@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import CryptoReport from "../components/PromisingCoin/CryptoReport";
+import CryptoCard from "../components/PromisingCoin/CryptoList";
 
 const PromisingCoins = () => {
   return (
@@ -22,6 +23,9 @@ const PromisingCoins = () => {
           <Typography variant="h5" gutterBottom>
             유망코인 리스트
           </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <CryptoCard/>
         </Grid>
       </Grid>
       {/* <CryptoReport /> */}
