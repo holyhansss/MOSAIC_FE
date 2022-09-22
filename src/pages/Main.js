@@ -56,7 +56,7 @@ const WelcomText = styled(Typography)`
   animation: 2s ${scale} ease-out;
 `;
 
-const MainPage = ({ result }) => {
+const MainPage = ({ reports }) => {
   return (
     <>
       <div
@@ -156,8 +156,8 @@ const MainPage = ({ result }) => {
             최신 리포트
           </Typography>
           <div>
-            {result !== undefined
-              ? result.slice(1).map((report, index) => (
+            {reports !== undefined
+              ? reports.slice(0,5).map((report, index) => (
                   <div key={index}>
                     <Reportlistcard
                       id={report.id}
