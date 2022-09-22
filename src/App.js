@@ -88,7 +88,7 @@ function App() {
       setReports((prev) => [reportObj, ...prev]);
     });
   };
-  const result = reports.slice(0, 5);
+  const result = reports[0];
   useEffect(() => {
     getReports();
   }, []);
@@ -115,7 +115,7 @@ function App() {
               />
               <Route
                 path="/reportList"
-                element={<ReportList result={result[0]} reports={reports} />}
+                element={<ReportList result={result} reports={reports} />}
               />
               <Route
                 path="/reportDetail/:id/:title/:writer/:date"
