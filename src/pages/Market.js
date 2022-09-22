@@ -339,18 +339,19 @@ function Marketpage() {
           <Box sx={{ height: "20em" }} />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h5">
+          <Typography variant="h5" gutterBottom>
             S&P 500 vs CMC 200
           </Typography>
           <Typography
-            variant="body1"
             align="left"
             gutterBottom
             component="div"
-            sx={{ lineHeight: 2, letterSpacing: 0.25 }}
+            sx={{ letterSpacing: 0.25, color: "#7F8487" }}
           >
-            미국 주식 시장 대표 지수인 S&P 500 Index와 암호화폐 시장을 대표하는
-            Crypto 200 Index를 동시에 비교 분석한 그래프입니다.
+            주식시장과 암호화폐 시장의 시세를 비교하는 지표입니다.
+            <br />
+            안전자산 대비 위험자산의 선호도, 주식과 암호화폐 간의 변동성 비교,
+            두 자산간의 자금 유입도 등을 파악할 수 있습니다.
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -361,13 +362,13 @@ function Marketpage() {
               exclusive
               sx={{ height: "2.5em" }}
             >
-              <ToggleButton sx={{ color: "darkgrey" }} value="1d">
+              <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                 1D
               </ToggleButton>
-              <ToggleButton sx={{ color: "darkgrey" }} value="1mo">
+              <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                 1M
               </ToggleButton>
-              <ToggleButton sx={{ color: "darkgrey" }} value="1y">
+              <ToggleButton sx={{ color: "#7F8487" }} value="1y">
                 1Y
               </ToggleButton>
             </ToggleButtonGroup>
@@ -376,7 +377,21 @@ function Marketpage() {
           {snpIndex !== null && <div>{selectComponent[snpIndex]}</div>}
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h5">코인 카테고리</Typography>
+          <Typography variant="h5" gutterBottom>
+            카테고리별 인덱스
+          </Typography>
+          <Typography
+            align="left"
+            gutterBottom
+            component="div"
+            sx={{ letterSpacing: 0.25, color: "#7F8487" }}
+          >
+            Computing, DeFi, Currency, Smart Contract Platform, Culture의 5가지
+            섹터로 나누어 상위 10개 종목으로 구성한 지수를 보여줍니다.
+            <br />
+            어떤 섹터의 코인/토큰들의 수익률이 우수한지 비교할 수 있으며, 시세를
+            통해 어떤 산업이 강세인지를 파악할 수 있습니다.
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <ThemeProvider theme={theme}>
@@ -386,13 +401,13 @@ function Marketpage() {
               exclusive
               sx={{ height: "2.5em" }}
             >
-              <ToggleButton sx={{ color: "gray" }} value="1d">
+              <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                 1D
               </ToggleButton>
-              <ToggleButton sx={{ color: "gray" }} value="1mo">
+              <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                 1M
               </ToggleButton>
-              <ToggleButton sx={{ color: "gray" }} value="1y">
+              <ToggleButton sx={{ color: "#7F8487" }} value="1y">
                 1Y
               </ToggleButton>
             </ToggleButtonGroup>
@@ -418,8 +433,20 @@ function Marketpage() {
           </div>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" gutterBottom>
             공포 탐욕 지수
+          </Typography>
+          <Typography
+            align="left"
+            gutterBottom
+            component="div"
+            sx={{ letterSpacing: 0.25, color: "#7F8487" }}
+          >
+            투자자의 감정을 나타내는 지수로, 하락장에서는 공포가, 상승장에서는
+            탐욕이 지배적입니다.
+            <br />
+            주식시장과 마찬가지로 선행지표이며, 보다 변동성이 심한 암호화폐
+            시장에서 미래 동향을 유추할 수 있는 지표로 활용됩니다.
           </Typography>
         </Grid>
         <Grid item xs={12}>
