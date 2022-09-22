@@ -62,7 +62,7 @@ function Header({ user, admin }) {
               <StyledLink to="/market">시장 동향</StyledLink>
             </Grid>
             <Grid item>
-              <StyledLink to="/reportList">리포트</StyledLink>
+              <StyledLink to="/reportMain">리포트</StyledLink>
             </Grid>
           </Grid>
           <Grid
