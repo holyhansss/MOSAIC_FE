@@ -15,7 +15,7 @@ import cardimage004 from "../../img/PromisingCoins/004.jpg";
 import cardimage005 from "../../img/PromisingCoins/005.jpg";
 
 
-
+//Crypto
 export default function CryptoCard() {
   return (
     <Grid container direction="row" spacing={5}>
