@@ -7,7 +7,7 @@ import Marquee from "react-fast-marquee";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // Components
-import { Reportlistcard } from "../components/Report/Reportlistcard.js";
+import { ReportlistFormAll } from "../components/Report/Reportlistcard.js";
 // Images
 import RankingImage from "../img/MainPage/001.jpg";
 import RatingImage from "../img/MainPage/002.jpg";
@@ -159,7 +159,7 @@ const MainPage = ({ reports }) => {
             {reports !== undefined
               ? reports.slice(0,5).map((report, index) => (
                   <div key={index}>
-                    <Reportlistcard
+                    <ReportlistFormAll
                       id={report.id}
                       title={report.title}
                       date={moment(report.date).format("YYYY.MM.DD")}
