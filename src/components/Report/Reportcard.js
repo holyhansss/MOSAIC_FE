@@ -6,8 +6,8 @@ import styled from "styled-components";
 import { grey } from "@mui/material/colors";
 
 //Viewer
-import { Viewer } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 const StyleBox = styled(Box)`
   background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);

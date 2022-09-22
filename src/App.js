@@ -7,7 +7,7 @@ import GlobalStyle from "./style/global";
 import { Container, Grid } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-//page
+// Pages
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
@@ -20,11 +20,7 @@ import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
 import CryptoReport from "./components/PromisingCoin/CryptoReport";
-import GlobalStyle from "./style/global";
-import { Container, Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReportMain from "./pages/ReportMain";
-
 
 const theme = createTheme({
   typography: {
@@ -88,7 +84,7 @@ function App() {
         id: docs.id,
         title: docs.data().title,
         date: docs.data().date,
-        writer: docs.data().writer
+        writer: docs.data().writer,
       };
       setReports((prev) => [reportObj, ...prev]);
     });

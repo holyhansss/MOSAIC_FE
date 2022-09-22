@@ -1,5 +1,18 @@
 import React from "react";
-import { List, ListItem, Divider,ListItemText, ListItemAvatar, Avatar, Typography, Card, CardActionArea, CardContent, CardMedia, Box } from "@mui/material";
+import {
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Box,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -53,7 +66,7 @@ function Reportrecentcard({ id, title, writer, date }) {
       <CardActionArea onClick={move}>
         <CardMedia
           component="img"
-          height= "230"
+          height="230"
           image="https://cdn.dribbble.com/users/30229/screenshots/16975390/ndax_dribbble_coins_2.png?compress=1&resize=400x300"
           alt="daily image"
         />
@@ -92,47 +105,47 @@ function Reportlistcard({ id, title, date, writer }) {
     });
   };
   return (
-      // <CardActionArea onClick={move}>
-      //   <StyleCardSmall
-      //     sx={{
-      //       width: 1,
-      //       height: 180,
-      //       margin: 1,
-      //       borderRadius: "10px",
-      //       color: "white",
-      //       boxShadow: 3
-      //     }}
-      //   >
-      //     <CardContent>
-      //       <Typography gutterBottom variant="h6" component="div">
-      //         {title}
-      //       </Typography>
-      //       <Typography variant="body2">{writer}</Typography>
-      //     </CardContent>
-      //   </StyleCardSmall>
-      // </CardActionArea>
+    // <CardActionArea onClick={move}>
+    //   <StyleCardSmall
+    //     sx={{
+    //       width: 1,
+    //       height: 180,
+    //       margin: 1,
+    //       borderRadius: "10px",
+    //       color: "white",
+    //       boxShadow: 3
+    //     }}
+    //   >
+    //     <CardContent>
+    //       <Typography gutterBottom variant="h6" component="div">
+    //         {title}
+    //       </Typography>
+    //       <Typography variant="body2">{writer}</Typography>
+    //     </CardContent>
+    //   </StyleCardSmall>
+    // </CardActionArea>
 
-      <Card sx={{ maxWidth: 1 }}>
-        <CardActionArea onClick={move}>
-          <CardMedia
-            component="img"
-            height= "230"
-            image="https://cdn.dribbble.com/users/30229/screenshots/16975390/ndax_dribbble_coins_2.png?compress=1&resize=400x300"
-            alt="daily image"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
-            </Typography>
-            <Typography variant="caption" color="text.secondary">
-              {date}
-            </Typography>
-            {/* <Typography variant="caption">
+    <Card sx={{ maxWidth: 1 }}>
+      <CardActionArea onClick={move}>
+        <CardMedia
+          component="img"
+          height="230"
+          image="https://cdn.dribbble.com/users/30229/screenshots/16975390/ndax_dribbble_coins_2.png?compress=1&resize=400x300"
+          alt="daily image"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {date}
+          </Typography>
+          {/* <Typography variant="caption">
               더보기 <ArrowForwardIcon fontSize="small" />
             </Typography> */}
-          </CardContent>
-        </CardActionArea>
-      </Card>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }
 
@@ -152,26 +165,25 @@ function ReportlistForm({ id, title, date, writer }) {
     });
   };
   return (
-    
-    <List sx={{ width: "75%", bgcolor: 'background.paper', mx: "auto"}}>
+    <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
       <ListItem button alignItems="flex-start" onClick={move}>
         <ListItemText
-          primary={            
-          <React.Fragment>
-            <Typography
-              sx={{ display: 'inline'}}
-              component="span"
-              variant="h5"
-              color="text.primary"
-            >
-              {title}
-            </Typography>
-          </React.Fragment>}
-
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                variant="h5"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
           secondary={
             <React.Fragment>
               <Typography
-                sx={{ display: 'inline'}}
+                sx={{ display: "inline" }}
                 component="span"
                 variant="body2"
                 color="text.primary"
@@ -182,13 +194,17 @@ function ReportlistForm({ id, title, date, writer }) {
           }
           // sx={{py:5, px:3}}
         />
-        <ListItemAvatar sx={{pb:1}}>
-          <Avatar alt="Remy Sharp" src="https://blog.kakaocdn.net/dn/RbIRm/btqV8F1wVH3/cRKJ1lSX7buBlmQtCB7f6k/img.png" variant="square" sx={{borderRadius: '8%', width: "6rem", height: "4rem"}}  />
+        <ListItemAvatar sx={{ pb: 1 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src="https://blog.kakaocdn.net/dn/RbIRm/btqV8F1wVH3/cRKJ1lSX7buBlmQtCB7f6k/img.png"
+            variant="square"
+            sx={{ borderRadius: "8%", width: "6rem", height: "4rem" }}
+          />
         </ListItemAvatar>
       </ListItem>
-      <Divider sx={{ width:'100%', mt:1}}/>
+      <Divider sx={{ width: "100%", mt: 1 }} />
     </List>
-
   );
 }
 
@@ -208,26 +224,25 @@ function ReportlistFormAll({ id, title, date, writer }) {
     });
   };
   return (
-    
-    <List sx={{ width: "75%", bgcolor: 'background.paper', mx: "auto"}}>
+    <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
       <ListItem button alignItems="flex-start" onClick={move}>
         <ListItemText
-          primary={            
-          <React.Fragment>
-            <Typography
-              sx={{ display: 'inline'}}
-              component="span"
-              variant="h5"
-              color="text.primary"
-            >
-              {title}
-            </Typography>
-          </React.Fragment>}
-
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                variant="h5"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
           secondary={
             <React.Fragment>
               <Typography
-                sx={{ display: 'inline'}}
+                sx={{ display: "inline" }}
                 component="span"
                 variant="body2"
                 color="text.primary"
@@ -236,15 +251,19 @@ function ReportlistFormAll({ id, title, date, writer }) {
               </Typography>
             </React.Fragment>
           }
-          sx={{py:5, px:3}}
+          sx={{ py: 5, px: 3 }}
         />
-        <ListItemAvatar sx={{pb:1}}>
-          <Avatar alt="Remy Sharp" src="https://blog.kakaocdn.net/dn/RbIRm/btqV8F1wVH3/cRKJ1lSX7buBlmQtCB7f6k/img.png" variant="square" sx={{borderRadius: '8%', width: "15rem", height: "10rem"}}  />
+        <ListItemAvatar sx={{ pb: 1 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src="https://blog.kakaocdn.net/dn/RbIRm/btqV8F1wVH3/cRKJ1lSX7buBlmQtCB7f6k/img.png"
+            variant="square"
+            sx={{ borderRadius: "8%", width: "15rem", height: "10rem" }}
+          />
         </ListItemAvatar>
       </ListItem>
-      <Divider sx={{ width:'100%', mt:3}}/>
+      <Divider sx={{ width: "100%", mt: 3 }} />
     </List>
-
   );
 }
 

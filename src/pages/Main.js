@@ -172,7 +172,7 @@ const MainPage = ({ reports }) => {
           </Divider>
           <div>
             {reports !== undefined
-              ? reports.slice(0,5).map((report, index) => (
+              ? reports.slice(0, 5).map((report, index) => (
                   <div key={index}>
                     <ReportlistFormAll
                       id={report.id}

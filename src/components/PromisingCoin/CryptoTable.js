@@ -206,12 +206,7 @@ export default function CryptoTable() {
 
   return (
     <div style={{ width: "100%", marginBottom: "5rem" }}>
-      <DataGrid
-        autoHeight
-        columns={columns}
-        rows={rows}
-        hideFooter
-      />
+      <DataGrid autoHeight columns={columns} rows={rows} hideFooter />
     </div>
   );
 }

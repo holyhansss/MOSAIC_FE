@@ -5,10 +5,7 @@ import moment from "moment";
 import styled from "styled-components";
 
 //components
-import {
-  Reportlistcard,
-  Reportrecentcard,
-} from "./Reportlistcard.js";
+import { Reportlistcard, Reportrecentcard } from "./Reportlistcard.js";
 
 function ReportList({ result, reports }) {
   return (
@@ -67,16 +64,16 @@ function ReportList({ result, reports }) {
               ))}
             </Grid>
           </Box> */}
-            {reports.slice(1).map((report, index) => (
-              <div key={index}>
-                  <Reportlistcard
-                    id={report.id}
-                    title={report.title}
-                    date={moment(report.date).format("YYYY.MM.DD")}
-                    writer={report.writer}
-                  />
-                  </div>
-              ))}
+          {reports.slice(1).map((report, index) => (
+            <div key={index}>
+              <Reportlistcard
+                id={report.id}
+                title={report.title}
+                date={moment(report.date).format("YYYY.MM.DD")}
+                writer={report.writer}
+              />
+            </div>
+          ))}
         </Grid>
       </Grid>
     </>
