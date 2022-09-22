@@ -6,7 +6,7 @@ import moment from "moment";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { grey } from "@mui/material/colors";
 // import Divider from '@mui/material/Divider';
-import { useNavigate } from "react-router-dom";
+
 
 //components
 import {
@@ -18,6 +18,7 @@ import {
 function ReportMain({ result, reports }) {
     let subreports = reports.slice(0,4);
     let dailyports = reports.slice(0,3);
+    console.log(result);
     
     // const navigate = useNavigate();
     // const onclick = () => {
