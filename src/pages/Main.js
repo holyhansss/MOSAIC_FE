@@ -17,7 +17,7 @@ import Marquee from "react-fast-marquee";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // Components
-import { Reportlistcard } from "../components/Report/Reportlistcard.js";
+import { ReportlistFormAll } from "../components/Report/Reportlistcard.js";
 // Images
 import RankingImage from "../img/MainPage/001.jpg";
 import RatingImage from "../img/MainPage/002.jpg";
@@ -69,7 +69,7 @@ const WelcomText = styled(Typography)`
   animation: 2s ${scale} ease-out;
 `;
 
-const MainPage = ({ result }) => {
+const MainPage = ({ reports }) => {
   return (
     <>
       <div
@@ -171,10 +171,10 @@ const MainPage = ({ result }) => {
             </Typography>
           </Divider>
           <div>
-            {result !== undefined
-              ? result.slice(1).map((report, index) => (
+            {reports !== undefined
+              ? reports.slice(0,5).map((report, index) => (
                   <div key={index}>
-                    <Reportlistcard
+                    <ReportlistFormAll
                       id={report.id}
                       title={report.title}
                       date={moment(report.date).format("YYYY.MM.DD")}

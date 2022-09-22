@@ -3,6 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { auth, dbService } from "./firebase";
+import GlobalStyle from "./style/global";
+import { Container, Grid } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+//page
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
@@ -18,6 +23,8 @@ import CryptoReport from "./components/PromisingCoin/CryptoReport";
 import GlobalStyle from "./style/global";
 import { Container, Grid } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ReportMain from "./pages/ReportMain";
+
 
 const theme = createTheme({
   typography: {
@@ -86,7 +93,8 @@ function App() {
       setReports((prev) => [reportObj, ...prev]);
     });
   };
-  const result = reports.slice(0, 4);
+  const result = reports[0];
+
   useEffect(() => {
     getReports();
   }, []);
@@ -101,7 +109,7 @@ function App() {
         <Grid item md={10}>
           <Container maxWidth="lg" disableGutters="true">
             <Routes>
-              <Route path="/" element={<MainPage result={result} />} />
+              <Route path="/" element={<MainPage reports={reports} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
               <Route path="admin" element={<Admin />} />
@@ -109,8 +117,12 @@ function App() {
               <Route path="/promising" element={<PromisingCoins />} />
               <Route path="/promising/:name" element={<CryptoReport />} />
               <Route
+                path="/reportMain"
+                element={<ReportMain result={result} reports={reports} />}
+              />
+              <Route
                 path="/reportList"
-                element={<ReportList result={result[0]} reports={reports} />}
+                element={<ReportList result={result} reports={reports} />}
               />
               <Route
                 path="/reportDetail/:id/:title/:writer/:date"
