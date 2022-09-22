@@ -100,11 +100,7 @@ function CryptoReport() {
               26/30
             </Grid>
           </Grid>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-          >
+          <Grid container direction="row" justifyContent="space-between">
             <Grid item xs={3}>
               <>확장성</>
               <Tooltip
@@ -127,11 +123,7 @@ function CryptoReport() {
               14/35
             </Grid>
           </Grid>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-          >
+          <Grid container direction="row" justifyContent="space-between">
             <Grid item xs={3}>
               <>탈중앙성</>
               <Tooltip

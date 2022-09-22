@@ -1,11 +1,16 @@
-import React, { forwardRef, useState, useImperativeHandle, useRef } from "react";
+import React, {
+  forwardRef,
+  useState,
+  useImperativeHandle,
+  useRef,
+} from "react";
 
 import { Container, Row } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 //Editor
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 // props: title, firebaseCollectionName, firebaseSubCollectionName, db
 const AdminTopicUploadForm = forwardRef((props, ref) => {
@@ -13,7 +18,7 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
     uploadtoDatabase(uid) {
       uploadtoDatabaseInternal(uid);
     },
-}));
+  }));
 
   const newContent = {
     id: 0,
@@ -113,12 +118,15 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
               height="300px"
               useCommandShortcut={false}
               onChange={(e) => {
-                handleDescChange(index, editorRef.current.getInstance().getMarkdown());
+                handleDescChange(
+                  index,
+                  editorRef.current.getInstance().getMarkdown()
+                );
               }}
             />
           </Row>
         );
-      })} 
+      })}
       <Row className="justify-content-md-center">
         <Button
           variant="outline-secondary"

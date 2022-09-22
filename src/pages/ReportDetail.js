@@ -7,7 +7,7 @@ import {
   Modal,
   Typography,
   Button,
-  ButtonGroup
+  ButtonGroup,
 } from "@mui/material";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
 import { useParams } from "react-router-dom";
@@ -71,7 +71,6 @@ export default function ReportDetail({ user }) {
   const [likescount, setLikescount] = useState([]);
   const [count, setCount] = useState(null);
   const [countValue, setCountValue] = useState(null);
-
 
   //전체 좋아요 개수
   const getLikes = async () => {
@@ -217,16 +216,20 @@ export default function ReportDetail({ user }) {
                 {clickICon === true ? (
                   <>
                     <FavoriteIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1" sx={{ color: grey[50]}}>{countValue}</Typography>
+                    <Typography variant="body1" sx={{ color: grey[50] }}>
+                      {countValue}
+                    </Typography>
                   </>
                 ) : (
                   <>
                     <FavoriteBorderIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1" sx={{ color: grey[50] }}>{countValue}</Typography>
+                    <Typography variant="body1" sx={{ color: grey[50] }}>
+                      {countValue}
+                    </Typography>
                   </>
                 )}
               </IconButton>
-              
+
               <IconButton onClick={handleOpen}>
                 <SendIcon sx={{ color: grey[50] }} />
               </IconButton>

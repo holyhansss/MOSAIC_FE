@@ -3,21 +3,20 @@ import Typography from "@mui/material/Typography";
 import { Button, Grid, Box } from "@mui/material";
 import moment from "moment";
 // import styled from "styled-components";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { grey } from "@mui/material/colors";
 // import Divider from '@mui/material/Divider';
-
 
 //components
 import {
   Reportlistcard,
   Reportrecentcard,
-  ReportlistForm
+  ReportlistForm,
 } from "../components/Report/Reportlistcard.js";
 
 function ReportMain({ result, reports }) {
-    let subreports = reports.slice(0,4);
-    let dailyports = reports.slice(0,3);
+  let subreports = reports.slice(0, 4);
+  let dailyports = reports.slice(0, 3);
 
   return (
     <>
@@ -40,11 +39,11 @@ function ReportMain({ result, reports }) {
           </Typography>
         </Grid>
         <Grid item xs={6}>
-            <Box display="flex" justifyContent="flex-end" >
-                <Button href="/reportList" sx={{ color : grey[400] }}>
-                    전체보기 <ArrowForwardIosIcon/>
-                </Button>
-            </Box>
+          <Box display="flex" justifyContent="flex-end">
+            <Button href="/reportList" sx={{ color: grey[400] }}>
+              전체보기 <ArrowForwardIosIcon />
+            </Button>
+          </Box>
         </Grid>
         <Grid item xs={6}>
           <div>
@@ -63,12 +62,12 @@ function ReportMain({ result, reports }) {
             {dailyports.map((report, index) => (
               <div key={index}>
                 <ReportlistForm
-                    id={report.id}
-                    title={report.title}
-                    date={moment(report.date).format("YYYY.MM.DD")}
-                    writer={report.writer}
+                  id={report.id}
+                  title={report.title}
+                  date={moment(report.date).format("YYYY.MM.DD")}
+                  writer={report.writer}
                 />
-            </div>
+              </div>
             ))}
           </div>
         </Grid>
@@ -81,11 +80,11 @@ function ReportMain({ result, reports }) {
           </Typography>
         </Grid>
         <Grid item xs={6}>
-            <Box display="flex" justifyContent="flex-end" >
-                <Button href="/reportList" sx={{ color : grey[400] }}>
-                    전체보기 <ArrowForwardIosIcon/>
-                </Button>
-            </Box>
+          <Box display="flex" justifyContent="flex-end">
+            <Button href="/reportList" sx={{ color: grey[400] }}>
+              전체보기 <ArrowForwardIosIcon />
+            </Button>
+          </Box>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ flexGrow: 1 }}>

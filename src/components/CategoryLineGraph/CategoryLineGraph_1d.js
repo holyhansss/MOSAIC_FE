@@ -30,11 +30,11 @@ function CategoryLineGraph_1d(props) {
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
     const thisResponse = response.data;
-    setDatesAndPrices(thisResponse[0])
-    if (thisResponse==null || thisResponse[1][0]==undefined){
-      setMinMax([0, 100])
+    setDatesAndPrices(thisResponse[0]);
+    if (thisResponse == null || thisResponse[1][0] == undefined) {
+      setMinMax([0, 100]);
     } else {
-      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])])  
+      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])]);
     }
   };
 
