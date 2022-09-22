@@ -35,8 +35,8 @@ function Header({ user, admin }) {
     <HeaderContainer>
       <Container
         maxWidth="lg"
-        disableGutters="true"
-        sx={{ diplay: "flex", alignItems: "center" }}
+        disableGutters
+        sx={{ diplay: "grid", alignItems: "center" }}
       >
         <Grid container alignItems="center">
           <Grid item xs md={2} alignItems="center">
@@ -44,7 +44,14 @@ function Header({ user, admin }) {
               <NavMain>MOSAIC</NavMain>
             </StyledLink>
           </Grid>
-          <Grid container direction="row" alignItems="center" xs={6} md={8} spacing={{xs: 2, md: 7}}>
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+            xs={6}
+            lg md={8}
+            spacing={{ xs: 2, md: 8 }}
+          >
             <Grid item>
               <StyledLink to="/ranking">Mosaic 순위</StyledLink>
             </Grid>
@@ -58,43 +65,47 @@ function Header({ user, admin }) {
               <StyledLink to="/reportList">리포트</StyledLink>
             </Grid>
           </Grid>
-          <Grid container xs md={2} alignItems="center" justifyContent="flex-end">
-            <Grid item>
-              {user != null ? (
-                <NavDropdown
-                  title={
-                    <img
-                      referrerpolicy="no-referrer"
-                      src={user.photoURL}
-                      alt=""
-                      style={{ borderRadius: "50%" }}
-                      width="30"
-                      height="30"
-                    />
-                  }
-                  id="basic-nav-dropdown"
-                >
+          <Grid
+            container
+            xs
+            md={2}
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            {user != null ? (
+              <NavDropdown
+                title={
+                  <img
+                    referrerpolicy="no-referrer"
+                    src={user.photoURL}
+                    alt=""
+                    style={{ borderRadius: "50%" }}
+                    width="30"
+                    height="30"
+                  />
+                }
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item>
+                  <StyledLink to="/profile">마이페이지</StyledLink>
+                </NavDropdown.Item>
+                {admin === true && (
                   <NavDropdown.Item>
-                    <StyledLink to="/profile">마이페이지</StyledLink>
+                    <StyledLink
+                      to={{
+                        pathname: "/admin",
+                        state: { user: user },
+                      }}
+                    >
+                      관리자
+                    </StyledLink>
                   </NavDropdown.Item>
-                  {admin === true && (
-                    <NavDropdown.Item>
-                      <StyledLink
-                        to={{
-                          pathname: "/admin",
-                          state: { user: user },
-                        }}
-                      >
-                        관리자
-                      </StyledLink>
-                    </NavDropdown.Item>
-                  )}
-                  <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <StyledLink to="/login">로그인</StyledLink>
-              )}
-            </Grid>
+                )}
+                <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <StyledLink to="/login">로그인</StyledLink>
+            )}
           </Grid>
         </Grid>
       </Container>

@@ -4,11 +4,15 @@ import { createTheme } from "@mui/material/styles";
 import styled, { keyframes } from "styled-components";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
-
-//components
-import { Reportrecentcard } from "../components/Report/Reportlistcard.js";
-import MainSNPCMC from "../components/LineGraph/MainLineGraph1d";
-import MainCategoryLineGraph from "../components/CategoryLineGraph/MainCategoryLineGraph.js";
+import { Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
+// Components
+import { Reportlistcard } from "../components/Report/Reportlistcard.js";
+// Images
+import RankingImage from "../img/MainPage/001.jpg";
+import RatingImage from "../img/MainPage/002.jpg";
+import MarketImage from "../img/MainPage/003.jpg";
+import Sample from "../img/logo_mosaic.jpg";
 
 // Style
 const theme = createTheme({
@@ -29,11 +33,6 @@ const theme = createTheme({
     },
   },
 });
-
-const StyleBox = styled(Box)`
-  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-  border-radius: 10px;
-`;
 
 const scale = keyframes`
   0% {
@@ -60,111 +59,122 @@ const WelcomText = styled(Typography)`
 const MainPage = ({ result }) => {
   return (
     <>
-      <Grid container spacing={5}>
-        <Grid item xs={12}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box
-              sx={{
-                maxHeight: "3rem",
-                width: 1 / 5,
-              }}
-            >
-              <Typography variant="caption">Mosaic 공지</Typography>
-            </Box>
-            <Box
-              sx={{
-                maxHeight: "3rem",
-                width: 4 / 5,
-              }}
-            >
-              <Marquee gradientColor speed={40}>
-                <Typography variant="caption">
-                  매주 새로운 Mosaic 리포트를 확인하세요!
-                </Typography>
-              </Marquee>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Box sx={{ paddingTop: 5 }} />
-        </Grid>
-        <Grid item xs={12}>
-          <WelcomText variant="h3">Welcome Mosaic</WelcomText>
-        </Grid>
-        <Grid item xs={12}>
-          <Box sx={{ paddingTop: 5 }} />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom component="div">
-            Mosaic Weekly Report
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <div>
-            {result !== undefined ? (
-              <Reportrecentcard
-                id={result.id}
-                title={result.title}
-                writer={result.writer}
-                date={moment(result.date).format("YYYY.MM.DD")}
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          width: "calc(100vw - (100vw - 100%))",
+          height: "40em",
+        }}
+      >
+        <Carousel>
+          <Carousel.Item>
+            <Link to="/ranking">
+              <img
+                className="d-block w-100"
+                src={RankingImage}
+                alt="Ranking slide"
               />
-            ) : null}
+            </Link>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Link to="/promising">
+              <img
+                className="d-block w-100"
+                src={RatingImage}
+                alt="Rating slide"
+              />
+            </Link>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Link to="market">
+              <img
+                className="d-block w-100"
+                src={MarketImage}
+                alt="Market slide"
+              />
+            </Link>
+          </Carousel.Item>
+        </Carousel>
+      </div>
+      <Grid container spacing={15} justifyContent="center">
+        <Grid item xs={12}>
+          <Box sx={{ height: "22em" }} />
+        </Grid>
+        <Grid item xs={12} sx={{ textAlign: "center" }}>
+          <Typography variant="h5" sx={{ margin: "3.5rem 0", lineHeight: 2 }}>
+            <div>
+              MOSAIC은{" "}
+              <span style={{ fontWeight: 900 }}>건전한 암호화폐 투자</span>를
+              선도하기 위해
+            </div>
+            <div>다음과 같은 서비스를 제공합니다.</div>
+          </Typography>
+          <Grid container direction="row" spacing={2}>
+            <Grid item xs={4}>
+              <img src={Sample} alt="Image" width={150} />
+              <Typography variant="h6" sx={{ margin: "1rem 0" }}>
+                암호화폐 등급 평가
+              </Typography>
+              <Typography sx={{ color: "#7F8487" }}>
+                암호화폐가 지닌 내재가치를
+                <br />
+                상세한 기준에 의거하여 평가한 등급을 통해
+                <br />각 암호화폐의 강약점을 파악할 수 있습니다.
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <img src={Sample} alt="Image" width={150} />
+              <Typography variant="h6" sx={{ margin: "1rem 0" }}>
+                펀드 상품
+              </Typography>
+              <Typography sx={{ color: "#7F8487" }}>
+                정보 제공을 넘어서 자체적인 투자 철학을 기반으로
+                <br />
+                펀드를 운용합니다. 투자자는 자신의 성향과
+                <br />
+                위험선호도에 따라 펀드에 투자할 수 있습니다.
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <img src={Sample} alt="Image" width={150} />
+              <Typography variant="h6" sx={{ margin: "1rem 0" }}>
+                경제 지표 & 리포트 제공
+              </Typography>
+              <Typography sx={{ color: "#7F8487" }}>
+                암호화폐 시장의 현황을 알 수 있도록
+                <br />
+                공포탐욕지수, 섹터별 인덱스, 벤치마크(주식, 원자재)
+                <br />
+                등의 거시적 지표와 일간, 주간 리포트를 제공합니다.
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sx={{ textAlign: "center" }}>
+          <Typography variant="h5" sx={{ margin: "3.5rem 0" }}>
+            최신 리포트
+          </Typography>
+          <div>
+            {result !== undefined
+              ? result.slice(1).map((report, index) => (
+                  <div key={index}>
+                    <Reportlistcard
+                      id={report.id}
+                      title={report.title}
+                      date={moment(report.date).format("YYYY.MM.DD")}
+                      writer={report.writer}
+                    />
+                  </div>
+                ))
+              : null}
           </div>
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom component="div">
-            시장 동향
+        <Grid item xs={12} sx={{ textAlign: "center" }}>
+          <Typography variant="h5" sx={{ margin: "3.5rem 0" }}>
+            유망 코인
           </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Box sx={{ display: "flex" }}>
-            <StyleBox
-              sx={{
-                height: 180,
-                width: 2 / 5,
-                borderRadius: "10px",
-                color: "white",
-                boxShadow: 3,
-              }}
-            >
-              <MainSNPCMC />
-            </StyleBox>
-            <Box
-              sx={{
-                height: 180,
-                width: 1 / 5,
-              }}
-            ></Box>
-            <StyleBox
-              sx={{
-                height: 180,
-                width: 2 / 5,
-                borderRadius: "10px",
-                color: "white",
-                boxShadow: 3,
-              }}
-            >
-              <MainCategoryLineGraph />
-            </StyleBox>
-          </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom component="div">
-            발굴 코인
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <StyleBox
-            sx={{
-              height: 500,
-              width: 1,
-              borderRadius: "20px",
-              color: "white",
-              boxShadow: 3,
-            }}
-          >
-            발굴 코인 내용
-          </StyleBox>
+
         </Grid>
       </Grid>
     </>
@@ -172,10 +182,3 @@ const MainPage = ({ result }) => {
 };
 
 export default MainPage;
-// 1. 주간 이슈: 뉴스 헤드라인 식으로 한줄로 작성
-// <거시 경제>
-// <크립토 규제/정책>
-// <크립토 이슈>
-// 2. 각 헤드라인별 부가 설명: 각 이슈별로 부가적인 설명
-// 3. Winner & loser (금융자산별 비교 & 섹터별 비교)
-// 4. 인사이트: 다음주, 내지는 앞으로 주목해야 할 부분들 설명
