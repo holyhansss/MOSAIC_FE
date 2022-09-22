@@ -1,5 +1,15 @@
 import React from "react";
-import { Container, Grid, Typography, Box } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Typography,
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Divider,
+} from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import styled, { keyframes } from "styled-components";
 import moment from "moment";
@@ -13,6 +23,9 @@ import RankingImage from "../img/MainPage/001.jpg";
 import RatingImage from "../img/MainPage/002.jpg";
 import MarketImage from "../img/MainPage/003.jpg";
 import Sample from "../img/logo_mosaic.jpg";
+import cardimage001 from "../img/PromisingCoins/001.jpg";
+import cardimage002 from "../img/PromisingCoins/002.jpg";
+import cardimage003 from "../img/PromisingCoins/003.jpg";
 
 // Style
 const theme = createTheme({
@@ -97,12 +110,12 @@ const MainPage = ({ reports }) => {
           </Carousel.Item>
         </Carousel>
       </div>
-      <Grid container spacing={15} justifyContent="center">
+      <Grid container spacing={10} justifyContent="center">
         <Grid item xs={12}>
-          <Box sx={{ height: "22em" }} />
+          <Box sx={{ height: "26em" }} />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h5" sx={{ margin: "3.5rem 0", lineHeight: 2 }}>
+          <Typography variant="h5" sx={{ margin: "5rem 0", lineHeight: 2 }}>
             <div>
               MOSAIC은{" "}
               <span style={{ fontWeight: 900 }}>건전한 암호화폐 투자</span>를
@@ -152,9 +165,11 @@ const MainPage = ({ reports }) => {
           </Grid>
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h5" sx={{ margin: "3.5rem 0" }}>
-            최신 리포트
-          </Typography>
+          <Divider component="div" role="presentation">
+            <Typography variant="h5" sx={{ margin: "3.5rem", fontWeight: 900 }}>
+              최신 리포트
+            </Typography>
+          </Divider>
           <div>
             {reports !== undefined
               ? reports.slice(0,5).map((report, index) => (
@@ -171,10 +186,70 @@ const MainPage = ({ reports }) => {
           </div>
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h5" sx={{ margin: "3.5rem 0" }}>
-            유망 코인
-          </Typography>
-
+          <Divider component="div" role="presentation">
+            <Typography variant="h5" sx={{ margin: "3.5rem", fontWeight: 900 }}>
+              최신 유망 코인
+            </Typography>
+          </Divider>
+          <Grid container direction="row" spacing={5} justifyContent="center">
+            <Grid item xs="auto">
+              <Card sx={{ maxWidth: 350 }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={cardimage001}
+                  alt="Cryptoimage"
+                />
+              </Card>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  이더리움
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  #이더리움 #기술성
+                </Typography>
+              </CardContent>
+            </Grid>
+            <Grid item xs="auto">
+              <Card sx={{ maxWidth: 350 }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={cardimage002}
+                  alt="Cryptoimage"
+                />
+              </Card>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Tezos
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  #Tezos #기술성
+                </Typography>
+              </CardContent>
+            </Grid>
+            <Grid item xs="auto">
+              <Card sx={{ maxWidth: 350 }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={cardimage003}
+                  alt="Cryptoimage"
+                />
+              </Card>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Lida Dao
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  #Lida Dao #이더리움 #기술성
+                </Typography>
+              </CardContent>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ height: "5rem" }} />
         </Grid>
       </Grid>
     </>

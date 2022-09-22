@@ -2,14 +2,26 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function CryptoTable() {
+  const columns = [
+    { field: "id", headerName: "순위" },
+    { field: "name", headerName: "이름" },
+    { field: "rating", headerName: "등급" },
+    {
+      field: "marketPerformance",
+      headerName: "MP",
+    },
+    { field: "criteria", headerName: "기준", width: 300 },
+    { field: "tag", headerName: "태그", width: 300 },
+    { field: "promising", headerName: "유망코인" },
+  ];
   const rows = [
     {
       id: 1,
       name: "Ethereum",
-      rating: "AA+",
+      rating: "A-",
       marketPerformance: "C",
-      criteria: "보안성:56 , 확장성:75, 탈중앙성:25 ",
-      tag: "#이더리움 #암호화폐",
+      criteria: "보안성: 26/30 , 확장성: 14/35, 탈중앙성: 27/35 ",
+      tag: "#PoS #Smart Contract Platform #L2",
       promising: "O",
     },
     {
@@ -120,7 +132,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "X",
     },
-    
+
     {
       id: 14,
       name: "WAX",
@@ -130,7 +142,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "X",
     },
-    
+
     {
       id: 15,
       name: "SushiSwap",
@@ -140,7 +152,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "X",
     },
-    
+
     {
       id: 16,
       name: "Ultra",
@@ -150,7 +162,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "O",
     },
-    
+
     {
       id: 17,
       name: "Reef",
@@ -160,7 +172,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "O",
     },
-    
+
     {
       id: 18,
       name: "Polkadot",
@@ -170,7 +182,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "X",
     },
-    
+
     {
       id: 19,
       name: "Compound",
@@ -180,7 +192,7 @@ export default function CryptoTable() {
       tag: "#암호화폐",
       promising: "X",
     },
-    
+
     {
       id: 20,
       name: "Ankr",
@@ -189,25 +201,16 @@ export default function CryptoTable() {
       criteria: "기술성:78 , 사업성:15",
       tag: "#암호화폐",
       promising: "X",
-    }
+    },
   ];
 
   return (
-    <div style={{ height: 600, width: "100%" }}>
+    <div style={{ width: "100%", marginBottom: "5rem" }}>
       <DataGrid
-        columns={[
-          { field: "id", headerName: "순위" },
-          { field: "name", headerName: "이름"},
-          { field: "rating", headerName: "등급" },
-          {
-            field: "marketPerformance",
-            headerName: "MP",
-          },
-          { field: "criteria", headerName: "기준", width: 280},
-          { field: "tag", headerName: "태그", width: 300 },
-          { field: "promising", headerName: "유망코인" },
-        ]}
+        autoHeight
+        columns={columns}
         rows={rows}
+        hideFooter
       />
     </div>
   );

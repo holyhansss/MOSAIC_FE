@@ -5,7 +5,10 @@ import {
   Grid,
   Typography,
   LinearProgress,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import styled from "styled-components";
 import grade from "../../img/Grade.jpg";
 import logo from "../../img/Ethereum_logo.png";
@@ -25,24 +28,28 @@ const MainContainer = styled(Container)`
 function CryptoReport() {
   return (
     <MainContainer maxWidth="md" disableGutters="true">
-      <Grid container direction="row" spacing={3}>
+      <Grid container direction="row" spacing={5}>
         <Grid item xs={12}>
           <Grid
             container
             direction="row"
-            spacing={3}
             justifyContent="center"
-            sx={{ margin: "2rem 0" }}
+            alignItems="center"
           >
             <Typography
               variant="h4"
-              align="left"
+              align="center"
               gutterBottom
               sx={{ fontWeight: "bold", m: 1 }}
             >
               이더리움 ETH
             </Typography>
             <img src={logo} alt="logo" width={30} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography align="center">
+              #PoS #Smart Contract Platform #L2
+            </Typography>
           </Grid>
         </Grid>
         <Grid item xs={6}>
@@ -60,61 +67,91 @@ function CryptoReport() {
           <Grid
             container
             direction="row"
-            spacing={1}
             justifyContent="space-between"
+            alignItems="center"
           >
-            <Grid item xs={2}>
-              보안성
+            <Grid
+              item
+              xs={3}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <>보안성</>
+              <Tooltip
+                title="블록체인 내의 데이터를 권한이 없는 이용자가 사용할 수 없도록 하는지를 파악"
+                disableInteractive
+              >
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
             </Grid>
-            <Grid item xs={8} sx={{ textAlign: "center" }}>
+            <Grid item xs={7}>
               <LinearProgress
                 variant="determinate"
-                value={96}
+                value={(26 / 30) * 100}
                 sx={{ borderRadius: "100px", height: "1.5em" }}
               />
             </Grid>
-            <Grid item xs={1} sx={{ textAlign: "end" }}>
-              96
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+              26/30
             </Grid>
           </Grid>
           <Grid
             container
             direction="row"
-            spacing={1}
             justifyContent="space-between"
           >
-            <Grid item xs={2}>
-              확장성
+            <Grid item xs={3}>
+              <>확장성</>
+              <Tooltip
+                title="사용자 수와 거래건수가 늘어나도 유연하게 대응할 수 있는가를 파악"
+                disableInteractive
+              >
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
             </Grid>
-            <Grid item xs={8} sx={{ textAlign: "center" }}>
+            <Grid item xs={7}>
               <LinearProgress
                 variant="determinate"
-                value={86}
+                value={(14 / 35) * 100}
                 sx={{ borderRadius: "100px", height: "1.5em" }}
               />
             </Grid>
-            <Grid item xs={1} sx={{ textAlign: "end" }}>
-              86
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+              14/35
             </Grid>
           </Grid>
           <Grid
             container
             direction="row"
-            spacing={1}
             justifyContent="space-between"
           >
-            <Grid item xs={2}>
-              탈중앙성
+            <Grid item xs={3}>
+              <>탈중앙성</>
+              <Tooltip
+                title="중앙집중화를 벗어나 분산된 소규모 단위로 자율적으로 운영되는 정도"
+                disableInteractive
+              >
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
             </Grid>
-            <Grid item xs={8} sx={{ textAlign: "center" }}>
+            <Grid item xs={7}>
               <LinearProgress
                 variant="determinate"
-                value={90}
+                value={(27 / 35) * 100}
                 sx={{ borderRadius: "100px", height: "1.5em" }}
               />
             </Grid>
-            <Grid item xs={1} sx={{ textAlign: "end" }}>
-              90
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+              27/35
             </Grid>
           </Grid>
         </Grid>

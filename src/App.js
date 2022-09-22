@@ -19,7 +19,12 @@ import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
+import CryptoReport from "./components/PromisingCoin/CryptoReport";
+import GlobalStyle from "./style/global";
+import { Container, Grid } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReportMain from "./pages/ReportMain";
+
 
 const theme = createTheme({
   typography: {
@@ -89,6 +94,7 @@ function App() {
     });
   };
   const result = reports[0];
+
   useEffect(() => {
     getReports();
   }, []);
@@ -109,6 +115,7 @@ function App() {
               <Route path="admin" element={<Admin />} />
               <Route path="/market" element={<MarketPage />} />
               <Route path="/promising" element={<PromisingCoins />} />
+              <Route path="/promising/:name" element={<CryptoReport />} />
               <Route
                 path="/reportMain"
                 element={<ReportMain result={result} reports={reports} />}
