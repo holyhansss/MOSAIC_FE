@@ -29,7 +29,11 @@ function FearandGreed() {
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid item md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Grid
+        item
+        md={6}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <ReactSpeedometer
           needleColor="grey"
           paddingVertical={50}
@@ -44,7 +48,16 @@ function FearandGreed() {
           value={Number(FearNGreed)}
         />
       </Grid>
-      <Grid item md={6} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <Grid
+        item
+        md={6}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h6" gutterBottom>
           {FnGState}
         </Typography>

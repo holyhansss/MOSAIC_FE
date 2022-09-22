@@ -49,7 +49,8 @@ function Header({ user, admin }) {
             direction="row"
             alignItems="center"
             xs={6}
-            lg md={8}
+            lg
+            md={8}
             spacing={{ xs: 2, md: 8 }}
           >
             <Grid item>

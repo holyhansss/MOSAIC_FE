@@ -7,7 +7,7 @@ import GlobalStyle from "./style/global";
 import { Container, Grid } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-//page
+// Pages
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
@@ -19,6 +19,7 @@ import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
+import CryptoReport from "./components/PromisingCoin/CryptoReport";
 import ReportMain from "./pages/ReportMain";
 
 const theme = createTheme({
@@ -83,12 +84,13 @@ function App() {
         id: docs.id,
         title: docs.data().title,
         date: docs.data().date,
-        writer: docs.data().writer
+        writer: docs.data().writer,
       };
       setReports((prev) => [reportObj, ...prev]);
     });
   };
   const result = reports[0];
+
   useEffect(() => {
     getReports();
   }, []);
@@ -109,6 +111,7 @@ function App() {
               <Route path="admin" element={<Admin />} />
               <Route path="/market" element={<MarketPage />} />
               <Route path="/promising" element={<PromisingCoins />} />
+              <Route path="/promising/:name" element={<CryptoReport />} />
               <Route
                 path="/reportMain"
                 element={<ReportMain result={result} reports={reports} />}

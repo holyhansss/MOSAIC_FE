@@ -4,8 +4,8 @@ import { dbService } from "../../firebase.js";
 import { Grid, Container, Box, Typography, Avatar } from "@mui/material";
 
 //Viewer
-import { Viewer } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 const Winner = ({ user, id, title, writer, date }) => {
   const [winner, setWinner] = useState([]);

@@ -5,7 +5,6 @@ import { Avatar, TextField, Box, Button } from "@mui/material";
 import styled from "styled-components";
 import { grey } from "@mui/material/colors";
 
-
 //components
 import SingleComment from "./SingleComment.js";
 
@@ -77,10 +76,13 @@ function Comment({ user, id, title, rep, writer, date }) {
           id="input-with-sx"
           label="코멘트를 작성해 주세요"
           variant="standard"
-          sx={{ color: "primary", width: "80%" , "& label": {color: grey[600]} }}
+          sx={{
+            color: "primary",
+            width: "80%",
+            "& label": { color: grey[600] },
+          }}
           onChange={handleChange}
           inputProps={{ style: { color: "white" } }}
-          
         />
 
         <br />

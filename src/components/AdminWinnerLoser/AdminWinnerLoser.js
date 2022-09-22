@@ -27,8 +27,8 @@ import AdminTopicUploadForm from "../AdmimBox/AdmimBox";
 import { FIREBASE_WEEKLY_REPORT_COLLECTION } from "../../constants/constants";
 
 //Editor
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 const AdminWinnerLoser = () => {
   const db = getFirestore();
@@ -180,7 +180,7 @@ const AdminWinnerLoser = () => {
         ) : (
           <div></div>
         )}
-{/* 
+        {/* 
         <Form.Control
           key={"desc1"}
           className="me-1 col-9"
@@ -196,19 +196,17 @@ const AdminWinnerLoser = () => {
           }}
         /> */}
 
-          <Editor
-            ref={content1Ref}
-            initialEditType="WYSIWYG"
-            initialValue="내용을 입력하세요"
-            previewStyle="vertical"
-            height="300px"
-            useCommandShortcut={false}
-            onChange={(e) => {
-              setDesc1(content1Ref.current.getInstance().getMarkdown());
-            }}
-          />
-
-
+        <Editor
+          ref={content1Ref}
+          initialEditType="WYSIWYG"
+          initialValue="내용을 입력하세요"
+          previewStyle="vertical"
+          height="300px"
+          useCommandShortcut={false}
+          onChange={(e) => {
+            setDesc1(content1Ref.current.getInstance().getMarkdown());
+          }}
+        />
       </Container>
       <Container className="my-5">
         <input

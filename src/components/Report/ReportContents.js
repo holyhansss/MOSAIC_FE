@@ -15,7 +15,12 @@ function ReportContents({ user, id, title, writer, date }) {
   const getContents = async () => {
     const invest = collection(dbService, "weekly_report", id, "investment");
     const policy = collection(dbService, "weekly_report", id, "policy");
-    const macroeconomic = collection(dbService, "weekly_report", id, "macroeconomic");
+    const macroeconomic = collection(
+      dbService,
+      "weekly_report",
+      id,
+      "macroeconomic"
+    );
     const insight = collection(dbService, "weekly_report", id, "insight");
     const querySnapShot = await getDocs(invest);
     const querySnaphot = await getDocs(policy);
