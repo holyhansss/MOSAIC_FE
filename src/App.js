@@ -3,6 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { auth, dbService } from "./firebase";
+import GlobalStyle from "./style/global";
+import { Container, Grid } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+//page
 import MainPage from "./pages/Main";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
@@ -14,9 +19,7 @@ import ReportDetail from "./pages/ReportDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
-import GlobalStyle from "./style/global";
-import { Container, Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ReportMain from "./pages/ReportMain";
 
 const theme = createTheme({
   typography: {
@@ -106,6 +109,10 @@ function App() {
               <Route path="admin" element={<Admin />} />
               <Route path="/market" element={<MarketPage />} />
               <Route path="/promising" element={<PromisingCoins />} />
+              <Route
+                path="/reportMain"
+                element={<ReportMain result={result} reports={reports} />}
+              />
               <Route
                 path="/reportList"
                 element={<ReportList result={result} reports={reports} />}
