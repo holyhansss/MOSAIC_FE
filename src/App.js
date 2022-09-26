@@ -105,7 +105,7 @@ function App() {
         <Grid item md={10}>
           <Container maxWidth="lg" disableGutters="true">
             <Routes>
-              <Route path="/" element={<MainPage reports={reports} />} />
+              <Route path="/" element={<MainPage result={result} reports={reports} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
               <Route path="admin" element={<Admin />} />
