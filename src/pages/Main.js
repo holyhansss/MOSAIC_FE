@@ -17,7 +17,10 @@ import Marquee from "react-fast-marquee";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // Components
-import { ReportlistFormAll } from "../components/Report/Reportlistcard.js";
+import {
+  Reportrecentcard,
+  ReportlistForm,
+} from "../components/Report/Reportlistcard.js";
 // Images
 import RankingImage from "../img/MainPage/001.jpg";
 import RatingImage from "../img/MainPage/002.jpg";
@@ -69,10 +72,10 @@ const WelcomText = styled(Typography)`
   animation: 2s ${scale} ease-out;
 `;
 
-const MainPage = ({ reports }) => {
+const MainPage = ({ result, reports }) => {
   return (
     <>
-      <div
+      {/* <div
         style={{
           position: "absolute",
           left: 0,
@@ -109,7 +112,7 @@ const MainPage = ({ reports }) => {
             </Link>
           </Carousel.Item>
         </Carousel>
-      </div>
+      </div> */}
       <Grid container spacing={10} justifyContent="center">
         <Grid item xs={12}>
           <Box sx={{ height: "26em" }} />
@@ -125,7 +128,7 @@ const MainPage = ({ reports }) => {
           </Typography>
           <Grid container direction="row" spacing={2}>
             <Grid item xs={4}>
-              <img src={Sample} alt="Image" width={150} />
+              <img src={Sample} alt="rating" width={150} />
               <Typography variant="h6" sx={{ margin: "1rem 0" }}>
                 암호화폐 등급 평가
               </Typography>
@@ -137,7 +140,7 @@ const MainPage = ({ reports }) => {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <img src={Sample} alt="Image" width={150} />
+              <img src={Sample} alt="fund" width={150} />
               <Typography variant="h6" sx={{ margin: "1rem 0" }}>
                 펀드 상품
               </Typography>
@@ -150,7 +153,7 @@ const MainPage = ({ reports }) => {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <img src={Sample} alt="Image" width={150} />
+              <img src={Sample} alt="report" width={150} />
               <Typography variant="h6" sx={{ margin: "1rem 0" }}>
                 경제 지표 & 리포트 제공
               </Typography>
@@ -164,33 +167,50 @@ const MainPage = ({ reports }) => {
             </Grid>
           </Grid>
         </Grid>
+        {/* 리포트 */}
         <Grid item xs={12} sx={{ textAlign: "center" }}>
           <Divider component="div" role="presentation">
             <Typography variant="h5" sx={{ margin: "3.5rem", fontWeight: 900 }}>
               최신 리포트
             </Typography>
           </Divider>
+        </Grid>
+        <Grid item xs={6}>
           <div>
-            {reports !== undefined
-              ? reports.slice(0, 5).map((report, index) => (
-                  <div key={index}>
-                    <ReportlistFormAll
-                      id={report.id}
-                      title={report.title}
-                      date={moment(report.date).format("YYYY.MM.DD")}
-                      writer={report.writer}
-                    />
-                  </div>
-                ))
-              : null}
+            {result !== undefined ? (
+              <Reportrecentcard
+                id={result.id}
+                title={result.title}
+                writer={result.writer}
+                date={moment(result.date).format("YYYY.MM.DD")}
+              />
+            ) : null}
           </div>
         </Grid>
+        <Grid item xs={6}>
+          <div>
+            {reports.slice(0, 3).map((report, index) => (
+              <div key={index}>
+                <ReportlistForm
+                  id={report.id}
+                  title={report.title}
+                  date={moment(report.date).format("YYYY.MM.DD")}
+                  writer={report.writer}
+                />
+              </div>
+            ))}
+          </div>
+        </Grid>
+        {/* 유망 코인 */}
         <Grid item xs={12} sx={{ textAlign: "center" }}>
           <Divider component="div" role="presentation">
             <Typography variant="h5" sx={{ margin: "3.5rem", fontWeight: 900 }}>
               최신 유망 코인
             </Typography>
           </Divider>
+          <Grid item xs={12}>
+            <Box sx={{ height: "5rem" }} />
+          </Grid>
           <Grid container direction="row" spacing={5} justifyContent="center">
             <Grid item xs="auto">
               <Card sx={{ maxWidth: 350 }}>
