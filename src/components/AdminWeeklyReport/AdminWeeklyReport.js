@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 // react bootstrap
 import { Container, Row, Spinner } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
+import { Typography } from "@mui/material";
 import {
   getFirestore,
   collection,
@@ -97,8 +98,10 @@ const AdminWeeklyReport = (props) => {
             ? navigate("/") 
             :  */}
       <div>
-        <Container className="my-5 h3">
-          Title
+        <Container className="my-5">
+          <Typography variant="h5" gutterBottom>
+            Title
+          </Typography>
           <Form.Control
             key={"title"}
             className=""
@@ -135,8 +138,10 @@ const AdminWeeklyReport = (props) => {
           firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[2]}
           db={db}
         />
-        <Container className="mt-5 align-item-center h3">
-          Insight
+        <Container className="mt-5 align-item-center">
+          <Typography variant="h5" gutterBottom>
+            Insight
+          </Typography>
           {/* <Form.Control
             key={"insight"}
             className="mt-3"

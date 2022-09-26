@@ -7,6 +7,7 @@ import React, {
 
 import { Container, Row } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
+import { Typography } from "@mui/material";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 //Editor
 import { Editor } from "@toast-ui/react-editor";
@@ -91,14 +92,14 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
 
   return (
     <Container>
-      {props.title}
+      <Typography variant="h5">{props.title}</Typography>
       {count.map((x, index) => {
         return (
           <Row key={index} className="my-2">
             <Form.Control
               key={"title" + index}
-              className="me-1 col-3"
-              type=""
+              className="m-3 col-3"
+              type="text"
               placeholder="제목"
               style={{
                 width: "20%",
@@ -127,7 +128,7 @@ const AdminTopicUploadForm = forwardRef((props, ref) => {
           </Row>
         );
       })}
-      <Row className="justify-content-md-center">
+      <Row className="justify-content-md-center my-3">
         <Button
           variant="outline-secondary"
           className="me-1"
