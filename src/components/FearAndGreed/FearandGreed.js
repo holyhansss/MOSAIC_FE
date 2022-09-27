@@ -43,8 +43,8 @@ function FearandGreed() {
           needleTransition="easeBounceInOut"
           minValue={0}
           maxValue={100}
-          customSegmentStops={[0, 24, 50, 75, 100]}
-          segmentColors={["#DBDFFD", "#9BA3EB", "#646FD4", "#242F9B"]}
+          customSegmentStops={[0, 25, 46, 54, 75, 100]}
+          segmentColors={["#DBDFFD", "#9BA3EB", "#646FD4", "#242F9B", "#210B61"]}
           value={Number(FearNGreed)}
         />
       </Grid>
