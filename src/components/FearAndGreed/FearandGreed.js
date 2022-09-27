@@ -8,19 +8,25 @@ import styled from "styled-components";
 function FearandGreed() {
   const [FearNGreed, setFearNGreed] = useState([]);
   const [FnGState, setFnGState] = useState([]);
+  const [FnGIcon, setFnGIcon] = useState([]);
   const getFeerNGreed = async () => {
     const response = await axios.get("https://api.alternative.me/fng/");
     setFearNGreed(response.data.data[0].value);
     if (response.data.data[0].value_classification === "Extreme Fear") {
       setFnGState("매우 공포");
+      setFnGIcon("https://img.icons8.com/emoji/48/000000/confounded-face.png");
     } else if (response.data.data[0].value_classification === "Fear") {
       setFnGState("공포");
+      setFnGIcon("https://img.icons8.com/emoji/48/000000/face-with-raised-eyebrow.png");
     } else if (response.data.data[0].value_classification === "Neutral") {
       setFnGState("중립");
+      setFnGIcon("https://img.icons8.com/emoji/48/000000/face-without-mouth.png");
     } else if (response.data.data[0].value_classification === "Greed") {
       setFnGState("탐욕");
+      setFnGIcon("https://img.icons8.com/emoji/48/000000/woozy-face.png");
     } else if (response.data.data[0].value_classification === "Extreme Greed") {
       setFnGState("매우 탐욕");
+      setFnGIcon("https://img.icons8.com/emoji/48/000000/money-mouth-face.png");
     }
   };
   useEffect(() => {
@@ -61,6 +67,7 @@ function FearandGreed() {
         <Typography variant="h6" gutterBottom>
           {FnGState}
         </Typography>
+        <img src={FnGIcon}/>
         <Typography>[설명]</Typography>
       </Grid>
     </Grid>
