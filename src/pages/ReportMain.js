@@ -31,11 +31,11 @@ function ReportMain({ result, reports }) {
       ></div>
       <Grid container spacing={10}>
         <Grid item xs={12}>
-          <Box sx={{ height: "20em" }} />
+          <Box sx={{ height: "15em" }} />
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h5" gutterBottom>
-            데일리 리포트
+            일간 리포트
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -105,6 +105,9 @@ function ReportMain({ result, reports }) {
               ))}
             </Grid>
           </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ height: "5rem" }} />
         </Grid>
       </Grid>
     </>
