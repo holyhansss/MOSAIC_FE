@@ -74,10 +74,7 @@ function ReportContents({ user, id, title, writer, date }) {
               title={title}
               writer={writer}
               date={date}
-              inve={investments}
-              poli={policies}
               mac={marcro}
-              insi={insights}
             />
           </Grid>
         </Grid>

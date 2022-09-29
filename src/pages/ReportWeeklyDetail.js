@@ -33,7 +33,7 @@ import ReportContents from "../components/Report/ReportContents";
 import Winner from "../components/Report/Winner";
 import Comment from "../components/Comment/Comment";
 
-export default function ReportDetail({ user }) {
+export default function ReportWeeklyDetail({ user }) {
   const [value, setValue] = React.useState("1");
   const { id, title, writer, date } = useParams();
   //코멘트 가져오기
@@ -216,14 +216,14 @@ export default function ReportDetail({ user }) {
                 {clickICon === true ? (
                   <>
                     <FavoriteIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1" sx={{ color: grey[50] }}>
+                    <Typography variant="body1" >
                       {countValue}
                     </Typography>
                   </>
                 ) : (
                   <>
                     <FavoriteBorderIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1" sx={{ color: grey[50] }}>
+                    <Typography variant="body1">
                       {countValue}
                     </Typography>
                   </>
@@ -231,7 +231,7 @@ export default function ReportDetail({ user }) {
               </IconButton>
 
               <IconButton onClick={handleOpen}>
-                <SendIcon sx={{ color: grey[50] }} />
+                <SendIcon />
               </IconButton>
             </ButtonGroup>
             <Modal open={open} onClose={handleClose}>

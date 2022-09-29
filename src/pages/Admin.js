@@ -1,43 +1,32 @@
-import React, { useState, useEffect, useRef } from "react";
-import AdminWeeklyReport from "../components/AdminWeeklyReport/AdminWeeklyReport";
-import AdminWinnerLoser from "../components/AdminWinnerLoser/AdminWinnerLoser";
+import React from "react";
 
-import { Box, Tab, Container } from "@mui/material";
-import { TabList, TabPanel, TabContext } from "@mui/lab";
+import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
+import HistoryEduTwoToneIcon from '@mui/icons-material/HistoryEduTwoTone';
+
+import {
+    Grid,
+    Typography,
+    Box,
+    Button
+  } from "@mui/material";
 
 const Admin = () => {
-  const [value, setValue] = useState("1");
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
-    <div>
-      <TabContext value={value}>
-        <Container maxWidth="md">
-          <Box
-            sx={{ borderColor: "divider", position: "relative", left: "35%" }}
-          >
-            <TabList
-              onChange={handleChange}
-              aria-label=""
-              sx={{ justifyContent: "center" }}
-            >
-              <Tab label="주간 리포트" value="1" />
-              <Tab label="Winner & Loser" value="2" />
-            </TabList>
-          </Box>
-        </Container>
-        <p />
-        <TabPanel value="1">
-          <AdminWeeklyReport />
-        </TabPanel>
-        <TabPanel value="2">
-          <AdminWinnerLoser />
-        </TabPanel>
-      </TabContext>
-    </div>
+    <Grid container spacing={10} justifyContent="center">
+        <Grid item xs={12}>
+          <Box sx={{ height: "10em" }} />
+        </Grid>
+        <Grid item xs={6}>
+            <Button href="/admindailymain" variant="outlined" startIcon={<ChatTwoToneIcon/>} sx={{ mx : 'auto', px : 10, py : 10}}>
+              일간 리포트
+            </Button>
+        </Grid>
+        <Grid item xs={6}>
+              <Button href="/adminweeklymain" variant="outlined" startIcon={<HistoryEduTwoToneIcon/>} sx={{ mx : 'auto', px : 10, py : 10}}>
+                주간 리포트
+              </Button>
+        </Grid>
+    </Grid>
   );
 };
 

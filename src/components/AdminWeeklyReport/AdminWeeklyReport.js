@@ -39,29 +39,21 @@ const AdminWeeklyReport = (props) => {
 
   // contents
   const [title, setTitle] = useState("");
-  const [insight, setInsight] = useState("");
+  // const [insight, setInsight] = useState("");
   const [loading, setLoading] = useState("");
   const [admin, setAdmin] = useState([]);
+  const [writer, setWriter] = useState([]);
 
   const submitContent = async () => {
     const time = Date;
     const docRef = await addDoc(collection(db, "weekly_report"), {
       title: title,
       date: time.now(),
-      writer: "Mosaic",
-      insight: insight,
+      writer: writer,
     });
 
     await childRef1.current.uploadtoDatabase(docRef.id);
-    await childRef2.current.uploadtoDatabase(docRef.id);
-    await childRef3.current.uploadtoDatabase(docRef.id);
 
-    const insightCol = collection(docRef, "insight");
-
-    await addDoc(insightCol, {
-      content: insight,
-      includedDoc: docRef,
-    });
 
     setTimeout(() => {
       alert("uploaded to database!!");
@@ -72,10 +64,10 @@ const AdminWeeklyReport = (props) => {
   const handleOnChangeTitle = (value) => {
     setTitle(value);
   };
-  const handleOnChangeInsight = (value) => {
-    setInsight(value);
-  };
 
+  const handleOnChangeWriter = (value) => {
+    setWriter(value);
+  };
   useEffect(() => {
     const getAdminFromDatabase = async () => {
       const adminColRef = collection(db, "admin_info");
@@ -93,10 +85,7 @@ const AdminWeeklyReport = (props) => {
 
   return (
     <Container>
-      {/* {console.log(location.state)}
-            {location.state === null || !admin.includes(location.state.user.emial) 
-            ? navigate("/") 
-            :  */}
+
       <div>
         <Container className="my-5">
           <Typography variant="h5" gutterBottom>
@@ -124,50 +113,24 @@ const AdminWeeklyReport = (props) => {
           firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[0]}
           db={db}
         />
-        <AdminTopicUploadForm
-          ref={childRef2}
-          title={REPORT_TITLES[1]}
-          firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION}
-          firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[1]}
-          db={db}
-        />
-        <AdminTopicUploadForm
-          ref={childRef3}
-          title={REPORT_TITLES[2]}
-          firebaseCollectionName={FIREBASE_WEEKLY_REPORT_COLLECTION}
-          firebaseSubCollectionName={FIREBASE_REPORT_SUBCOLLECTION[2]}
-          db={db}
-        />
-        <Container className="mt-5 align-item-center">
+       
+        <Container className="my-5">
           <Typography variant="h5" gutterBottom>
-            Insight
+            Writer
           </Typography>
-          {/* <Form.Control
-            key={"insight"}
-            className="mt-3"
+          <Form.Control
+            key={"Writer"}
+            className=""
             type=""
-            as="textarea"
-            placeholder="Insight"
-            onChange={(e) => {
-              handleOnChangeInsight(e.target.value);
-            }}
+            placeholder="Writer"
             style={{
-              // width: '67%',
-              height: "200px",
+              width: "100%",
+              height: "50px",
             }}
-          /> */}
-          <Editor
-            ref={insightRef}
-            initialEditType="WYSIWYG"
-            initialValue="내용을 입력하세요"
-            previewStyle="vertical"
-            height="300px"
-            useCommandShortcut={false}
             onChange={(e) => {
-              handleOnChangeInsight(
-                insightRef.current.getInstance().getMarkdown()
-              );
+              handleOnChangeWriter(e.target.value);
             }}
+            label=""
           />
         </Container>
         <Row className="justify-content-md-center my-5">
