@@ -15,12 +15,14 @@ import Admin from "./pages/Admin";
 import MarketPage from "./pages/Market";
 import PromisingCoins from "./pages/PromisingCoins";
 import ReportList from "./pages/ReportList";
-import ReportDetail from "./pages/ReportDetail";
+import ReportWeeklyDetail from "./pages/ReportWeeklyDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
 import CryptoReport from "./components/PromisingCoin/CryptoReport";
 import ReportMain from "./pages/ReportMain";
+import AdminWeeklyMain from "./pages/AdminWeeklyMain";
+import AdminDailyMain from "./pages/AdminDailyMain";
 
 const theme = createTheme({
   typography: {
@@ -75,6 +77,7 @@ function App() {
 
   //리포트 리스트 db 불러오기
   const [reports, setReports] = useState([]);
+  const [dailyReport, setDailyReport] = useState([]);
 
   const getReports = async () => {
     const q = query(collection(dbService, "weekly_report"), orderBy("date"));
@@ -88,8 +91,21 @@ function App() {
       };
       setReports((prev) => [reportObj, ...prev]);
     });
+
+    const qu = query(collection(dbService, "daily_report"), orderBy("date"));
+    const querySnapShot = await getDocs(qu);
+    querySnapShot.forEach((docs) => {
+      const reportObj = {
+        id: docs.id,
+        title: docs.data().issue1_title,
+        date: docs.data().date,
+        writer: docs.data().writer,
+      };
+      setDailyReport((prev) => [reportObj, ...prev]);
+    });
   };
-  const result = reports[0];
+  
+  const result = dailyReport[0];
 
   useEffect(() => {
     getReports();
@@ -109,6 +125,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
               <Route path="admin" element={<Admin />} />
+              <Route path="adminweeklymain" element={<AdminWeeklyMain />} />
+              <Route path="admindailymain" element={<AdminDailyMain />} />
               <Route path="/market" element={<MarketPage />} />
               <Route path="/promising" element={<PromisingCoins />} />
               <Route path="/promising/:name" element={<CryptoReport />} />
@@ -122,7 +140,7 @@ function App() {
               />
               <Route
                 path="/reportDetail/:id/:title/:writer/:date"
-                element={<ReportDetail user={userObj} />}
+                element={<ReportWeeklyDetail user={userObj} />}
               />
               <Route
                 path="/profile"
