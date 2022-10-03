@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+// import { useNavigate, useLocation } from "react-router-dom";
 // react bootstrap
 import { Container, Row, Spinner } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
@@ -12,6 +12,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 
 // components
 import AdminTopicUploadForm from "../AdmimBox/AdmimBox";
@@ -23,19 +25,18 @@ import {
   REPORT_TITLES,
 } from "../../constants/constants";
 
-//Editor
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
+// //Editor
+// import { Editor } from "@toast-ui/react-editor";
+// import "@toast-ui/editor/dist/toastui-editor.css";
 
 const AdminWeeklyReport = (props) => {
   const db = getFirestore();
-  const auth = getAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const auth = getAuth();
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  const storage = getStorage();
 
   let childRef1 = useRef(null);
-  let childRef2 = useRef(null);
-  let childRef3 = useRef(null);
 
   // contents
   const [title, setTitle] = useState("");
@@ -43,13 +44,24 @@ const AdminWeeklyReport = (props) => {
   const [loading, setLoading] = useState("");
   const [admin, setAdmin] = useState([]);
   const [writer, setWriter] = useState([]);
+  const [thumbnail, setThumbnail] = useState();
+  const [thumbnail1Url, setThumbnailUrl] = useState(null);
 
   const submitContent = async () => {
+    let thumbnailStorageRef = ref(
+      storage,
+      `weekly_report`
+    );
+
+    await uploadBytes(thumbnailStorageRef, thumbnail);
+    const thumbnailStorageURL = await getDownloadURL(thumbnailStorageRef);
+
     const time = Date;
     const docRef = await addDoc(collection(db, "weekly_report"), {
       title: title,
       date: time.now(),
       writer: writer,
+      thumbnail: thumbnailStorageURL,
     });
 
     await childRef1.current.uploadtoDatabase(docRef.id);
@@ -81,12 +93,36 @@ const AdminWeeklyReport = (props) => {
     getAdminFromDatabase();
   }, []);
 
-  const insightRef = useRef();
+
+  useEffect(() => {
+    if (thumbnail) {
+      setThumbnailUrl(URL.createObjectURL(thumbnail));
+    }
+  }, [thumbnail]);
 
   return (
     <Container>
 
       <div>
+        <Container className="my-5">
+          <input
+            accept="image/*"
+            type="file"
+            id="select-thumbnail"
+            className="d-none"
+            onChange={(e) => setThumbnail(e.target.files[0])}
+          />
+          <Button variant="primary" className="my-2">
+            <label htmlFor="select-thumbnail">썸네일 업로드 *</label>
+          </Button>
+          {thumbnail1Url && thumbnail ? (
+            <div className="my-2">
+              <img src={thumbnail1Url} alt={thumbnail.name} height="300px" />
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </Container>
         <Container className="my-5">
           <Typography variant="h5" gutterBottom>
             Title

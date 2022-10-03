@@ -5,7 +5,6 @@ import HistoryEduTwoToneIcon from '@mui/icons-material/HistoryEduTwoTone';
 
 import {
     Grid,
-    Typography,
     Box,
     Button
   } from "@mui/material";

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Box } from "@mui/material";
+import React, { useRef } from "react";
+import { Avatar, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Nav from "react-bootstrap/Nav";
 import styled from "styled-components";
@@ -23,31 +23,6 @@ function Reportcard({ title, writer, date, mac }) {
 
   return (
     <div>
-      {/* <Box
-        sx={{
-          position: "fixed",
-          top: 160,
-          left: 15,
-          width: 1 / 6,
-          whiteSpace: "normal",
-        }}
-      >
-        <div>
-          <Nav className="flex-column">
-            <Nav.Link
-              onClick={() => {
-                inputmacro.current.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              <Typography variant="subtitle2" sx={{ color: "black" }}>
-                거시경제
-              </Typography>
-            </Nav.Link>
-          </Nav>
-        </div>
-      </Box> */}
-
-      {/* {Table of contents} */}
       <Typography variant="h3" align="center">
         {title}
       </Typography>
@@ -175,4 +150,117 @@ function Reportcard({ title, writer, date, mac }) {
   );
 }
 
-export default Reportcard;
+export {Reportcard};
+
+function DailyReportcard({title, writer, date, daily}) {
+
+  return (
+    <div>
+        <Box
+          sx={{
+              paddingTop: 10,
+          }}
+        />
+        <Typography variant="h4" align="center" sx={{ fontWeight: "bold" }}>
+         {title}
+        </Typography>
+        <p />
+        <Typography variant="caption" display="block" align="center" gutterBottom>
+            {date}
+        </Typography>
+        <Box
+          sx={{
+              paddingTop: 10,
+          }}
+        />
+        <Avatar 
+          alt="thumbnail"
+          src={daily.thumbnail}
+          variant="square"
+          align ="center"
+          sx={{ width: "35rem", height: "10rem" }}/>
+        <Box
+          sx={{
+              paddingTop: 10,
+          }}
+          />
+        <div>
+          <Typography
+            variant="h6"
+            align="center"
+            gutterBottom
+            component="div"
+            sx={{ fontWeight: "bold" }}
+            >
+            {daily.issue1_title}
+          </Typography>
+          <Box
+          sx={{
+              paddingTop: 3,
+          }}
+          />
+          <Viewer initialValue={daily.issue1_content} />
+          <Box
+          sx={{
+              paddingTop: 3,
+          }}
+          />
+        </div>
+        <Box
+            sx={{
+            paddingTop: 10,
+            }}
+        />
+        
+        <div>
+        <Typography
+            variant="h6"
+            align="center"
+            gutterBottom
+            component="div"
+            sx={{ fontWeight: "bold" }}
+            >
+            {daily.issue2_title}
+          </Typography>
+          <Box
+          sx={{
+              paddingTop: 3,
+          }}
+          />
+          <Viewer initialValue={daily.issue2_content} />
+          <Box
+          sx={{
+              paddingTop: 3,
+          }}
+          />
+        </div>
+        <Box
+            sx={{
+            paddingTop: 10,
+            }}
+        />
+
+        <div>
+            <Typography
+            variant="subtitle1"
+            align="center"
+            gutterBottom
+            component="div"
+            sx={{ textDecoration: "underline" }}
+            >
+            Credit
+            </Typography>
+        </div>
+        <Typography
+            variant="subtitle2"
+            align="center"
+            gutterBottom
+            component="div"
+            sx={{ fontWeight: "bold", m: 1 }}
+        >
+            {writer}
+        </Typography>
+      </div>
+  );
+}
+export {DailyReportcard};

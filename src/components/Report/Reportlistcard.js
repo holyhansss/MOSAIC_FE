@@ -11,20 +11,19 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 
-const StyleCard = styled(Card)`
-  background: linear-gradient(-45deg, #0b062d 10%, #230b65 90%);
-`;
+// const StyleCard = styled(Card)`
+//   background: linear-gradient(-45deg, #0b062d 10%, #230b65 90%);
+// `;
 
-const StyleCardSmall = styled(Card)`
-  background: linear-gradient(-45deg, #0b062d 10%, #2e1c72 90%);
-`;
+// const StyleCardSmall = styled(Card)`
+//   background: linear-gradient(-45deg, #0b062d 10%, #2e1c72 90%);
+// `;
 
-function Reportrecentcard({ id, title, writer, date }) {
+function Reportrecentcard({ id, title, writer, date, thumbnail, hashtag }) {
   const navigate = useNavigate();
   const move = () => {
     // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -34,48 +33,31 @@ function Reportrecentcard({ id, title, writer, date }) {
         title: title,
         writer: writer,
         date: date,
+        thumbnail: thumbnail,
+        hashtag: hashtag,
       },
     });
   };
 
   return (
-    // <CardActionArea onClick={move}>
-    //   <StyleCard
-    //     sx={() => ({
-    //       height: "280px",
-    //       py: "32px",
-    //       borderRadius: "20px",
-    //       color: "white",
-    //       boxShadow: 3
-    //     })}
-    //   >
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h4" component="div">
-    //         {title}
-    //       </Typography>
-    //       <Typography variant="h6">{writer}</Typography>
-    //       <p />
-    //       <Typography variant="caption">
-    //         더보기
-    //         <ArrowForwardIcon fontSize="small" />
-    //       </Typography>
-    //     </CardContent>
-    //   </StyleCard>
-    // </CardActionArea>
+
     <Card sx={{ maxWidth: 1 }}>
       <CardActionArea onClick={move}>
         <CardMedia
           component="img"
-          height="230"
-          image="https://cdn.dribbble.com/users/30229/screenshots/16975390/ndax_dribbble_coins_2.png?compress=1&resize=400x300"
-          alt="daily image"
+          height="240"
+          image={thumbnail}
+          alt='thumbnail'
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            암호화폐 거래업체 윈터뮤트 2200억 해킹
+            {hashtag}
+          </Typography>
+          <Typography variant="caption" color="text.secondary" sx={{display: "block"}}>
+            {writer}
           </Typography>
           <Typography variant="caption" color="text.secondary">
             {date}
@@ -91,7 +73,7 @@ function Reportrecentcard({ id, title, writer, date }) {
 
 export { Reportrecentcard };
 
-function Reportlistcard({ id, title, date, writer }) {
+function Reportlistcard({ id, title, date, writer, thumbnail }) {
   const navigate = useNavigate();
   const move = () => {
     // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -101,48 +83,30 @@ function Reportlistcard({ id, title, date, writer }) {
         title: title,
         writer: writer,
         date: date,
+        thumbnail: thumbnail,
       },
     });
   };
   return (
-    // <CardActionArea onClick={move}>
-    //   <StyleCardSmall
-    //     sx={{
-    //       width: 1,
-    //       height: 180,
-    //       margin: 1,
-    //       borderRadius: "10px",
-    //       color: "white",
-    //       boxShadow: 3
-    //     }}
-    //   >
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h6" component="div">
-    //         {title}
-    //       </Typography>
-    //       <Typography variant="body2">{writer}</Typography>
-    //     </CardContent>
-    //   </StyleCardSmall>
-    // </CardActionArea>
 
     <Card sx={{ maxWidth: 1 }}>
       <CardActionArea onClick={move}>
         <CardMedia
           component="img"
-          height="230"
-          image="https://cdn.dribbble.com/users/30229/screenshots/16975390/ndax_dribbble_coins_2.png?compress=1&resize=400x300"
-          alt="daily image"
+          height="90"
+          image={thumbnail}
+          alt="thumbnail"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {title}
           </Typography>
           <Typography variant="caption" color="text.secondary">
             {date}
           </Typography>
-          {/* <Typography variant="caption">
-              더보기 <ArrowForwardIcon fontSize="small" />
-            </Typography> */}
+          <Typography variant="caption" color="text.secondary" sx={{display : 'block'}}>
+            {writer}
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -151,7 +115,7 @@ function Reportlistcard({ id, title, date, writer }) {
 
 export { Reportlistcard };
 
-function ReportlistForm({ id, title, date, writer }) {
+function ReportlistForm({ id, title, date, writer, thumbnail }) {
   const navigate = useNavigate();
   const move = () => {
     // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -161,6 +125,7 @@ function ReportlistForm({ id, title, date, writer }) {
         title: title,
         writer: writer,
         date: date,
+        thumbnail: thumbnail,
       },
     });
   };
@@ -171,9 +136,9 @@ function ReportlistForm({ id, title, date, writer }) {
           primary={
             <React.Fragment>
               <Typography
-                sx={{ display: "inline" }}
+                sx={{ display: "block" }}
                 component="span"
-                variant="h5"
+                variant="subtitle1"
                 color="text.primary"
               >
                 {title}
@@ -183,21 +148,30 @@ function ReportlistForm({ id, title, date, writer }) {
           secondary={
             <React.Fragment>
               <Typography
-                sx={{ display: "inline" }}
+                sx={{ display: "block" }}
                 component="span"
                 variant="body2"
                 color="text.primary"
               >
+                <p />
                 {writer}
+              </Typography>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="caption"
+                color="text.primary"
+              >
+                {date}
               </Typography>
             </React.Fragment>
           }
-          // sx={{py:5, px:3}}
+
         />
         <ListItemAvatar sx={{ pb: 1 }}>
           <Avatar
             alt="Remy Sharp"
-            src="https://blog.kakaocdn.net/dn/RbIRm/btqV8F1wVH3/cRKJ1lSX7buBlmQtCB7f6k/img.png"
+            src={thumbnail}
             variant="square"
             sx={{ borderRadius: "8%", width: "6rem", height: "4rem" }}
           />
@@ -210,7 +184,7 @@ function ReportlistForm({ id, title, date, writer }) {
 
 export { ReportlistForm };
 
-function ReportlistFormAll({ id, title, date, writer }) {
+function ReportlistFormAll({ id, title, date, writer, thumbnail }) {
   const navigate = useNavigate();
   const move = () => {
     // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
@@ -220,6 +194,7 @@ function ReportlistFormAll({ id, title, date, writer }) {
         title: title,
         writer: writer,
         date: date,
+        thumbnail: thumbnail,
       },
     });
   };
@@ -241,13 +216,23 @@ function ReportlistFormAll({ id, title, date, writer }) {
           }
           secondary={
             <React.Fragment>
+              <p />
               <Typography
-                sx={{ display: "inline" }}
+                sx={{ display: "block" }}
                 component="span"
                 variant="body2"
                 color="text.primary"
               >
                 {writer}
+              </Typography>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {date}
               </Typography>
             </React.Fragment>
           }
@@ -256,7 +241,7 @@ function ReportlistFormAll({ id, title, date, writer }) {
         <ListItemAvatar sx={{ pb: 1 }}>
           <Avatar
             alt="Remy Sharp"
-            src="https://blog.kakaocdn.net/dn/RbIRm/btqV8F1wVH3/cRKJ1lSX7buBlmQtCB7f6k/img.png"
+            src={thumbnail}
             variant="square"
             sx={{ borderRadius: "8%", width: "15rem", height: "10rem" }}
           />
@@ -268,3 +253,193 @@ function ReportlistFormAll({ id, title, date, writer }) {
 }
 
 export { ReportlistFormAll };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////For Daily Report////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function ReportrecentcardDetail({ id, title, writer, date, thumbnail, hashtag }) {
+  const navigate = useNavigate();
+  const move = () => {
+    // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
+    navigate("/reportDailyDetail/" + id + "/" + title + "/" + writer + "/" + date, {
+      state: {
+        id: id,
+        title: title,
+        writer: writer,
+        date: date,
+        thumbnail: thumbnail,
+        hashtag: hashtag,
+      },
+    });
+  };
+
+  return (
+
+    <Card sx={{ maxWidth: 1 }}>
+      <CardActionArea onClick={move}>
+        <CardMedia
+          component="img"
+          height="240"
+          image={thumbnail}
+          alt='thumbnail'
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {hashtag}
+          </Typography>
+          <Typography variant="caption" color="text.secondary" sx={{display: "block"}}>
+            {writer}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {date}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
+}
+
+export { ReportrecentcardDetail };
+
+function ReportlistFormDetail({ id, title, date, writer, thumbnail }) {
+  const navigate = useNavigate();
+  const move = () => {
+    // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
+    navigate("/reportDailyDetail/" + id + "/" + title + "/" + writer + "/" + date, {
+      state: {
+        id: id,
+        title: title,
+        writer: writer,
+        date: date,
+        thumbnail: thumbnail,
+      },
+    });
+  };
+  return (
+    <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
+      <ListItem button alignItems="flex-start" onClick={move}>
+        <ListItemText
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="subtitle1"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                <p />
+                {writer}
+              </Typography>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="caption"
+                color="text.primary"
+              >
+                {date}
+              </Typography>
+            </React.Fragment>
+          }
+
+        />
+        <ListItemAvatar sx={{ pb: 1 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src={thumbnail}
+            variant="square"
+            sx={{ borderRadius: "8%", width: "6rem", height: "4rem" }}
+          />
+        </ListItemAvatar>
+      </ListItem>
+      <Divider sx={{ width: "100%", mt: 1 }} />
+    </List>
+  );
+}
+
+export { ReportlistFormDetail };
+
+function DailyReportlistFormAll({ id, title, date, writer, thumbnail }) {
+  const navigate = useNavigate();
+  const move = () => {
+    // 두번재 인자의 state 속성에 원하는 파라미터를 넣어준다. (id, job을 넣어봤다)
+    navigate("/reportDailyDetail/" + id + "/" + title + "/" + writer + "/" + date, {
+      state: {
+        id: id,
+        title: title,
+        writer: writer,
+        date: date,
+        thumbnail: thumbnail,
+      },
+    });
+  };
+  return (
+    <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
+      <ListItem button alignItems="flex-start" onClick={move}>
+        <ListItemText
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                variant="h5"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
+          secondary={
+            <React.Fragment>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {writer}
+              </Typography>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {date}
+              </Typography>
+            </React.Fragment>
+          }
+          sx={{ py: 5, px: 3 }}
+        />
+        <ListItemAvatar sx={{ pb: 1 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src={thumbnail}
+            variant="square"
+            sx={{ borderRadius: "8%", width: "15rem", height: "10rem" }}
+          />
+        </ListItemAvatar>
+      </ListItem>
+      <Divider sx={{ width: "100%", mt: 3 }} />
+    </List>
+  );
+}
+
+export { DailyReportlistFormAll };

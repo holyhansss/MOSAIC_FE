@@ -183,6 +183,8 @@ const MainPage = ({ result, reports }) => {
                 title={result.title}
                 writer={result.writer}
                 date={moment(result.date).format("YYYY.MM.DD")}
+                thumbnail={result.thumbnail}
+                hashtag={result.hashtag}
               />
             ) : null}
           </div>

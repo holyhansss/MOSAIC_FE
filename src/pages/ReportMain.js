@@ -10,13 +10,13 @@ import { grey } from "@mui/material/colors";
 //components
 import {
   Reportlistcard,
-  Reportrecentcard,
-  ReportlistForm,
+  ReportlistFormDetail,
+  ReportrecentcardDetail,
 } from "../components/Report/Reportlistcard.js";
 
-function ReportMain({ result, reports }) {
+function ReportMain({ result, reports, dailyReport }) {
   let subreports = reports.slice(0, 4);
-  let dailyports = reports.slice(0, 3);
+  let dailyports = dailyReport.slice(0, 3);
 
   return (
     <>
@@ -40,7 +40,7 @@ function ReportMain({ result, reports }) {
         </Grid>
         <Grid item xs={6}>
           <Box display="flex" justifyContent="flex-end">
-            <Button href="/reportList" sx={{ color: grey[400] }}>
+            <Button href="/reportDailyList" sx={{ color: grey[400] }}>
               전체보기 <ArrowForwardIosIcon />
             </Button>
           </Box>
@@ -48,11 +48,13 @@ function ReportMain({ result, reports }) {
         <Grid item xs={6}>
           <div>
             {result !== undefined ? (
-              <Reportrecentcard
+              <ReportrecentcardDetail
                 id={result.id}
                 title={result.title}
                 writer={result.writer}
                 date={moment(result.date).format("YYYY.MM.DD")}
+                thumbnail={result.thumbnail}
+                hashtag={result.hashtag}
               />
             ) : null}
           </div>
@@ -61,11 +63,12 @@ function ReportMain({ result, reports }) {
           <div>
             {dailyports.map((report, index) => (
               <div key={index}>
-                <ReportlistForm
+                <ReportlistFormDetail
                   id={report.id}
                   title={report.title}
                   date={moment(report.date).format("YYYY.MM.DD")}
                   writer={report.writer}
+                  thumbnail={report.thumbnail}
                 />
               </div>
             ))}
@@ -90,7 +93,7 @@ function ReportMain({ result, reports }) {
           <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
-              spacing={{ xs: 2, md: 3 }}
+              spacing={{ xs: 2, md: 4 }}
               columns={{ xs: 4, sm: 8, md: 20 }}
             >
               {subreports.map((subreports, index) => (
@@ -100,6 +103,7 @@ function ReportMain({ result, reports }) {
                     title={subreports.title}
                     date={moment(subreports.date).format("YYYY.MM.DD")}
                     writer={subreports.writer}
+                    thumbnail={subreports.thumbnail}
                   />
                 </Grid>
               ))}
