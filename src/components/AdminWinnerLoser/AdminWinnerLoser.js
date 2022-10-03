@@ -105,11 +105,11 @@ const AdminWinnerLoser = () => {
     const image1StorageURL = await getDownloadURL(image1StorageRef);
     const image2StorageURL = await getDownloadURL(image2StorageRef);
 
-    console.log(image1StorageURL);
-    console.log(image2StorageURL);
+    // console.log(image1StorageURL);
+    // console.log(image2StorageURL);
 
-    console.log(docRef);
-    console.log(subColRef);
+    // console.log(docRef);
+    // console.log(subColRef);
 
     await setDoc(
       doc(

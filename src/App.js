@@ -14,7 +14,7 @@ import Join from "./pages/Join";
 import Admin from "./pages/Admin";
 import MarketPage from "./pages/Market";
 import PromisingCoins from "./pages/PromisingCoins";
-import ReportList from "./pages/ReportList";
+import {ReportList, DailyReportList} from "./pages/ReportList";
 import ReportWeeklyDetail from "./pages/ReportWeeklyDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
@@ -23,6 +23,7 @@ import CryptoReport from "./components/PromisingCoin/CryptoReport";
 import ReportMain from "./pages/ReportMain";
 import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
+import ReportDailyDetail from "./pages/ReportDailyDetail";
 
 const theme = createTheme({
   typography: {
@@ -88,6 +89,7 @@ function App() {
         title: docs.data().title,
         date: docs.data().date,
         writer: docs.data().writer,
+        thumbnail: docs.data().thumbnail,
       };
       setReports((prev) => [reportObj, ...prev]);
     });
@@ -100,6 +102,9 @@ function App() {
         title: docs.data().issue1_title,
         date: docs.data().date,
         writer: docs.data().writer,
+        thumbnail: docs.data().thumbnail,
+        hashtag: docs.data().hashtag,
+
       };
       setDailyReport((prev) => [reportObj, ...prev]);
     });
@@ -132,15 +137,23 @@ function App() {
               <Route path="/promising/:name" element={<CryptoReport />} />
               <Route
                 path="/reportMain"
-                element={<ReportMain result={result} reports={reports} />}
+                element={<ReportMain result={result} reports={reports} dailyReport={dailyReport} />}
               />
               <Route
                 path="/reportList"
                 element={<ReportList result={result} reports={reports} />}
               />
               <Route
+                path="/reportDailyList"
+                element={<DailyReportList result={result} dailyReport={dailyReport} />}
+              />
+              <Route
                 path="/reportDetail/:id/:title/:writer/:date"
                 element={<ReportWeeklyDetail user={userObj} />}
+              />
+              <Route
+                path="/reportDailyDetail/:id/:title/:writer/:date"
+                element={<ReportDailyDetail user={userObj} />}
               />
               <Route
                 path="/profile"

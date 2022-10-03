@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
   Box,
-  Tab,
   Container,
   Grid,
   Modal,
@@ -9,7 +8,6 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-import { TabList, TabPanel, TabContext } from "@mui/lab";
 import { useParams } from "react-router-dom";
 import {
   query,
@@ -29,20 +27,19 @@ import SendIcon from "@mui/icons-material/Send";
 import { pink } from "@mui/material/colors";
 
 //components
-import ReportContents from "../components/Report/ReportContents";
-import Winner from "../components/Report/Winner";
-import { Comment } from "../components/Comment/Comment";
+import DailyReportcontents from "../components/Report/DailyReportContents";
+import { DailyComment } from "../components/Comment/Comment";
 
-export default function ReportWeeklyDetail({ user }) {
-  const [value, setValue] = React.useState("1");
+export default function ReportDailyDetail({ user }) {
   const { id, title, writer, date } = useParams();
-
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
+
   const getReplies = async () => {
     const repl = query(
-      collection(dbService, "weekly_report", id, "comment"),
+      collection(dbService, "daily_report", id, "comment"),
       where("isreply", "==", false),
+      orderBy("created_at", "desc")
     );
     const querySnapShot = await getDocs(repl);
 
@@ -73,7 +70,7 @@ export default function ReportWeeklyDetail({ user }) {
 
   //전체 좋아요 개수
   const getLikes = async () => {
-    const Likes = query(collection(dbService, "weekly_report", id, "like"));
+    const Likes = query(collection(dbService, "daily_report", id, "like"));
     const QuerySnapShot = await getDocs(Likes);
     QuerySnapShot.forEach((collection) => {
       const lkeObj = {
@@ -95,9 +92,8 @@ export default function ReportWeeklyDetail({ user }) {
   const getUserLike = async () => {
     if (user !== null) {
       const likequ = query(
-        collection(dbService, "weekly_report", id, "like"),
-        where("likeuid", "==", user.uid),
-        orderBy("created_at", 'desc')
+        collection(dbService, "daily_report", id, "like"),
+        where("likeuid", "==", user.uid)
       );
       const querySnapShot = await getDocs(likequ);
       querySnapShot.forEach((collection) => {
@@ -121,7 +117,7 @@ export default function ReportWeeklyDetail({ user }) {
       setClickIcon(!clickICon);
 
       if (clickICon === false) {
-        await setDoc(doc(dbService, "weekly_report", id, "like", user.uid), {
+        await setDoc(doc(dbService, "daily_report", id, "like", user.uid), {
           likename: user.displayName,
           likeuid: user.uid,
         });
@@ -132,7 +128,7 @@ export default function ReportWeeklyDetail({ user }) {
           date: date,
         });
       } else {
-        await deleteDoc(doc(dbService, "weekly_report", id, "like", user.uid));
+        await deleteDoc(doc(dbService, "daily_report", id, "like", user.uid));
         await deleteDoc(doc(dbService, "users", user.uid, "liked", id));
       }
 
@@ -141,10 +137,7 @@ export default function ReportWeeklyDetail({ user }) {
       alert("로그인이 필요한 서비스입니다.");
     }
   };
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  
   const style = {
     position: "absolute",
     top: "50%",
@@ -172,41 +165,13 @@ export default function ReportWeeklyDetail({ user }) {
 
   return (
     <div>
-      <TabContext value={value}>
-        <Container maxWidth="md">
-          <Box
-            sx={{ borderColor: "divider", position: "relative", left: "35%" }}
-          >
-            <TabList
-              onChange={handleChange}
-              aria-label="lab API tabs example"
-              sx={{ justifyContent: "center" }}
-            >
-              <Tab label="주간이슈" value="1" />
-              <Tab label="Winner & Loser" value="2" />
-            </TabList>
-          </Box>
-        </Container>
-        <p />
-        <TabPanel value="1">
-          <ReportContents
-            user={user}
-            id={id}
-            title={title}
-            writer={writer}
-            date={date}
-          />
-        </TabPanel>
-        <TabPanel value="2">
-          <Winner
-            user={user}
-            id={id}
-            title={title}
-            writer={writer}
-            date={date}
-          />
-        </TabPanel>
-      </TabContext>
+        <DailyReportcontents
+        user={user}
+        id={id}
+        title={title}
+        writer={writer}
+        date={date}
+        />
 
       <Container maxWidth="md">
         <Grid container spacing={1}>
@@ -253,7 +218,7 @@ export default function ReportWeeklyDetail({ user }) {
             </Modal>
           </Grid>
           <Grid item xs={12}>
-            <Comment
+            <DailyComment
               user={user}
               id={id}
               title={title}

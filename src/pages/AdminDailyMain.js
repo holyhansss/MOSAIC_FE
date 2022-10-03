@@ -11,6 +11,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 
 //Editor
 import { Editor } from "@toast-ui/react-editor";
@@ -18,6 +20,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 
 const AdminDailyMain = () => {
   const db = getFirestore();
+  const storage = getStorage();
 
   let issue1contentRef = useRef(null);
   let issue2contentRef = useRef(null);
@@ -32,8 +35,21 @@ const AdminDailyMain = () => {
   const [loading, setLoading] = useState("");
   const [admin, setAdmin] = useState([]);
   const [writer, setWriter] = useState([]);
+  const [thumbnail, setThumbnail] = useState();
+  const [thumbnail1Url, setThumbnailUrl] = useState(null);
+  const [hashtag, setHashtag] = useState("");
+
 
   const submitContent = async () => {
+
+    let thumbnailStorageRef = ref(
+      storage,
+      `daily_report`
+    );
+
+    await uploadBytes(thumbnailStorageRef, thumbnail);
+    const thumbnailStorageURL = await getDownloadURL(thumbnailStorageRef);
+
     const time = Date;
     const docRef = await addDoc(collection(db, "daily_report"), {
       issue1_title: issue1_title,
@@ -43,6 +59,8 @@ const AdminDailyMain = () => {
       date: time.now(),
       writer: writer,
       insight: insight,
+      thumbnail: thumbnailStorageURL,
+      hashtag: hashtag,
     });
 
     setTimeout(() => {
@@ -51,6 +69,8 @@ const AdminDailyMain = () => {
       window.location.reload();
     }, 2000);
   };
+
+
   const handleOnChangeIssue1Title = (value) => {
     setIssue1_title(value);
   };
@@ -69,6 +89,9 @@ const AdminDailyMain = () => {
   const handleOnChangeInsight = (value) => {
     setInsight(value);
   };
+  const handleOnChangeHashtag = (value) => {
+    setHashtag(value);
+  };
 
   useEffect(() => {
     const getAdminFromDatabase = async () => {
@@ -83,9 +106,36 @@ const AdminDailyMain = () => {
     getAdminFromDatabase();
   }, []);
 
+ 
+
+  useEffect(() => {
+    if (thumbnail) {
+      setThumbnailUrl(URL.createObjectURL(thumbnail));
+    }
+  }, [thumbnail]);
+
   return (
     <Container>
       <div>
+      <Container className="my-5">
+        <input
+          accept="image/*"
+          type="file"
+          id="select-thumbnail"
+          className="d-none"
+          onChange={(e) => setThumbnail(e.target.files[0])}
+        />
+        <Button variant="primary" className="my-2">
+          <label htmlFor="select-thumbnail">썸네일 업로드 *</label>
+        </Button>
+        {thumbnail1Url && thumbnail ? (
+          <div className="my-2">
+            <img src={thumbnail1Url} alt={thumbnail.name} height="300px" />
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </Container>
         <Container className="mt-5 align-item-center">
           <Typography variant="h5" gutterBottom>
             Issue1
@@ -170,6 +220,26 @@ const AdminDailyMain = () => {
                 insightRef.current.getInstance().getMarkdown()
               );
             }}
+          />
+        </Container>
+
+        <Container className="my-5">
+          <Typography variant="h5" gutterBottom>
+            Hashtag
+          </Typography>
+          <Form.Control
+            key={"Hashtag"}
+            className=""
+            type=""
+            placeholder="#키워드"
+            style={{
+              width: "100%",
+              height: "50px",
+            }}
+            onChange={(e) => {
+              handleOnChangeHashtag(e.target.value);
+            }}
+            label=""
           />
         </Container>
 
