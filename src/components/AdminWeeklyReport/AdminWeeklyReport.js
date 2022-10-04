@@ -46,10 +46,16 @@ const AdminWeeklyReport = (props) => {
   const [thumbnail, setThumbnail] = useState();
   const [thumbnail1Url, setThumbnailUrl] = useState(null);
 
+  const Unix_timestampConv = () => {
+    return Math.floor(new Date().getTime() / 1000);
+  };
+
   const submitContent = async () => {
+    const currentTime = Unix_timestampConv();
+    
     let thumbnailStorageRef = ref(
       storage,
-      `weekly_report`
+      `thumbnail/weekly_report/${currentTime}`
     );
 
     await uploadBytes(thumbnailStorageRef, thumbnail);
