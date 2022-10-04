@@ -1,12 +1,5 @@
-import React, { useRef, useState } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { StyledLink } from "../Header/Header";
 //image
 import cardimage001 from "../../img/PromisingCoins/001.jpg";
@@ -14,7 +7,6 @@ import cardimage002 from "../../img/PromisingCoins/002.jpg";
 import cardimage003 from "../../img/PromisingCoins/003.jpg";
 import cardimage004 from "../../img/PromisingCoins/004.jpg";
 import cardimage005 from "../../img/PromisingCoins/005.jpg";
-
 
 export default function CryptoCard() {
   return (

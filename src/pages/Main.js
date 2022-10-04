@@ -1,11 +1,9 @@
 import React from "react";
 import {
-  Container,
   Grid,
   Typography,
   Box,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Divider,
@@ -13,7 +11,6 @@ import {
 import { createTheme } from "@mui/material/styles";
 import styled, { keyframes } from "styled-components";
 import moment from "moment";
-import Marquee from "react-fast-marquee";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // Components
@@ -31,25 +28,6 @@ import cardimage002 from "../img/PromisingCoins/002.jpg";
 import cardimage003 from "../img/PromisingCoins/003.jpg";
 
 // Style
-const theme = createTheme({
-  components: {
-    MuiToggleButton: {
-      selected: {
-        disable: "true",
-      },
-      styleOverrides: {
-        root: {
-          "&.Mui-selected": {
-            color: "#fff",
-            fontWeight: "bold",
-            backgroundColor: "rgba(0,0,0,0)",
-          },
-        },
-      },
-    },
-  },
-});
-
 const scale = keyframes`
   0% {
       opacity: 0;

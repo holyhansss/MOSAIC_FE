@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import {
   Box,
   Container,
@@ -13,14 +13,6 @@ import styled from "styled-components";
 import grade from "../../img/Grade.jpg";
 import logo from "../../img/Ethereum_logo.png";
 
-const StyleBox = styled(Box)`
-  background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
-  border-radius: 10px;
-`;
-var x = document.getElementById("grade");
-const Styleli = styled.li`
-  color: white;
-`;
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;

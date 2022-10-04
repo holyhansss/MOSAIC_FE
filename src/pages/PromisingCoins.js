@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import CryptoReport from "../components/PromisingCoin/CryptoReport";
 import CryptoCard from "../components/PromisingCoin/CryptoList";
 
 const PromisingCoins = () => {

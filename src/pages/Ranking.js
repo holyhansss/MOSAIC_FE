@@ -1,16 +1,8 @@
 import React from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import styled from "styled-components";
 import CryptoTable from "../components/PromisingCoin/CryptoTable";
 
-const StyleBox = styled(Box)`
-  background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
-  border-radius: 10px;
-`;
-var x = document.getElementById("grade");
-const Styleli = styled.li`
-  color: white;
-`;
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;

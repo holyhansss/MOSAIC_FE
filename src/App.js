@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import styled from "styled-components";
 import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { auth, dbService } from "./firebase";
 import GlobalStyle from "./style/global";
