@@ -16,7 +16,7 @@ import {
 
 function ReportMain({ result, reports, dailyReport }) {
   let subreports = reports.slice(0, 4);
-  let dailyports = dailyReport.slice(0, 3);
+  let dailyports = dailyReport.slice(1, 4);
 
   return (
     <>
