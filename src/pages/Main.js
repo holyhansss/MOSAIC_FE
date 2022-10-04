@@ -19,13 +19,13 @@ import {
   ReportlistForm,
 } from "../components/Report/Reportlistcard.js";
 // Images
-import RankingImage from "../img/MainPage/001.jpg";
-import RatingImage from "../img/MainPage/002.jpg";
-import MarketImage from "../img/MainPage/003.jpg";
+// import RankingImage from "../img/MainPage/001.jpg";
+// import RatingImage from "../img/MainPage/002.jpg";
+// import MarketImage from "../img/MainPage/003.jpg";
 import Sample from "../img/logo_mosaic.jpg";
-import cardimage001 from "../img/PromisingCoins/001.jpg";
-import cardimage002 from "../img/PromisingCoins/002.jpg";
-import cardimage003 from "../img/PromisingCoins/003.jpg";
+import cardimage001 from "../img/PromisingCoins/Ethereum.jpg";
+import cardimage002 from "../img/PromisingCoins/Tezos.jpg";
+import cardimage003 from "../img/PromisingCoins/Lido Dao.jpg";
 
 // Style
 const scale = keyframes`

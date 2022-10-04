@@ -2,11 +2,11 @@ import React from "react";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { StyledLink } from "../Header/Header";
 //image
-import cardimage001 from "../../img/PromisingCoins/001.jpg";
-import cardimage002 from "../../img/PromisingCoins/002.jpg";
-import cardimage003 from "../../img/PromisingCoins/003.jpg";
-import cardimage004 from "../../img/PromisingCoins/004.jpg";
-import cardimage005 from "../../img/PromisingCoins/005.jpg";
+import cardimage001 from "../../img/PromisingCoins/Ethereum.jpg";
+import cardimage002 from "../../img/PromisingCoins/Tezos.jpg";
+import cardimage003 from "../../img/PromisingCoins/Lido Dao.jpg";
+import cardimage004 from "../../img/PromisingCoins/Ultra.jpg";
+import cardimage005 from "../../img/PromisingCoins/Reef.jpg";
 
 export default function CryptoCard() {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import CryptoCard from "../components/PromisingCoin/CryptoList";
+import CryptoCard from "../components/PromisingCoin/CryptoCard";
 
-const PromisingCoins = () => {
+const PromisingCoins = ({ crypto }) => {
   return (
     <>
       <div
@@ -24,7 +24,14 @@ const PromisingCoins = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <CryptoCard />
+          {/* {
+            crypto.map((content, index) => (
+              content.type == 
+              <CryptoCard 
+                
+              />
+            ))
+          } */}
         </Grid>
       </Grid>
       {/* <CryptoReport /> */}

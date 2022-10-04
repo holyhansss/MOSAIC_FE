@@ -10,13 +10,14 @@ import {
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import styled from "styled-components";
-import grade from "../../img/Grade.jpg";
+import grade from "../../img/AA+.jpg";
 import logo from "../../img/Ethereum_logo.png";
 
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
 `;
+
 function CryptoReport() {
   return (
     <MainContainer maxWidth="md" disableGutters="true">

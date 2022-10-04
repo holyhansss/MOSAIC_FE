@@ -13,7 +13,7 @@ import Join from "./pages/Join";
 import Admin from "./pages/Admin";
 import MarketPage from "./pages/Market";
 import PromisingCoins from "./pages/PromisingCoins";
-import {ReportList, DailyReportList} from "./pages/ReportList";
+import { ReportList, DailyReportList } from "./pages/ReportList";
 import ReportWeeklyDetail from "./pages/ReportWeeklyDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
@@ -34,6 +34,11 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [admin, setAdmin] = useState(false);
+  // 리포트 리스트 db 불러오기
+  const [reports, setReports] = useState([]);
+  const [dailyReport, setDailyReport] = useState([]);
+  // 암호화폐 db
+  const [crypto, setCrypto] = useState([]);
 
   const refreshUser = () => {
     const user = auth.currentUser;
@@ -75,10 +80,6 @@ function App() {
     });
   }, []);
 
-  //리포트 리스트 db 불러오기
-  const [reports, setReports] = useState([]);
-  const [dailyReport, setDailyReport] = useState([]);
-
   const getReports = async () => {
     const q = query(collection(dbService, "weekly_report"), orderBy("date"));
     const querySnapshot = await getDocs(q);
@@ -103,16 +104,52 @@ function App() {
         writer: docs.data().writer,
         thumbnail: docs.data().thumbnail,
         hashtag: docs.data().hashtag,
-
       };
       setDailyReport((prev) => [reportObj, ...prev]);
     });
   };
-  
+
   const result = dailyReport[0];
+
+  const getCrypto = async () => {
+    const q = query(collection(dbService, "cryptocurrency"), orderBy("date"));
+    const querySnapShot = await getDocs(q);
+    querySnapShot.forEach((docs) => {
+      let cryptoObj = {};
+      if (docs.data().type === "coin") {
+        cryptoObj = {
+          id: docs.id,
+          name: docs.data().name,
+          security: docs.data().security,
+          scalability: docs.data().scalability,
+          decentralization: docs.data().decentralization,
+          logo: docs.data().logo,
+          rating: docs.data().rating,
+          thumbnail: docs.data().thumbnail,
+          hashtag: docs.data().hashtag,
+          type: docs.data().type,
+        };
+      } else {
+        cryptoObj = {
+          id: docs.id,
+          name: docs.data().name,
+          business: docs.data().business,
+          technicality: docs.data().technicality,
+          reliability: docs.data().reliability,
+          logo: docs.data().logo,
+          rating: docs.data().rating,
+          thumbnail: docs.data().thumbnail,
+          hashtag: docs.data().hashtag,
+          type: docs.data().type,
+        };
+      }
+      setCrypto((prev) => [cryptoObj, ...prev]);
+    });
+  };
 
   useEffect(() => {
     getReports();
+    getCrypto();
   }, []);
 
   return (
@@ -125,18 +162,30 @@ function App() {
         <Grid item md={10}>
           <Container maxWidth="lg" disableGutters="true">
             <Routes>
-              <Route path="/" element={<MainPage result={result} reports={reports} />} />
+              <Route
+                path="/"
+                element={<MainPage result={result} reports={reports} />}
+              />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
               <Route path="admin" element={<Admin />} />
               <Route path="adminweeklymain" element={<AdminWeeklyMain />} />
               <Route path="admindailymain" element={<AdminDailyMain />} />
               <Route path="/market" element={<MarketPage />} />
-              <Route path="/promising" element={<PromisingCoins />} />
+              <Route
+                path="/promising"
+                element={<PromisingCoins crypto={crypto} />}
+              />
               <Route path="/promising/:name" element={<CryptoReport />} />
               <Route
                 path="/reportMain"
-                element={<ReportMain result={result} reports={reports} dailyReport={dailyReport} />}
+                element={
+                  <ReportMain
+                    result={result}
+                    reports={reports}
+                    dailyReport={dailyReport}
+                  />
+                }
               />
               <Route
                 path="/reportList"
@@ -144,7 +193,9 @@ function App() {
               />
               <Route
                 path="/reportDailyList"
-                element={<DailyReportList result={result} dailyReport={dailyReport} />}
+                element={
+                  <DailyReportList result={result} dailyReport={dailyReport} />
+                }
               />
               <Route
                 path="/reportDetail/:id/:title/:writer/:date"
@@ -158,7 +209,7 @@ function App() {
                 path="/profile"
                 element={<MyPage user={userObj} refreshUser={refreshUser} />}
               />
-              <Route path="/ranking" element={<Ranking />} />
+              <Route path="/ranking" element={<Ranking crypto={crypto} />} />
             </Routes>
           </Container>
         </Grid>
