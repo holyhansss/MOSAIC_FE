@@ -77,7 +77,7 @@ function Header({ user, admin }) {
               <NavDropdown
                 title={
                   <img
-                    referrerpolicy="no-referrer"
+                    referrerPolicy="no-referrer"
                     src={user.photoURL}
                     alt=""
                     style={{ borderRadius: "50%" }}

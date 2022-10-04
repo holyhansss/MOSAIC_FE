@@ -13,15 +13,6 @@ import {
   CardMedia,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// import styled from "styled-components";
-
-// const StyleCard = styled(Card)`
-//   background: linear-gradient(-45deg, #0b062d 10%, #230b65 90%);
-// `;
-
-// const StyleCardSmall = styled(Card)`
-//   background: linear-gradient(-45deg, #0b062d 10%, #2e1c72 90%);
-// `;
 
 function Reportrecentcard({ id, title, writer, date, thumbnail, hashtag }) {
   const navigate = useNavigate();
