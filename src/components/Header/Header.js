@@ -24,6 +24,7 @@ const HeaderContainer = styled.div`
   height: 4rem;
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 5px lightgrey;
 `;
 
 const NavMain = styled.div`
