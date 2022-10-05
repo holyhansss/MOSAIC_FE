@@ -17,12 +17,12 @@ import { ReportList, DailyReportList } from "./pages/ReportList";
 import ReportWeeklyDetail from "./pages/ReportWeeklyDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
-import Header from "./components/Header/Header";
-import CryptoReport from "./components/PromisingCoin/CryptoReport";
+import CryptoReport from "./pages/CryptoReport";
 import ReportMain from "./pages/ReportMain";
 import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
 import ReportDailyDetail from "./pages/ReportDailyDetail";
+import Header from "./components/Header/Header";
 
 const theme = createTheme({
   typography: {
@@ -116,33 +116,68 @@ function App() {
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((docs) => {
       let cryptoObj = {};
-      if (docs.data().type === "coin") {
-        cryptoObj = {
-          id: docs.id,
-          name: docs.data().name,
-          security: docs.data().security,
-          scalability: docs.data().scalability,
-          decentralization: docs.data().decentralization,
-          logo: docs.data().logo,
-          rating: docs.data().rating,
-          thumbnail: docs.data().thumbnail,
-          hashtag: docs.data().hashtag,
-          type: docs.data().type,
-        };
+      if (docs.data().promising === true) {
+        if (docs.data().type === "coin") {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            security: docs.data().security,
+            scalability: docs.data().scalability,
+            decentralization: docs.data().decentralization,
+            logo: docs.data().logo,
+            rating: docs.data().rating,
+            thumbnail: docs.data().thumbnail,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+            description: docs.data().description,
+            assessment: docs.data().assessment,
+          };
+        } else {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            business: docs.data().business,
+            technicality: docs.data().technicality,
+            reliability: docs.data().reliability,
+            logo: docs.data().logo,
+            rating: docs.data().rating,
+            thumbnail: docs.data().thumbnail,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+            description: docs.data().description,
+            assessment: docs.data().assessment,
+          };
+        }
       } else {
-        cryptoObj = {
-          id: docs.id,
-          name: docs.data().name,
-          business: docs.data().business,
-          technicality: docs.data().technicality,
-          reliability: docs.data().reliability,
-          logo: docs.data().logo,
-          rating: docs.data().rating,
-          thumbnail: docs.data().thumbnail,
-          hashtag: docs.data().hashtag,
-          type: docs.data().type,
-        };
+        if (docs.data().type === "coin") {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            security: docs.data().security,
+            scalability: docs.data().scalability,
+            decentralization: docs.data().decentralization,
+            rating: docs.data().rating,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+          };
+        } else {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            business: docs.data().business,
+            technicality: docs.data().technicality,
+            reliability: docs.data().reliability,
+            rating: docs.data().rating,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+          };
+        }
       }
+
       setCrypto((prev) => [cryptoObj, ...prev]);
     });
   };
@@ -160,11 +195,11 @@ function App() {
           <Header user={userObj} admin={admin} />
         </Grid>
         <Grid item md={10}>
-          <Container maxWidth="lg" disableGutters="true">
+          <Container maxWidth="lg" disableGutters>
             <Routes>
               <Route
                 path="/"
-                element={<MainPage result={result} reports={reports} />}
+                element={<MainPage result={result} reports={reports} crypto={crypto} />}
               />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
@@ -176,7 +211,7 @@ function App() {
                 path="/promising"
                 element={<PromisingCoins crypto={crypto} />}
               />
-              <Route path="/promising/:name" element={<CryptoReport />} />
+              <Route path="/promising/:id" element={<CryptoReport />} />
               <Route
                 path="/reportMain"
                 element={
