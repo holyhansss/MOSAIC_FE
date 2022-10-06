@@ -10,7 +10,6 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 
@@ -38,38 +37,6 @@ const AdminDailyMain = () => {
   const [thumbnail, setThumbnail] = useState();
   const [thumbnail1Url, setThumbnailUrl] = useState(null);
   const [hashtag, setHashtag] = useState("");
-
-
-  const submitContent = async () => {
-
-    let thumbnailStorageRef = ref(
-      storage,
-      `daily_report`
-    );
-
-    await uploadBytes(thumbnailStorageRef, thumbnail);
-    const thumbnailStorageURL = await getDownloadURL(thumbnailStorageRef);
-
-    const time = Date;
-    const docRef = await addDoc(collection(db, "daily_report"), {
-      issue1_title: issue1_title,
-      issue2_title: issue2_title, 
-      issue1_content: issue1_content,
-      issue2_content: issue2_content,
-      date: time.now(),
-      writer: writer,
-      insight: insight,
-      thumbnail: thumbnailStorageURL,
-      hashtag: hashtag,
-    });
-
-    setTimeout(() => {
-      alert("uploaded to database!!");
-      setLoading(false);
-      window.location.reload();
-    }, 2000);
-  };
-
 
   const handleOnChangeIssue1Title = (value) => {
     setIssue1_title(value);
@@ -106,6 +73,9 @@ const AdminDailyMain = () => {
     getAdminFromDatabase();
   }, []);
 
+  const Unix_timestampConv = () => {
+    return Math.floor(new Date().getTime() / 1000);
+  };
  
 
   useEffect(() => {
@@ -113,6 +83,37 @@ const AdminDailyMain = () => {
       setThumbnailUrl(URL.createObjectURL(thumbnail));
     }
   }, [thumbnail]);
+
+  const submitContent = async () => {
+    const currentTime = Unix_timestampConv();
+    let thumbnailStorageRef = ref(
+      storage,
+      `thumbnail/daily_report/${currentTime}`
+    );
+
+  await uploadBytes(thumbnailStorageRef, thumbnail);
+  const thumbnailStorageURL = await getDownloadURL(thumbnailStorageRef);
+
+  const time = Date;
+  const docRef = await addDoc(collection(db, "daily_report"), {
+    issue1_title: issue1_title,
+    issue2_title: issue2_title, 
+    issue1_content: issue1_content,
+    issue2_content: issue2_content,
+    date: time.now(),
+    writer: writer,
+    insight: insight,
+    thumbnail: thumbnailStorageURL,
+    hashtag: hashtag,
+  });
+
+  setTimeout(() => {
+    alert("uploaded to database!!");
+    setLoading(false);
+    window.location.reload();
+  }, 2000);
+};
+
 
   return (
     <Container>

@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
-import { Typography, Box, Grid, Container } from "@mui/material";
-import styled from "styled-components";
+import { Typography, Grid } from "@mui/material";
 
 //공포탐욕지수
 function FearandGreed() {
@@ -67,7 +66,7 @@ function FearandGreed() {
         <Typography variant="h6" gutterBottom>
           {FnGState}
         </Typography>
-        <img src={FnGIcon}/>
+        <img src={FnGIcon} alt="Fear and Greed"/>
         <Typography>[설명]</Typography>
       </Grid>
     </Grid>

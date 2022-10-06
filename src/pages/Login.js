@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Button, ButtonGroup } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { signInWithGoogle, signInWithEmail } from "../firebase";
@@ -49,8 +48,8 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#fff",
-      contrastText: "#000"
-    }
+      contrastText: "#000",
+    },
   },
 });
 
@@ -135,7 +134,13 @@ function Login() {
                 onClick={signInWithGoogle}
                 color="secondary"
               >
-                <img alt="Google" width={30} height={30} src={gooLogo} />
+                <img
+                  referrerpolicy="no-referrer"
+                  alt="Google"
+                  width={30}
+                  height={30}
+                  src={gooLogo}
+                />
                 구글 아이디로 로그인
               </Button>
             </ThemeProvider>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 //components
 import {
-  Container,
   Grid,
   Typography,
   ToggleButtonGroup,
@@ -16,11 +15,9 @@ import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
 import Index1mo from "../components/LineGraph/LineGraph1mo";
 import Index1y from "../components/LineGraph/LineGraph1y";
-import CategoryLineGraph_1y from "../components/CategoryLineGraph/CategoryLineGraph_1y.js";
-import CategoryLineGraph_1mo from "../components/CategoryLineGraph/CategoryLineGraph_1mo.js";
-import CategoryLineGraph_1d from "../components/CategoryLineGraph/CategoryLineGraph_1d.js";
-
-import axios from "axios";
+import CategoryLineGraph1y from "../components/CategoryLineGraph/CategoryLineGraph_1y.js";
+import CategoryLineGraph1mo from "../components/CategoryLineGraph/CategoryLineGraph_1mo.js";
+import CategoryLineGraph1d from "../components/CategoryLineGraph/CategoryLineGraph_1d.js";
 
 // 시장동향
 // S&P 500 지수와 CMC 200 그래프(line) 불러옴
@@ -414,12 +411,12 @@ function Marketpage() {
           </ThemeProvider>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div>
-              {categoryIndex == 0 && <CategoryLineGraph_1d {...props} />}
-              {categoryIndex == 1 && <CategoryLineGraph_1mo {...props} />}
-              {categoryIndex == 2 && <CategoryLineGraph_1y {...props} />}
-              {categoryIndex == 3 && <CategoryLineGraph_1d {...props} />}
-              {categoryIndex == 4 && <CategoryLineGraph_1mo {...props} />}
-              {categoryIndex == 5 && <CategoryLineGraph_1y {...props} />}
+              {categoryIndex === 0 && <CategoryLineGraph1d {...props} />}
+              {categoryIndex === 1 && <CategoryLineGraph1mo {...props} />}
+              {categoryIndex === 2 && <CategoryLineGraph1y {...props} />}
+              {categoryIndex === 3 && <CategoryLineGraph1d {...props} />}
+              {categoryIndex === 4 && <CategoryLineGraph1mo {...props} />}
+              {categoryIndex === 5 && <CategoryLineGraph1y {...props} />}
             </div>
             <div
               style={{

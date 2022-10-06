@@ -10,8 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { type } from "@testing-library/user-event/dist/type";
-import { Typography } from "@mui/material";
 
 // S&P 500 지수 와 CMC 200 지수를 그래프로(1일 기준)
 
@@ -36,7 +34,6 @@ export const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function Index1d() {
-  const [time, setTime] = useState([]);
   const [res, setRes] = useState([]);
   const [maxData, setMaxData] = useState(0);
   const [minData, setMinData] = useState(1000);
