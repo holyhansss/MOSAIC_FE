@@ -41,35 +41,46 @@ function Header({ user, admin }) {
         sx={{ diplay: "flex", flexDirection: "row", alignItems: "center" }}
       >
         <Grid container direction="row" alignItems="center">
-          <Grid item xs md={2} alignItems="center">
+          <Grid item xs={3} md={1.5} lg={2} alignItems="center">
             <StyledLink to="/">
               <NavMain>MOSAIC</NavMain>
             </StyledLink>
           </Grid>
           <Grid
             item
-            xs={6}
-            md
-            lg={8}
-            sx={{ display: "flex", flexDirection: "row" }}
+            xs={7}
+            md={6.5}
+            lg={4}
+            sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Grid item sx={{ marginRight: "4em" }}>
+            <Grid item>
               <StyledLink to="/ranking">Mosaic 순위</StyledLink>
             </Grid>
-            <Grid item sx={{ marginRight: "4em" }}>
+            <Grid item>
               <StyledLink to="/promising">유망 코인</StyledLink>
             </Grid>
-            <Grid item sx={{ marginRight: "4em" }}>
+            <Grid item>
               <StyledLink to="/market">시장 동향</StyledLink>
             </Grid>
-            <Grid item sx={{ marginRight: "4em" }}>
+            <Grid item>
               <StyledLink to="/reportMain">리포트</StyledLink>
             </Grid>
           </Grid>
           <Grid
             item
-            xs
-            md={2}
+            xs={0}
+            md={2.5}
+            lg={4}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          />
+          <Grid
+            item
+            xs={2}
+            md={1.5}
+            lg={2}
             sx={{
               display: "flex",
               flexDirection: "row",
