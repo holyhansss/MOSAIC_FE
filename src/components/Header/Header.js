@@ -24,6 +24,8 @@ const HeaderContainer = styled.div`
   height: 4rem;
   display: flex;
   align-items: center;
+  flex-direction: row;
+  box-shadow: 0 2px 5px lightgrey;
 `;
 
 const NavMain = styled.div`
@@ -36,42 +38,43 @@ function Header({ user, admin }) {
       <Container
         maxWidth="lg"
         disableGutters
-        sx={{ diplay: "grid", alignItems: "center" }}
+        sx={{ diplay: "flex", flexDirection: "row", alignItems: "center" }}
       >
-        <Grid container alignItems="center">
+        <Grid container direction="row" alignItems="center">
           <Grid item xs md={2} alignItems="center">
             <StyledLink to="/">
               <NavMain>MOSAIC</NavMain>
             </StyledLink>
           </Grid>
           <Grid
-            container
-            direction="row"
-            alignItems="center"
+            item
             xs={6}
-            lg
-            md={8}
-            spacing={{ xs: 2, md: 8 }}
+            md
+            lg={8}
+            sx={{ display: "flex", flexDirection: "row" }}
           >
-            <Grid item>
+            <Grid item sx={{ marginRight: "4em" }}>
               <StyledLink to="/ranking">Mosaic 순위</StyledLink>
             </Grid>
-            <Grid item>
+            <Grid item sx={{ marginRight: "4em" }}>
               <StyledLink to="/promising">유망 코인</StyledLink>
             </Grid>
-            <Grid item>
+            <Grid item sx={{ marginRight: "4em" }}>
               <StyledLink to="/market">시장 동향</StyledLink>
             </Grid>
-            <Grid item>
+            <Grid item sx={{ marginRight: "4em" }}>
               <StyledLink to="/reportMain">리포트</StyledLink>
             </Grid>
           </Grid>
           <Grid
-            container
+            item
             xs
             md={2}
-            alignItems="center"
-            justifyContent="flex-end"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+            }}
           >
             {user != null ? (
               <NavDropdown

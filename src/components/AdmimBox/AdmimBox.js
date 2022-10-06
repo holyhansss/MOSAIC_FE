@@ -8,7 +8,7 @@ import React, {
 import { Container, Row } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { Typography } from "@mui/material";
-import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
+import { collection, addDoc, doc } from "firebase/firestore";
 //Editor
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";

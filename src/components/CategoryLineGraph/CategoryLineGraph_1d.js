@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import moment from "moment";
 import {
   LineChart,
   Line,
@@ -8,9 +7,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts";
-import { type } from "@testing-library/user-event/dist/type";
 import { CustomTooltip } from "../LineGraph/LineGraph1d";
 
 function CategoryLineGraph_1d(props) {

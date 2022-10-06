@@ -1,11 +1,9 @@
 import React from "react";
 import {
-  Container,
   Grid,
   Typography,
   Box,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Divider,
@@ -13,7 +11,6 @@ import {
 import { createTheme } from "@mui/material/styles";
 import styled, { keyframes } from "styled-components";
 import moment from "moment";
-import Marquee from "react-fast-marquee";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // Components
@@ -21,35 +18,14 @@ import {
   Reportrecentcard,
   ReportlistForm,
 } from "../components/Report/Reportlistcard.js";
+import CryptoCard from "../components/PromisingCoin/CryptoCard";
 // Images
-import RankingImage from "../img/MainPage/001.jpg";
-import RatingImage from "../img/MainPage/002.jpg";
-import MarketImage from "../img/MainPage/003.jpg";
+// import RankingImage from "../img/MainPage/001.jpg";
+// import RatingImage from "../img/MainPage/002.jpg";
+// import MarketImage from "../img/MainPage/003.jpg";
 import Sample from "../img/logo_mosaic.jpg";
-import cardimage001 from "../img/PromisingCoins/001.jpg";
-import cardimage002 from "../img/PromisingCoins/002.jpg";
-import cardimage003 from "../img/PromisingCoins/003.jpg";
 
 // Style
-const theme = createTheme({
-  components: {
-    MuiToggleButton: {
-      selected: {
-        disable: "true",
-      },
-      styleOverrides: {
-        root: {
-          "&.Mui-selected": {
-            color: "#fff",
-            fontWeight: "bold",
-            backgroundColor: "rgba(0,0,0,0)",
-          },
-        },
-      },
-    },
-  },
-});
-
 const scale = keyframes`
   0% {
       opacity: 0;
@@ -72,7 +48,7 @@ const WelcomText = styled(Typography)`
   animation: 2s ${scale} ease-out;
 `;
 
-const MainPage = ({ result, reports }) => {
+const MainPage = ({ result, reports, crypto }) => {
   return (
     <>
       {/* <div
@@ -214,60 +190,11 @@ const MainPage = ({ result, reports }) => {
             <Box sx={{ height: "5rem" }} />
           </Grid>
           <Grid container direction="row" spacing={5} justifyContent="center">
-            <Grid item xs="auto">
-              <Card sx={{ maxWidth: 350 }}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={cardimage001}
-                  alt="Cryptoimage"
-                />
-              </Card>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  이더리움
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  #이더리움 #기술성
-                </Typography>
-              </CardContent>
-            </Grid>
-            <Grid item xs="auto">
-              <Card sx={{ maxWidth: 350 }}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={cardimage002}
-                  alt="Cryptoimage"
-                />
-              </Card>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Tezos
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  #Tezos #기술성
-                </Typography>
-              </CardContent>
-            </Grid>
-            <Grid item xs="auto">
-              <Card sx={{ maxWidth: 350 }}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={cardimage003}
-                  alt="Cryptoimage"
-                />
-              </Card>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Lida Dao
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  #Lida Dao #이더리움 #기술성
-                </Typography>
-              </CardContent>
-            </Grid>
+            {crypto !== null &&
+              crypto.map(
+                (content) =>
+                  content.promising === true && <CryptoCard crypto={content} />
+              )}
           </Grid>
         </Grid>
         <Grid item xs={12}>

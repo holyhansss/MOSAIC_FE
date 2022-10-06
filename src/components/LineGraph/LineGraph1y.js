@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { type } from "@testing-library/user-event/dist/type";
 import { CustomTooltip } from "./LineGraph1d";
 
 // S&P 500 지수 와 CMC 200 지수를 그래프로(1년 기준)

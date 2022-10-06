@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Grid } from "@mui/material";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { query, getDocs, collection } from "firebase/firestore";
 import { dbService } from "../../firebase.js";
 import { Reportlistcard } from "../Report/Reportlistcard.js";
