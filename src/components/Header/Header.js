@@ -41,7 +41,7 @@ function Header({ user, admin }) {
         sx={{ diplay: "flex", flexDirection: "row", alignItems: "center" }}
       >
         <Grid container direction="row" alignItems="center">
-          <Grid item xs={3} md={1.5} lg={2} alignItems="center">
+          <Grid item xs={3} md={2} lg={2} alignItems="center">
             <StyledLink to="/">
               <NavMain>MOSAIC</NavMain>
             </StyledLink>
@@ -49,7 +49,7 @@ function Header({ user, admin }) {
           <Grid
             item
             xs={7}
-            md={6.5}
+            md={6}
             lg={4}
             sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
           >
