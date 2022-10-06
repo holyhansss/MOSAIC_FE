@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col, Tab, Tabs } from "react-bootstrap";
-import styled from "styled-components";
 import ProfileModal from "../components/Modal/ProfileModal";
 import PostList from "../components/MyPage/PostList";
 

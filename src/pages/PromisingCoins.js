@@ -1,9 +1,8 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import CryptoReport from "../components/PromisingCoin/CryptoReport";
-import CryptoCard from "../components/PromisingCoin/CryptoList";
+import CryptoCard from "../components/PromisingCoin/CryptoCard";
 
-const PromisingCoins = () => {
+const PromisingCoins = ({ crypto }) => { 
   return (
     <>
       <div
@@ -24,11 +23,14 @@ const PromisingCoins = () => {
             유망코인 리스트
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <CryptoCard />
+        <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
+          {crypto !== null &&
+            crypto.map(
+              (content) =>
+                content.promising === true && <CryptoCard crypto={content} />
+            )}
         </Grid>
       </Grid>
-      {/* <CryptoReport /> */}
     </>
   );
 };

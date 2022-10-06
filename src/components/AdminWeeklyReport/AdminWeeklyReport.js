@@ -11,7 +11,6 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 
