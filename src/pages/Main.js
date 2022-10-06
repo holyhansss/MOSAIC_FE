@@ -15,7 +15,7 @@ import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // Components
 import {
-  Reportrecentcard,
+  ReportrecentcardDetail,
   ReportlistForm,
 } from "../components/Report/Reportlistcard.js";
 import CryptoCard from "../components/PromisingCoin/CryptoCard";
@@ -165,7 +165,7 @@ const MainPage = ({ result, reports, crypto }) => {
         <Grid item xs={6}>
           <div>
             {result !== undefined ? (
-              <Reportrecentcard
+              <ReportrecentcardDetail
                 id={result.id}
                 title={result.title}
                 writer={result.writer}
@@ -185,6 +185,7 @@ const MainPage = ({ result, reports, crypto }) => {
                   title={report.title}
                   date={moment(report.date).format("YYYY.MM.DD")}
                   writer={report.writer}
+                  thumbnail={report.thumbnail}
                 />
               </div>
             ))}
