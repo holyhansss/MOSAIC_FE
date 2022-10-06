@@ -267,9 +267,9 @@ const AdminPromising = () => {
                     Rating
                   </Typography>
                   {/* <AdminRating rating={rating} /> */}
-                  <Typography variant="h5">
+                  {/* <Typography variant="h5">
                     {rating}
-                  </Typography>
+                  </Typography> */}
 
                 </Container>
           </Container>
