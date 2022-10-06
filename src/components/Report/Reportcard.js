@@ -241,6 +241,34 @@ function DailyReportcard({title, writer, date, daily}) {
         />
 
         <div>
+        <Typography
+            variant="h6"
+            align="center"
+            gutterBottom
+            component="div"
+            sx={{ fontWeight: "bold" }}
+            >
+            인사이트
+          </Typography>
+          <Box
+          sx={{
+              paddingTop: 3,
+          }}
+          />
+          <Viewer initialValue={daily.insight} />
+          <Box
+          sx={{
+              paddingTop: 3,
+          }}
+          />
+        </div>
+        <Box
+            sx={{
+            paddingTop: 10,
+            }}
+        />
+
+        <div>
             <Typography
             variant="subtitle1"
             align="center"
