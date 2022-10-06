@@ -20,10 +20,6 @@ import {
 } from "../components/Report/Reportlistcard.js";
 import CryptoCard from "../components/PromisingCoin/CryptoCard";
 // Images
-import RankingImage from "../img/MainPage/Ranking.jpg";
-import RatingImage from "../img/MainPage/Rating.jpg";
-import MarketImage from "../img/MainPage/Market.jpg";
-import Hidden from "../img/hidden.png";
 import Sample from "../img/logo_mosaic.jpg";
 
 // Style
@@ -68,7 +64,7 @@ const MainPage = ({ result, reports, crypto }) => {
             <Link to="/ranking">
               <img
                 className="mw-100 w-auto"
-                src={RankingImage}
+                src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FRanking.jpg?alt=media&token=f3d66167-c25a-4417-809b-16a8b90df16a"
                 alt="Ranking slide"
               />
             </Link>
@@ -79,7 +75,7 @@ const MainPage = ({ result, reports, crypto }) => {
             <Link to="/promising">
               <img
                 className="mw-100 w-auto"
-                src={RatingImage}
+                src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FRating.jpg?alt=media&token=e124885f-c6d1-4c4f-8ee8-ec9529570dfc"
                 alt="Rating slide"
               />
             </Link>
@@ -90,7 +86,7 @@ const MainPage = ({ result, reports, crypto }) => {
             <Link to="market">
               <img
                 className="mw-100 w-auto"
-                src={MarketImage}
+                src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FMarket.jpg?alt=media&token=50353301-5ea7-467f-a473-7992c2feece3"
                 alt="Market slide"
               />
             </Link>
@@ -99,7 +95,11 @@ const MainPage = ({ result, reports, crypto }) => {
       </div>
       <Grid container spacing={10} justifyContent="center">
         <Grid item xs={12}>
-          <img className="w-100" src={Hidden} alt="hidden" />
+          <img
+            className="w-100"
+            src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2Fhidden.png?alt=media&token=5ede2848-db74-4880-b929-ab81f5b0bf71"
+            alt="hidden"
+          />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
           <Typography variant="h5" sx={{ marginBottom: "3rem", lineHeight: 2 }}>
