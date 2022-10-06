@@ -23,11 +23,8 @@ import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
 import ReportDailyDetail from "./pages/ReportDailyDetail";
 import Header from "./components/Header/Header";
-<<<<<<< HEAD
 import AdminPromising from "./pages/AdminPromising";
-=======
-import Header from "./components/Header/Header";
->>>>>>> a7470824883bcc43b1c828e30aee625574fdb1f9
+
 
 const theme = createTheme({
   typography: {
