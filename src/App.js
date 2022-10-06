@@ -23,6 +23,8 @@ import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
 import ReportDailyDetail from "./pages/ReportDailyDetail";
 import Header from "./components/Header/Header";
+import AdminPromising from "./pages/AdminPromising";
+
 
 const theme = createTheme({
   typography: {
@@ -206,6 +208,7 @@ function App() {
               <Route path="admin" element={<Admin />} />
               <Route path="adminweeklymain" element={<AdminWeeklyMain />} />
               <Route path="admindailymain" element={<AdminDailyMain />} />
+              <Route path="adminpromising" element={<AdminPromising />} />
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
