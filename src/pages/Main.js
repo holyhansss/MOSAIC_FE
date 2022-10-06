@@ -20,9 +20,10 @@ import {
 } from "../components/Report/Reportlistcard.js";
 import CryptoCard from "../components/PromisingCoin/CryptoCard";
 // Images
-// import RankingImage from "../img/MainPage/001.jpg";
-// import RatingImage from "../img/MainPage/002.jpg";
-// import MarketImage from "../img/MainPage/003.jpg";
+import RankingImage from "../img/MainPage/Ranking.jpg";
+import RatingImage from "../img/MainPage/Rating.jpg";
+import MarketImage from "../img/MainPage/Market.jpg";
+import Hidden from "../img/hidden.png";
 import Sample from "../img/logo_mosaic.jpg";
 
 // Style
@@ -51,50 +52,57 @@ const WelcomText = styled(Typography)`
 const MainPage = ({ result, reports, crypto }) => {
   return (
     <>
-      {/* <div
+      <div
         style={{
           position: "absolute",
           left: 0,
+          top: "4rem",
           width: "calc(100vw - (100vw - 100%))",
-          height: "40em",
+          maxHeight: "10rem",
         }}
       >
         <Carousel>
-          <Carousel.Item>
+          <Carousel.Item
+            style={{ backgroundColor: "#BA6BC6", textAlign: "center" }}
+          >
             <Link to="/ranking">
               <img
-                className="d-block w-100"
+                className="mw-100 w-auto"
                 src={RankingImage}
                 alt="Ranking slide"
               />
             </Link>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item
+            style={{ backgroundColor: "#A2D9DC", textAlign: "center" }}
+          >
             <Link to="/promising">
               <img
-                className="d-block w-100"
+                className="mw-100 w-auto"
                 src={RatingImage}
                 alt="Rating slide"
               />
             </Link>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item
+            style={{ backgroundColor: "#000000", textAlign: "center" }}
+          >
             <Link to="market">
               <img
-                className="d-block w-100"
+                className="mw-100 w-auto"
                 src={MarketImage}
                 alt="Market slide"
               />
             </Link>
           </Carousel.Item>
         </Carousel>
-      </div> */}
+      </div>
       <Grid container spacing={10} justifyContent="center">
         <Grid item xs={12}>
-          <Box sx={{ height: "26em" }} />
+          <img className="w-100" src={Hidden} alt="hidden" />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center" }}>
-          <Typography variant="h5" sx={{ margin: "5rem 0", lineHeight: 2 }}>
+          <Typography variant="h5" sx={{ marginBottom: "3rem", lineHeight: 2 }}>
             <div>
               MOSAIC은{" "}
               <span style={{ fontWeight: 900 }}>건전한 암호화폐 투자</span>를
@@ -146,7 +154,10 @@ const MainPage = ({ result, reports, crypto }) => {
         {/* 리포트 */}
         <Grid item xs={12} sx={{ textAlign: "center" }}>
           <Divider component="div" role="presentation">
-            <Typography variant="h5" sx={{ margin: "3.5rem", fontWeight: 900 }}>
+            <Typography
+              variant="h5"
+              sx={{ margin: "0 3.5rem", fontWeight: 900 }}
+            >
               최신 리포트
             </Typography>
           </Divider>
@@ -182,7 +193,10 @@ const MainPage = ({ result, reports, crypto }) => {
         {/* 유망 코인 */}
         <Grid item xs={12} sx={{ textAlign: "center" }}>
           <Divider component="div" role="presentation">
-            <Typography variant="h5" sx={{ margin: "3.5rem", fontWeight: 900 }}>
+            <Typography
+              variant="h5"
+              sx={{ margin: "0 3.5rem", fontWeight: 900 }}
+            >
               최신 유망 코인
             </Typography>
           </Divider>
@@ -192,8 +206,10 @@ const MainPage = ({ result, reports, crypto }) => {
           <Grid container direction="row" spacing={5} justifyContent="center">
             {crypto !== null &&
               crypto.map(
-                (content) =>
-                  content.promising === true && <CryptoCard crypto={content} />
+                (content, index) =>
+                  content.promising === true && (
+                    <CryptoCard crypto={content} idx={index} />
+                  )
               )}
           </Grid>
         </Grid>
