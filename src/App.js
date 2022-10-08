@@ -23,6 +23,8 @@ import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
 import ReportDailyDetail from "./pages/ReportDailyDetail";
 import Header from "./components/Header/Header";
+import AdminPromising from "./pages/AdminPromising";
+
 
 const theme = createTheme({
   typography: {
@@ -39,6 +41,7 @@ function App() {
   const [dailyReport, setDailyReport] = useState([]);
   // 암호화폐 db
   const [crypto, setCrypto] = useState([]);
+  const [allCrypto, setAllCrypto] = useState([]);
 
   const refreshUser = () => {
     const user = auth.currentUser;
@@ -115,6 +118,7 @@ function App() {
     const q = query(collection(dbService, "cryptocurrency"), orderBy("date"));
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((docs) => {
+      const allCryptoObj = docs.data();
       let cryptoObj = {};
       if (docs.data().promising === true) {
         if (docs.data().type === "coin") {
@@ -179,6 +183,7 @@ function App() {
       }
 
       setCrypto((prev) => [cryptoObj, ...prev]);
+      setAllCrypto((prev) => [allCryptoObj, ...prev]);
     });
   };
 
@@ -206,6 +211,7 @@ function App() {
               <Route path="admin" element={<Admin />} />
               <Route path="adminweeklymain" element={<AdminWeeklyMain />} />
               <Route path="admindailymain" element={<AdminDailyMain />} />
+              <Route path="adminpromising" element={<AdminPromising />} />
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
@@ -244,7 +250,7 @@ function App() {
                 path="/profile"
                 element={<MyPage user={userObj} refreshUser={refreshUser} />}
               />
-              <Route path="/ranking" element={<Ranking crypto={crypto} />} />
+              <Route path="/ranking" element={<Ranking crypto={allCrypto} />} />
             </Routes>
           </Container>
         </Grid>
