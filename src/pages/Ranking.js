@@ -8,7 +8,7 @@ const MainContainer = styled(Container)`
   z-index: 1;
 `;
 
-export default function Ranking() {
+export default function Ranking({crypto}) {
   return (
     <>
       <div
@@ -26,7 +26,7 @@ export default function Ranking() {
             <Box sx={{ height: "20em" }} />
           </Grid>
           <Grid item xs={12}>
-            <CryptoTable />
+            <CryptoTable crypto={crypto} />
           </Grid>
         </Grid>
       </MainContainer>
