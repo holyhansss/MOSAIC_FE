@@ -11,9 +11,6 @@ import {
 import { getAuth } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
-import AdminRating from "../components/AdminRating/AdminRating";
-
-
 
 const AdminPromising = () => {
   const db = getFirestore();
@@ -31,7 +28,8 @@ const AdminPromising = () => {
   const [standard2num, setStandard2Num] = useState(0);
   const [standard3num, setStandard3Num] = useState(0);
   const [rating, setRating] = useState(0);
-  const [thumbnail, setThumnail] = useState('');
+  const [grade, setGrade] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
   const [thumbnail1Url, setThumbnailUrl] = useState(null);
   const [logo, setLogo] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
@@ -55,21 +53,64 @@ const AdminPromising = () => {
   const handleOnChangeStandard1 = (value, num ) => {
     setStandard1(value);
     setStandard1Num(Number(num));
-  }
+  };
   const handleOnChangeStandard2 = (value, num ) => {
     setStandard2(value);
     setStandard2Num(Number(num));
-  }
+  };
   const handleOnChangeStandard3 = (value, num ) => {
     setStandard3(value);
     setStandard3Num(Number(num));
-  }
+  };
   const handleOnChangeAssess = (value ) => {
     setAssessment(value);
-  }
+  };
   const handleOnChangeDescription = (value) => {
     setDescription(value);
-  }
+  };
+  useEffect(() => {
+    setRating(standard1num+standard2num+standard3num);
+  }, [standard1num, standard2num, standard3num]);
+
+  const onClickRating = () => {
+    if (95 <= rating && rating <= 100) {
+      setGrade('A');
+    } else if (90 <= rating && rating <= 94) {
+      setGrade('AA+');
+    } else if (85 <= rating && rating <= 89) {
+      setGrade('AA');
+    } else if (80 <= rating && rating <= 84) {
+      setGrade('AA-');
+    } else if (75 <= rating && rating <= 79) {
+      setGrade('A+');
+    } else if (70 <= rating && rating <= 74) {
+      setGrade('A');
+    } else if (65 <= rating && rating <= 69) {
+      setGrade('A-');
+    } else if (60 <= rating && rating <= 64) {
+      setGrade('BBB');
+    } else if (55 <= rating && rating <= 59) {
+      setGrade('BB+');
+    } else if (50 <= rating && rating <= 54) {
+      setGrade('BB');
+    } else if (45 <= rating && rating <= 49) {
+      setGrade('BB-');
+    } else if (40 <= rating && rating <= 44) {
+      setGrade('B+');
+    } else if (35 <= rating && rating <= 39) {
+      setGrade('B');
+    } else if (30 <= rating && rating <= 34) {
+      setGrade('B-');
+    } else if (25 <= rating && rating <= 29) {
+      setGrade('CCC');
+    } else if (20 <= rating && rating <= 24) {
+      setGrade('CC');
+    } else if (10 <= rating && rating <= 19) {
+      setGrade('C');
+    } else if (0 <= rating && rating <= 9) {
+      setGrade('D');
+    };
+  };
 
   useEffect(() => {
     if (thumbnail) {
@@ -106,6 +147,8 @@ const AdminPromising = () => {
       [standard1]: standard1num,
       [standard2]: standard2num,
       [standard3]: standard3num,
+      rating : grade,
+      date : time.now(),
     });
 
   } else {
@@ -121,6 +164,8 @@ const AdminPromising = () => {
       thumbnail : thumbnailStorageURL,
       assessment : assessment,
       description : description,
+      rating : grade,
+      date : time.now(),
     });
   }
 
@@ -198,7 +243,6 @@ const AdminPromising = () => {
             }}
           />
         </Container>
-        {/* <AdminCryptoType cryptoType={cryptoType}/> */}
         {
           cryptoType == null ?(
             null
@@ -263,14 +307,13 @@ const AdminPromising = () => {
                 />
                 </Row>
                 <Container>
-                  <Typography variant="h5">
+                  <Button variant="primary" className="my-2" onClick={onClickRating}>
                     Rating
-                  </Typography>
+                  </Button>
                   {/* <AdminRating rating={rating} /> */}
-                  {/* <Typography variant="h5">
-                    {rating}
-                  </Typography> */}
-
+                  <Typography variant="h5">
+                    {grade}
+                  </Typography>
                 </Container>
           </Container>
             ):(
@@ -332,6 +375,15 @@ const AdminPromising = () => {
                   }}
                 />
                 </Row>
+                <Container>
+                  <Button variant="primary" className="my-2" onClick={onClickRating}>
+                    Rating
+                  </Button>
+                  {/* <AdminRating rating={rating} /> */}
+                  <Typography variant="h5">
+                    {grade}
+                  </Typography>
+                </Container>
           </Container>
             )
           )
@@ -410,7 +462,7 @@ const AdminPromising = () => {
                     type="file"
                     id="select-thumbnail"
                     className="d-none"
-                    
+                    onChange={(e) => setThumbnail(e.target.files[0])}
                   />
                   <Button variant="primary" className="my-2">
                     <label htmlFor="select-thumbnail">썸네일 업로드 *</label>
@@ -429,9 +481,9 @@ const AdminPromising = () => {
                     type="file"
                     id="select-logo"
                     className="d-none"
-                    
+                    onChange={(e) => setLogo(e.target.files[0])}
                   />
-                  <Button variant="primary" className="my-2">
+                  <Button>
                     <label htmlFor="select-logo">로고 업로드 *</label>
                   </Button>
                   {logoUrl && logo ? (
