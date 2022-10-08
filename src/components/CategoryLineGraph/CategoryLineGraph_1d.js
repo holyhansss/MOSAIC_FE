@@ -28,11 +28,15 @@ function CategoryLineGraph_1d(props) {
     );
     const thisResponse = response.data;
     setDatesAndPrices(thisResponse[0]);
-    if (thisResponse == null || thisResponse[1][0] == undefined) {
-      setMinMax([0, 100]);
-    } else {
-      setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])]);
-    }
+    setMinMax([
+      parseInt(thisResponse[1][0]) - 10,
+      parseInt(thisResponse[1][1]) + 10,
+    ]);
+    // if (thisResponse == null || thisResponse[1][0] == undefined) {
+    //   setMinMax([0, 100]);
+    // } else {
+    //   setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])]);
+    // }
   };
 
   return (

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { logout } from "../../firebase";
 import { Container, Grid } from "@mui/material";
+import {Mosaic_logo} from "../../img/Mosaic_logo.png";
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
