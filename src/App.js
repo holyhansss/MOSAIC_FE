@@ -41,7 +41,6 @@ function App() {
   const [dailyReport, setDailyReport] = useState([]);
   // 암호화폐 db
   const [crypto, setCrypto] = useState([]);
-  const [allCrypto, setAllCrypto] = useState([]);
 
   const refreshUser = () => {
     const user = auth.currentUser;
@@ -118,7 +117,6 @@ function App() {
     const q = query(collection(dbService, "cryptocurrency"), orderBy("date"));
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((docs) => {
-      const allCryptoObj = docs.data();
       let cryptoObj = {};
       if (docs.data().promising === true) {
         if (docs.data().type === "coin") {
@@ -183,7 +181,6 @@ function App() {
       }
 
       setCrypto((prev) => [cryptoObj, ...prev]);
-      setAllCrypto((prev) => [allCryptoObj, ...prev]);
     });
   };
 
@@ -250,7 +247,7 @@ function App() {
                 path="/profile"
                 element={<MyPage user={userObj} refreshUser={refreshUser} />}
               />
-              <Route path="/ranking" element={<Ranking crypto={allCrypto} />} />
+              <Route path="/ranking" element={<Ranking crypto={crypto} />} />
             </Routes>
           </Container>
         </Grid>
