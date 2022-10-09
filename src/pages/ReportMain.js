@@ -29,9 +29,9 @@ function ReportMain({ result, reports, dailyReport }) {
           height: "20em",
         }}
       ></div>
-      <Grid container spacing={10}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Box sx={{ height: "15em" }} />
+          <Box sx={{ height: "20em" }} />
         </Grid>
         <Grid item xs={6}>
           <Typography variant="h5" gutterBottom>

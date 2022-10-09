@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
   ButtonGroup,
+  Tooltip,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import {
@@ -25,6 +26,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SendIcon from "@mui/icons-material/Send";
 import { pink } from "@mui/material/colors";
+import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 
 //components
 import DailyReportcontents from "../components/Report/DailyReportContents";
@@ -34,6 +36,7 @@ export default function ReportDailyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
+  let email = '잘못된 정보가 있다면 모자익에게 메일을 보내주세요';
 
   const getReplies = async () => {
     const repl = query(
@@ -198,6 +201,11 @@ export default function ReportDailyDetail({ user }) {
               <IconButton onClick={handleOpen}>
                 <SendIcon />
               </IconButton>
+              <Tooltip title={email} disableInteractive>
+                <IconButton>
+                  <AttachEmailIcon />
+                </IconButton>
+              </Tooltip>
             </ButtonGroup>
             <Modal open={open} onClose={handleClose}>
               <Box sx={style}>

@@ -29,7 +29,6 @@ function CryptoReport() {
   const getContents = async () => {
     const docRef = doc(dbService, "cryptocurrency", id);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data());
     setPromising(docSnap.data());
   };
 
