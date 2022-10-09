@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function CryptoCard({ crypto }) {
+export default function PromisingCard({ crypto }) {
   const navigate = useNavigate();
   const move = () => {
     navigate("/promising/" + crypto.id, {
@@ -14,10 +14,10 @@ export default function CryptoCard({ crypto }) {
   return (
     <Grid
       item
-      xs
-      md
+      xs={12}
+      md={5}
       lg={4}
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{ display: "flex", justifyContent: "center" }}
     >
       <div onClick={move}>
         <Card sx={{ maxWidth: 350 }}>

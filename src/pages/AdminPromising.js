@@ -74,7 +74,7 @@ const AdminPromising = () => {
 
   const onClickRating = () => {
     if (95 <= rating && rating <= 100) {
-      setGrade('A');
+      setGrade('AAA');
     } else if (90 <= rating && rating <= 94) {
       setGrade('AA+');
     } else if (85 <= rating && rating <= 89) {
