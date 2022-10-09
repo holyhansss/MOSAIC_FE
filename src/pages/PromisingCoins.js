@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import CryptoCard from "../components/PromisingCoin/CryptoCard";
 
-const PromisingCoins = ({ crypto }) => { 
+const PromisingCoins = ({ crypto }) => {
   return (
     <>
       <div
@@ -23,12 +23,14 @@ const PromisingCoins = ({ crypto }) => {
             유망코인 리스트
           </Typography>
         </Grid>
-        <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
-          {crypto !== null &&
-            crypto.map(
-              (content) =>
-                content.promising === true && <CryptoCard crypto={content} />
-            )}
+        <Grid item xs={12}>
+          <Grid container spacting={1}>
+            {crypto !== null &&
+              crypto.map(
+                (content) =>
+                  content.promising === true && <CryptoCard crypto={content} />
+              )}
+          </Grid>
         </Grid>
       </Grid>
     </>

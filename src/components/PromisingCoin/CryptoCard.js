@@ -14,10 +14,10 @@ export default function CryptoCard({ crypto }) {
   return (
     <Grid
       item
-      xs
-      md
+      xs={12}
+      md={5}
       lg={4}
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{ display: "flex", justifyContent: "center" }}
     >
       <div onClick={move}>
         <Card sx={{ maxWidth: 350 }}>
