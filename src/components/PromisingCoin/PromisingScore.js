@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Tooltip, IconButton, LinearProgress } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-export default function CryptoScore({ type, score1, score2, score3 }) {
+export default function PromisingScore({ type, score1, score2, score3 }) {
   let criteria1 = ""
   let criteria2 = ""
   let criteria3 = ""

@@ -12,19 +12,18 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Admin from "./pages/Admin";
 import MarketPage from "./pages/Market";
-import PromisingCoins from "./pages/PromisingCoins";
+import PromisingList from "./pages/PromisingList";
 import { ReportList, DailyReportList } from "./pages/ReportList";
 import ReportWeeklyDetail from "./pages/ReportWeeklyDetail";
 import MyPage from "./pages/MyPage";
 import Ranking from "./pages/Ranking";
-import CryptoReport from "./pages/CryptoReport";
+import PromisingReport from "./pages/PromisingReport";
 import ReportMain from "./pages/ReportMain";
 import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
 import ReportDailyDetail from "./pages/ReportDailyDetail";
 import Header from "./components/Header/Header";
 import AdminPromising from "./pages/AdminPromising";
-
 
 const theme = createTheme({
   typography: {
@@ -201,7 +200,9 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={<MainPage result={result} reports={reports} crypto={crypto} />}
+                element={
+                  <MainPage result={result} reports={reports} crypto={crypto} />
+                }
               />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
@@ -212,9 +213,9 @@ function App() {
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
-                element={<PromisingCoins crypto={crypto} />}
+                element={<PromisingList crypto={crypto} />}
               />
-              <Route path="/promising/:id" element={<CryptoReport />} />
+              <Route path="/promising/:id" element={<PromisingReport />} />
               <Route
                 path="/reportMain"
                 element={

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Grid } from "@mui/material";
 import styled from "styled-components";
-import CryptoTable from "../components/PromisingCoin/CryptoTable";
+import CryptoTable from "../components/Ranking/CryptoTable";
 
 const MainContainer = styled(Container)`
   position: relative;

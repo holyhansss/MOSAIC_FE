@@ -14,14 +14,14 @@ import { dbService } from "../firebase";
 
 import styled from "styled-components";
 import grade from "../img/AA+.jpg";
-import CryptoScore from "../components/PromisingCoin/CryptoScore";
+import PromisingScore from "../components/PromisingCoin/PromisingScore";
 
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
 `;
 
-function CryptoReport() {
+export default function PromisingReport() {
   // 유망코인 정보
   const { id } = useParams();
   const [promising, setPromising] = useState(null);
@@ -65,14 +65,14 @@ function CryptoReport() {
             <img src={grade} alt="Pomising Coin Grade" width="100%"></img>
           </Grid>
           {promising.type === "coin" ? (
-            <CryptoScore
+            <PromisingScore
               type={promising.type}
               score1={promising.scalability}
               score2={promising.decentralization}
               score3={promising.security}
             />
           ) : (
-            <CryptoScore
+            <PromisingScore
               type={promising.type}
               score1={promising.business}
               score2={promising.technicality}
@@ -128,6 +128,4 @@ function CryptoReport() {
       )}
     </MainContainer>
   );
-}
-
-export default CryptoReport;
+};

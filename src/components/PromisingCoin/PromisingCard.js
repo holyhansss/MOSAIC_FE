@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function CryptoCard({ crypto }) {
+export default function PromisingCard({ crypto }) {
   const navigate = useNavigate();
   const move = () => {
     navigate("/promising/" + crypto.id, {

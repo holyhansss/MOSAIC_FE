@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import CryptoCard from "../components/PromisingCoin/CryptoCard";
+import PromisingCard from "../components/PromisingCoin/PromisingCard";
 
-const PromisingCoins = ({ crypto }) => {
+export default function PromisingList({ crypto }) {
   return (
     <>
       <div
@@ -28,7 +28,7 @@ const PromisingCoins = ({ crypto }) => {
             {crypto !== null &&
               crypto.map(
                 (content) =>
-                  content.promising === true && <CryptoCard crypto={content} />
+                  content.promising === true && <PromisingCard crypto={content} />
               )}
           </Grid>
         </Grid>
@@ -36,4 +36,3 @@ const PromisingCoins = ({ crypto }) => {
     </>
   );
 };
-export default PromisingCoins;

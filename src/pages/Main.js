@@ -18,7 +18,7 @@ import {
   ReportrecentcardDetail,
   ReportlistForm,
 } from "../components/Report/Reportlistcard.js";
-import CryptoCard from "../components/PromisingCoin/CryptoCard";
+import PromisingCard from "../components/PromisingCoin/PromisingCard";
 // Images
 import Sample from "../img/logo_mosaic.jpg";
 
@@ -209,7 +209,7 @@ const MainPage = ({ result, reports, crypto }) => {
               crypto.map(
                 (content, index) =>
                   content.promising === true && (
-                    <CryptoCard crypto={content} idx={index} />
+                    <PromisingCard crypto={content} idx={index} />
                   )
               )}
           </Grid>
