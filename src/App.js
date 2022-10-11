@@ -29,6 +29,7 @@ import AdminPromising from "./pages/AdminPromising";
 const theme = createTheme({
   typography: {
     fontFamily: "Spoqa Han Sans Neo",
+    whiteSpace: "pre-line",
   },
 });
 
