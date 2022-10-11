@@ -23,6 +23,7 @@
     "firebase": "^9.8.4",
     "firebase-tools": "^1.2.0",
     "internmap": "^2.0.3",
+    "mdb-react-ui-kit": "^4.2.0",
     "moment": "^2.29.3",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
