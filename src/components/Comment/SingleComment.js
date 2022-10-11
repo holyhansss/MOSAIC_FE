@@ -253,7 +253,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
               // "& label": { color: grey[600] },
             }}
             onChange={onHandleChange}
-            inputProps={{ style: { color: "white" } }}
+            inputProps={{ style: { color: "black" } }}
           />
 
           <br />
