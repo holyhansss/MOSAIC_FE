@@ -23,6 +23,7 @@ import AdminWeeklyMain from "./pages/AdminWeeklyMain";
 import AdminDailyMain from "./pages/AdminDailyMain";
 import ReportDailyDetail from "./pages/ReportDailyDetail";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import AdminPromising from "./pages/AdminPromising";
 
 const theme = createTheme({
@@ -251,6 +252,9 @@ function App() {
               <Route path="/ranking" element={<Ranking crypto={crypto} />} />
             </Routes>
           </Container>
+        </Grid>
+        <Grid item md={2}>
+          <Footer />
         </Grid>
       </Grid>
     </ThemeProvider>
