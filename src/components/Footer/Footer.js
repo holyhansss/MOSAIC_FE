@@ -1,5 +1,13 @@
-import React from 'react';
-import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import React from "react";
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+} from "mdb-react-ui-kit";
+import styled from "styled-components";
+
 
 //icon
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
