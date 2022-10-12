@@ -1,6 +1,12 @@
 import React from 'react';
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 
+//icon
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import BusinessIcon from '@mui/icons-material/Business';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import ChatIcon from '@mui/icons-material/Chat';
+
 export default function Footer() {
     return (
       <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
@@ -47,22 +53,17 @@ export default function Footer() {
               <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>MOSAIC</h6>
                 <p>
-                  <a href='#!' className='text-reset'>
-                    모자익 오픈 채팅방
-                  </a>
-                </p>
-                <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/' className='text-reset'>
                     모자익 등급표
                   </a>
                 </p>
                 <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/'  target="_blank" className='text-reset'>
                     모자익 공지사항
                   </a>
                 </p>
                 <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/' className='text-reset'>
                     모자익 건의사항
                   </a>
                 </p>
@@ -71,22 +72,22 @@ export default function Footer() {
               <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>추천 메뉴</h6>
                 <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/reportMain' className='text-reset'>
                     데일리 리포트
                   </a>
                 </p>
                 <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/promising' className='text-reset'>
                     유망코인
                   </a>
                 </p>
                 <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/ranking' className='text-reset'>
                     MOSAIC 랭킹
                   </a>
                 </p>
                 <p>
-                  <a href='#!' className='text-reset'>
+                  <a href='/help' className='text-reset'>
                     Help
                   </a>
                 </p>
@@ -95,19 +96,22 @@ export default function Footer() {
               <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
                 <p>
-                  <MDBIcon icon="home" className="me-3" />
+                  <ContactsIcon />
                   경상북도.포항시.북구.흥해읍.한동로
                 </p>
                 <p>
-                  <MDBIcon icon="envelope" className="me-3" />
-                  MOSAIC@gmail.com
+                  <AlternateEmailIcon/>
+                  mosaic.team.tech@gmail.com
                 </p>
                 <p>
-                  <MDBIcon icon="phone" className="me-3" /> 
-                  https://open.kakao.com/o/gdQximie
+                  <ChatIcon/>
+                  <a href='https://open.kakao.com/o/gdQximie' className='text-reset'>
+                    모자익 오픈 채팅방
+                  </a>
                 </p>
                 <p>
-                  <MDBIcon icon="print" className="me-3" /> (주)MOSAIC | 대표: 한성원
+                  <BusinessIcon />
+                  (주)MOSAIC | 대표: 한성원
                 </p>
               </MDBCol>
             </MDBRow>
