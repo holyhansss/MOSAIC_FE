@@ -1,13 +1,6 @@
-import React from "react";
-import {
-  MDBFooter,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-} from "mdb-react-ui-kit";
+import React from 'react';
+import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 import styled from "styled-components";
-
 
 //icon
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -15,6 +8,17 @@ import BusinessIcon from '@mui/icons-material/Business';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import ChatIcon from '@mui/icons-material/Chat';
 
+export const StyledLink = styled.a`
+  text-decoration: none;
+  color: black;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 export default function Footer() {
     return (
       <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
@@ -24,24 +28,18 @@ export default function Footer() {
           </div>
   
           <div>
-            <a href='/' className='me-4 text-reset'>
+            <StyledLink href='/' className='me-4 text-reset'>
               <MDBIcon fab icon="facebook-f" />
-            </a>
-            <a href='' className='me-4 text-reset'>
+            </StyledLink>
+            <StyledLink href='' className='me-4 text-reset'>
               <MDBIcon fab icon="twitter" />
-            </a>
-            <a href='' className='me-4 text-reset'>
+            </StyledLink>
+            <StyledLink href='' className='me-4 text-reset'>
               <MDBIcon fab icon="google" />
-            </a>
-            <a href='' className='me-4 text-reset'>
-              <MDBIcon fab icon="instagram" />
-            </a>
-            <a href='' className='me-4 text-reset'>
-              <MDBIcon fab icon="linkedin" />
-            </a>
-            <a href='' className='me-4 text-reset'>
+            </StyledLink>
+            <StyledLink href='' className='me-4 text-reset'>
               <MDBIcon fab icon="github" />
-            </a>
+            </StyledLink>
           </div>
         </section>
   
@@ -61,43 +59,43 @@ export default function Footer() {
               <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>MOSAIC</h6>
                 <p>
-                  <a href='/' className='text-reset'>
+                  <StyledLink href='/' className='text-reset'>
                     모자익 등급표
-                  </a>
+                  </StyledLink>
                 </p>
                 <p>
-                  <a href='/'  target="_blank" className='text-reset'>
+                  <StyledLink href='/'  target="_blank" className='text-reset'>
                     모자익 공지사항
-                  </a>
+                  </StyledLink>
                 </p>
                 <p>
-                  <a href='/' className='text-reset'>
+                  <StyledLink href='/' className='text-reset'>
                     모자익 건의사항
-                  </a>
+                  </StyledLink>
                 </p>
               </MDBCol>
   
               <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>추천 메뉴</h6>
                 <p>
-                  <a href='/reportMain' className='text-reset'>
+                  <StyledLink href='/reportMain' className='text-reset'>
                     데일리 리포트
-                  </a>
+                  </StyledLink>
                 </p>
                 <p>
-                  <a href='/promising' className='text-reset'>
+                  <StyledLink href='/promising' className='text-reset'>
                     유망코인
-                  </a>
+                  </StyledLink>
                 </p>
                 <p>
-                  <a href='/ranking' className='text-reset'>
+                  <StyledLink href='/ranking' className='text-reset'>
                     MOSAIC 랭킹
-                  </a>
+                  </StyledLink>
                 </p>
                 <p>
-                  <a href='/help' className='text-reset'>
+                  <StyledLink href='/help' className='text-reset'>
                     Help
-                  </a>
+                  </StyledLink>
                 </p>
               </MDBCol>
   
@@ -113,9 +111,9 @@ export default function Footer() {
                 </p>
                 <p>
                   <ChatIcon/>
-                  <a href='https://open.kakao.com/o/gdQximie' className='text-reset'>
+                  <StyledLink href='https://open.kakao.com/o/gdQximie' className='text-reset'>
                     모자익 오픈 채팅방
-                  </a>
+                  </StyledLink>
                 </p>
                 <p>
                   <BusinessIcon />
@@ -128,10 +126,10 @@ export default function Footer() {
   
         <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
           © 2022 Copyright:
-          <a className='text-reset fw-bold' href='https://mdbootstrap.com/'>
+          <StyledLink className='text-reset fw-bold' href='https://mdbootstrap.com/'>
            MOSAIC
-          </a>
+          </StyledLink>
         </div>
       </MDBFooter>
     );
-  }
+  };
