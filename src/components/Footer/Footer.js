@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 import styled from "styled-components";
+
 //icon
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -35,12 +36,6 @@ export default function Footer() {
             </StyledLink>
             <StyledLink href='' className='me-4 text-reset'>
               <MDBIcon fab icon="google" />
-            </StyledLink>
-            <StyledLink href='' className='me-4 text-reset'>
-              <MDBIcon fab icon="instagram" />
-            </StyledLink>
-            <StyledLink href='' className='me-4 text-reset'>
-              <MDBIcon fab icon="linkedin" />
             </StyledLink>
             <StyledLink href='' className='me-4 text-reset'>
               <MDBIcon fab icon="github" />
@@ -137,4 +132,4 @@ export default function Footer() {
         </div>
       </MDBFooter>
     );
-  }
+  };
