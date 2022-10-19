@@ -29,7 +29,7 @@ export default function RatingDes() {
             <Typography variant="body1" sx={{ mt: 1 }}>사업성: 기존에 존재하는 Dapp과의 차별성 및 시장성, 상품성을 분석하여 성장 가능성과 지속성을 평가합니다.</Typography>
             <Typography variant="body1" sx={{ mt: 1 }} >기술성: Dapp이 기술적 결함이 있는지 확인하는 절차로, Auditing 이력과 지원하는 블록체인을 평가합니다.</Typography>
             <Typography variant="body1" sx={{ mt: 1 }}>신뢰성: Dapp이 유저가 신뢰하고 사용 할 수 있는지를 검증하기 위해 탈중앙성과 Developer team을 평가합니다.</Typography>
-            <Typography variant="body1" sx={{ mt: 1 }}>기타: Dapp의 활성화 정도를 평가합니다.</Typography>
+            <Typography variant="body1" sx={{ mt: 1 }}>기타: 해당 코인의 Dapp 활성화 수준을 통한 사용성과 기관 투자유치 횟수와 규모를 파악합니다.</Typography>
         </TabPanel>
         <TabPanel value="2">
             <Typography variant="h6" sx={{ mb: 2 }} >토큰 평가 기준</Typography>
