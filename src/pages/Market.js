@@ -52,9 +52,9 @@ const MainContainer = styled(Container)`
   z-index: 1;
 `;
 
-const StyleButton = styled(Button)`
-  background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
-`;
+// const StyledButton = styled(Button)`
+//   background: linear-gradient(-45deg, #242F9B 5%, #646FD4 80%);
+// `;
 
 function Marketpage() {
   const [snpRange, setSnpRange] = useState("1d");
@@ -147,7 +147,7 @@ function Marketpage() {
       <>
         <div>
           {categoryArray[0] ? (
-            <StyleButton
+            <Button
               onClick={buttonToggleArrayElement}
               variant="contained"
               size="small"
@@ -156,13 +156,13 @@ function Marketpage() {
                 width: "15.5em",
                 height: "6em",
                 margin: "0.3rem 0",
-                fontWeight: "bold",
                 fontSize: "8px",
-                color: "#F2789F",
+                color: "black",
+                background: "linear-gradient(-45deg, #9BA3EB 5%, #DBDFFD 90%)"
               }}
             >
               Currency
-            </StyleButton>
+            </Button>
           ) : (
             <Button
               onClick={buttonToggleArrayElement}
@@ -182,22 +182,22 @@ function Marketpage() {
         </div>
         <div>
           {categoryArray[1] ? (
-            <StyleButton
+            <Button
               onClick={buttonToggleArrayElement}
               variant="contained"
               size="small"
               name="Smart Contract Platform"
               sx={{
                 width: "15.5em",
-                fontWeight: "bold",
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: "#F999B7",
+                color: "black",
+                background: "linear-gradient(-45deg, #646FD4 5%, #9BA3EB 90%)"
               }}
             >
               Smart Contract Platform
-            </StyleButton>
+            </Button>
           ) : (
             <Button
               onClick={buttonToggleArrayElement}
@@ -217,22 +217,21 @@ function Marketpage() {
         </div>
         <div>
           {categoryArray[2] ? (
-            <StyleButton
+            <Button
               onClick={buttonToggleArrayElement}
               variant="contained"
               size="small"
               name="Computing"
               sx={{
                 width: "15.5em",
-                fontWeight: "bold",
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: "#F9C5D5",
+                background: "linear-gradient(-45deg, #242F9B 5%, #646FD4 90%)"
               }}
             >
               Computing
-            </StyleButton>
+            </Button>
           ) : (
             <Button
               onClick={buttonToggleArrayElement}
@@ -252,22 +251,21 @@ function Marketpage() {
         </div>
         <div>
           {categoryArray[3] ? (
-            <StyleButton
+            <Button
               onClick={buttonToggleArrayElement}
               size="small"
               variant="contained"
               name="DeFi"
               sx={{
                 width: "15.5em",
-                fontWeight: "bold",
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: "#794C74",
+                background: "linear-gradient(-45deg, #210B61 5%, #242F9B 90%)"
               }}
             >
               DeFi
-            </StyleButton>
+            </Button>
           ) : (
             <Button
               onClick={buttonToggleArrayElement}
@@ -287,22 +285,21 @@ function Marketpage() {
         </div>
         <div>
           {categoryArray[4] ? (
-            <StyleButton
+            <Button
               onClick={buttonToggleArrayElement}
               variant="contained"
               size="small"
               name="Culture & Entertainment"
               sx={{
                 width: "15.5em",
-                fontWeight: "bold",
                 margin: "0.3rem 0",
                 height: "6em",
                 fontSize: "8px",
-                color: "#867AE9",
+                background: "linear-gradient(-45deg, #0b062d 5%, #210B61 90%)"
               }}
             >
               Culture & Entertainment
-            </StyleButton>
+            </Button>
           ) : (
             <Button
               onClick={buttonToggleArrayElement}
