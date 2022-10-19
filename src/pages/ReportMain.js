@@ -29,7 +29,7 @@ function ReportMain({ result, reports, dailyReport }) {
         style={{
           position: "absolute",
           left: 0,
-          backgroundColor: "#E6E1EF",
+          backgroundColor: "#451776",
           width: "calc(100vw - (100vw - 100%))",
           height: "20em",
         }}
@@ -48,14 +48,14 @@ function ReportMain({ result, reports, dailyReport }) {
               <Box sx={{ height: "2em" }} />
               <Typography
                 variant="h4"
-                sx={{ color: "black", marginBottom: "1rem" }}
+                sx={{ color: "white", marginBottom: "1rem" }}
               >
                 리포트
               </Typography>
-              <Typography variant="body1" sx={{ color: "grey" }}>
+              <Typography variant="body1" sx={{ color: "white" }}>
                 암호화폐 시장의 주요 이슈들을 정리한
               </Typography>
-              <Typography variant="body1" sx={{ color: "grey" }}>
+              <Typography variant="body1" sx={{ color: "white" }}>
                 Mosaic 리포트를 만나보세요!
               </Typography>
             </Box>

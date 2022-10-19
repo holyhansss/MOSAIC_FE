@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import CryptoTable from "../components/Ranking/CryptoTable";
-
+import RatingDes from "../components/Ranking/RatingDes";
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
@@ -45,6 +45,9 @@ export default function Ranking({ crypto }) {
                 상세한 평가기준에 의거하여 평가한 순위입니다.
               </Typography>
             </Box>
+          </Grid>
+          <Grid item xs={12}>
+              <RatingDes></RatingDes>
           </Grid>
           <Grid item xs={12}>
             <CryptoTable crypto={crypto} />
