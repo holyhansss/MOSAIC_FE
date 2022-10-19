@@ -9,10 +9,10 @@ export default function CryptoTable({ crypto }) {
 
   const columns = [
     { field: "docid", headerName: "아이디", hide: true },
-    { field: "id", headerName: "순위" },
-    { field: "name", headerName: "이름" },
-    { field: "rating", headerName: "등급" },
-    { field: "criteria", headerName: "기준별 점수", width: 300 },
+    { field: "id", headerName: "순위", width: 60 },
+    { field: "name", headerName: "이름", width: 170 },
+    { field: "rating", headerName: "등급", width: 60 },
+    { field: "criteria", headerName: "기준별 점수", width: 350 },
     { field: "tag", headerName: "태그", width: 400 },
     {
       field: "promising",
@@ -48,7 +48,7 @@ export default function CryptoTable({ crypto }) {
         rating: rank.rating,
         tag: rank.hashtag,
         promising: rank.promising,
-        criteria: `확장성: ${rank.scalability}　탈중앙성: ${rank.decentralization}　보안성: ${rank.security}`,
+        criteria: `확장성: ${rank.scalability}　탈중앙성: ${rank.decentralization}　보안성: ${rank.security}　기타: ${rank.others}`,
       });
     } else {
       rows.push({

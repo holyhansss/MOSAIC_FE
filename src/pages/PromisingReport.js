@@ -108,6 +108,7 @@ export default function PromisingReport() {
               score1={promising.scalability}
               score2={promising.decentralization}
               score3={promising.security}
+              score4={promising.others}
             />
           ) : (
             <PromisingScore
