@@ -14,7 +14,7 @@ import { dbService } from "../firebase";
 
 import styled from "styled-components";
 import PromisingScore from "../components/PromisingCoin/PromisingScore";
-
+import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
@@ -73,6 +73,9 @@ export default function PromisingReport() {
   useEffect(() => {
     getContents();
   }, []);
+  
+  let email = '잘못된 정보가 있다면 모자익에게 메일을 보내주세요';
+
 
   return (
     <MainContainer maxWidth="md" disableGutters>
@@ -162,6 +165,13 @@ export default function PromisingReport() {
                 paddingTop: 3,
               }}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <Tooltip title={email} disableInteractive>
+              <IconButton>
+                <AttachEmailIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Grid>
       )}

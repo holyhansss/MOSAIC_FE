@@ -115,7 +115,7 @@ function App() {
   const result = dailyReport[0];
 
   const getCrypto = async () => {
-    const q = query(collection(dbService, "cryptocurrency"), orderBy("date"));
+    const q = query(collection(dbService, "cryptocurrency"), orderBy('rate','asc'));
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((docs) => {
       let cryptoObj = {};
@@ -136,6 +136,7 @@ function App() {
             promising: docs.data().promising,
             description: docs.data().description,
             assessment: docs.data().assessment,
+            rate: docs.data().rate,
           };
         } else {
           cryptoObj = {
@@ -152,6 +153,7 @@ function App() {
             promising: docs.data().promising,
             description: docs.data().description,
             assessment: docs.data().assessment,
+            rate: docs.data().rate,
           };
         }
       } else {
@@ -167,6 +169,7 @@ function App() {
             hashtag: docs.data().hashtag,
             type: docs.data().type,
             promising: docs.data().promising,
+            rate: docs.data().rate,
           };
         } else {
           cryptoObj = {
@@ -179,6 +182,7 @@ function App() {
             hashtag: docs.data().hashtag,
             type: docs.data().type,
             promising: docs.data().promising,
+            rate: docs.data().rate,
           };
         }
       }

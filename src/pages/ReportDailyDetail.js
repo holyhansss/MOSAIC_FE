@@ -26,7 +26,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SendIcon from "@mui/icons-material/Send";
 import { pink } from "@mui/material/colors";
-import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 
 //components
 import DailyReportcontents from "../components/Report/DailyReportContents";
@@ -36,7 +35,6 @@ export default function ReportDailyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
-  let email = '잘못된 정보가 있다면 모자익에게 메일을 보내주세요';
 
   const getReplies = async () => {
     const repl = query(
@@ -60,16 +58,18 @@ export default function ReportDailyDetail({ user }) {
     });
   };
 
-  useEffect(() => {
-    getReplies();
-  }, []);
-
-  //좋아요 가져오기
-  const [likenum, setLikenum] = useState([]);
+    //좋아요 가져오기
+  // const [likenum, setLikenum] = useState([]);
   const [clickICon, setClickIcon] = useState(false);
   const [likescount, setLikescount] = useState([]);
-  const [count, setCount] = useState(null);
-  const [countValue, setCountValue] = useState(null);
+  const [count, setCount] = useState(0);
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    if (user !== null) {
+      setUid(user.uid);
+    }
+  }, [user]);
 
   //전체 좋아요 개수
   const getLikes = async () => {
@@ -83,37 +83,30 @@ export default function ReportDailyDetail({ user }) {
       setLikescount((prev) => [lkeObj, ...prev]);
     });
   };
-  useEffect(() => {
-    getLikes();
-  }, []);
-  useEffect(() => {
-    setCount(likescount.length);
-    setCountValue(likescount.length);
-  });
-
-  // user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
+  
+// user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
   const getUserLike = async () => {
-    if (user !== null) {
-      const likequ = query(
-        collection(dbService, "daily_report", id, "like"),
-        where("likeuid", "==", user.uid)
-      );
-      const querySnapShot = await getDocs(likequ);
-      querySnapShot.forEach((collection) => {
-        const likeObj = {
-          likename: collection.data().likename,
-          likeuid: collection.data().likeuid,
-        };
+    if (likescount.length != 0) {
+      const getUserLike = likescount.find(userid => userid.likeuid === uid)
+      if (getUserLike != undefined) {
         setClickIcon(true);
-        setLikenum((prev) => [likeObj, ...prev]);
-      });
-    }
-  };
+      } else {
+        setClickIcon(false);
+      }
+    };
+    };
+
+  useEffect(() => {
+    getReplies();
+    getLikes();
+    getUserLike();
+  }, []);
 
   useEffect(() => {
     getUserLike();
-  }, [user]);
-
+    setCount(likescount.length);
+  }, [likescount]);
+ 
   // 좋아요 클릭
   const onclick = async () => {
     if (user !== null) {
@@ -124,6 +117,7 @@ export default function ReportDailyDetail({ user }) {
           likename: user.displayName,
           likeuid: user.uid,
         });
+        setCount(count+1);
         // 유저별 좋아요 정보 firestore에 저장
         await setDoc(doc(dbService, "users", user.uid, "liked", id), {
           title: title,
@@ -133,6 +127,7 @@ export default function ReportDailyDetail({ user }) {
       } else {
         await deleteDoc(doc(dbService, "daily_report", id, "like", user.uid));
         await deleteDoc(doc(dbService, "users", user.uid, "liked", id));
+        setCount(count-1);
       }
 
       // window.location.reload();
@@ -185,14 +180,14 @@ export default function ReportDailyDetail({ user }) {
                   <>
                     <FavoriteIcon sx={{ color: pink[500] }} />
                     <Typography variant="body1" >
-                      {countValue}
+                      {count}
                     </Typography>
                   </>
                 ) : (
                   <>
                     <FavoriteBorderIcon sx={{ color: pink[500] }} />
                     <Typography variant="body1">
-                      {countValue}
+                      {count}
                     </Typography>
                   </>
                 )}
@@ -201,11 +196,6 @@ export default function ReportDailyDetail({ user }) {
               <IconButton onClick={handleOpen}>
                 <SendIcon />
               </IconButton>
-              <Tooltip title={email} disableInteractive>
-                <IconButton>
-                  <AttachEmailIcon />
-                </IconButton>
-              </Tooltip>
             </ButtonGroup>
             <Modal open={open} onClose={handleClose}>
               <Box sx={style}>
