@@ -69,7 +69,6 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
     );
     const querySnapShot = await getDocs(q);
     if (querySnapShot.empty) {
-      console.log(querySnapShot);
       await deleteDoc(doc(dbService, "users", user.uid, "comment", id));
     }
     window.location.reload();
@@ -153,7 +152,6 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
   return (
     <div>
       {/* 댓글리스트 */}
-      {console.log(replylist)}
       <List>
         <ListItem
           alignItems="flex-start"
@@ -206,6 +204,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
                   <CommentIcon fontSize="small" />
                 </IconButton>
                 {replylist.length !== 0 ? (
+                  <>
                   <IconButton
                     edge="end"
                     aria-label="comment"
@@ -221,6 +220,8 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
                       />
                     )}
                   </IconButton>
+                  　{replylist.length}
+                  </>
                 ) : null}
               </React.Fragment>
             }
@@ -419,7 +420,6 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
     );
     const querySnapShot = await getDocs(q);
     if (querySnapShot.empty) {
-      console.log(querySnapShot);
       await deleteDoc(doc(dbService, "users", user.uid, "comment", id));
     }
     window.location.reload();
@@ -555,6 +555,7 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
                   <CommentIcon fontSize="small"/>
                 </IconButton>
                 {replylist.length !== 0 ? (
+                  <>
                   <IconButton
                     edge="end"
                     aria-label="comment"
@@ -570,6 +571,9 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
                       />
                     )}
                   </IconButton>
+                  　{replylist.length}
+                  </>
+
                 ) : null}
               </React.Fragment>
             }

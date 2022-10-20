@@ -24,9 +24,11 @@ const AdminPromising = () => {
   const [standard1, setStandard1] = useState('');
   const [standard2, setStandard2] = useState('');
   const [standard3, setStandard3] = useState('');
+  const [standard4, setStandard4] = useState('others');
   const [standard1num, setStandard1Num] = useState(0);
   const [standard2num, setStandard2Num] = useState(0);
   const [standard3num, setStandard3Num] = useState(0);
+  const [standard4num, setStandard4Num] = useState(0);
   const [rating, setRating] = useState(0);
   const [grade, setGrade] = useState('');
   const [thumbnail, setThumbnail] = useState('');
@@ -62,6 +64,10 @@ const AdminPromising = () => {
     setStandard3(value);
     setStandard3Num(Number(num));
   };
+  const handleOnChangeStandard4 = (value, num ) => {
+    setStandard4(value);
+    setStandard4Num(Number(num));
+  };
   const handleOnChangeAssess = (value ) => {
     setAssessment(value);
   };
@@ -69,8 +75,8 @@ const AdminPromising = () => {
     setDescription(value);
   };
   useEffect(() => {
-    setRating(standard1num+standard2num+standard3num);
-  }, [standard1num, standard2num, standard3num]);
+    setRating(standard1num+standard2num+standard3num+standard4num);
+  }, [standard1num, standard2num, standard3num, standard4num]);
 
   const onClickRating = () => {
     if (95 <= rating && rating <= 100) {
@@ -147,7 +153,9 @@ const AdminPromising = () => {
       [standard1]: standard1num,
       [standard2]: standard2num,
       [standard3]: standard3num,
+      [standard4]: standard4num,
       rating : grade,
+      rate: rating,
       date : time.now(),
     });
 
@@ -160,11 +168,13 @@ const AdminPromising = () => {
       [standard1]: standard1num,
       [standard2]: standard2num,
       [standard3]: standard3num,
+      [standard4]: standard4num,
       logo : logoStorageURL,
       thumbnail : thumbnailStorageURL,
       assessment : assessment,
       description : description,
       rating : grade,
+      rate: rating,
       date : time.now(),
     });
   }
@@ -375,11 +385,29 @@ const AdminPromising = () => {
                   }}
                 />
                 </Row>
+                <Row>
+                  <Typography variant="h5">
+                    Others
+                  </Typography>
+                  <Form.Control
+                  key={"others"}
+                  className=""
+                  type=""
+                  placeholder="점수를 입력하세요"
+                  style={{
+                    width: "30%",
+                    height: "50px",
+                  }}
+                  id="others"
+                  onChange={(e) => {
+                    handleOnChangeStandard4(e.target.id, e.target.value);
+                  }}
+                />
+                </Row>
                 <Container>
                   <Button variant="primary" className="my-2" onClick={onClickRating}>
                     Rating
                   </Button>
-                  {/* <AdminRating rating={rating} /> */}
                   <Typography variant="h5">
                     {grade}
                   </Typography>

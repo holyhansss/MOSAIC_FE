@@ -62,7 +62,7 @@ function Comment({ user, id, title, rep, writer, date }) {
   return (
     <div>
       <br />
-      <p>Replies</p>
+      <p>댓글 {rep.length}</p>
       <hr />
 
       {/* <SingleComment /> */}
@@ -175,7 +175,7 @@ function DailyComment({ user, id, title, rep, writer, date }) {
   return (
     <div>
       <br />
-      <p>Replies</p>
+      <p>댓글 {rep.length}</p>
       <hr />
 
       {/* <SingleComment /> */}
