@@ -16,10 +16,10 @@ export default function RatingDes() {
 
   return (
     <Grid>
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <Box sx={{ width: '100%', typography: 'body1',border:'1px solid grey',borderRadius: '5px',borderColor: 'grey.300' }} >
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList onChange={handleChange} aria-label="lab API tabs example"  indicatorColor="secondary" textColor="secondary">
             <Tab label="Coin" value="1" />
             <Tab label="Token" value="2" />
           </TabList>
