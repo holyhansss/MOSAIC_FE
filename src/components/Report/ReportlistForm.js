@@ -42,7 +42,7 @@ function ReportList({ result, reports }) {
         </Grid> */}
         <Grid item xs={12}>
           <Typography variant="h5" gutterBottom sx={{ marginTop: 3 }}>
-            주간리포트
+            주간 리포트
           </Typography>
         </Grid>
         <Grid item xs={12}>
