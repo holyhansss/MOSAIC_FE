@@ -46,6 +46,8 @@ const WelcomText = styled(Typography)`
 `;
 
 const MainPage = ({ result, reports, crypto }) => {
+  const promising = crypto.filter((c) => c.promising === true);
+  const mainCrypto = promising.slice(0, 3);
   return (
     <>
       <div
@@ -205,13 +207,10 @@ const MainPage = ({ result, reports, crypto }) => {
             <Box sx={{ height: "5rem" }} />
           </Grid>
           <Grid container direction="row" spacing={5} justifyContent="center">
-            {crypto !== null &&
-              crypto.map(
-                (content, index) =>
-                  content.promising === true && (
-                    <PromisingCard crypto={content} idx={index} />
-                  )
-              )}
+            {mainCrypto !== null &&
+              mainCrypto.map((content, index) => (
+                <PromisingCard crypto={content} key={index} />
+              ))}
           </Grid>
         </Grid>
         <Grid item xs={12}>

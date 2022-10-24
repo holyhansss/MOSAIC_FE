@@ -264,7 +264,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
               sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
               onClick={onsubmit}
             >
-              댓글
+              등록
             </StyleButton>
           ) : (
             <Button
@@ -272,7 +272,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
               variant="contained"
               sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
             >
-              댓글
+              등록
             </Button>
           )}
         </form>
@@ -616,7 +616,7 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
               sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
               onClick={onsubmit}
             >
-              댓글
+              등록
             </StyleButton>
           ) : (
             <Button
@@ -624,7 +624,7 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
               variant="contained"
               sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
             >
-              댓글
+              등록
             </Button>
           )}
         </form>

@@ -10,8 +10,9 @@ import { Viewer } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 const StyleBox = styled(Box)`
-  background: linear-gradient(-45deg, #1a1a40 5%, #270082 90%);
+  background: linear-gradient(-45deg, #242f9b 10%, #646fd4 80%);
   border-radius: 10px;
+  padding: 1rem;
 `;
 
 const Styleli = styled.li`
@@ -40,7 +41,11 @@ function Reportcard({ title, writer, date, mac }) {
 
       {/* {Table of contents} 시작 */}
       <StyleBox>
-        <Typography variant="h6" align="center" sx={{ color: grey[50] }}>
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ color: grey[50], marginBottom: "1rem" }}
+        >
           목차
         </Typography>
         <div>
@@ -50,12 +55,6 @@ function Reportcard({ title, writer, date, mac }) {
                 inputmacro.current.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <Typography
-                variant="body1"
-                sx={{ paddingBottom: "5px", color: grey[50] }}
-              >
-                거시경제
-              </Typography>
               {mac.map((ma, index) => (
                 <div key={index}>
                   <ul>
@@ -150,145 +149,145 @@ function Reportcard({ title, writer, date, mac }) {
   );
 }
 
-export {Reportcard};
+export { Reportcard };
 
-function DailyReportcard({title, writer, date, daily}) {
-
+function DailyReportcard({ title, writer, date, daily }) {
   return (
     <div>
-        <Box
-          sx={{
-              paddingTop: 10,
-          }}
-        />
-        <Typography variant="h4" align="center" sx={{ fontWeight: "bold" }}>
-         {title}
-        </Typography>
-        <p />
-        <Typography variant="caption" display="block" align="center" gutterBottom>
-            {date}
-        </Typography>
-        <Box
-          sx={{
-              paddingTop: 10,
-          }}
-        />
-        <Avatar 
-          alt="thumbnail"
-          src={daily.thumbnail}
-          variant="square"
-          align ="center"
-          sx={{ width: "35rem", height: "10rem" }}/>
-        <Box
-          sx={{
-              paddingTop: 10,
-          }}
-          />
-        <div>
-          <Typography
-            variant="h6"
-            align="center"
-            gutterBottom
-            component="div"
-            sx={{ fontWeight: "bold" }}
-            >
-            {daily.issue1_title}
-          </Typography>
-          <Box
-          sx={{
-              paddingTop: 3,
-          }}
-          />
-          <Viewer initialValue={daily.issue1_content} />
-          <Box
-          sx={{
-              paddingTop: 3,
-          }}
-          />
-        </div>
-        <Box
-            sx={{
-            paddingTop: 10,
-            }}
-        />
-        
-        <div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      <Typography variant="h4" align="center" sx={{ fontWeight: "bold" }}>
+        {title}
+      </Typography>
+      <p />
+      <Typography variant="caption" display="block" align="center" gutterBottom>
+        {date}
+      </Typography>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      <Avatar
+        alt="thumbnail"
+        src={daily.thumbnail}
+        variant="square"
+        align="center"
+        sx={{ width: "35rem", height: "10rem" }}
+      />
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      <div>
         <Typography
-            variant="h6"
-            align="center"
-            gutterBottom
-            component="div"
-            sx={{ fontWeight: "bold" }}
-            >
-            {daily.issue2_title}
-          </Typography>
-          <Box
-          sx={{
-              paddingTop: 3,
-          }}
-          />
-          <Viewer initialValue={daily.issue2_content} />
-          <Box
-          sx={{
-              paddingTop: 3,
-          }}
-          />
-        </div>
-        <Box
-            sx={{
-            paddingTop: 10,
-            }}
-        />
-
-        <div>
-        <Typography
-            variant="h6"
-            align="center"
-            gutterBottom
-            component="div"
-            sx={{ fontWeight: "bold" }}
-            >
-            인사이트
-          </Typography>
-          <Box
-          sx={{
-              paddingTop: 3,
-          }}
-          />
-          <Viewer initialValue={daily.insight} />
-          <Box
-          sx={{
-              paddingTop: 3,
-          }}
-          />
-        </div>
-        <Box
-            sx={{
-            paddingTop: 10,
-            }}
-        />
-
-        <div>
-            <Typography
-            variant="subtitle1"
-            align="center"
-            gutterBottom
-            component="div"
-            sx={{ textDecoration: "underline" }}
-            >
-            Credit
-            </Typography>
-        </div>
-        <Typography
-            variant="subtitle2"
-            align="center"
-            gutterBottom
-            component="div"
-            sx={{ fontWeight: "bold", m: 1 }}
+          variant="h6"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ fontWeight: "bold" }}
         >
-            {writer}
+          {daily.issue1_title}
+        </Typography>
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+        <Viewer initialValue={daily.issue1_content} />
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <div>
+        <Typography
+          variant="h6"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
+          {daily.issue2_title}
+        </Typography>
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+        <Viewer initialValue={daily.issue2_content} />
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <div>
+        <Typography
+          variant="h6"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
+          인사이트
+        </Typography>
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+        <Viewer initialValue={daily.insight} />
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <div>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ textDecoration: "underline" }}
+        >
+          Credit
         </Typography>
       </div>
+      <Typography
+        variant="subtitle2"
+        align="center"
+        gutterBottom
+        component="div"
+        sx={{ fontWeight: "bold", m: 1 }}
+      >
+        {writer}
+      </Typography>
+    </div>
   );
 }
-export {DailyReportcard};
+export { DailyReportcard };
