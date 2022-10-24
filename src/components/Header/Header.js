@@ -3,8 +3,7 @@ import { NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { logout } from "../../firebase";
-import { Container, Grid } from "@mui/material";
-import {Mosaic_logo} from "../../img/Mosaic_logo.png";
+import { Container, Grid, Typography } from "@mui/material";
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -29,10 +28,6 @@ const HeaderContainer = styled.div`
   box-shadow: 0 2px 5px lightgrey;
 `;
 
-const NavMain = styled.div`
-  font-size: 1.5em;
-`;
-
 function Header({ user, admin }) {
   return (
     <HeaderContainer>
@@ -42,29 +37,51 @@ function Header({ user, admin }) {
         sx={{ diplay: "flex", flexDirection: "row", alignItems: "center" }}
       >
         <Grid container direction="row" alignItems="center">
-          <Grid item xs={3} md={2} lg={2} alignItems="center">
+          <Grid item xs={3} md={2.5} lg={2} alignItems="center">
             <StyledLink to="/">
-              <NavMain>MOSAIC</NavMain>
+              <Grid item sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/main_logo%2Ffavicon.png?alt=media&token=20eb3567-702e-4f24-a985-823060370a14"
+                  alt="main"
+                  width="30"
+                  height="30"
+                />
+                <Typography sx={{ fontWeight: 500, fontSize: "1.2em", marginLeft: "0.2rem" }}>
+                  MOSAIC
+                </Typography>
+              </Grid>
             </StyledLink>
           </Grid>
           <Grid
             item
             xs={7}
-            md={6}
+            md={5.5}
             lg={4}
-            sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
           >
             <Grid item>
-              <StyledLink to="/ranking">Mosaic 순위</StyledLink>
+              <StyledLink to="/ranking">
+                <Typography>Mosaic 순위</Typography>
+              </StyledLink>
             </Grid>
             <Grid item>
-              <StyledLink to="/promising">유망 코인</StyledLink>
+              <StyledLink to="/promising">
+                <Typography>유망 코인</Typography>
+              </StyledLink>
             </Grid>
             <Grid item>
-              <StyledLink to="/market">시장 동향</StyledLink>
+              <StyledLink to="/market">
+                <Typography>시장 동향</Typography>
+              </StyledLink>
             </Grid>
             <Grid item>
-              <StyledLink to="/reportMain">리포트</StyledLink>
+              <StyledLink to="/reportMain">
+                <Typography>리포트</Typography>
+              </StyledLink>
             </Grid>
           </Grid>
           <Grid

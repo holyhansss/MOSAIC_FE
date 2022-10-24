@@ -52,9 +52,9 @@ export default function PromisingList({ crypto }) {
             <Grid container spacting={1}>
               {crypto !== null &&
                 crypto.map(
-                  (content) =>
+                  (content, index) =>
                     content.promising === true && (
-                      <PromisingCard crypto={content} />
+                      <PromisingCard crypto={content} key={index} />
                     )
                 )}
             </Grid>

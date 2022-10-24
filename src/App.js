@@ -115,7 +115,10 @@ function App() {
   const result = dailyReport[0];
 
   const getCrypto = async () => {
-    const q = query(collection(dbService, "cryptocurrency"), orderBy('rate','asc'));
+    const q = query(
+      collection(dbService, "cryptocurrency"),
+      orderBy("rate", "asc")
+    );
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((docs) => {
       let cryptoObj = {};
@@ -260,10 +263,8 @@ function App() {
             </Routes>
           </Container>
         </Grid>
-        <Grid item md={2}>
-          <Footer />
-        </Grid>
       </Grid>
+      <Footer />
     </ThemeProvider>
   );
 }

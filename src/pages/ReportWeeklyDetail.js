@@ -43,7 +43,7 @@ export default function ReportWeeklyDetail({ user }) {
   const getReplies = async () => {
     const repl = query(
       collection(dbService, "weekly_report", id, "comment"),
-      where("isreply", "==", false),
+      where("isreply", "==", false)
     );
     const querySnapShot = await getDocs(repl);
 
@@ -86,8 +86,8 @@ export default function ReportWeeklyDetail({ user }) {
       setLikescount((prev) => [lkeObj, ...prev]);
     });
   };
-  
-// user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
+
+  // user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
   const getUserLike = async () => {
     if (likescount.length !== 0) {
       const getUserLike = likescount.find(userid => userid.likeuid === uid)
@@ -96,8 +96,8 @@ export default function ReportWeeklyDetail({ user }) {
       } else {
         setClickIcon(false);
       }
-    };
-    };
+    }
+  };
 
   useEffect(() => {
     getReplies();
@@ -120,7 +120,7 @@ export default function ReportWeeklyDetail({ user }) {
           likename: user.displayName,
           likeuid: user.uid,
         });
-        setCount(count+1);
+        setCount(count + 1);
         // 유저별 좋아요 정보 firestore에 저장
         await setDoc(doc(dbService, "users", user.uid, "liked", id), {
           title: title,
@@ -130,7 +130,7 @@ export default function ReportWeeklyDetail({ user }) {
       } else {
         await deleteDoc(doc(dbService, "weekly_report", id, "like", user.uid));
         await deleteDoc(doc(dbService, "users", user.uid, "liked", id));
-        setCount(count-1);
+        setCount(count - 1);
       }
 
       // window.location.reload();
@@ -179,7 +179,7 @@ export default function ReportWeeklyDetail({ user }) {
               aria-label="lab API tabs example"
               sx={{ justifyContent: "center" }}
             >
-              <Tab label="주간이슈" value="1" />
+              <Tab label="주간 이슈" value="1" />
               <Tab label="Winner & Loser" value="2" />
             </TabList>
           </Box>
@@ -213,16 +213,12 @@ export default function ReportWeeklyDetail({ user }) {
                 {clickICon === true ? (
                   <>
                     <FavoriteIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1" >
-                      {count}
-                    </Typography>
+                    <Typography variant="body1">{count}</Typography>
                   </>
                 ) : (
                   <>
                     <FavoriteBorderIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1">
-                      {count}
-                    </Typography>
+                    <Typography variant="body1">{count}</Typography>
                   </>
                 )}
               </IconButton>
