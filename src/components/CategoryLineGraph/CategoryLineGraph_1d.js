@@ -8,7 +8,29 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { CustomTooltip } from "../LineGraph/LineGraph1d";
+
+export const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          borderRadius: "10px",
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          padding: 10,
+        }}
+      >
+        <div style={{ color: "black", marginBottom: 5 }}>{label}</div>
+        {payload.map((line, index) => (
+          <div
+            style={{ color: line.stroke }}
+          >{`${line.dataKey} : ${line.value}`}</div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
+};
 
 function CategoryLineGraph_1d(props) {
   const dateRange = props.dateRange;
@@ -28,15 +50,15 @@ function CategoryLineGraph_1d(props) {
     );
     const thisResponse = response.data;
     setDatesAndPrices(thisResponse[0]);
-    setMinMax([
-      parseInt(thisResponse[1][0]) - 10,
-      parseInt(thisResponse[1][1]) + 10,
-    ]);
-    // if (thisResponse == null || thisResponse[1][0] == undefined) {
-    //   setMinMax([0, 100]);
-    // } else {
-    //   setMinMax([parseInt(thisResponse[1][0]), parseInt(thisResponse[1][1])]);
-    // }
+    console.log(response);
+    if (thisResponse == null || thisResponse[1][0] == undefined) {
+      setMinMax([85, 105]);
+    } else {
+      setMinMax([
+        parseInt(thisResponse[1][0]) - 3,
+        parseInt(thisResponse[1][1]) + 3,
+      ]);
+    }
   };
 
   return (
