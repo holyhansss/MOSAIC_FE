@@ -42,6 +42,7 @@ function App() {
   const [dailyReport, setDailyReport] = useState([]);
   // 암호화폐 db
   const [crypto, setCrypto] = useState([]);
+  const [promising, setPromising] = useState([]);
 
   const refreshUser = () => {
     const user = auth.currentUser;
@@ -192,6 +193,86 @@ function App() {
 
       setCrypto((prev) => [cryptoObj, ...prev]);
     });
+
+    const q2 = query(
+      collection(dbService, "cryptocurrency"),
+      orderBy("date")
+    );
+    const querySnapShot2 = await getDocs(q2);
+    querySnapShot2.forEach((docs) => {
+      let cryptoObj = {};
+      if (docs.data().promising === true) {
+        if (docs.data().type === "coin") {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            security: docs.data().security,
+            scalability: docs.data().scalability,
+            decentralization: docs.data().decentralization,
+            others: docs.data().others,
+            logo: docs.data().logo,
+            rating: docs.data().rating,
+            thumbnail: docs.data().thumbnail,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+            description: docs.data().description,
+            assessment: docs.data().assessment,
+            rate: docs.data().rate,
+          };
+        } else {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            business: docs.data().business,
+            technicality: docs.data().technicality,
+            reliability: docs.data().reliability,
+            logo: docs.data().logo,
+            rating: docs.data().rating,
+            thumbnail: docs.data().thumbnail,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+            description: docs.data().description,
+            assessment: docs.data().assessment,
+            rate: docs.data().rate,
+          };
+        }
+      } else {
+        if (docs.data().type === "coin") {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            security: docs.data().security,
+            scalability: docs.data().scalability,
+            decentralization: docs.data().decentralization,
+            others: docs.data().others,
+            rating: docs.data().rating,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+            rate: docs.data().rate,
+          };
+        } else {
+          cryptoObj = {
+            id: docs.id,
+            name: docs.data().name,
+            business: docs.data().business,
+            technicality: docs.data().technicality,
+            reliability: docs.data().reliability,
+            rating: docs.data().rating,
+            hashtag: docs.data().hashtag,
+            type: docs.data().type,
+            promising: docs.data().promising,
+            rate: docs.data().rate,
+          };
+        }
+      }
+
+      setPromising((prev) => [cryptoObj, ...prev]);
+    });
+
+
   };
 
   useEffect(() => {
@@ -212,7 +293,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <MainPage result={result} reports={reports} crypto={crypto} />
+                  <MainPage result={result} reports={reports} crypto={promising} />
                 }
               />
               <Route path="/login" element={<Login />} />
@@ -224,7 +305,7 @@ function App() {
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
-                element={<PromisingList crypto={crypto} />}
+                element={<PromisingList crypto={promising} />}
               />
               <Route path="/promising/:id" element={<PromisingReport />} />
               <Route
