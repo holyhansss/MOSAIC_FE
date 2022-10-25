@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { CustomTooltip } from "../LineGraph/LineGraph1d";
+import { CustomTooltip } from "./CategoryLineGraph_1d";
 
 function CategoryLineGraph_1y(props) {
   const dateRange = props.dateRange;
