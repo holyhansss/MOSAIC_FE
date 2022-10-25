@@ -168,15 +168,17 @@ export default function PromisingReport() {
             />
           )}
           <Grid item xs={12}>
-            <Typography
-              variant="body1"
-              align="left"
-              gutterBottom
-              component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
-            >
-              {promising.description}
-            </Typography>
+            {promising.description.map((content) => (
+              <Typography
+                variant="body1"
+                align="left"
+                gutterBottom
+                component="div"
+                sx={{ lineHeight: 2, letterSpacing: 0.25 }}
+              >
+                {content}
+              </Typography>
+            ))}
           </Grid>
           <Grid item xs={12}>
             <Box
@@ -197,14 +199,24 @@ export default function PromisingReport() {
                 paddingTop: 3,
               }}
             />
+            {promising.assessment.map((content, index) => (
+              <Typography
+                variant="body1"
+                align="left"
+                gutterBottom
+                component="div"
+                sx={{ lineHeight: 2, letterSpacing: 0.25 }}
+              >
+                {`${index + 1}. ${content}`}
+              </Typography>
+            ))}
             <Typography
               variant="body1"
               align="left"
-              gutterBottom
               component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25 }}
+              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
             >
-              {promising.assessment}
+              {promising.general}
             </Typography>
             <Box
               sx={{
