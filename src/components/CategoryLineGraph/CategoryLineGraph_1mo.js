@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { CustomTooltip } from "../LineGraph/LineGraph1d";
+import { CustomTooltip } from "./CategoryLineGraph_1d";
 
 // import { type } from '@testing-library/user-event/dist/type/index.js';
 // import {get_coins_specific_category, return_calculated_prices} from '../../datafetching/queries.js'
