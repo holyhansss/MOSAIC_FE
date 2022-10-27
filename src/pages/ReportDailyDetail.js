@@ -86,9 +86,9 @@ export default function ReportDailyDetail({ user }) {
   
 // user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
   const getUserLike = async () => {
-    if (likescount.length != 0) {
+    if (likescount.length !== 0) {
       const getUserLike = likescount.find(userid => userid.likeuid === uid)
-      if (getUserLike != undefined) {
+      if (getUserLike !== undefined) {
         setClickIcon(true);
       } else {
         setClickIcon(false);
