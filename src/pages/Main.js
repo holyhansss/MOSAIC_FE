@@ -114,7 +114,7 @@ const MainPage = ({ result, reports, crypto }) => {
           </Typography>
           <Grid container direction="row" spacing={2}>
             <Grid item xs={4}>
-              <img src={Sample} alt="rating" width={150} />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_reviews_lp8w.svg?alt=media&token=67ea23a8-ea21-4cdd-9c73-5096420838cb" alt="rating" width={150} />
               <Typography variant="h6" sx={{ margin: "1rem 0" }}>
                 암호화폐 등급 평가
               </Typography>
@@ -126,7 +126,7 @@ const MainPage = ({ result, reports, crypto }) => {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <img src={Sample} alt="fund" width={150} />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_savings_re_eq4w.svg?alt=media&token=5b826551-ac3e-4314-80e4-abd5bbdd96b1" alt="fund" width={150} />
               <Typography variant="h6" sx={{ margin: "1rem 0" }}>
                 펀드 상품
               </Typography>
@@ -139,7 +139,7 @@ const MainPage = ({ result, reports, crypto }) => {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <img src={Sample} alt="report" width={150} />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_data_reports_706v.svg?alt=media&token=2b60aa1f-11ce-4c9d-bbe0-7290eff215f1" alt="report" width={150} />
               <Typography variant="h6" sx={{ margin: "1rem 0" }}>
                 경제 지표 & 리포트 제공
               </Typography>
