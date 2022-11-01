@@ -203,6 +203,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
                 >
                   <CommentIcon fontSize="small" />
                 </IconButton>
+                　{replylist.length}
                 {replylist.length !== 0 ? (
                   <>
                   <IconButton
@@ -220,7 +221,6 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
                       />
                     )}
                   </IconButton>
-                  　{replylist.length}
                   </>
                 ) : null}
               </React.Fragment>
@@ -554,6 +554,7 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
                 >
                   <CommentIcon fontSize="small"/>
                 </IconButton>
+                　{replylist.length}
                 {replylist.length !== 0 ? (
                   <>
                   <IconButton
@@ -571,7 +572,6 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
                       />
                     )}
                   </IconButton>
-                  　{replylist.length}
                   </>
 
                 ) : null}

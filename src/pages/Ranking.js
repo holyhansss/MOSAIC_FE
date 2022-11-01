@@ -3,6 +3,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import CryptoTable from "../components/Ranking/CryptoTable";
 import RatingDes from "../components/Ranking/RatingDes";
+
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
@@ -47,7 +48,7 @@ export default function Ranking({ crypto }) {
             </Box>
           </Grid>
           <Grid item xs={12}>
-              <RatingDes></RatingDes>
+            <RatingDes></RatingDes>
           </Grid>
           <Grid item xs={12}>
             <CryptoTable crypto={crypto} />
