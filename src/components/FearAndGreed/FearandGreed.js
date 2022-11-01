@@ -30,6 +30,7 @@ function FearandGreed() {
         "참여자들이 자산을 시장에 매도하여 거래량은 증가하고 자산 가격은 떨어지게 됩니다."
       ]
       );
+
     } else if (response.data.data[0].value_classification === "Neutral") {
       setFnGState("중립");
       setFnGIcon(
@@ -40,6 +41,7 @@ function FearandGreed() {
         "심리적인 요소가 크게 작용하며, 단기간 자산 가격 움직임의 향방을 알 수 없는 국면입니다."
       ]
       );
+
     } else if (response.data.data[0].value_classification === "Greed") {
       setFnGState("탐욕");
       setFnGIcon("https://img.icons8.com/emoji/48/000000/woozy-face.png");
@@ -48,6 +50,7 @@ function FearandGreed() {
         "거래량과 자산 가격이 증가할 여지가 있으며, 단기 차익을 노린 투자자들이 시장에 참여하기 시작합니다."
       ]
       );
+
     } else if (response.data.data[0].value_classification === "Extreme Greed") {
       setFnGState("매우 탐욕");
       setFnGIcon("https://img.icons8.com/emoji/48/000000/money-mouth-face.png");
