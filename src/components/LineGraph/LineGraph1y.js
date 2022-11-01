@@ -26,7 +26,7 @@ function Index1y() {
       response.data[i].SNP = Math.ceil(response.data[i].SNP * 100) / 100;
       response.data[i].CMC = Math.ceil(response.data[i].CMC * 100) / 100;
     }
-    console.log(response.data);
+    //console.log(response.data);
     setRes(response.data);
   };
 
