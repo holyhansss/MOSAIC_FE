@@ -36,7 +36,7 @@ const StyleButton = styled(Button)`
   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
 `;
 
-function SingleComment({ value, id, user, title, writer, date, commentObj }) {
+function SingleComment({ value, id, user, title, writer, date, commentObj, thumbnail }) {
   const [useId, setUserId] = useState("");
   const [ava, setAva] = useState(null);
   const [uid, setUid] = useState("");
@@ -62,6 +62,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
       }
     );
 
+    // 댓글 삭제 시 users의 '댓글 단 글'에서 삭제
     const q = query(
       collection(dbService, "weekly_report", id, "comment"),
       where("user_uid", "==", uid),
@@ -109,6 +110,8 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
       title: title,
       writer: writer,
       date: date,
+      thumbnail: thumbnail,
+      type: "weekly"
     });
 
     setReply("");
@@ -387,7 +390,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj }) {
 export {SingleComment};
 
 
-function DailySingleComment({ value, id, user, title, writer, date, commentObj }) {
+function DailySingleComment({ value, id, user, title, writer, date, commentObj, thumbnail }) {
   const [useId, setUserId] = useState("");
   const [ava, setAva] = useState(null);
   const [uid, setUid] = useState("");
@@ -412,7 +415,8 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
         show: false,
       }
     );
-
+    
+    // 댓글 삭제 시 users의 '댓글 단 글'에서 삭제
     const q = query(
       collection(dbService, "daily_report", id, "comment"),
       where("user_uid", "==", uid),
@@ -460,6 +464,8 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj }
       title: title,
       writer: writer,
       date: date,
+      thumbnail: thumbnail,
+      type: "daily"
     });
 
     setReply("");

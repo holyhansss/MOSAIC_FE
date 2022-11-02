@@ -39,14 +39,27 @@ function Header({ user, admin }) {
         <Grid container direction="row" alignItems="center">
           <Grid item xs={3} md={2.5} lg={2} alignItems="center">
             <StyledLink to="/">
-              <Grid item sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+              <Grid
+                item
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/main_logo%2Ffavicon.png?alt=media&token=20eb3567-702e-4f24-a985-823060370a14"
                   alt="main"
                   width="30"
                   height="30"
                 />
-                <Typography sx={{ fontWeight: 500, fontSize: "1.2em", marginLeft: "0.2rem" }}>
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: "1.2em",
+                    marginLeft: "0.2rem",
+                  }}
+                >
                   MOSAIC
                 </Typography>
               </Grid>
@@ -119,20 +132,9 @@ function Header({ user, admin }) {
                 }
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item>
-                  <StyledLink to="/profile">마이페이지</StyledLink>
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/profile">마이페이지</NavDropdown.Item>
                 {admin === true && (
-                  <NavDropdown.Item>
-                    <StyledLink
-                      to={{
-                        pathname: "/admin",
-                        state: { user: user },
-                      }}
-                    >
-                      관리자
-                    </StyledLink>
-                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/admin">관리자</NavDropdown.Item>
                 )}
                 <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
               </NavDropdown>

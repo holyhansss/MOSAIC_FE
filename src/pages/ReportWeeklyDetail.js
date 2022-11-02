@@ -10,17 +10,15 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import {
   query,
   getDocs,
   collection,
-  orderBy,
   deleteDoc,
   setDoc,
   doc,
   where,
-  getDoc,
 } from "firebase/firestore";
 import { dbService } from "../firebase";
 import IconButton from "@mui/material/IconButton";
@@ -35,8 +33,11 @@ import Winner from "../components/Report/Winner";
 import { Comment } from "../components/Comment/Comment";
 
 export default function ReportWeeklyDetail({ user }) {
-  const [value, setValue] = React.useState("1");
   const { id, title, writer, date } = useParams();
+  const location = useLocation();
+  const thumbnail = location.state.thumbnail;
+
+  const [value, setValue] = useState("1");
 
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
@@ -90,7 +91,7 @@ export default function ReportWeeklyDetail({ user }) {
   // user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
   const getUserLike = async () => {
     if (likescount.length !== 0) {
-      const getUserLike = likescount.find(userid => userid.likeuid === uid)
+      const getUserLike = likescount.find((userid) => userid.likeuid === uid);
       if (getUserLike !== undefined) {
         setClickIcon(true);
       } else {
@@ -126,6 +127,8 @@ export default function ReportWeeklyDetail({ user }) {
           title: title,
           writer: writer,
           date: date,
+          thumbnail: thumbnail,
+          type: "weekly",
         });
       } else {
         await deleteDoc(doc(dbService, "weekly_report", id, "like", user.uid));
@@ -253,6 +256,7 @@ export default function ReportWeeklyDetail({ user }) {
               rep={reply}
               writer={writer}
               date={date}
+              thumbnail={thumbnail}
             />
           </Grid>
         </Grid>

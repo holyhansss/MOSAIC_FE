@@ -194,10 +194,7 @@ function App() {
       setCrypto((prev) => [cryptoObj, ...prev]);
     });
 
-    const q2 = query(
-      collection(dbService, "cryptocurrency"),
-      orderBy("date")
-    );
+    const q2 = query(collection(dbService, "cryptocurrency"), orderBy("date"));
     const querySnapShot2 = await getDocs(q2);
     querySnapShot2.forEach((docs) => {
       let cryptoObj = {};
@@ -271,8 +268,6 @@ function App() {
 
       setPromising((prev) => [cryptoObj, ...prev]);
     });
-
-
   };
 
   useEffect(() => {
@@ -293,7 +288,11 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <MainPage result={result} reports={reports} crypto={promising} />
+                  <MainPage
+                    result={result}
+                    reports={reports}
+                    crypto={promising}
+                  />
                 }
               />
               <Route path="/login" element={<Login />} />
