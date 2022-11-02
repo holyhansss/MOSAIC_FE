@@ -65,9 +65,9 @@ function Marketpage() {
   const [categoryArray, setCategoryArray] = useState([
     true,
     true,
-    true,
-    true,
-    true,
+    false,
+    false,
+    false,
   ]);
   const [props, setProps] = useState({
     dateRange: "1d",
@@ -149,6 +149,22 @@ function Marketpage() {
           {categoryArray[0] ? (
             <Button
               onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Currency"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+                border: "1px solid",
+              }}
+            >
+              Currency
+            </Button>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
               variant="contained"
               size="small"
               name="Currency"
@@ -158,22 +174,7 @@ function Marketpage() {
                 margin: "0.3rem 0",
                 fontSize: "8px",
                 color: "black",
-                background: "linear-gradient(-45deg, #9BA3EB 5%, #DBDFFD 90%)"
-              }}
-            >
-              Currency
-            </Button>
-          ) : (
-            <Button
-              onClick={buttonToggleArrayElement}
-              variant="text"
-              size="small"
-              name="Currency"
-              sx={{
-                width: "15.5em",
-                height: "6em",
-                margin: "0.3rem 0",
-                fontSize: "8px",
+                background: "linear-gradient(-45deg, #9BA3EB 5%, #DBDFFD 90%)",
               }}
             >
               Currency
@@ -184,6 +185,22 @@ function Marketpage() {
           {categoryArray[1] ? (
             <Button
               onClick={buttonToggleArrayElement}
+              variant="text"
+              size="small"
+              name="Smart Contract Platform"
+              sx={{
+                width: "15.5em",
+                height: "6em",
+                margin: "0.3rem 0",
+                fontSize: "8px",
+                border: "1px solid",
+              }}
+            >
+              Smart Contract Platform
+            </Button>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
               variant="contained"
               size="small"
               name="Smart Contract Platform"
@@ -193,22 +210,7 @@ function Marketpage() {
                 height: "6em",
                 fontSize: "8px",
                 color: "black",
-                background: "linear-gradient(-45deg, #646FD4 5%, #9BA3EB 90%)"
-              }}
-            >
-              Smart Contract Platform
-            </Button>
-          ) : (
-            <Button
-              onClick={buttonToggleArrayElement}
-              variant="text"
-              size="small"
-              name="Smart Contract Platform"
-              sx={{
-                width: "15.5em",
-                height: "6em",
-                margin: "0.3rem 0",
-                fontSize: "8px",
+                background: "linear-gradient(-45deg, #646FD4 5%, #9BA3EB 90%)",
               }}
             >
               Smart Contract Platform
@@ -219,22 +221,6 @@ function Marketpage() {
           {categoryArray[2] ? (
             <Button
               onClick={buttonToggleArrayElement}
-              variant="contained"
-              size="small"
-              name="Computing"
-              sx={{
-                width: "15.5em",
-                margin: "0.3rem 0",
-                height: "6em",
-                fontSize: "8px",
-                background: "linear-gradient(-45deg, #242F9B 5%, #646FD4 90%)"
-              }}
-            >
-              Computing
-            </Button>
-          ) : (
-            <Button
-              onClick={buttonToggleArrayElement}
               variant="text"
               size="small"
               name="Computing"
@@ -243,6 +229,23 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
+                border: "1px solid",
+              }}
+            >
+              Computing
+            </Button>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Computing"
+              sx={{
+                width: "15.5em",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                background: "linear-gradient(-45deg, #242F9B 5%, #646FD4 90%)",
               }}
             >
               Computing
@@ -253,22 +256,6 @@ function Marketpage() {
           {categoryArray[3] ? (
             <Button
               onClick={buttonToggleArrayElement}
-              size="small"
-              variant="contained"
-              name="DeFi"
-              sx={{
-                width: "15.5em",
-                margin: "0.3rem 0",
-                height: "6em",
-                fontSize: "8px",
-                background: "linear-gradient(-45deg, #210B61 5%, #242F9B 90%)"
-              }}
-            >
-              DeFi
-            </Button>
-          ) : (
-            <Button
-              onClick={buttonToggleArrayElement}
               variant="text"
               size="small"
               name="DeFi"
@@ -277,6 +264,23 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
+                border: "1px solid",
+              }}
+            >
+              DeFi
+            </Button>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              size="small"
+              variant="contained"
+              name="DeFi"
+              sx={{
+                width: "15.5em",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                background: "linear-gradient(-45deg, #210B61 5%, #242F9B 90%)",
               }}
             >
               DeFi
@@ -287,22 +291,6 @@ function Marketpage() {
           {categoryArray[4] ? (
             <Button
               onClick={buttonToggleArrayElement}
-              variant="contained"
-              size="small"
-              name="Culture & Entertainment"
-              sx={{
-                width: "15.5em",
-                margin: "0.3rem 0",
-                height: "6em",
-                fontSize: "8px",
-                background: "linear-gradient(-45deg, #0b062d 5%, #210B61 90%)"
-              }}
-            >
-              Culture & Entertainment
-            </Button>
-          ) : (
-            <Button
-              onClick={buttonToggleArrayElement}
               variant="text"
               size="small"
               name="Culture & Entertainment"
@@ -311,6 +299,23 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
+                border: "1px solid",
+              }}
+            >
+              Culture & Entertainment
+            </Button>
+          ) : (
+            <Button
+              onClick={buttonToggleArrayElement}
+              variant="contained"
+              size="small"
+              name="Culture & Entertainment"
+              sx={{
+                width: "15.5em",
+                margin: "0.3rem 0",
+                height: "6em",
+                fontSize: "8px",
+                background: "linear-gradient(-45deg, #0b062d 5%, #210B61 90%)",
               }}
             >
               Culture & Entertainment
@@ -408,11 +413,22 @@ function Marketpage() {
               component="div"
               sx={{ letterSpacing: 0.25, color: "#7F8487" }}
             >
-              Computing, DeFi, Currency, Smart Contract Platform, Culture의
-              5가지 섹터로 나누어 상위 10개 종목으로 구성한 지수를 보여줍니다.
+              Currency, Smart Contract Platform, Computing, DeFi, Culture &
+              Entertainment의 5가지 섹터로 나누어 상위 10개 종목으로 구성한
+              지수를 보여줍니다.
               <br />
               어떤 섹터의 코인/토큰들의 수익률이 우수한지 비교할 수 있으며,
               시세를 통해 어떤 산업이 강세인지를 파악할 수 있습니다.
+            </Typography>
+            <Typography
+              align="left"
+              gutterBottom
+              variant="caption"
+              sx={{ color: "#7F8487" }}
+            >
+              Currency: 거래용 코인　 Smart Contract Platform: 스마트 컨트랙트를
+              지원하는 플랫폼 코인　 Computing: 분산 클라우드 컴퓨팅　 Defi:
+              탈중앙화 금융　 Culture & Entertainment: 메타버스, 미디어, 예술 등
             </Typography>
           </Grid>
           <Grid item xs={12}>

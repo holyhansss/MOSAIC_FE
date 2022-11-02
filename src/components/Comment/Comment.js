@@ -13,7 +13,7 @@ const StyleButton = styled(Button)`
   background: linear-gradient(-45deg, #0b062d 5%, #230b65 90%);
 `;
 
-function Comment({ user, id, title, rep, writer, date }) {
+function Comment({ user, id, title, rep, writer, date, thumbnail }) {
   const [useId, setUserId] = useState("");
   const [pic, setPic] = useState("");
   const [uid, setUid] = useState("");
@@ -51,6 +51,8 @@ function Comment({ user, id, title, rep, writer, date }) {
       title: title,
       writer: writer,
       date: date,
+      thumbnail: thumbnail,
+      type: "weekly",
     });
 
     window.location.reload();
@@ -117,6 +119,7 @@ function Comment({ user, id, title, rep, writer, date }) {
             writer={writer}
             date={date}
             commentObj={repl}
+            thumbnail={thumbnail}
           />
         </div>
       ))}
@@ -126,7 +129,7 @@ function Comment({ user, id, title, rep, writer, date }) {
 
 export {Comment};
 
-function DailyComment({ user, id, title, rep, writer, date }) {
+function DailyComment({ user, id, title, rep, writer, date, thumbnail }) {
   const [useId, setUserId] = useState("");
   const [pic, setPic] = useState("");
   const [uid, setUid] = useState("");
@@ -164,6 +167,8 @@ function DailyComment({ user, id, title, rep, writer, date }) {
       title: title,
       writer: writer,
       date: date,
+      thumbnail: thumbnail,
+      type: "daily"
     });
 
     window.location.reload();
@@ -229,6 +234,7 @@ function DailyComment({ user, id, title, rep, writer, date }) {
             writer={writer}
             date={date}
             commentObj={repl}
+            thumbnail={thumbnail}
           />
         </div>
       ))}

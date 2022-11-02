@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+// 일간 리포트 - 최신 리포트 (큰 사이즈)
 function Reportrecentcard({ id, title, writer, date, thumbnail, hashtag }) {
   const navigate = useNavigate();
   const move = () => {
@@ -64,6 +65,7 @@ function Reportrecentcard({ id, title, writer, date, thumbnail, hashtag }) {
 
 export { Reportrecentcard };
 
+// 주간 리포트
 function Reportlistcard({ id, title, date, writer, thumbnail }) {
   const navigate = useNavigate();
   const move = () => {
@@ -106,6 +108,7 @@ function Reportlistcard({ id, title, date, writer, thumbnail }) {
 
 export { Reportlistcard };
 
+// 일간 리포트 리스트 (메인)
 function ReportlistForm({ id, title, date, writer, thumbnail }) {
   const navigate = useNavigate();
   const move = () => {
@@ -175,6 +178,7 @@ function ReportlistForm({ id, title, date, writer, thumbnail }) {
 
 export { ReportlistForm };
 
+// 리포트 전체 보기
 function ReportlistFormAll({ id, title, date, writer, thumbnail }) {
   const navigate = useNavigate();
   const move = () => {

@@ -34,7 +34,7 @@ export default function PromisingScore({
     desc2 = "중앙집중화를 벗어나 분산된 소규모 단위로 자율적으로 운영되는 정도";
     desc3 =
       "블록체인 내의 데이터를 권한이 없는 이용자가 사용할 수 없도록 하는지를 파악";
-    desc4 = "해당 코인의 Dapp 활성화 수준을 통한 사용성과 기관 투자유치 횟수와 규모를 파악";
+    desc4 = "해당 코인의 토큰 활성화 수준을 통한 사용성과 기관 투자유치 횟수와 규모를 파악";
   } else {
     criteria1 = "사업성";
     criteria2 = "기술성";
@@ -43,11 +43,11 @@ export default function PromisingScore({
     total2 = 20;
     total3 = 40;
     desc1 =
-      "기존에 존재하는 Dapp과의 차별성 및 시장성, 상품성을 분석하여 성장 가능성과 지속성을 평가";
+      "기존에 존재하는 토큰과의 차별성 및 시장성, 상품성을 분석하여 성장 가능성과 지속성을 평가";
     desc2 =
-      "Dapp이 기술적 결함이 있는지 확인하는 절차로, Auditing 이력과 지원하는 블록체인을 평가";
+      "토큰이 기술적 결함이 있는지 확인하는 절차로, Auditing 이력과 지원하는 블록체인을 평가";
     desc3 =
-      "Dapp이 유저가 신뢰하고 사용 할 수 있는지를 검증하기 위해 탈중앙성과 Developer team을 평가";
+      "토큰이 유저가 신뢰하고 사용 할 수 있는지를 검증하기 위해 탈중앙성과 Developer team을 평가";
   }
 
   return (

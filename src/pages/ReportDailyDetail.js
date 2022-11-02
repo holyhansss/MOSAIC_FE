@@ -7,9 +7,8 @@ import {
   Typography,
   Button,
   ButtonGroup,
-  Tooltip,
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import {
   query,
   getDocs,
@@ -33,6 +32,9 @@ import { DailyComment } from "../components/Comment/Comment";
 
 export default function ReportDailyDetail({ user }) {
   const { id, title, writer, date } = useParams();
+  const location = useLocation();
+  const thumbnail = location.state.thumbnail;
+
   //코멘트 가져오기
   const [reply, setReply] = useState([]);
 
@@ -58,7 +60,7 @@ export default function ReportDailyDetail({ user }) {
     });
   };
 
-    //좋아요 가져오기
+  //좋아요 가져오기
   // const [likenum, setLikenum] = useState([]);
   const [clickICon, setClickIcon] = useState(false);
   const [likescount, setLikescount] = useState([]);
@@ -83,18 +85,18 @@ export default function ReportDailyDetail({ user }) {
       setLikescount((prev) => [lkeObj, ...prev]);
     });
   };
-  
-// user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
+
+  // user가 이전에 좋아요를 눌렀는지 안눌렀는지 확인
   const getUserLike = async () => {
     if (likescount.length !== 0) {
-      const getUserLike = likescount.find(userid => userid.likeuid === uid)
+      const getUserLike = likescount.find((userid) => userid.likeuid === uid);
       if (getUserLike !== undefined) {
         setClickIcon(true);
       } else {
         setClickIcon(false);
       }
-    };
-    };
+    }
+  };
 
   useEffect(() => {
     getReplies();
@@ -106,7 +108,7 @@ export default function ReportDailyDetail({ user }) {
     getUserLike();
     setCount(likescount.length);
   }, [likescount]);
- 
+
   // 좋아요 클릭
   const onclick = async () => {
     if (user !== null) {
@@ -117,17 +119,19 @@ export default function ReportDailyDetail({ user }) {
           likename: user.displayName,
           likeuid: user.uid,
         });
-        setCount(count+1);
+        setCount(count + 1);
         // 유저별 좋아요 정보 firestore에 저장
         await setDoc(doc(dbService, "users", user.uid, "liked", id), {
           title: title,
           writer: writer,
           date: date,
+          thumbnail: thumbnail,
+          type: "daily"
         });
       } else {
         await deleteDoc(doc(dbService, "daily_report", id, "like", user.uid));
         await deleteDoc(doc(dbService, "users", user.uid, "liked", id));
-        setCount(count-1);
+        setCount(count - 1);
       }
 
       // window.location.reload();
@@ -135,7 +139,7 @@ export default function ReportDailyDetail({ user }) {
       alert("로그인이 필요한 서비스입니다.");
     }
   };
-  
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -163,13 +167,13 @@ export default function ReportDailyDetail({ user }) {
 
   return (
     <div>
-        <DailyReportcontents
+      <DailyReportcontents
         user={user}
         id={id}
         title={title}
         writer={writer}
         date={date}
-        />
+      />
 
       <Container maxWidth="md">
         <Grid container spacing={1}>
@@ -179,16 +183,12 @@ export default function ReportDailyDetail({ user }) {
                 {clickICon === true ? (
                   <>
                     <FavoriteIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1" >
-                      {count}
-                    </Typography>
+                    <Typography variant="body1">{count}</Typography>
                   </>
                 ) : (
                   <>
                     <FavoriteBorderIcon sx={{ color: pink[500] }} />
-                    <Typography variant="body1">
-                      {count}
-                    </Typography>
+                    <Typography variant="body1">{count}</Typography>
                   </>
                 )}
               </IconButton>
@@ -223,6 +223,7 @@ export default function ReportDailyDetail({ user }) {
               rep={reply}
               writer={writer}
               date={date}
+              thumbnail={thumbnail}
             />
           </Grid>
         </Grid>
