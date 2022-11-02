@@ -74,7 +74,7 @@ export default function CryptoTable({ crypto }) {
         id: index+1,
         tag: rank.hashtag,
         promising: rank.promising,
-        criteria: `확장성: ${rank.scalability}　탈중앙성: ${rank.decentralization}　보안성: ${rank.security}　기타: ${rank.others}`,
+        criteria: `확장성: ${Math.round((rank.scalability/25)*100)}　탈중앙성: ${Math.round((rank.decentralization/25)*100)}　보안성: ${Math.round((rank.security/25)*100)}　기타: ${Math.round((rank.others/25)*100)}`,
         rate: rank.rate,
         type: rank.type,
       });
@@ -86,7 +86,7 @@ export default function CryptoTable({ crypto }) {
         id: index+1,
         tag: rank.hashtag,
         promising: rank.promising,
-        criteria: `사업성: ${rank.business}　기술성: ${rank.technicality}　신뢰성: ${rank.reliability}`,
+        criteria: `사업성: ${Math.round((rank.business/40)*100)}　기술성: ${Math.round((rank.technicality/20)*100)}　신뢰성: ${Math.round((rank.reliability/40)*100)}`,
         rate: rank.rate,
         type: rank.type,
       });

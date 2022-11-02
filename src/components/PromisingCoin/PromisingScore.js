@@ -92,7 +92,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score1}/{total1}
+              {Math.round((score1 / total1) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -112,7 +112,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score2}/{total2}
+            {Math.round((score2 / total2) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -132,7 +132,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score3}/{total3}
+            {Math.round((score3 / total3) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -152,7 +152,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score4}/{total3}
+             {Math.round((score4 / total3) * 100)}
             </Grid>
           </Grid>
         </Grid>
@@ -196,7 +196,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score1}/{total1}
+             {Math.round((score1 / total1) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -216,7 +216,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score2}/{total2}
+            {Math.round((score2 / total2) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -236,7 +236,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score3}/{total3}
+            {Math.round((score3 / total3) * 100)} 
             </Grid>
           </Grid>
         </Grid>
