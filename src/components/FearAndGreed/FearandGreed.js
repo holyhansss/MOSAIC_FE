@@ -3,83 +3,11 @@ import React, { useState, useEffect } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 import { Typography, Grid } from "@mui/material";
 import Box from '@mui/material/Box';
-import Switch from '@mui/material/Switch';
-import Fade from '@mui/material/Fade';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 
-const FnGinfo = (
-  <Grid container spacing={3}>
-      <Card sx={{ minWidth: 220 }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="#DBDFFD" gutterBottom>
-              매우 공포 (0~25)
-            </Typography>
-            <Typography variant="body2">
-              극심한 공포로 인해 과도하게 매도
-              <br />
-              {'"시장의 변동성 증가"'}
-            </Typography>
-          </CardContent>
-      </Card>
-      <Card sx={{ minWidth: 220 }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="#9BA3EB" gutterBottom>
-              공포 (26~45)
-            </Typography>
-            <Typography variant="body2">
-              자산 하락의 두려움이 생김
-              <br />
-              {'"거래량 증가, 자산 가격 하락"'}
-            </Typography>
-          </CardContent>
-      </Card>
-      <Card sx={{ minWidth: 220 }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="#646FD4" gutterBottom>
-              중립 (46~54)
-            </Typography>
-            <Typography variant="body2">
-              저항과 지지를 동시에 받음
-              <br />
-              {'"자산 가격 행보 예측 힘듦"'}
-            </Typography>
-          </CardContent>
-      </Card>
-      <Card sx={{ minWidth: 220 }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="#242F9B" gutterBottom>
-              탐욕 (55~75)
-            </Typography>
-            <Typography variant="body2">
-              매수에 대한 관심이 증가
-              <br />
-              {'"단기차익을 노린 투자자들이 투입"'}
-            </Typography>
-          </CardContent>
-      </Card>
-      <Card sx={{ minWidth: 220 }}>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="#210B61" gutterBottom>
-              매우 탐욕 (76~100)
-            </Typography>
-            <Typography variant="body2">
-              매수에 대한 관심이 매우 증가
-              <br />
-              {'"시장의 변동성 증가"'}
-            </Typography>
-          </CardContent>
-      </Card>
-  </Grid>
-);
+
+
 // 공포탐욕지수
 function FearandGreed() {
-  const [checked, setChecked] = React.useState(false);
-
-  const handleChange = () => {
-    setChecked((prev) => !prev);
-  };
   const [FearNGreed, setFearNGreed] = useState([]);
   const [FnGState, setFnGState] = useState([]);
   const [FnGIcon, setFnGIcon] = useState([]);
@@ -167,17 +95,8 @@ function FearandGreed() {
         }}
       >
         <Typography variant="h6" gutterBottom>
-          <img src={FnGIcon} alt="Fear and Greed" /> {FnGState} <FormControlLabel
-            control={<Switch checked={checked} onChange={handleChange} color="secondary"/>}
-            label="공포탐욕지수기준"
-          />
-        </Typography>
+          <img src={FnGIcon} alt="Fear and Greed" /> {FnGState} </Typography>
         {desc && desc.map((d, idx) => <Typography width={600} key={idx}>{d}</Typography>)}
-      </Grid>
-      <Grid>
-        <Box sx={{ display: 'flex' }}>
-          <Fade in={checked}>{FnGinfo}</Fade>
-        </Box>
       </Grid>
     </Grid>
   );
