@@ -157,7 +157,8 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
-                border: "1px solid",
+                color: "#DBDFFD",
+                border: "1px solid #DBDFFD",
               }}
             >
               Currency
@@ -193,7 +194,8 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
-                border: "1px solid",
+                color: "#9BA3EB",
+                border: "1px solid #9BA3EB",
               }}
             >
               Smart Contract Platform
@@ -229,7 +231,8 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
-                border: "1px solid",
+                color: "#646FD4",
+                border: "1px solid #646FD4",
               }}
             >
               Computing
@@ -263,8 +266,9 @@ function Marketpage() {
                 width: "15.5em",
                 height: "6em",
                 margin: "0.3rem 0",
-                fontSize: "8px",
-                border: "1px solid",
+                fontSize: "8px", 
+                color: "#242F9B",
+                border: "1px solid #242F9B",
               }}
             >
               DeFi
@@ -299,7 +303,8 @@ function Marketpage() {
                 height: "6em",
                 margin: "0.3rem 0",
                 fontSize: "8px",
-                border: "1px solid",
+                color: "#210B61",
+                border: "1px solid #210B61",
               }}
             >
               Culture & Entertainment
@@ -420,16 +425,6 @@ function Marketpage() {
               어떤 섹터의 코인/토큰들의 수익률이 우수한지 비교할 수 있으며,
               시세를 통해 어떤 산업이 강세인지를 파악할 수 있습니다.
             </Typography>
-            <Typography
-              align="left"
-              gutterBottom
-              variant="caption"
-              sx={{ color: "#7F8487" }}
-            >
-              Currency: 거래용 코인　 Smart Contract Platform: 스마트 컨트랙트를
-              지원하는 플랫폼 코인　 Computing: 분산 클라우드 컴퓨팅　 Defi:
-              탈중앙화 금융　 Culture & Entertainment: 메타버스, 미디어, 예술 등
-            </Typography>
           </Grid>
           <Grid item xs={12}>
             <ThemeProvider theme={theme}>
@@ -469,6 +464,18 @@ function Marketpage() {
                 <CategoryButton />
               </div>
             </div>
+            <Typography
+              align="left"
+              gutterBottom
+              variant="caption"
+              sx={{ color: "#7F8487" }}
+            >
+              Currency: BaaS, 스테이블 코인, 사설 화폐 등 <br/>
+              Smart Contract Platform: 멀티체인, 싱글체인 <br/>
+              Computing: IoT, 클라우드, 공유 네트워크, 공유 스토리지 등 <br/>
+              DeFi: DAO, 파생, 거래소, 보험, 스테이킹 등 <br/>
+              Culture & Entertainment: 예술, 미디어, 메타버스, NFT 등
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h5" gutterBottom>

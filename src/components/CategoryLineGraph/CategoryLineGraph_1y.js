@@ -27,11 +27,89 @@ function CategoryLineGraph_1y(props) {
       { params: { dateRange: dateRange, categoryArray: categoryArray } }
     );
     const thisResponse = response.data;
+
+    // 각 섹터의 최솟값, 최댓값을 저장하는 array
+    let currency = [];
+    let smart = [];
+    let computing = [];
+    let defi = [];
+    let culture = [];
+
+    // 현재 선택된 섹터의 최솟값, 최댓값 array를 저장하는 array
+    let category = [[], []];
+
+    if (thisResponse[0][0].hasOwnProperty("Currency")) {
+      currency[0] = thisResponse[0]
+        .map((v) => v.Currency)
+        .reduce((min, cur) =>
+          Number(min) > Number(cur) ? Number(cur) : Number(min)
+        );
+      currency[1] = thisResponse[0]
+        .map((v) => v.Currency)
+        .reduce((max, cur) =>
+          Number(max) < Number(cur) ? Number(cur) : Number(max)
+        );
+      category[0].push(currency[0]);
+      category[1].push(currency[1]);
+    }
+    if (thisResponse[0][0].hasOwnProperty("Smart Contract Platform")) {
+      smart[0] = thisResponse[0]
+        .map((v) => v["Smart Contract Platform"])
+        .reduce((min, cur) =>
+          Number(min) > Number(cur) ? Number(cur) : Number(min)
+        );
+      smart[1] = thisResponse[0]
+        .map((v) => v["Smart Contract Platform"])
+        .reduce((max, cur) =>
+          Number(max) < Number(cur) ? Number(cur) : Number(max)
+        );
+      category[0].push(smart[0]);
+      category[1].push(smart[1]);
+    }
+    if (thisResponse[0][0].hasOwnProperty("Computing")) {
+      computing[0] = thisResponse[0]
+        .map((v) => v.Computing)
+        .reduce((min, cur) =>
+          Number(min) > Number(cur) ? Number(cur) : Number(min)
+        );
+      computing[1] = thisResponse[0]
+        .map((v) => v.Computing)
+        .reduce((max, cur) =>
+          Number(max) < Number(cur) ? Number(cur) : Number(max)
+        );
+      category[0].push(computing[0]);
+      category[1].push(computing[1]);
+    }
+    if (thisResponse[0][0].hasOwnProperty("DeFi")) {
+      defi[0] = thisResponse[0]
+        .map((v) => v.DeFi)
+        .reduce((min, cur) =>
+          Number(min) > Number(cur) ? Number(cur) : Number(min)
+        );
+      defi[1] = thisResponse[0]
+        .map((v) => v.DeFi)
+        .reduce((max, cur) =>
+          Number(max) < Number(cur) ? Number(cur) : Number(max)
+        );
+      category[0].push(defi[0]);
+      category[1].push(defi[1]);
+    }
+    if (thisResponse[0][0].hasOwnProperty("Culture & Entertainment")) {
+      culture[0] = thisResponse[0]
+        .map((v) => v["Culture & Entertainment"])
+        .reduce((min, cur) =>
+          Number(min) > Number(cur) ? Number(cur) : Number(min)
+        );
+      culture[1] = thisResponse[0]
+        .map((v) => v["Culture & Entertainment"])
+        .reduce((max, cur) =>
+          Number(max) < Number(cur) ? Number(cur) : Number(max)
+        );
+      category[0].push(culture[0]);
+      category[1].push(culture[1]);
+    }
     setDatesAndPrices(thisResponse[0]);
-    setMinMax([
-      parseInt(thisResponse[1][0]) - 20,
-      parseInt(thisResponse[1][1]) + 20,
-    ]);
+    setMinMax([Math.min(...category[0]) - 1, Math.max(...category[1]) + 1]);
   };
 
   return (
