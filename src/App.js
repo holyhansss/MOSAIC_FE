@@ -78,6 +78,7 @@ function App() {
           photoURL: user.photoURL,
         });
         getAdmin(user.email);
+        setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
       }
@@ -297,10 +298,28 @@ function App() {
               />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
-              <Route path="admin" element={<Admin />} />
-              <Route path="adminweeklymain" element={<AdminWeeklyMain />} />
-              <Route path="admindailymain" element={<AdminDailyMain />} />
-              <Route path="adminpromising" element={<AdminPromising />} />
+              <Route
+                path="admin"
+                element={<Admin admin={admin} isLoggedIn={isLoggedIn} />}
+              />
+              <Route
+                path="adminweeklymain"
+                element={
+                  <AdminWeeklyMain admin={admin} isLoggedIn={isLoggedIn} />
+                }
+              />
+              <Route
+                path="admindailymain"
+                element={
+                  <AdminDailyMain admin={admin} isLoggedIn={isLoggedIn} />
+                }
+              />
+              <Route
+                path="adminpromising"
+                element={
+                  <AdminPromising admin={admin} isLoggedIn={isLoggedIn} />
+                }
+              />
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
