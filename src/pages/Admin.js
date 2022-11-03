@@ -7,19 +7,6 @@ import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import { Grid, Box, Button } from "@mui/material";
 
 const Admin = ({ admin, isLoggedIn }) => {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     if (admin === false) {
-  //       navigate("/");
-  //     }
-  //   } else {
-  //     navigate("/");
-  //   }
-  // }, []);
-  console.log(admin);
-  console.log(isLoggedIn);
   return (
     <>
       {isLoggedIn && admin && (
