@@ -32,11 +32,11 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
   const [grade, setGrade] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [thumbnail1Url, setThumbnailUrl] = useState(null);
-  const [logo, setLogo] = useState('');
-  const [logoUrl, setLogoUrl] = useState('');
-  const [assessment, setAssessment] = useState('');
-  const [description, setDescription] = useState('');
-  const [cmcLink, setCmcLink] = useState('');
+  const [logo, setLogo] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
+  const [assessment, setAssessment] = useState("");
+  const [description, setDescription] = useState("");
+  const [cmcLink, setCmcLink] = useState("");
 
   const handleOnChangeCmcLink = (value) => {
     setCmcLink(value);
@@ -138,41 +138,41 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
     const logoStorageURL = await getDownloadURL(logoStorageRef);
     const time = Date;
 
-  if (isPromising == false) {
-    const docRef = await addDoc(collection(db, "cryptocurrency"), {
-      name : cryptoName,
-      hashtag : cryptoTag,
-      type : cryptoType,
-      cmcLink: cmcLink,
-      promising : isPromising,
-      [standard1]: standard1num,
-      [standard2]: standard2num,
-      [standard3]: standard3num,
-      [standard4]: standard4num,
-      rating : grade,
-      rate: rating,
-      date : time.now(),
-    });
-  } else {
-    const docRef = await addDoc(collection(db, "cryptocurrency"), {
-      name : cryptoName,
-      hashtag : cryptoTag,
-      type : cryptoType,
-      cmcLink: cmcLink,
-      promising : isPromising,
-      [standard1]: standard1num,
-      [standard2]: standard2num,
-      [standard3]: standard3num,
-      [standard4]: standard4num,
-      logo : logoStorageURL,
-      thumbnail : thumbnailStorageURL,
-      assessment : assessment,
-      description : description,
-      rating : grade,
-      rate: rating,
-      date : time.now(),
-    });
-  }
+    if (isPromising == false) {
+      const docRef = await addDoc(collection(db, "cryptocurrency"), {
+        name: cryptoName,
+        hashtag: cryptoTag,
+        type: cryptoType,
+        cmcLink: cmcLink,
+        promising: isPromising,
+        [standard1]: standard1num,
+        [standard2]: standard2num,
+        [standard3]: standard3num,
+        [standard4]: standard4num,
+        rating: grade,
+        rate: rating,
+        date: time.now(),
+      });
+    } else {
+      const docRef = await addDoc(collection(db, "cryptocurrency"), {
+        name: cryptoName,
+        hashtag: cryptoTag,
+        type: cryptoType,
+        cmcLink: cmcLink,
+        promising: isPromising,
+        [standard1]: standard1num,
+        [standard2]: standard2num,
+        [standard3]: standard3num,
+        [standard4]: standard4num,
+        logo: logoStorageURL,
+        thumbnail: thumbnailStorageURL,
+        assessment: assessment,
+        description: description,
+        rating: grade,
+        rate: rating,
+        date: time.now(),
+      });
+    }
     setTimeout(() => {
       alert("uploaded to database!!");
       setLoading(false);
@@ -180,51 +180,13 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
     }, 2000);
   };
 
-let assessmentCommet = useRef(null);
-let descCommet = useRef(null);
+  let assessmentCommet = useRef(null);
+  let descCommet = useRef(null);
 
   return (
     <Container>
       {isLoggedIn && admin && (
-      <div>
-        <Container className="my-5">
-        <Typography variant="h5" gutterBottom>
-          크립토 이름
-        </Typography>
-        <Form.Control
-          key={"CryptoName"}
-          className=""
-          type=""
-          placeholder="크립토 이름"
-          style={{
-            width: "100%",
-            height: "50px",
-          }}
-          onChange={(e) => {
-            handleOnChangeCryptoName(e.target.value);
-          }}
-          label=""
-        />
-        </Container>
-        <Container className="my-5">
-          <Typography variant="h5" gutterBottom>
-            코인마켓캡 링크
-          </Typography>
-          <Form.Control
-            key={"CoinmarketLink"}
-            className=""
-            type=""
-            placeholder="코인마켓캡 링크"
-            style={{
-              width: "100%",
-              height: "50px",
-            }}
-            onChange={(e) => {
-              handleOnChangeCmcLink(e.target.value);
-            }}
-            label=""
-          />
-        </Container>
+        <div>
           <Container className="my-5">
             <Typography variant="h5" gutterBottom>
               크립토 이름
@@ -246,13 +208,32 @@ let descCommet = useRef(null);
           </Container>
           <Container className="my-5">
             <Typography variant="h5" gutterBottom>
+              코인마켓캡 링크
+            </Typography>
+            <Form.Control
+              key={"CoinmarketLink"}
+              className=""
+              type=""
+              placeholder="코인마켓캡 링크"
+              style={{
+                width: "100%",
+                height: "50px",
+              }}
+              onChange={(e) => {
+                handleOnChangeCmcLink(e.target.value);
+              }}
+              label=""
+            />
+          </Container>
+          <Container className="my-5">
+            <Typography variant="h5" gutterBottom>
               해시태그
             </Typography>
             <Form.Control
               key={"cryptoTag"}
               className=""
               type=""
-              placeholder="크립토 이름"
+              placeholder="해시태그"
               style={{
                 width: "100%",
                 height: "50px",
@@ -467,85 +448,84 @@ let descCommet = useRef(null);
           </Container>
           {isPromising == true ? (
             <Container>
-                <Row>
-                    <Typography variant="h5">
-                      평가
-                    </Typography>
-                    <Editor
-                      ref={assessmentCommet}
-                      initialEditType="WYSIWYG"
-                      initialValue="내용을 입력하세요"
-                      previewStyle="vertical"
+              <Row>
+                <Typography variant="h5">평가</Typography>
+                <Editor
+                  ref={assessmentCommet}
+                  initialEditType="WYSIWYG"
+                  initialValue="내용을 입력하세요"
+                  previewStyle="vertical"
+                  height="300px"
+                  useCommandShortcut={false}
+                  onChange={(e) => {
+                    handleOnChangeAssess(
+                      assessmentCommet.current.getInstance().getMarkdown()
+                    );
+                  }}
+                />
+              </Row>
+              <Row>
+                <Typography variant="h5" gutterBottom>
+                  설명
+                </Typography>
+                <Editor
+                  ref={descCommet}
+                  initialEditType="WYSIWYG"
+                  initialValue="내용을 입력하세요"
+                  previewStyle="vertical"
+                  height="300px"
+                  useCommandShortcut={false}
+                  onChange={(e) => {
+                    handleOnChangeDescription(
+                      descCommet.current.getInstance().getMarkdown()
+                    );
+                  }}
+                />
+              </Row>
+              <Container className="my-5">
+                <input
+                  accept="image/*"
+                  type="file"
+                  id="select-thumbnail"
+                  className="d-none"
+                  onChange={(e) => setThumbnail(e.target.files[0])}
+                />
+                <Button variant="primary" className="my-2">
+                  <label htmlFor="select-thumbnail">썸네일 업로드 *</label>
+                </Button>
+                {thumbnail1Url && thumbnail ? (
+                  <div className="my-2">
+                    <img
+                      src={thumbnail1Url}
+                      alt={thumbnail.name}
                       height="300px"
-                      useCommandShortcut={false}
-                      onChange={(e) => {
-                        handleOnChangeAssess(
-                          assessmentCommet.current.getInstance().getMarkdown()
-                        );
-                      }}
                     />
-                </Row>
-                <Row>
-                  <Typography variant="h5" gutterBottom>
-                    설명
-                  </Typography>
-                  <Editor
-                    ref={descCommet}
-                    initialEditType="WYSIWYG"
-                    initialValue="내용을 입력하세요"
-                    previewStyle="vertical"
-                    height="300px"
-                    useCommandShortcut={false}
-                    onChange={(e) => {
-                      handleOnChangeDescription(
-                        descCommet.current.getInstance().getMarkdown()
-                      );
-                    }}
-                  />
-                </Row>
-                <Container className="my-5">
-                  <input
-                    accept="image/*"
-                    type="file"
-                    id="select-thumbnail"
-                    className="d-none"
-                    onChange={(e) => setThumbnail(e.target.files[0])}
-                  />
-                  <Button variant="primary" className="my-2">
-                    <label htmlFor="select-thumbnail">썸네일 업로드 *</label>
-                  </Button>
-                  {thumbnail1Url && thumbnail ? (
-                    <div className="my-2">
-                      <img src={thumbnail1Url} alt={thumbnail.name} height="300px" />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </Container>
-                <Container className="my-5">
-                  <input
-                    accept="image/*"
-                    type="file"
-                    id="select-logo"
-                    className="d-none"
-                    onChange={(e) => setLogo(e.target.files[0])}
-                  />
-                  <Button>
-                    <label htmlFor="select-logo">로고 업로드 *</label>
-                  </Button>
-                  {logoUrl && logo ? (
-                    <div className="my-2">
-                      <img src={logoUrl} alt={logo.name} height="300px" />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </Container>
-          </Container>
-          ) : (
-            null
-          )
-        }
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </Container>
+              <Container className="my-5">
+                <input
+                  accept="image/*"
+                  type="file"
+                  id="select-logo"
+                  className="d-none"
+                  onChange={(e) => setLogo(e.target.files[0])}
+                />
+                <Button>
+                  <label htmlFor="select-logo">로고 업로드 *</label>
+                </Button>
+                {logoUrl && logo ? (
+                  <div className="my-2">
+                    <img src={logoUrl} alt={logo.name} height="300px" />
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </Container>
+            </Container>
+          ) : null}
 
           <Row className="justify-content-md-center my-5">
             <Button
