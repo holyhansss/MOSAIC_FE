@@ -8,6 +8,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     overflow-y: scroll;
   }
+  p {
+    font-size: 18px;
+  }
 `;
 
 export default GlobalStyle;
