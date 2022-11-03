@@ -10,7 +10,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {
   query,
   getDocs,
@@ -26,6 +26,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SendIcon from "@mui/icons-material/Send";
 import { pink } from "@mui/material/colors";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 //components
 import ReportContents from "../components/Report/ReportContents";
@@ -170,8 +171,13 @@ export default function ReportWeeklyDetail({ user }) {
     });
   };
 
+  const navigate = useNavigate();
   return (
     <div>
+      <IconButton onClick={ () => {navigate(-1);}}>
+        <ArrowBackIcon />
+      </IconButton>
+
       <TabContext value={value}>
         <Container maxWidth="md">
           <Box

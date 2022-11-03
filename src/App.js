@@ -141,6 +141,7 @@ function App() {
             description: docs.data().description,
             assessment: docs.data().assessment,
             rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         } else {
           cryptoObj = {
@@ -158,6 +159,7 @@ function App() {
             description: docs.data().description,
             assessment: docs.data().assessment,
             rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         }
       } else {
@@ -174,6 +176,7 @@ function App() {
             type: docs.data().type,
             promising: docs.data().promising,
             rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         } else {
           cryptoObj = {
@@ -187,6 +190,7 @@ function App() {
             type: docs.data().type,
             promising: docs.data().promising,
             rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         }
       }
@@ -216,6 +220,7 @@ function App() {
             description: docs.data().description,
             assessment: docs.data().assessment,
             rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         } else {
           cryptoObj = {
@@ -232,7 +237,7 @@ function App() {
             promising: docs.data().promising,
             description: docs.data().description,
             assessment: docs.data().assessment,
-            rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         }
       } else {
@@ -248,7 +253,7 @@ function App() {
             hashtag: docs.data().hashtag,
             type: docs.data().type,
             promising: docs.data().promising,
-            rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         } else {
           cryptoObj = {
@@ -261,7 +266,7 @@ function App() {
             hashtag: docs.data().hashtag,
             type: docs.data().type,
             promising: docs.data().promising,
-            rate: docs.data().rate,
+            cmcLink: docs.data().cmcLink,
           };
         }
       }

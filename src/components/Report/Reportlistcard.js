@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-// 일간 리포트 - 최신 리포트 (큰 사이즈)
+// 주간 리포트 - 최신 리포트 (큰 사이즈)
 function Reportrecentcard({ id, title, writer, date, thumbnail, hashtag }) {
   const navigate = useNavigate();
   const move = () => {

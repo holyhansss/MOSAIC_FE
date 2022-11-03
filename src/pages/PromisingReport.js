@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import {
   Box,
@@ -9,9 +9,15 @@ import {
   LinearProgress,
   Tooltip,
   IconButton,
+  Button
 } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";
 import { dbService } from "../firebase";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+//Viewer
+import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 import styled from "styled-components";
 import PromisingScore from "../components/PromisingCoin/PromisingScore";
@@ -20,6 +26,12 @@ const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
 `;
+
+// const MainViewer = styled(Viewer)`
+//   &.toastui-editor-contents {
+//     font-size : 50px;
+//   }
+// `;
 
 export default function PromisingReport() {
   // 유망코인 정보
@@ -112,8 +124,13 @@ export default function PromisingReport() {
   }, []);
 
   let email = "잘못된 정보가 있다면 Mosaic에게 메일을 보내주세요";
+  const navigate = useNavigate();
 
   return (
+    <div>
+    <IconButton onClick={ () => {navigate(-1);}}>
+      <ArrowBackIcon />
+    </IconButton>
     <MainContainer maxWidth="md" disableGutters>
       {promising !== null && (
         <Grid container direction="row" spacing={5}>
@@ -169,17 +186,8 @@ export default function PromisingReport() {
             />
           )}
           <Grid item xs={12}>
-            {promising.description.map((content) => (
-              <Typography
-                variant="body1"
-                align="left"
-                gutterBottom
-                component="div"
-                sx={{ lineHeight: 2, letterSpacing: 0.25 }}
-              >
-                {content}
-              </Typography>
-            ))}
+            <Viewer initialValue={promising.description} />
+
           </Grid>
           <Grid item xs={12}>
             <Box
@@ -200,17 +208,7 @@ export default function PromisingReport() {
                 paddingTop: 3,
               }}
             />
-            {promising.assessment.map((content, index) => (
-              <Typography
-                variant="body1"
-                align="left"
-                gutterBottom
-                component="div"
-                sx={{ lineHeight: 2, letterSpacing: 0.25 }}
-              >
-                {`${index + 1}. ${content}`}
-              </Typography>
-            ))}
+            <Viewer initialValue={promising.assessment} />
             <Typography
               variant="body1"
               align="left"
@@ -218,6 +216,54 @@ export default function PromisingReport() {
               sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
             >
               {promising.general}
+            </Typography>
+            <Box
+              sx={{
+                paddingTop: 3,
+              }}
+            />
+          </Grid>
+          {/* <Grid item xs={12}>
+            {promising.description.map((content) => (
+              <Typography
+                variant="body1"
+                align="left"
+                gutterBottom
+                component="div"
+                sx={{ lineHeight: 2, letterSpacing: 0.25 }}
+              >
+                {content}
+              </Typography>
+            ))}
+          </Grid> */}
+          <Grid item xs={12}>
+            <Box
+              sx={{
+                paddingTop: 2,
+              }}
+            />
+            <Typography
+              variant="h5"
+              align="left"
+              gutterBottom
+              sx={{ fontWeight: "bold" }}
+            >
+              코인마켓캡 링크
+            </Typography>
+            <Box
+              sx={{
+                paddingTop: 3,
+              }}
+            />
+            <Typography
+              variant="body1"
+              align="left"
+              component="div"
+              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+            >
+              <Button onClick ={() => {window.open( promising.cmcLink, '_blank')}}> {promising.cmcLink} </Button>
+             {/* <Link to={promising.cmcLink} /> */}
+             {/* <a href={promising.cmcLink} /> */}
             </Typography>
             <Box
               sx={{
@@ -235,5 +281,6 @@ export default function PromisingReport() {
         </Grid>
       )}
     </MainContainer>
+  </div>
   );
 }

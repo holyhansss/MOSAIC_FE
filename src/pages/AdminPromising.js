@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // react bootstrap
 import { Container, Row, Spinner, Col } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
@@ -11,6 +11,9 @@ import {
 import { getAuth } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
+//Editor
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 const AdminPromising = () => {
   const db = getFirestore();
@@ -37,9 +40,12 @@ const AdminPromising = () => {
   const [logoUrl, setLogoUrl] = useState('');
   const [assessment, setAssessment] = useState('');
   const [description, setDescription] = useState('');
+  const [cmcLink, setCmcLink] = useState('');
  
 
-
+  const handleOnChangeCmcLink = (value) => {
+    setCmcLink(value);
+  };
   const handleOnChangeCryptoName = (value) => {
     setCryptoName(value);
   };
@@ -149,6 +155,7 @@ const AdminPromising = () => {
       name : cryptoName,
       hashtag : cryptoTag,
       type : cryptoType,
+      cmcLink: cmcLink,
       promising : isPromising,
       [standard1]: standard1num,
       [standard2]: standard2num,
@@ -164,6 +171,7 @@ const AdminPromising = () => {
       name : cryptoName,
       hashtag : cryptoTag,
       type : cryptoType,
+      cmcLink: cmcLink,
       promising : isPromising,
       [standard1]: standard1num,
       [standard2]: standard2num,
@@ -186,6 +194,9 @@ const AdminPromising = () => {
   }, 2000);
 };
 
+let assessmentCommet = useRef(null);
+let descCommet = useRef(null);
+
   return (
     <Container>
       <div>
@@ -207,8 +218,26 @@ const AdminPromising = () => {
           }}
           label=""
         />
-        
-      </Container>
+        </Container>
+        <Container className="my-5">
+          <Typography variant="h5" gutterBottom>
+            코인마켓캡 링크
+          </Typography>
+          <Form.Control
+            key={"CoinmarketLink"}
+            className=""
+            type=""
+            placeholder="코인마켓캡 링크"
+            style={{
+              width: "100%",
+              height: "50px",
+            }}
+            onChange={(e) => {
+              handleOnChangeCmcLink(e.target.value);
+            }}
+            label=""
+          />
+        </Container>
           <Container className="my-5">
           <Typography variant="h5" gutterBottom>
             해시태그
@@ -450,39 +479,37 @@ const AdminPromising = () => {
                     <Typography variant="h5">
                       평가
                     </Typography>
-                    <Form.Control
-                    key={"assessment"}
-                    className=""
-                    type=""
-                    placeholder="유망 크립토에 대한 평가를 입력하세요"
-                    style={{
-                      width: "30%",
-                      height: "50px",
-                    }}
-                    id="assessment"
-                    onChange={(e) => {
-                      handleOnChangeAssess(e.target.value);
-                    }}
-                  />
+                    <Editor
+                      ref={assessmentCommet}
+                      initialEditType="WYSIWYG"
+                      initialValue="내용을 입력하세요"
+                      previewStyle="vertical"
+                      height="300px"
+                      useCommandShortcut={false}
+                      onChange={(e) => {
+                        handleOnChangeAssess(
+                          assessmentCommet.current.getInstance().getMarkdown()
+                        );
+                      }}
+                    />
                 </Row>
                 <Row>
                   <Typography variant="h5" gutterBottom>
                     설명
                   </Typography>
-                  <Form.Control
-                  key={"description"}
-                  className=""
-                  type=""
-                  placeholder="유망 크립토에 대한 설명을 입력하세요"
-                  style={{
-                    width: "30%",
-                    height: "50px",
-                  }}
-                  id="description"
-                  onChange={(e) => {
-                    handleOnChangeDescription(e.target.value);
-                  }}
-                />
+                  <Editor
+                    ref={descCommet}
+                    initialEditType="WYSIWYG"
+                    initialValue="내용을 입력하세요"
+                    previewStyle="vertical"
+                    height="300px"
+                    useCommandShortcut={false}
+                    onChange={(e) => {
+                      handleOnChangeDescription(
+                        descCommet.current.getInstance().getMarkdown()
+                      );
+                    }}
+                  />
                 </Row>
                 <Container className="my-5">
                   <input
