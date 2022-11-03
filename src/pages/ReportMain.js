@@ -62,7 +62,7 @@ function ReportMain({ result, reports, dailyReport }) {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h5" gutterBottom>
-              일간 리포트
+              일간 이슈
             </Typography>
           </Grid>
           <Grid item xs={6}>
