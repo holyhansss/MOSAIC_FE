@@ -8,7 +8,7 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {
   query,
   getDocs,
@@ -25,6 +25,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SendIcon from "@mui/icons-material/Send";
 import { pink } from "@mui/material/colors";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 //components
 import DailyReportcontents from "../components/Report/DailyReportContents";
@@ -165,8 +166,12 @@ export default function ReportDailyDetail({ user }) {
     });
   };
 
+  const navigate = useNavigate();
   return (
     <div>
+      <IconButton onClick={ () => {navigate(-1);}}>
+        <ArrowBackIcon />
+      </IconButton>
       <DailyReportcontents
         user={user}
         id={id}

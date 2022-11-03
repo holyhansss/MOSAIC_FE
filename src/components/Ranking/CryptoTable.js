@@ -10,13 +10,13 @@ export default function CryptoTable({ crypto }) {
   const navigate = useNavigate();
 
   const columns = [
-    { field: "docid", headerName: "아이디", hide: true },
-    { field: "id", headerName: "순위",  width:60},
-    { field: "rate", headerName: "합산", hide: true},
-    { field: "name", headerName: "이름", width: 170 },
-    { field: "rating", headerName: "등급", width: 60 },
-    { field: "criteria", headerName: "기준별 점수", width: 350 },
-    { field: "tag", headerName: "태그", width: 350, 
+    { field: "docid", headerName: "아이디", hide: true, sortable: false },
+    { field: "id", headerName: "순위",  width:60, sortable: false},
+    { field: "rate", headerName: "합산", hide: true, sortable: false},
+    { field: "name", headerName: "이름", width: 170, sortable: false },
+    { field: "rating", headerName: "등급", width: 60, sortable: false },
+    { field: "criteria", headerName: "기준별 점수", width: 350, sortable: false },
+    { field: "tag", headerName: "태그", width: 350, sortable: false,
     renderCell: (params) => {
       const chipTag = params.row.tag.split(" ")
       console.log(chipTag)
@@ -39,11 +39,12 @@ export default function CryptoTable({ crypto }) {
     } 
   },
     // { field: "tag", headerName: "태그", width: 350},
-    { field: "type", headerName: "타입", width: 60},
+    { field: "type", headerName: "타입", width: 60, sortable: false},
     {
       field: "promising",
       headerName: "유망코인",
       type: "boolean",
+      sortable: false,
       renderCell: (params) => {
         if (params.row.promising == true) {
           return (
