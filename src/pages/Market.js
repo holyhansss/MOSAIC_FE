@@ -11,6 +11,10 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
+import IconButton from '@mui/material/IconButton';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import HelpIcon from '@mui/icons-material/Help';
 // Components
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
@@ -73,7 +77,10 @@ function Marketpage() {
     dateRange: "1d",
     categoryArray: categoryArray,
   });
-
+  const [clicked, setClicked] = React.useState(false);
+  const handleChange = () => {
+    setClicked(!clicked);
+  }
   const snpButtonChange = (e, newValue) => {
     setSnpRange(newValue);
     if (newValue === "1d") {
@@ -479,7 +486,7 @@ function Marketpage() {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h5" gutterBottom>
-              공포 탐욕 지수
+              공포 탐욕 지수<IconButton onClick={handleChange} alignItems="right"><HelpIcon color="secondary" fontSize="large" ></HelpIcon></IconButton>
             </Typography>
             <Typography
               align="left"
@@ -497,7 +504,74 @@ function Marketpage() {
           <Grid item xs={12}>
             <FearandGreed />
           </Grid>
-        </Grid>
+          <Grid item xs={12}>
+            <Box sx={{ display: 'flex' }}>
+              {
+                clicked && (
+                  <Grid container spacing={3}>
+                      <Card sx={{ minWidth: 220 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14 }} color="#DBDFFD" gutterBottom>
+                              매우 공포 (0~25)
+                            </Typography>
+                            <Typography variant="body2">
+                              극심한 공포로 인해 과도하게 매도
+                              <br />
+                              {'"시장의 변동성 증가"'}
+                            </Typography>
+                          </CardContent>
+                      </Card>
+                      <Card sx={{ minWidth: 220 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14 }} color="#9BA3EB" gutterBottom>
+                              공포 (26~45)
+                            </Typography>
+                            <Typography variant="body2">
+                              자산 하락의 두려움이 생김
+                              <br />
+                              {'"거래량 증가, 자산 가격 하락"'}
+                            </Typography>
+                          </CardContent>
+                      </Card>
+                      <Card sx={{ minWidth: 220 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14 }} color="#646FD4" gutterBottom>
+                              중립 (46~54)
+                            </Typography>
+                            <Typography variant="body2">
+                              저항과 지지를 동시에 받음
+                              <br />
+                              {'"자산 가격 행보 예측 힘듦"'}
+                            </Typography>
+                          </CardContent>
+                      </Card>
+                      <Card sx={{ minWidth: 220 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14 }} color="#242F9B" gutterBottom>
+                              탐욕 (55~75)
+                            </Typography>
+                            <Typography variant="body2">
+                              매수에 대한 관심이 증가
+                              <br />
+                              {'"단기차익을 노린 투자자들이 투입"'}
+                            </Typography>
+                          </CardContent>
+                      </Card>
+                      <Card sx={{ minWidth: 220 }}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 14 }} color="#210B61" gutterBottom>
+                              매우 탐욕 (76~100)
+                            </Typography>
+                            <Typography variant="body2">
+                              매수에 대한 관심이 매우 증가
+                              <br />
+                              {'"시장의 변동성 증가"'}
+                            </Typography>
+                          </CardContent>
+                      </Card>
+                </Grid>)}
+            </Box></Grid>
+      </Grid>
       </MainContainer>
     </>
   );
