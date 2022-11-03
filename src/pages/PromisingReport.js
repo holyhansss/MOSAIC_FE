@@ -187,7 +187,14 @@ export default function PromisingReport() {
           )}
           <Grid item xs={12}>
             <Viewer initialValue={promising.description} />
-
+            <Typography
+              variant="body1"
+              align="left"
+              component="div"
+              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+            >
+              <Button onClick ={() => {window.open( promising.cmcLink, '_blank')}}> {promising.cmcLink} </Button>
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Box
@@ -240,34 +247,6 @@ export default function PromisingReport() {
             <Box
               sx={{
                 paddingTop: 2,
-              }}
-            />
-            <Typography
-              variant="h5"
-              align="left"
-              gutterBottom
-              sx={{ fontWeight: "bold" }}
-            >
-              코인마켓캡 링크
-            </Typography>
-            <Box
-              sx={{
-                paddingTop: 3,
-              }}
-            />
-            <Typography
-              variant="body1"
-              align="left"
-              component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
-            >
-              <Button onClick ={() => {window.open( promising.cmcLink, '_blank')}}> {promising.cmcLink} </Button>
-             {/* <Link to={promising.cmcLink} /> */}
-             {/* <a href={promising.cmcLink} /> */}
-            </Typography>
-            <Box
-              sx={{
-                paddingTop: 3,
               }}
             />
           </Grid>
