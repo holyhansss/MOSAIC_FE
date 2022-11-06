@@ -22,6 +22,9 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import styled from "styled-components";
 import PromisingScore from "../components/PromisingCoin/PromisingScore";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
+//Responsive Web
+import {Pc, Mobile} from "../components/Responsive/Responsive";
+
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
@@ -127,11 +130,12 @@ export default function PromisingReport() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <>
+    <Pc>
+    <MainContainer maxWidth="md" disableGutters >
     <IconButton onClick={ () => {navigate(-1);}}>
       <ArrowBackIcon />
     </IconButton>
-    <MainContainer maxWidth="md" disableGutters>
       {promising !== null && (
         <Grid container direction="row" spacing={5}>
           <Grid item xs={12}>
@@ -230,19 +234,6 @@ export default function PromisingReport() {
               }}
             />
           </Grid>
-          {/* <Grid item xs={12}>
-            {promising.description.map((content) => (
-              <Typography
-                variant="body1"
-                align="left"
-                gutterBottom
-                component="div"
-                sx={{ lineHeight: 2, letterSpacing: 0.25 }}
-              >
-                {content}
-              </Typography>
-            ))}
-          </Grid> */}
           <Grid item xs={12}>
             <Box
               sx={{
@@ -260,6 +251,131 @@ export default function PromisingReport() {
         </Grid>
       )}
     </MainContainer>
-  </div>
+  </Pc>
+  <Mobile>
+  <MainContainer maxWidth="lg">
+      <IconButton onClick={ () => {navigate(-1);}}>
+        <ArrowBackIcon />
+      </IconButton>
+        {promising !== null && (
+          <Grid container direction="row" spacing={5}>
+            <Grid item xs={12}>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Typography
+                  variant="h5"
+                  align="center"
+                  gutterBottom
+                  sx={{ fontWeight: "bold", m: 1 }}
+                >
+                  {promising.name}
+                </Typography>
+                <img src={promising.logo} alt="logo" width={30} />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography align="center">{promising.hashtag}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography
+                  variant="caption"
+                  display="block"
+                  align="center"
+                  gutterBottom
+                >
+                  {moment(promising.date).format("YYYY.MM.DD")}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} display="flex"  justifyContent="center"
+                alignItems="center">
+              <img src={gradeImg} alt="Grade" width="40%" align="center"></img>
+            </Grid>
+            <Grid item xs={12}>
+            {promising.type === "coin" ? (
+              <PromisingScore
+                type={promising.type}
+                score1={promising.scalability}
+                score2={promising.decentralization}
+                score3={promising.security}
+                score4={promising.others}
+              />
+            ) : (
+              <PromisingScore
+                type={promising.type}
+                score1={promising.business}
+                score2={promising.technicality}
+                score3={promising.reliability}
+              />
+            )}
+            </Grid>
+            <Grid item xs={12}>
+              <Viewer initialValue={promising.description} />
+              <Typography
+                variant="body1"
+                align="left"
+                component="div"
+                sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+              >
+                <Button onClick ={() => {window.open( promising.cmcLink, '_blank')}}> {promising.cmcLink} </Button>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  paddingTop: 2,
+                }}
+              />
+              <Typography
+                variant="h5"
+                align="left"
+                gutterBottom
+                sx={{ fontWeight: "bold" }}
+              >
+                선정 이유
+              </Typography>
+              <Box
+                sx={{
+                  paddingTop: 3,
+                }}
+              />
+              <Viewer initialValue={promising.assessment} />
+              <Typography
+                variant="body1"
+                align="left"
+                component="div"
+                sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+              >
+                {promising.general}
+              </Typography>
+              <Box
+                sx={{
+                  paddingTop: 3,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  paddingTop: 2,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Tooltip title={email} disableInteractive>
+                <IconButton>
+                  <AttachEmailIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        )}
+    </MainContainer>
+</Mobile>
+</>
+    
   );
 }
