@@ -9,6 +9,9 @@ import {
   Tooltip,
 } from "recharts";
 
+//Responsive Web
+import {Pc, Mobile} from "../Responsive/Responsive";
+
 export const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
@@ -63,6 +66,7 @@ function CategoryLineGraph_1d(props) {
 
   return (
     <div>
+      <Pc>
       {datesAndPrices && (
         <div>
           <LineChart
@@ -126,6 +130,72 @@ function CategoryLineGraph_1d(props) {
           </LineChart>
         </div>
       )}
+      </Pc>
+      <Mobile>
+      {datesAndPrices && (
+        <div>
+          <LineChart
+            width={250}
+            height={150}
+            data={datesAndPrices}
+            margin={{ top: 5, bottom: 5 }}
+          >
+            <CartesianGrid opacity={0.4} />
+            <XAxis
+              dataKey="time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              type="number"
+              domain={minMax}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Line
+              type="monotone"
+              dataKey="Currency"
+              stroke="#DBDFFD"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Smart Contract Platform"
+              stroke="#9BA3EB"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Computing"
+              stroke="#646FD4"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="DeFi"
+              stroke="#242F9B"
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Culture & Entertainment"
+              stroke="#210B61"
+              dot={false}
+              isAnimationActive={false}
+            />
+            {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
+          </LineChart>
+        </div>
+      )}
+      </Mobile>
     </div>
   );
 }
