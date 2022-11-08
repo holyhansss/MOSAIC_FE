@@ -37,8 +37,12 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
   const [assessment, setAssessment] = useState("");
   const [description, setDescription] = useState("");
   const [cmcLink, setCmcLink] = useState("");
+  const [notionLink, setNotionLink] = useState("");
 
   const handleOnChangeCmcLink = (value) => {
+    setNotionLink(value);
+  };
+  const handleOnChangeNotion = (value) => {
     setCmcLink(value);
   };
   const handleOnChangeCryptoName = (value) => {
@@ -144,6 +148,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
         hashtag: cryptoTag,
         type: cryptoType,
         cmcLink: cmcLink,
+        notionLink : notionLink,
         promising: isPromising,
         [standard1]: standard1num,
         [standard2]: standard2num,
@@ -159,6 +164,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
         hashtag: cryptoTag,
         type: cryptoType,
         cmcLink: cmcLink,
+        notionLink : notionLink,
         promising: isPromising,
         [standard1]: standard1num,
         [standard2]: standard2num,
@@ -221,6 +227,25 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
               }}
               onChange={(e) => {
                 handleOnChangeCmcLink(e.target.value);
+              }}
+              label=""
+            />
+          </Container>
+          <Container className="my-5">
+            <Typography variant="h5" gutterBottom>
+              노션링크
+            </Typography>
+            <Form.Control
+              key={"NotionLink"}
+              className=""
+              type=""
+              placeholder="노션 링크"
+              style={{
+                width: "100%",
+                height: "50px",
+              }}
+              onChange={(e) => {
+                handleOnChangeNotion(e.target.value);
               }}
               label=""
             />

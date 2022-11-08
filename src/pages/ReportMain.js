@@ -35,7 +35,7 @@ function ReportMain({ result, reports, dailyReport }) {
         }}
       ></div>
       <MainContainer maxWidth="lg">
-        <Grid container spacing={3}>
+        <Grid container spacing={3} >
           <Grid item xs={12}>
             <Box
               sx={{
@@ -66,28 +66,29 @@ function ReportMain({ result, reports, dailyReport }) {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Box display="flex" justifyContent="flex-end">
-              <Button href="/reportDailyList" sx={{ color: grey[400] }}>
-                전체보기 <ArrowForwardIosIcon />
-              </Button>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <div>
-              {result !== undefined ? (
-                <ReportrecentcardDetail
-                  id={result.id}
-                  title={result.title}
-                  writer={result.writer}
-                  date={moment(result.date).format("YYYY.MM.DD")}
-                  thumbnail={result.thumbnail}
-                  hashtag={result.hashtag}
-                />
-              ) : null}
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <div>
+              <Box display="flex" justifyContent="flex-end">
+                <Button href="/reportDailyList" sx={{ color: grey[400] }}>
+                  전체보기 <ArrowForwardIosIcon />
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <div>
+                {result !== undefined ? (
+                  <ReportrecentcardDetail
+                    id={result.id}
+                    title={result.title}
+                    writer={result.writer}
+                    date={moment(result.date).format("YYYY.MM.DD")}
+                    thumbnail={result.thumbnail}
+                    hashtag={result.hashtag}
+                  />
+                ) : null}
+              </div>
+            </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <Box>
+              <div>
               {dailyports.map((report, index) => (
                 <div key={index}>
                   <ReportlistFormDetail
@@ -100,10 +101,8 @@ function ReportMain({ result, reports, dailyReport }) {
                 </div>
               ))}
             </div>
+            </Box>
           </Grid>
-          {/* <Grid item xs={12}>
-            <Divider/>
-        </Grid> */}
           <Grid item xs={6}>
             <Typography variant="h5" gutterBottom sx={{ marginTop: 3 }}>
               주간 리포트
@@ -124,7 +123,7 @@ function ReportMain({ result, reports, dailyReport }) {
                 columns={{ xs: 4, sm: 8, md: 20 }}
               >
                 {subreports.map((subreports, index) => (
-                  <Grid item xs={2} sm={4} md={5} key={index}>
+                  <Grid item xs={4} sm={4} md={5} key={index}>
                     <Reportlistcard
                       id={subreports.id}
                       title={subreports.title}

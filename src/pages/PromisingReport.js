@@ -190,6 +190,14 @@ export default function PromisingReport() {
             />
           )}
           <Grid item xs={12}>
+            <Typography
+              variant="h5"
+              align="left"
+              gutterBottom
+              sx={{ fontWeight: "bold" }}
+            >
+              개요
+            </Typography>
             <Viewer initialValue={promising.description} />
             <Typography
               variant="body1"
@@ -221,12 +229,12 @@ export default function PromisingReport() {
             />
             <Viewer initialValue={promising.assessment} />
             <Typography
-              variant="body1"
-              align="left"
+              variant="caption"
+              align="right"
               component="div"
               sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
             >
-              {promising.general}
+              <Button onClick ={() => {window.open( promising.notionLink, '_blank')}}> 자세히보기 </Button>
             </Typography>
             <Box
               sx={{
