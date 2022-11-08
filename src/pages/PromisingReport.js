@@ -352,13 +352,13 @@ export default function PromisingReport() {
               />
               <Viewer initialValue={promising.assessment} />
               <Typography
-                variant="body1"
-                align="left"
-                component="div"
-                sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
-              >
-                {promising.general}
-              </Typography>
+              variant="caption"
+              align="right"
+              component="div"
+              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+            >
+              <Button onClick ={() => {window.open( promising.notionLink, '_blank')}}> 자세히보기 </Button>
+            </Typography>
               <Box
                 sx={{
                   paddingTop: 3,
