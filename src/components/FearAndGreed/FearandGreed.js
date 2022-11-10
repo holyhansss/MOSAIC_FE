@@ -112,10 +112,10 @@ function FearandGreed() {
       >
         <ReactSpeedometer
           needleColor="grey"
-          paddingVertical={50}
+          paddingVertical={20}
           paddingHorizontal={30}
-          width={300}
-          height={250}
+          width={200}
+          height={150}
           needleTransition="easeBounceInOut"
           minValue={0}
           maxValue={100}
@@ -140,9 +140,9 @@ function FearandGreed() {
           alignItems: "left",
         }}
       >
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom align="center"  paddingVertical={50}>
           <img src={FnGIcon} alt="Fear and Greed" /> {FnGState} </Typography>
-        {desc && desc.map((d, idx) => <Typography width={600} key={idx}>{d}</Typography>)}
+        {desc && desc.map((d, idx) => <Typography variant="caption" width="100%" key={idx}>{d} </Typography>)}
       </Grid>
     </Grid>
     </Mobile>
