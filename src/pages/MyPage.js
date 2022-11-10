@@ -53,6 +53,9 @@ function MyPage({ user, refreshUser }) {
                   <Tab eventKey="comments" title="댓글단 글">
                     <PostList user={user} kind="comment" />
                   </Tab>
+                  <Tab eventKey="scrap" title="스크랩한 글">
+                    <PostList user={user} kind="scrap" />
+                  </Tab>
                 </Tabs>
               </Row>
             </Col>
