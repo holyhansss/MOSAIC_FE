@@ -758,90 +758,92 @@ function Marketpage() {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
-                    <Grid container spacing={3}>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#B22222"
-                            gutterBottom
-                          >
-                            매우 공포 (0~25)
-                          </Typography>
-                          <Typography variant="body2">
-                            극심한 공포로 인해 과도하게 매도
-                            <br />
-                            {'"시장의 변동성 증가"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#FF6347"
-                            gutterBottom
-                          >
-                            공포 (26~45)
-                          </Typography>
-                          <Typography variant="body2">
-                            자산 하락의 두려움이 생김
-                            <br />
-                            {'"거래량 증가, 자산 가격 하락"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#FF8C00"
-                            gutterBottom
-                          >
-                            중립 (46~54)
-                          </Typography>
-                          <Typography variant="body2">
-                            저항과 지지를 동시에 받음
-                            <br />
-                            {'"자산 가격 행보 예측 힘듦"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#7FFF00"
-                            gutterBottom
-                          >
-                            탐욕 (55~75)
-                          </Typography>
-                          <Typography variant="body2">
-                            매수에 대한 관심이 증가
-                            <br />
-                            {'"단기차익을 노린 투자자들이 투입"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#3CB371"
-                            gutterBottom
-                          >
-                            매우 탐욕 (76~100)
-                          </Typography>
-                          <Typography variant="body2">
-                            매수에 대한 관심이 매우 증가
-                            <br />
-                            {'"시장의 변동성 증가"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  </Box>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    sx={{ marginTop: "0.5rem" }}
+                  >
+                    <Card sx={{ minWidth: 200 }}>
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="#B22222"
+                          gutterBottom
+                        >
+                          매우 공포 (0~25)
+                        </Typography>
+                        <Typography variant="body2">
+                          극심한 공포로 인해 과도하게 매도
+                          <br />
+                          {'"시장의 변동성 증가"'}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card sx={{ minWidth: 200 }}>
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="#FF6347"
+                          gutterBottom
+                        >
+                          공포 (26~45)
+                        </Typography>
+                        <Typography variant="body2">
+                          자산 하락의 두려움이 생김
+                          <br />
+                          {'"거래량 증가, 자산 가격 하락"'}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card sx={{ minWidth: 200 }}>
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="#FF8C00"
+                          gutterBottom
+                        >
+                          중립 (46~54)
+                        </Typography>
+                        <Typography variant="body2">
+                          저항과 지지를 동시에 받음
+                          <br />
+                          {'"자산 가격 행보 예측 힘듦"'}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card sx={{ minWidth: 200 }}>
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="#7FFF00"
+                          gutterBottom
+                        >
+                          탐욕 (55~75)
+                        </Typography>
+                        <Typography variant="body2">
+                          매수에 대한 관심이 증가
+                          <br />
+                          {'"단기차익을 노린 투자자들이 투입"'}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card sx={{ minWidth: 200 }}>
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="#3CB371"
+                          gutterBottom
+                        >
+                          매우 탐욕 (76~100)
+                        </Typography>
+                        <Typography variant="body2">
+                          매수에 대한 관심이 매우 증가
+                          <br />
+                          {'"시장의 변동성 증가"'}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
                 </AccordionDetails>
               </Accordion>
               <FearandGreed />
