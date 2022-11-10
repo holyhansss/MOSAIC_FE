@@ -349,8 +349,8 @@ function Marketpage() {
               sx={{
                 width: "50%",
                 height: "50%",
-                margin: "3%",
-                fontSize: "10%",
+                margin: "0.3rem 0",
+                fontSize: "3px",
                 color: "#DBDFFD",
                 border: "1px solid #DBDFFD",
               }}
@@ -367,7 +367,7 @@ function Marketpage() {
                 width: "50%",
                 height: "50%",
                 margin: "3%",
-                fontSize: "10%",
+                fontSize: "3px",
                 color: "black",
                 background: "linear-gradient(-45deg, #9BA3EB 5%, #DBDFFD 90%)",
               }}
@@ -387,7 +387,7 @@ function Marketpage() {
                 width: "50%",
                 height: "50%",
                 margin: "3%",
-                fontSize: "3%",
+                fontSize: "3px",
                 color: "#9BA3EB",
                 border: "1px solid #9BA3EB",
               }}
@@ -404,7 +404,7 @@ function Marketpage() {
                 width: "50%",
                 margin: "3%",
                 height: "50%",
-                fontSize: "3%",
+                fontSize: "3px",
                 color: "black",
                 background: "linear-gradient(-45deg, #646FD4 5%, #9BA3EB 90%)",
               }}
@@ -424,7 +424,7 @@ function Marketpage() {
                 width: "50%",
                 height: "50%",
                 margin: "3%",
-                fontSize: "10%",
+                fontSize: "3px",
                 color: "#646FD4",
                 border: "1px solid #646FD4",
               }}
@@ -441,7 +441,7 @@ function Marketpage() {
                 width: "50%",
                 margin: "3%",
                 height: "50%",
-                fontSize: "10%",
+                fontSize: "3px",
                 background: "linear-gradient(-45deg, #242F9B 5%, #646FD4 90%)",
               }}
             >
@@ -460,7 +460,7 @@ function Marketpage() {
                 width: "50%",
                 height: "50%",
                 margin: "3%",
-                fontSize: "10%", 
+                fontSize: "3px", 
                 color: "#242F9B",
                 border: "1px solid #242F9B",
               }}
@@ -477,7 +477,7 @@ function Marketpage() {
                 width: "50%",
                 margin: "3%",
                 height: "50%",
-                fontSize: "10%",
+                fontSize: "3px",
                 background: "linear-gradient(-45deg, #210B61 5%, #242F9B 90%)",
               }}
             >
@@ -496,7 +496,7 @@ function Marketpage() {
                 width: "50%",
                 height: "50%",
                 margin: "3%",
-                fontSize: "10%",
+                fontSize: "3px",
                 color: "#210B61",
                 border: "1px solid #210B61",
               }}
@@ -513,7 +513,7 @@ function Marketpage() {
                 width: "50%",
                 margin: "3%",
                 height: "50%",
-                fontSize: "10%",
+                fontSize: "3px",
                 background: "linear-gradient(-45deg, #0b062d 5%, #210B61 90%)",
               }}
             >

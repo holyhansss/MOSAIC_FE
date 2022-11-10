@@ -4,7 +4,8 @@ import ReactSpeedometer from "react-d3-speedometer";
 import { Typography, Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 
-
+//Responsive Web
+import {Pc, Mobile} from "../Responsive/Responsive";
 
 // 공포탐욕지수
 function FearandGreed() {
@@ -58,6 +59,8 @@ function FearandGreed() {
   }, []);
 
   return (
+    <>
+    <Pc>
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid
         item
@@ -99,6 +102,53 @@ function FearandGreed() {
         {desc && desc.map((d, idx) => <Typography width={600} key={idx}>{d}</Typography>)}
       </Grid>
     </Grid>
+    </Pc>
+    <Mobile>
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <Grid
+        item
+        md={12}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <ReactSpeedometer
+          needleColor="grey"
+          paddingVertical={50}
+          paddingHorizontal={30}
+          width={300}
+          height={250}
+          needleTransition="easeBounceInOut"
+          minValue={0}
+          maxValue={100}
+          customSegmentStops={[0, 25, 46, 54, 75, 100]}
+          segmentColors={[
+            "#DBDFFD",
+            "#9BA3EB",
+            "#646FD4",
+            "#242F9B",
+            "#210B61",
+          ]}
+          value={Number(FearNGreed)}
+        />
+      </Grid>
+      <Grid
+        item
+        md={12}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "left",
+          alignItems: "left",
+        }}
+      >
+        <Typography variant="h6" gutterBottom>
+          <img src={FnGIcon} alt="Fear and Greed" /> {FnGState} </Typography>
+        {desc && desc.map((d, idx) => <Typography width={600} key={idx}>{d}</Typography>)}
+      </Grid>
+    </Grid>
+    </Mobile>
+    </>
   );
 }
 export default FearandGreed;
+
+// categories_graph_data_1d
