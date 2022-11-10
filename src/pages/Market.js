@@ -339,6 +339,7 @@ function Marketpage() {
         </div>
         </Pc>
         <Mobile>
+
         <div>
           {categoryArray[0] ? (
             <Button
