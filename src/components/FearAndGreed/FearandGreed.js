@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
+
 import { Typography, Grid, Box, Card, CardContent } from "@mui/material";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
@@ -59,6 +60,7 @@ function FearandGreed() {
   }, []);
 
   return (
+    <>
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid
         item
@@ -107,6 +109,8 @@ function FearandGreed() {
         {desc && desc.map((d, idx) => <Typography key={idx}>{d}</Typography>)}
       </Grid>
     </Grid>
+
+    </>
   );
 }
 export default FearandGreed;
