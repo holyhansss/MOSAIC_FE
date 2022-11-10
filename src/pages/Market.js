@@ -385,8 +385,8 @@ function Marketpage() {
                   height: "50%",
                   margin: "3%",
                   fontSize: "10%",
-                  color: "#DBDFFD",
-                  border: "1px solid #DBDFFD",
+                  color: "#FFB404",
+                  border: "1px solid #FFB404",
                 }}
               >
                 Currency
@@ -403,8 +403,7 @@ function Marketpage() {
                   margin: "3%",
                   fontSize: "10%",
                   color: "black",
-                  background:
-                    "linear-gradient(-45deg, #9BA3EB 5%, #DBDFFD 90%)",
+                  background: "#FFB404",
                 }}
               >
                 Currency
@@ -423,8 +422,8 @@ function Marketpage() {
                   height: "50%",
                   margin: "3%",
                   fontSize: "3%",
-                  color: "#9BA3EB",
-                  border: "1px solid #9BA3EB",
+                  color: "#BCCF5F",
+                  border: "1px solid #BCCF5F",
                 }}
               >
                 Smart Contract Platform
@@ -441,8 +440,7 @@ function Marketpage() {
                   height: "50%",
                   fontSize: "3%",
                   color: "black",
-                  background:
-                    "linear-gradient(-45deg, #646FD4 5%, #9BA3EB 90%)",
+                  background: "#BCCF5F",
                 }}
               >
                 Smart Contract Platform
@@ -461,8 +459,8 @@ function Marketpage() {
                   height: "50%",
                   margin: "3%",
                   fontSize: "10%",
-                  color: "#646FD4",
-                  border: "1px solid #646FD4",
+                  color: "#01EDA5",
+                  border: "1px solid #01EDA5",
                 }}
               >
                 Computing
@@ -478,8 +476,8 @@ function Marketpage() {
                   margin: "3%",
                   height: "50%",
                   fontSize: "10%",
-                  background:
-                    "linear-gradient(-45deg, #242F9B 5%, #646FD4 90%)",
+                  color: "black",
+                  background: "#01EDA5",
                 }}
               >
                 Computing
@@ -498,8 +496,8 @@ function Marketpage() {
                   height: "50%",
                   margin: "3%",
                   fontSize: "10%",
-                  color: "#242F9B",
-                  border: "1px solid #242F9B",
+                  color: "#24C6FE",
+                  border: "1px solid #24C6FE",
                 }}
               >
                 DeFi
@@ -515,8 +513,8 @@ function Marketpage() {
                   margin: "3%",
                   height: "50%",
                   fontSize: "10%",
-                  background:
-                    "linear-gradient(-45deg, #210B61 5%, #242F9B 90%)",
+                  color: "black",
+                  background: "#24C6FE",
                 }}
               >
                 DeFi
@@ -535,8 +533,8 @@ function Marketpage() {
                   height: "50%",
                   margin: "3%",
                   fontSize: "10%",
-                  color: "#210B61",
-                  border: "1px solid #210B61",
+                  color: "#5D5CB0",
+                  border: "1px solid #5D5CB0",
                 }}
               >
                 Culture & Entertainment
@@ -552,8 +550,8 @@ function Marketpage() {
                   margin: "3%",
                   height: "50%",
                   fontSize: "10%",
-                  background:
-                    "linear-gradient(-45deg, #0b062d 5%, #210B61 90%)",
+                  color: "black",
+                  background: "#5D5CB0",
                 }}
               >
                 Culture & Entertainment
