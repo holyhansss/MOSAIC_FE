@@ -50,6 +50,7 @@ function Header({ user, admin }) {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  
                 }}
               >
                 <img
@@ -154,6 +155,7 @@ function Header({ user, admin }) {
     <Mobile>
     <HeaderContainer>
       <Container
+        maxWidth="lg"
         disableGutters
         sx={{ diplay: "flex", flexDirection: "row", alignItems: "center" }}
       >
@@ -188,7 +190,7 @@ function Header({ user, admin }) {
           </Grid>
           <Grid
             item
-            xs={7}
+            xs={6}
             md={5.5}
             lg={4}
             sx={{
@@ -199,22 +201,22 @@ function Header({ user, admin }) {
           >
             <Grid item>
               <StyledLink to="/ranking">
-                <Typography>Mosaic 순위</Typography>
+                <Typography sx={{fontSize:"75%"}}>Mosaic 순위</Typography>
               </StyledLink>
             </Grid>
             <Grid item>
               <StyledLink to="/promising">
-                <Typography>유망 코인</Typography>
+                <Typography sx={{fontSize:"75%"}}>유망 코인</Typography>
               </StyledLink>
             </Grid>
             <Grid item>
               <StyledLink to="/market">
-                <Typography>시장 동향</Typography>
+                <Typography sx={{fontSize:"75%"}}>시장 동향</Typography>
               </StyledLink>
             </Grid>
             <Grid item>
               <StyledLink to="/reportMain">
-                <Typography>리포트</Typography>
+                <Typography sx={{fontSize:"75%"}}>리포트</Typography>
               </StyledLink>
             </Grid>
           </Grid>
@@ -230,7 +232,7 @@ function Header({ user, admin }) {
           />
           <Grid
             item
-            xs={2}
+            xs={2.5}
             md={1.5}
             lg={2}
             sx={{

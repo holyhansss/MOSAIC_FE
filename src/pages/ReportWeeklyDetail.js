@@ -33,6 +33,9 @@ import ReportContents from "../components/Report/ReportContents";
 import Winner from "../components/Report/Winner";
 import { Comment } from "../components/Comment/Comment";
 
+//Responsive Web
+import { Pc, Mobile } from "../components/Responsive/Responsive";
+
 export default function ReportWeeklyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   const location = useLocation();
@@ -173,6 +176,8 @@ export default function ReportWeeklyDetail({ user }) {
 
   const navigate = useNavigate();
   return (
+    <>
+    <Pc>
     <div>
       <IconButton onClick={ () => {navigate(-1);}}>
         <ArrowBackIcon />
@@ -268,5 +273,103 @@ export default function ReportWeeklyDetail({ user }) {
         </Grid>
       </Container>
     </div>
+    </Pc>
+    <Mobile>
+        <div>
+          <IconButton onClick={ () => {navigate(-1);}}>
+            <ArrowBackIcon />
+          </IconButton>
+    
+          <TabContext value={value}>
+            <Container maxWidth="md">
+              <Box
+                sx={{ display:"flex",borderColor: "divider", position: "relative", justifyContent: "center"  }}
+              >
+                <TabList
+                  onChange={handleChange}
+                  aria-label="lab API tabs example"
+                >
+                  <Tab label="주간 이슈" value="1" />
+                  <Tab label="Winner & Loser" value="2" />
+                </TabList>
+              </Box>
+            </Container>
+            <p />
+            <TabPanel value="1">
+              <ReportContents
+                user={user}
+                id={id}
+                title={title}
+                writer={writer}
+                date={date}
+              />
+            </TabPanel>
+            <TabPanel value="2">
+              <Winner
+                user={user}
+                id={id}
+                title={title}
+                writer={writer}
+                date={date}
+              />
+            </TabPanel>
+          </TabContext>
+    
+          <Container maxWidth="md">
+            <Grid container spacing={1}>
+              <Grid item xs={4}>
+                <ButtonGroup variant="outlined">
+                  <IconButton onClick={onclick}>
+                    {clickICon === true ? (
+                      <>
+                        <FavoriteIcon sx={{ color: pink[500] }} />
+                        <Typography variant="body1">{count}</Typography>
+                      </>
+                    ) : (
+                      <>
+                        <FavoriteBorderIcon sx={{ color: pink[500] }} />
+                        <Typography variant="body1">{count}</Typography>
+                      </>
+                    )}
+                  </IconButton>
+    
+                  <IconButton onClick={handleOpen}>
+                    <SendIcon />
+                  </IconButton>
+                </ButtonGroup>
+                <Modal open={open} onClose={handleClose}>
+                  <Box sx={style}>
+                    <Typography variant="h6" component="h2">
+                      공유하기
+                    </Typography>
+                    <p />
+                    <input
+                      type="text"
+                      value={window.location.href}
+                      ref={copyLinkRef}
+                      disabled
+                    />
+                    <Button variant="text" onClick={copyTextUrl}>
+                      복사
+                    </Button>
+                  </Box>
+                </Modal>
+              </Grid>
+              <Grid item xs={12}>
+                <Comment
+                  user={user}
+                  id={id}
+                  title={title}
+                  rep={reply}
+                  writer={writer}
+                  date={date}
+                  thumbnail={thumbnail}
+                />
+              </Grid>
+            </Grid>
+          </Container>
+        </div>
+        </Mobile>
+        </>
   );
 }
