@@ -11,6 +11,8 @@ import {
   Legend,
 } from "recharts";
 
+//Responsive Web
+import {Pc, Mobile} from "../Responsive/Responsive";
 // S&P 500 지수 와 CMC 200 지수를 그래프로(1일 기준)
 
 export const CustomTooltip = ({ active, payload, label }) => {
@@ -178,6 +180,7 @@ function Index1d() {
 
   return (
     <div>
+      <Pc>
       {res && (
         <div>
           <LineChart
@@ -220,6 +223,51 @@ function Index1d() {
           </LineChart>
         </div>
       )}
+      </Pc>
+      <Mobile>
+      {res && (
+        <div>
+          <LineChart
+            width={250}
+            height={150}
+            data={res}
+            margin={{ top: 5, bottom: 5 }}
+          >
+            <CartesianGrid opacity={0.4} />
+            <XAxis
+              dataKey="time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              tickSize={5}
+              domain={[Math.floor(minData), Math.ceil(maxData)]}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            <Line
+              name="S&P"
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="SnP"
+              stroke="#8884d8"
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="CMC"
+              stroke="#82ca9d"
+              dot={false}
+            />
+          </LineChart>
+        </div>
+      )}
+      </Mobile>
     </div>
   );
 }

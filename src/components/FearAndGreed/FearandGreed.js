@@ -108,10 +108,10 @@ const FnGinfo = (
 // 공포탐욕지수
 function FearandGreed() {
   const [expanded, setExpanded] = useState("");
-
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+  
   const [FearNGreed, setFearNGreed] = useState([]);
   const [FnGState, setFnGState] = useState([]);
   const [FnGIcon, setFnGIcon] = useState([]);
