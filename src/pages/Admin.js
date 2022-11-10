@@ -5,7 +5,7 @@ import HistoryEduTwoToneIcon from "@mui/icons-material/HistoryEduTwoTone";
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 
 import { Grid, Box, Button } from "@mui/material";
-
+//어드민
 const Admin = ({ admin, isLoggedIn }) => {
   return (
     <>
