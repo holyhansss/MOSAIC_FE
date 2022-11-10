@@ -14,6 +14,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+//Responsive Web
+import {Pc, Mobile} from "../Responsive/Responsive";
+
 // 주간 리포트 - 최신 리포트 (큰 사이즈)
 function Reportrecentcard({ id, title, writer, date, thumbnail, hashtag }) {
   const navigate = useNavigate();
@@ -315,7 +318,9 @@ function ReportlistFormDetail({ id, title, date, writer, thumbnail }) {
     });
   };
   return (
-    <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
+    <>
+    <Pc>
+    <List sx={{ width: "80%", bgcolor: "background.paper", mx: "auto" }}>
       <ListItem button alignItems="flex-start" onClick={move}>
         <ListItemText
           primary={
@@ -351,7 +356,7 @@ function ReportlistFormDetail({ id, title, date, writer, thumbnail }) {
               </Typography>
             </React.Fragment>
           }
-
+          
         />
         <ListItemAvatar sx={{ pb: 1 }}>
           <Avatar
@@ -364,6 +369,59 @@ function ReportlistFormDetail({ id, title, date, writer, thumbnail }) {
       </ListItem>
       <Divider sx={{ width: "100%", mt: 1 }} />
     </List>
+    </Pc>
+    <Mobile>
+    <List sx={{ width: "100%", bgcolor: "background.paper", mx: "auto" }}>
+      <ListItem button alignItems="flex-start" onClick={move}>
+        <ListItemText
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="subtitle1"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                <p />
+                {writer}
+              </Typography>
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="caption"
+                color="text.primary"
+              >
+                {date}
+              </Typography>
+            </React.Fragment>
+          }
+          
+        />
+        <ListItemAvatar sx={{ pb: 1 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src={thumbnail}
+            variant="square"
+            sx={{ borderRadius: "8%", width: "6rem", height: "4rem" }}
+          />
+        </ListItemAvatar>
+      </ListItem>
+      <Divider sx={{ width: "100%", mt: 1 }} />
+    </List>
+    </Mobile>
+    </>
   );
 }
 
@@ -384,7 +442,9 @@ function DailyReportlistFormAll({ id, title, date, writer, thumbnail }) {
     });
   };
   return (
-    <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
+    <>
+    <Pc>
+    <List sx={{ width: "100%", bgcolor: "background.paper", mx: "auto" }}>
       <ListItem button alignItems="flex-start" onClick={move}>
         <ListItemText
           primary={
@@ -434,6 +494,60 @@ function DailyReportlistFormAll({ id, title, date, writer, thumbnail }) {
       </ListItem>
       <Divider sx={{ width: "100%", mt: 3 }} />
     </List>
+    </Pc>
+    <Mobile>
+    <List sx={{ width: "100%", bgcolor: "background.paper"}}>
+      <ListItem button alignItems="flex-start" onClick={move}>
+        <ListItemText
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                fontSize="100%"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
+          secondary={
+            <React.Fragment>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {writer}
+              </Typography>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {date}
+              </Typography>
+            </React.Fragment>
+          }
+          sx={{ py: 5 }}
+        />
+        <ListItemAvatar sx={{ pb: 1 ,display:"flex",justifyContent:"right",alignItems:"center"}}>
+          <Avatar
+            alt="Remy Sharp"
+            src={thumbnail}
+            variant="square"
+            sx={{ borderRadius: "8%", width: "150px", height: "100px" }}
+          />
+        </ListItemAvatar>
+      </ListItem>
+      <Divider sx={{ width: "100%", mt: 3 }} />
+    </List>
+    </Mobile>
+    </>
   );
 }
 

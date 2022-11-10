@@ -141,35 +141,35 @@ function CategoryLineGraph_1mo(props) {
             <Line
               type="monotone"
               dataKey="Currency"
-              stroke="#FFB404"
+              stroke="#DBDFFD"
               dot={false}
               isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Smart Contract Platform"
-              stroke="#BCCF5F"
+              stroke="#9BA3EB"
               dot={false}
               isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Computing"
-              stroke="#01EDA5"
+              stroke="#646FD4"
               dot={false}
               isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="DeFi"
-              stroke="#24C6FE"
+              stroke="#242F9B"
               dot={false}
               isAnimationActive={false}
             />
             <Line
               type="monotone"
               dataKey="Culture & Entertainment"
-              stroke="#5D5CB0"
+              stroke="#210B61"
               dot={false}
               isAnimationActive={false}
             />

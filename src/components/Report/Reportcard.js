@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Nav from "react-bootstrap/Nav";
 import styled from "styled-components";
 import { grey } from "@mui/material/colors";
+//Responsive Web
+import {Pc, Mobile} from "../Responsive/Responsive";
 
 //Viewer
 import { Viewer } from "@toast-ui/react-editor";
@@ -153,6 +155,8 @@ export { Reportcard };
 
 function DailyReportcard({ title, writer, date, daily }) {
   return (
+    <>
+    <Pc>
     <div>
       <Box
         sx={{
@@ -288,6 +292,145 @@ function DailyReportcard({ title, writer, date, daily }) {
         {writer}
       </Typography>
     </div>
+    </Pc>
+    <Mobile>
+    <div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      <Typography variant="h4" align="center" sx={{ fontWeight: "bold" }}>
+        {title}
+      </Typography>
+      <p />
+      <Typography variant="caption" display="block" align="center" gutterBottom>
+        {date}
+      </Typography>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      <Avatar
+        alt="thumbnail"
+        src={daily.thumbnail}
+        variant="square"
+        align="center"
+        sx={{ width: "100%", height: "10rem" }}
+      />
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+      <div>
+        <Typography
+          variant="h6"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
+          {daily.issue1_title}
+        </Typography>
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+        <Viewer initialValue={daily.issue1_content} />
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <div>
+        <Typography
+          variant="h6"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
+          {daily.issue2_title}
+        </Typography>
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+        <Viewer initialValue={daily.issue2_content} />
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <div>
+        <Typography
+          variant="h6"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ fontWeight: "bold" }}
+        >
+          인사이트
+        </Typography>
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+        <Viewer initialValue={daily.insight} />
+        <Box
+          sx={{
+            paddingTop: 3,
+          }}
+        />
+      </div>
+      <Box
+        sx={{
+          paddingTop: 10,
+        }}
+      />
+
+      <div>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          gutterBottom
+          component="div"
+          sx={{ textDecoration: "underline" }}
+        >
+          Credit
+        </Typography>
+      </div>
+      <Typography
+        variant="subtitle2"
+        align="center"
+        gutterBottom
+        component="div"
+        sx={{ fontWeight: "bold", m: 1 }}
+      >
+        {writer}
+      </Typography>
+    </div>
+    </Mobile>
+    </>
   );
 }
 export { DailyReportcard };

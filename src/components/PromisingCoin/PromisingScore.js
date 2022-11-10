@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Tooltip,
-  IconButton,
-  LinearProgress,
-  Typography,
-} from "@mui/material";
+import { Grid, Tooltip, IconButton, LinearProgress } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 //Responsive Web
 import {Pc, Mobile} from "../Responsive/Responsive";
@@ -42,8 +36,7 @@ export default function PromisingScore({
     desc2 = "중앙집중화를 벗어나 분산된 소규모 단위로 자율적으로 운영되는 정도";
     desc3 =
       "블록체인 내의 데이터를 권한이 없는 이용자가 사용할 수 없도록 하는지를 파악";
-    desc4 =
-      "해당 코인의 토큰 활성화 수준을 통한 사용성과 기관 투자유치 횟수와 규모를 파악";
+    desc4 = "해당 코인의 토큰 활성화 수준을 통한 사용성과 기관 투자유치 횟수와 규모를 파악";
   } else {
     criteria1 = "사업성";
     criteria2 = "기술성";
@@ -75,13 +68,107 @@ export default function PromisingScore({
           <Grid
             container
             direction="row"
-            justifyContent="center"
+            justifyContent="space-between"
             alignItems="center"
           >
-            <Typography variant="h5">
-              {score1 + score2 + score3 + score4}
-            </Typography>
+            <Grid
+              item
+              xs={3}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <>{criteria1}</>
+              <Tooltip title={desc1} disableInteractive>
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={7}>
+              <LinearProgress
+                variant="determinate"
+                value={(score1 / total1) * 100}
+                sx={{ borderRadius: "100px", height: "1.5em" }}
+              />
+            </Grid>
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+              {Math.round((score1 / total1) * 100)} 
+            </Grid>
           </Grid>
+          <Grid container direction="row" justifyContent="space-between">
+            <Grid item xs={3}>
+              <>{criteria2}</>
+              <Tooltip title={desc2} disableInteractive>
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={7}>
+              <LinearProgress
+                variant="determinate"
+                value={(score2 / total2) * 100}
+                sx={{ borderRadius: "100px", height: "1.5em" }}
+              />
+            </Grid>
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+            {Math.round((score2 / total2) * 100)} 
+            </Grid>
+          </Grid>
+          <Grid container direction="row" justifyContent="space-between">
+            <Grid item xs={3}>
+              <>{criteria3}</>
+              <Tooltip title={desc3} disableInteractive>
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={7}>
+              <LinearProgress
+                variant="determinate"
+                value={(score3 / total3) * 100}
+                sx={{ borderRadius: "100px", height: "1.5em" }}
+              />
+            </Grid>
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+            {Math.round((score3 / total3) * 100)} 
+            </Grid>
+          </Grid>
+          <Grid container direction="row" justifyContent="space-between">
+            <Grid item xs={3}>
+              <>{criteria4}</>
+              <Tooltip title={desc4} disableInteractive>
+                <IconButton>
+                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={7}>
+              <LinearProgress
+                variant="determinate"
+                value={(score4 / total3) * 100}
+                sx={{ borderRadius: "100px", height: "1.5em" }}
+              />
+            </Grid>
+            <Grid item xs={2} sx={{ textAlign: "end" }}>
+             {Math.round((score4 / total3) * 100)}
+            </Grid>
+          </Grid>
+        </Grid>
+      ) : (
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+          }}
+        >
           <Grid
             container
             direction="row"
@@ -112,7 +199,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score1} / {total1}
+             {Math.round((score1 / total1) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -132,7 +219,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score2} / {total2}
+            {Math.round((score2 / total2) * 100)} 
             </Grid>
           </Grid>
           <Grid container direction="row" justifyContent="space-between">
@@ -152,121 +239,7 @@ export default function PromisingScore({
               />
             </Grid>
             <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score3} / {total3}
-            </Grid>
-          </Grid>
-          <Grid container direction="row" justifyContent="space-between">
-            <Grid item xs={3}>
-              <>{criteria4}</>
-              <Tooltip title={desc4} disableInteractive>
-                <IconButton>
-                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={7}>
-              <LinearProgress
-                variant="determinate"
-                value={(score4 / total3) * 100}
-                sx={{ borderRadius: "100px", height: "1.5em" }}
-              />
-            </Grid>
-            <Grid item xs={2} sx={{ textAlign: "end" }}>
-              {score4} / {total1}
-            </Grid>
-          </Grid>
-        </Grid>
-      ) : (
-        <Grid
-          item
-          xs={6}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-              {score1 + score2 + score3} / 100
-            </Typography>
-          </Grid>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Grid
-              item
-              xs={2.5}
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <>{criteria1}</>
-              <Tooltip title={desc1} disableInteractive>
-                <IconButton>
-                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={7}>
-              <LinearProgress
-                variant="determinate"
-                value={(score1 / total1) * 100}
-                sx={{ borderRadius: "100px", height: "1.5em" }}
-              />
-            </Grid>
-            <Grid item xs={2.5} sx={{ textAlign: "end" }}>
-              {score1} / {total1}
-            </Grid>
-          </Grid>
-          <Grid container direction="row" justifyContent="space-between">
-            <Grid item xs={2.5}>
-              <>{criteria2}</>
-              <Tooltip title={desc2} disableInteractive>
-                <IconButton>
-                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={7}>
-              <LinearProgress
-                variant="determinate"
-                value={(score2 / total2) * 100}
-                sx={{ borderRadius: "100px", height: "1.5em" }}
-              />
-            </Grid>
-            <Grid item xs={2.5} sx={{ textAlign: "end" }}>
-              {score2} / {total2}
-            </Grid>
-          </Grid>
-          <Grid container direction="row" justifyContent="space-between">
-            <Grid item xs={2.5}>
-              <>{criteria3}</>
-              <Tooltip title={desc3} disableInteractive>
-                <IconButton>
-                  <HelpOutlineIcon sx={{ fontSize: "medium" }} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={7}>
-              <LinearProgress
-                variant="determinate"
-                value={(score3 / total3) * 100}
-                sx={{ borderRadius: "100px", height: "1.5em" }}
-              />
-            </Grid>
-            <Grid item xs={2.5} sx={{ textAlign: "end" }}>
-              {score3} / {total3}
+            {Math.round((score3 / total3) * 100)} 
             </Grid>
           </Grid>
         </Grid>
