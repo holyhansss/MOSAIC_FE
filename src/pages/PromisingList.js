@@ -54,7 +54,15 @@ export default function PromisingList({ crypto }) {
                 crypto.map(
                   (content, index) =>
                     content.promising === true && (
-                      <PromisingCard crypto={content} key={index} />
+                      <Grid
+                        item
+                        xs={12}
+                        md={5}
+                        lg={4}
+                        sx={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <PromisingCard crypto={content} key={index} />
+                      </Grid>
                     )
                 )}
             </Grid>
