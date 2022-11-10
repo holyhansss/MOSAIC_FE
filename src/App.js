@@ -330,7 +330,7 @@ function App() {
                 path="/promising"
                 element={<PromisingList crypto={promising} />}
               />
-              <Route path="/promising/:id" element={<PromisingReport />} />
+              <Route path="/promising/:id" element={<PromisingReport user={userObj}/>} />
               <Route
                 path="/reportMain"
                 element={

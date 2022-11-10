@@ -9,11 +9,21 @@ import {
   LinearProgress,
   Tooltip,
   IconButton,
-  Button
+  Button,
 } from "@mui/material";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  query,
+  doc,
+  getDoc,
+  collection,
+  deleteDoc,
+  setDoc,
+  getDocs,
+} from "firebase/firestore";
 import { dbService } from "../firebase";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 //Viewer
 import { Viewer } from "@toast-ui/react-editor";
@@ -23,24 +33,19 @@ import styled from "styled-components";
 import PromisingScore from "../components/PromisingCoin/PromisingScore";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 //Responsive Web
-import {Pc, Mobile} from "../components/Responsive/Responsive";
+import { Pc, Mobile } from "../components/Responsive/Responsive";
 
 const MainContainer = styled(Container)`
   position: relative;
   z-index: 1;
 `;
 
-// const MainViewer = styled(Viewer)`
-//   &.toastui-editor-contents {
-//     font-size : 50px;
-//   }
-// `;
-
-export default function PromisingReport() {
+export default function PromisingReport({ user }) {
   // 유망코인 정보
   const { id } = useParams();
   const [promising, setPromising] = useState(null);
   const [gradeImg, setGradeImg] = useState("");
+  const [clickIcon, setClickIcon] = useState(false);
 
   const getContents = async () => {
     const docRef = doc(dbService, "cryptocurrency", id);
@@ -59,7 +64,7 @@ export default function PromisingReport() {
       setGradeImg(
         "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FCC.png?alt=media&token=dfd3bdce-7d2d-443e-a7c2-cdb1eda58703"
       );
-      } else if (docSnap.data().rating === "CCC") {
+    } else if (docSnap.data().rating === "CCC") {
       setGradeImg(
         "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FCCC.png?alt=media&token=8ab979bf-f05f-4b37-a305-f1c17b40cdcf"
       );
@@ -122,8 +127,40 @@ export default function PromisingReport() {
     }
   };
 
+  const onClick = async () => {
+    if (user !== null) {
+      setClickIcon(!clickIcon);
+      if (clickIcon === false) {
+        // 유저별 스크랩 정보 firestore에 저장
+        await setDoc(doc(dbService, "users", user.uid, "scrap", id), {
+          name: promising.name,
+          hashtag: promising.hashtag,
+          date: promising.date,
+          thumbnail: promising.thumbnail,
+        });
+      } else {
+        await deleteDoc(doc(dbService, "users", user.uid, "scrap", id));
+      }
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+    }
+  };
+
+  const getUserScrap = async () => {
+    const q = query(collection(dbService, "users", user.uid, "scrap"));
+    const querySnapShot = await getDocs(q);
+    querySnapShot.forEach((collection) => {
+      if (collection.id === id) {
+        setClickIcon(true);
+      }
+    });
+  };
+
   useEffect(() => {
     getContents();
+    if (user !== null) {
+      getUserScrap();
+    }
   }, []);
 
   let email = "잘못된 정보가 있다면 Mosaic에게 메일을 보내주세요";
@@ -131,248 +168,22 @@ export default function PromisingReport() {
 
   return (
     <>
-    <Pc>
-    <MainContainer maxWidth="md" disableGutters >
-    <IconButton onClick={ () => {navigate(-1);}}>
-      <ArrowBackIcon />
-    </IconButton>
-      {promising !== null && (
-        <Grid container direction="row" spacing={5}>
-          <Grid item xs={12}>
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography
-                variant="h4"
-                align="center"
-                gutterBottom
-                sx={{ fontWeight: "bold", m: 1 }}
+      <Pc>
+        <MainContainer maxWidth="md" disableGutters>
+          <Grid container direction="row" justifyContent="space-between">
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  navigate(-1);
+                }}
               >
-                {promising.name}
-              </Typography>
-              <img src={promising.logo} alt="logo" width={30} />
-            </Grid>
-            <Grid item xs={12}>
-              <Typography align="center">{promising.hashtag}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography
-                variant="caption"
-                display="block"
-                align="center"
-                gutterBottom
-              >
-                {moment(promising.date).format("YYYY.MM.DD")}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={6} display="flex"  justifyContent="center"
-              alignItems="center">
-            <img src={gradeImg} alt="Grade" width="55%" align="center"></img>
-          </Grid>
-          {promising.type === "coin" ? (
-            <PromisingScore
-              type={promising.type}
-              score1={promising.scalability}
-              score2={promising.decentralization}
-              score3={promising.security}
-              score4={promising.others}
-            />
-          ) : (
-            <PromisingScore
-              type={promising.type}
-              score1={promising.business}
-              score2={promising.technicality}
-              score3={promising.reliability}
-            />
-          )}
-          <Grid item xs={12}>
-            <Typography
-              variant="h5"
-              align="left"
-              gutterBottom
-              sx={{ fontWeight: "bold" }}
-            >
-              개요
-            </Typography>
-            <Viewer initialValue={promising.description} />
-            <Typography
-              variant="body1"
-              align="left"
-              component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
-            >
-              <Button onClick ={() => {window.open( promising.cmcLink, '_blank')}}> {promising.cmcLink} </Button>
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                paddingTop: 2,
-              }}
-            />
-            <Typography
-              variant="h5"
-              align="left"
-              gutterBottom
-              sx={{ fontWeight: "bold" }}
-            >
-              선정 이유
-            </Typography>
-            <Box
-              sx={{
-                paddingTop: 3,
-              }}
-            />
-            <Viewer initialValue={promising.assessment} />
-            <Typography
-              variant="caption"
-              align="right"
-              component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
-            >
-              <Button onClick ={() => {window.open( promising.notionLink, '_blank')}}> 자세히보기 </Button>
-            </Typography>
-            <Box
-              sx={{
-                paddingTop: 3,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                paddingTop: 2,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Tooltip title={email} disableInteractive>
-              <IconButton>
-                <AttachEmailIcon />
+                <ArrowBackIcon />
               </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>
-      )}
-    </MainContainer>
-  </Pc>
-  <Mobile>
-  <MainContainer maxWidth="lg">
-      <IconButton onClick={ () => {navigate(-1);}}>
-        <ArrowBackIcon />
-      </IconButton>
-        {promising !== null && (
-          <Grid container direction="row" spacing={5}>
-            <Grid item xs={12}>
-              <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Typography
-                  variant="h5"
-                  align="center"
-                  gutterBottom
-                  sx={{ fontWeight: "bold", m: 1 }}
-                >
-                  {promising.name}
-                </Typography>
-                <img src={promising.logo} alt="logo" width={30} />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography align="center">{promising.hashtag}</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography
-                  variant="caption"
-                  display="block"
-                  align="center"
-                  gutterBottom
-                >
-                  {moment(promising.date).format("YYYY.MM.DD")}
-                </Typography>
-              </Grid>
             </Grid>
-            <Grid item xs={12} display="flex"  justifyContent="center"
-                alignItems="center">
-              <img src={gradeImg} alt="Grade" width="40%" align="center"></img>
-            </Grid>
-            <Grid item xs={12}>
-            {promising.type === "coin" ? (
-              <PromisingScore
-                type={promising.type}
-                score1={promising.scalability}
-                score2={promising.decentralization}
-                score3={promising.security}
-                score4={promising.others}
-              />
-            ) : (
-              <PromisingScore
-                type={promising.type}
-                score1={promising.business}
-                score2={promising.technicality}
-                score3={promising.reliability}
-              />
-            )}
-            </Grid>
-            <Grid item xs={12}>
-              <Viewer initialValue={promising.description} />
-              <Typography
-                variant="body1"
-                align="left"
-                component="div"
-                sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
-              >
-                <Button onClick ={() => {window.open( promising.cmcLink, '_blank')}}> {promising.cmcLink} </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Box
-                sx={{
-                  paddingTop: 2,
-                }}
-              />
-              <Typography
-                variant="h5"
-                align="left"
-                gutterBottom
-                sx={{ fontWeight: "bold" }}
-              >
-                선정 이유
-              </Typography>
-              <Box
-                sx={{
-                  paddingTop: 3,
-                }}
-              />
-              <Viewer initialValue={promising.assessment} />
-              <Typography
-              variant="caption"
-              align="right"
-              component="div"
-              sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
-            >
-              <Button onClick ={() => {window.open( promising.notionLink, '_blank')}}> 자세히보기 </Button>
-            </Typography>
-              <Box
-                sx={{
-                  paddingTop: 3,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Box
-                sx={{
-                  paddingTop: 2,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
+            <Grid item>
+              <IconButton onClick={onClick}>
+                {clickIcon ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+              </IconButton>
               <Tooltip title={email} disableInteractive>
                 <IconButton>
                   <AttachEmailIcon />
@@ -380,10 +191,298 @@ export default function PromisingReport() {
               </Tooltip>
             </Grid>
           </Grid>
-        )}
-    </MainContainer>
-</Mobile>
-</>
-    
+          {promising !== null && (
+            <Grid container direction="row" spacing={5}>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Typography
+                    variant="h4"
+                    align="center"
+                    gutterBottom
+                    sx={{ fontWeight: "bold", m: 1 }}
+                  >
+                    {promising.name}
+                  </Typography>
+                  <img src={promising.logo} alt="logo" width={30} />
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography align="center">{promising.hashtag}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    align="center"
+                    gutterBottom
+                  >
+                    {moment(promising.date).format("YYYY.MM.DD")}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                xs={6}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <img
+                  src={gradeImg}
+                  alt="Grade"
+                  width="55%"
+                  align="center"
+                ></img>
+              </Grid>
+              {promising.type === "coin" ? (
+                <PromisingScore
+                  type={promising.type}
+                  score1={promising.scalability}
+                  score2={promising.decentralization}
+                  score3={promising.security}
+                  score4={promising.others}
+                />
+              ) : (
+                <PromisingScore
+                  type={promising.type}
+                  score1={promising.business}
+                  score2={promising.technicality}
+                  score3={promising.reliability}
+                />
+              )}
+              <Grid item xs={12}>
+                <Typography
+                  variant="h5"
+                  align="left"
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                >
+                  개요
+                </Typography>
+                <Viewer initialValue={promising.description} />
+                <Typography
+                  variant="body1"
+                  align="left"
+                  component="div"
+                  sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+                >
+                  <Button
+                    onClick={() => {
+                      window.open(promising.cmcLink, "_blank");
+                    }}
+                  >
+                    {" "}
+                    {promising.cmcLink}{" "}
+                  </Button>
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    paddingTop: 2,
+                  }}
+                />
+                <Typography
+                  variant="h5"
+                  align="left"
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                >
+                  선정 이유
+                </Typography>
+                <Box
+                  sx={{
+                    paddingTop: 3,
+                  }}
+                />
+                <Viewer initialValue={promising.assessment} />
+                <Typography
+                  variant="caption"
+                  align="right"
+                  component="div"
+                  sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+                >
+                  <Button
+                    onClick={() => {
+                      window.open(promising.notionLink, "_blank");
+                    }}
+                  >
+                    {" "}
+                    자세히보기{" "}
+                  </Button>
+                </Typography>
+                <Box
+                  sx={{
+                    paddingTop: 3,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    paddingTop: 2,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Tooltip title={email} disableInteractive>
+                  <IconButton>
+                    <AttachEmailIcon />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+          )}
+        </MainContainer>
+      </Pc>
+      <Mobile>
+        <MainContainer maxWidth="lg">
+          <IconButton
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          {promising !== null && (
+            <Grid container direction="row" spacing={5}>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Typography
+                    variant="h5"
+                    align="center"
+                    gutterBottom
+                    sx={{ fontWeight: "bold", m: 1 }}
+                  >
+                    {promising.name}
+                  </Typography>
+                  <img src={promising.logo} alt="logo" width={30} />
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography align="center">{promising.hashtag}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    align="center"
+                    gutterBottom
+                  >
+                    {moment(promising.date).format("YYYY.MM.DD")}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <img
+                  src={gradeImg}
+                  alt="Grade"
+                  width="40%"
+                  align="center"
+                ></img>
+              </Grid>
+              <Grid item xs={12}>
+                {promising.type === "coin" ? (
+                  <PromisingScore
+                    type={promising.type}
+                    score1={promising.scalability}
+                    score2={promising.decentralization}
+                    score3={promising.security}
+                    score4={promising.others}
+                  />
+                ) : (
+                  <PromisingScore
+                    type={promising.type}
+                    score1={promising.business}
+                    score2={promising.technicality}
+                    score3={promising.reliability}
+                  />
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <Viewer initialValue={promising.description} />
+                <Typography
+                  variant="body1"
+                  align="left"
+                  component="div"
+                  sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+                >
+                  <Button
+                    onClick={() => {
+                      window.open(promising.cmcLink, "_blank");
+                    }}
+                  >
+                    {" "}
+                    {promising.cmcLink}{" "}
+                  </Button>
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    paddingTop: 2,
+                  }}
+                />
+                <Typography
+                  variant="h5"
+                  align="left"
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                >
+                  선정 이유
+                </Typography>
+                <Box
+                  sx={{
+                    paddingTop: 3,
+                  }}
+                />
+                <Viewer initialValue={promising.assessment} />
+                <Typography
+                  variant="caption"
+                  align="right"
+                  component="div"
+                  sx={{ lineHeight: 2, letterSpacing: 0.25, marginTop: 5 }}
+                >
+                  <Button
+                    onClick={() => {
+                      window.open(promising.notionLink, "_blank");
+                    }}
+                  >
+                    {" "}
+                    자세히보기{" "}
+                  </Button>
+                </Typography>
+                <Box
+                  sx={{
+                    paddingTop: 3,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    paddingTop: 2,
+                  }}
+                />
+              </Grid>
+            </Grid>
+          )}
+        </MainContainer>
+      </Mobile>
+    </>
   );
 }
