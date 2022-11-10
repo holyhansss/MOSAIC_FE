@@ -197,6 +197,8 @@ function ReportlistFormAll({ id, title, date, writer, thumbnail }) {
     });
   };
   return (
+    <>
+    <Pc>
     <List sx={{ width: "75%", bgcolor: "background.paper", mx: "auto" }}>
       <ListItem button alignItems="flex-start" onClick={move}>
         <ListItemText
@@ -247,6 +249,60 @@ function ReportlistFormAll({ id, title, date, writer, thumbnail }) {
       </ListItem>
       <Divider sx={{ width: "100%", mt: 3 }} />
     </List>
+    </Pc>
+    <Mobile>
+    <List sx={{ width: "100%", bgcolor: "background.paper", mx: "auto" }}>
+      <ListItem button alignItems="flex-start" onClick={move}>
+        <ListItemText
+          primary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: "inline" }}
+                component="span"
+                variant="h5"
+                color="text.primary"
+              >
+                {title}
+              </Typography>
+            </React.Fragment>
+          }
+          secondary={
+            <React.Fragment>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {writer}
+              </Typography>
+              <p />
+              <Typography
+                sx={{ display: "block" }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {date}
+              </Typography>
+            </React.Fragment>
+          }
+          sx={{ py: 5, px: 3 }}
+        />
+        <ListItemAvatar sx={{ pb: 1 }}>
+          <Avatar
+            alt="Remy Sharp"
+            src={thumbnail}
+            variant="square"
+            sx={{ borderRadius: "8%", width: "15rem", height: "10rem" }}
+          />
+        </ListItemAvatar>
+      </ListItem>
+      <Divider sx={{ width: "100%", mt: 3 }} />
+    </List>
+    </Mobile>
+    </>
   );
 }
 
