@@ -40,10 +40,10 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
   const [notionLink, setNotionLink] = useState("");
 
   const handleOnChangeCmcLink = (value) => {
-    setNotionLink(value);
+    setCmcLink(value);
   };
   const handleOnChangeNotion = (value) => {
-    setCmcLink(value);
+    setNotionLink(value);
   };
   const handleOnChangeCryptoName = (value) => {
     setCryptoName(value);
@@ -474,25 +474,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
           {isPromising == true ? (
             <Container>
               <Row>
-                <Typography variant="h5">평가</Typography>
-                <Editor
-                  ref={assessmentCommet}
-                  initialEditType="WYSIWYG"
-                  initialValue="내용을 입력하세요"
-                  previewStyle="vertical"
-                  height="300px"
-                  useCommandShortcut={false}
-                  onChange={(e) => {
-                    handleOnChangeAssess(
-                      assessmentCommet.current.getInstance().getMarkdown()
-                    );
-                  }}
-                />
-              </Row>
-              <Row>
-                <Typography variant="h5" gutterBottom>
-                  설명
-                </Typography>
+                <Typography variant="h5">개요</Typography>
                 <Editor
                   ref={descCommet}
                   initialEditType="WYSIWYG"
@@ -501,8 +483,26 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                   height="300px"
                   useCommandShortcut={false}
                   onChange={(e) => {
-                    handleOnChangeDescription(
+                    handleOnChangeAssess(
                       descCommet.current.getInstance().getMarkdown()
+                    );
+                  }}
+                />
+              </Row>
+              <Row>
+                <Typography variant="h5" gutterBottom>
+                  선정 이유
+                </Typography>
+                <Editor
+                  ref={assessmentCommet}
+                  initialEditType="WYSIWYG"
+                  initialValue="내용을 입력하세요"
+                  previewStyle="vertical"
+                  height="300px"
+                  useCommandShortcut={false}
+                  onChange={(e) => {
+                    handleOnChangeDescription(
+                      assessmentCommet.current.getInstance().getMarkdown()
                     );
                   }}
                 />
