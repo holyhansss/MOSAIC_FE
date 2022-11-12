@@ -328,26 +328,33 @@ export default function PromisingReport({ user }) {
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <Tooltip title={email} disableInteractive>
-                  <IconButton>
-                    <AttachEmailIcon />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
             </Grid>
           )}
         </MainContainer>
       </Pc>
       <Mobile>
         <MainContainer maxWidth="lg">
-          <IconButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
+          <Grid container direction="row" justifyContent="space-between">
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                <ArrowBackIcon />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={onClick}>
+                {clickIcon ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+              </IconButton>
+              <Tooltip title={email} disableInteractive>
+                <IconButton>
+                  <AttachEmailIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
           {promising !== null && (
             <Grid container direction="row" spacing={5}>
               <Grid item xs={12}>
