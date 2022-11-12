@@ -263,6 +263,11 @@ export default function PromisingReport({ user }) {
                 >
                   개요
                 </Typography>
+                <Box
+                  sx={{
+                    paddingTop: 2,
+                  }}
+                />
                 <Viewer initialValue={promising.description} />
                 <Typography
                   variant="body1"
@@ -296,7 +301,7 @@ export default function PromisingReport({ user }) {
                 </Typography>
                 <Box
                   sx={{
-                    paddingTop: 3,
+                    paddingTop: 2,
                   }}
                 />
                 <Viewer initialValue={promising.assessment} />
@@ -421,6 +426,19 @@ export default function PromisingReport({ user }) {
                 )}
               </Grid>
               <Grid item xs={12}>
+                <Typography
+                  variant="h5"
+                  align="left"
+                  gutterBottom
+                  sx={{ fontWeight: "bold" }}
+                >
+                  개요
+                </Typography>
+                <Box
+                  sx={{
+                    paddingTop: 2,
+                  }}
+                />
                 <Viewer initialValue={promising.description} />
                 <Typography
                   variant="body1"
@@ -454,7 +472,7 @@ export default function PromisingReport({ user }) {
                 </Typography>
                 <Box
                   sx={{
-                    paddingTop: 3,
+                    paddingTop: 2,
                   }}
                 />
                 <Viewer initialValue={promising.assessment} />
