@@ -20,6 +20,7 @@ function PostList({ user, kind }) {
         postObj = {
           id: collection.id,
           name: collection.data().name,
+          code: collection.data().code,
           hashtag: collection.data().hashtag,
           date: collection.data().date,
           thumbnail: collection.data().thumbnail,

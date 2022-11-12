@@ -17,6 +17,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
 
   const [loading, setLoading] = useState("");
   const [cryptoName, setCryptoName] = useState("");
+  const [cryptoCode, setCryptoCode] = useState("");
   const [cryptoTag, setCryptoTag] = useState("");
   const [cryptoType, setCryptoType] = useState(null);
   const [isPromising, setIsPromising] = useState(false);
@@ -47,6 +48,9 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
   };
   const handleOnChangeCryptoName = (value) => {
     setCryptoName(value);
+  };
+  const handleOnChangeCryptoCode = (value) => {
+    setCryptoCode(value);
   };
   const handleOnChangeCryptoTag = (value) => {
     setCryptoTag(value);
@@ -145,10 +149,11 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
     if (isPromising == false) {
       const docRef = await addDoc(collection(db, "cryptocurrency"), {
         name: cryptoName,
+        code: cryptoCode,
         hashtag: cryptoTag,
         type: cryptoType,
         cmcLink: cmcLink,
-        notionLink : notionLink,
+        notionLink: notionLink,
         promising: isPromising,
         [standard1]: standard1num,
         [standard2]: standard2num,
@@ -161,10 +166,11 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
     } else {
       const docRef = await addDoc(collection(db, "cryptocurrency"), {
         name: cryptoName,
+        code: cryptoCode,
         hashtag: cryptoTag,
         type: cryptoType,
         cmcLink: cmcLink,
-        notionLink : notionLink,
+        notionLink: notionLink,
         promising: isPromising,
         [standard1]: standard1num,
         [standard2]: standard2num,
@@ -208,6 +214,25 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
               }}
               onChange={(e) => {
                 handleOnChangeCryptoName(e.target.value);
+              }}
+              label=""
+            />
+          </Container>
+          <Container className="my-5">
+            <Typography variant="h5" gutterBottom>
+              크립토 코드
+            </Typography>
+            <Form.Control
+              key={"CryptoCode"}
+              className=""
+              type=""
+              placeholder="크립토 코드"
+              style={{
+                width: "100%",
+                height: "50px",
+              }}
+              onChange={(e) => {
+                handleOnChangeCryptoCode(e.target.value);
               }}
               label=""
             />
@@ -297,7 +322,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
           {cryptoType == null ? null : cryptoType === "token" ? (
             <Container>
               <Row>
-                <Typography variant="h5">Business</Typography>
+                <Typography variant="h5">사업성</Typography>
                 <Form.Control
                   key={"business"}
                   className=""
@@ -315,7 +340,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
               </Row>
               <Row>
                 <Typography variant="h5" gutterBottom>
-                  Reliability
+                  신뢰성
                 </Typography>
                 <Form.Control
                   key={"reliability"}
@@ -333,7 +358,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                 />
               </Row>
               <Row>
-                <Typography variant="h5">Technicality</Typography>
+                <Typography variant="h5">기술성</Typography>
                 <Form.Control
                   key={"technicality"}
                   className=""
@@ -364,7 +389,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
           ) : (
             <Container>
               <Row>
-                <Typography variant="h5">Decentralization</Typography>
+                <Typography variant="h5">탈중앙성</Typography>
                 <Form.Control
                   key={"Decentralization"}
                   className=""
@@ -382,7 +407,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
               </Row>
               <Row>
                 <Typography variant="h5" gutterBottom>
-                  Scalability
+                  확장성
                 </Typography>
                 <Form.Control
                   key={"scalability"}
@@ -400,7 +425,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                 />
               </Row>
               <Row>
-                <Typography variant="h5">Security</Typography>
+                <Typography variant="h5">보안성</Typography>
                 <Form.Control
                   key={"security"}
                   className=""
@@ -417,7 +442,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                 />
               </Row>
               <Row>
-                <Typography variant="h5">Others</Typography>
+                <Typography variant="h5">기타</Typography>
                 <Form.Control
                   key={"others"}
                   className=""
@@ -439,7 +464,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                   className="my-2"
                   onClick={onClickRating}
                 >
-                  Rating
+                  등급 확인
                 </Button>
                 <Typography variant="h5">{grade}</Typography>
               </Container>
@@ -483,7 +508,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                   height="300px"
                   useCommandShortcut={false}
                   onChange={(e) => {
-                    handleOnChangeAssess(
+                    handleOnChangeDescription(
                       descCommet.current.getInstance().getMarkdown()
                     );
                   }}
@@ -501,7 +526,7 @@ const AdminPromising = ({ admin, isLoggedIn }) => {
                   height="300px"
                   useCommandShortcut={false}
                   onChange={(e) => {
-                    handleOnChangeDescription(
+                    handleOnChangeAssess(
                       assessmentCommet.current.getInstance().getMarkdown()
                     );
                   }}
