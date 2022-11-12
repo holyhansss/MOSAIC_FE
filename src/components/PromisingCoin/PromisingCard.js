@@ -22,10 +22,25 @@ export default function PromisingCard({ crypto }) {
         />
       </Card>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {crypto.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <div
+          style={{
+            display: "flex",
+            flexDrection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography gutterBottom variant="h5" component="div">
+            {crypto.name}
+          </Typography>
+          <Typography gutterBottom variant="body1" sx={{ color: "gray" }}>
+            　{crypto.code}
+          </Typography>
+        </div>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ textAlign: "left" }}
+        >
           {crypto.hashtag}
         </Typography>
       </CardContent>

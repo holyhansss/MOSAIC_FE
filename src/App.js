@@ -129,6 +129,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             security: docs.data().security,
             scalability: docs.data().scalability,
             decentralization: docs.data().decentralization,
@@ -148,6 +149,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             business: docs.data().business,
             technicality: docs.data().technicality,
             reliability: docs.data().reliability,
@@ -168,6 +170,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             security: docs.data().security,
             scalability: docs.data().scalability,
             decentralization: docs.data().decentralization,
@@ -183,6 +186,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             business: docs.data().business,
             technicality: docs.data().technicality,
             reliability: docs.data().reliability,
@@ -208,6 +212,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             security: docs.data().security,
             scalability: docs.data().scalability,
             decentralization: docs.data().decentralization,
@@ -227,6 +232,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             business: docs.data().business,
             technicality: docs.data().technicality,
             reliability: docs.data().reliability,
@@ -246,6 +252,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             security: docs.data().security,
             scalability: docs.data().scalability,
             decentralization: docs.data().decentralization,
@@ -260,6 +267,7 @@ function App() {
           cryptoObj = {
             id: docs.id,
             name: docs.data().name,
+            code: docs.data().code,
             business: docs.data().business,
             technicality: docs.data().technicality,
             reliability: docs.data().reliability,

@@ -134,6 +134,7 @@ export default function PromisingReport({ user }) {
         // 유저별 스크랩 정보 firestore에 저장
         await setDoc(doc(dbService, "users", user.uid, "scrap", id), {
           name: promising.name,
+          code: promising.code,
           hashtag: promising.hashtag,
           date: promising.date,
           thumbnail: promising.thumbnail,
@@ -200,15 +201,24 @@ export default function PromisingReport({ user }) {
                   justifyContent="center"
                   alignItems="center"
                 >
-                  <Typography
-                    variant="h4"
-                    align="center"
-                    gutterBottom
-                    sx={{ fontWeight: "bold", m: 1 }}
-                  >
-                    {promising.name}
-                  </Typography>
                   <img src={promising.logo} alt="logo" width={30} />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "end",
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      sx={{ fontWeight: "bold", margin: "0 0.5rem" }}
+                    >
+                      {promising.name}
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "gray" }}>
+                      {promising.code}
+                    </Typography>
+                  </div>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography align="center">{promising.hashtag}</Typography>
@@ -369,15 +379,24 @@ export default function PromisingReport({ user }) {
                   justifyContent="center"
                   alignItems="center"
                 >
-                  <Typography
-                    variant="h5"
-                    align="center"
-                    gutterBottom
-                    sx={{ fontWeight: "bold", m: 1 }}
-                  >
-                    {promising.name}
-                  </Typography>
                   <img src={promising.logo} alt="logo" width={30} />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "end",
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      sx={{ fontWeight: "bold", margin: "0 0.5rem" }}
+                    >
+                      {promising.name}
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "gray" }}>
+                      {promising.code}
+                    </Typography>
+                  </div>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography align="center">{promising.hashtag}</Typography>
