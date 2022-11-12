@@ -65,15 +65,15 @@ function Header({ user, admin }) {
                   </ListItemAvatar>
                 </ListItem>
                 <ListItem disablePadding>
-                  <Link to= "/profile">
+                  <StyledLink to= "/profile">
                     <ListItemText primary={'마이페이지'} />
-                  </Link>
+                  </StyledLink>
                 </ListItem>
                   {admin === true && (
                     <ListItem>
-                      <Link to= "/admin">
+                      <StyledLink to= "/admin">
                         <ListItemText primary={'관리자'} />
-                      </Link>
+                      </StyledLink>
                     </ListItem>
                   )}
                   <ListItem disablePadding>
@@ -83,42 +83,42 @@ function Header({ user, admin }) {
                     </ListItem>
               </div>
               ) : (
-                <Link to="/login">
+                <StyledLink to="/login">
                   <ListItemButton>
                     <ListItemText primary={'로그인해주세요'} />
                   </ListItemButton>
-                </Link>
+                </StyledLink>
               )}
 
         <Divider />
 
         <ListItem disablePadding>
-          <Link to='/ranking'>
+          <StyledLink to='/ranking'>
             <ListItemButton>
               <ListItemText primary={'Mosaic 순위'} />
             </ListItemButton>
-         </Link>
+         </StyledLink>
           </ListItem>
           <ListItem disablePadding>
-          <Link to='/promising'>
+          <StyledLink to='/promising'>
             <ListItemButton>
               <ListItemText primary={'유망 코인'} />
             </ListItemButton>
-         </Link>
+         </StyledLink>
           </ListItem>
           <ListItem disablePadding>
-          <Link to='/market'>
+          <StyledLink to='/market'>
             <ListItemButton>
               <ListItemText primary={'시장 동향'} />
             </ListItemButton>
-         </Link>
+         </StyledLink>
           </ListItem>        
           <ListItem disablePadding>
-            <Link to='/reportMain'>
+            <StyledLink to='/reportMain'>
               <ListItemButton>
                 <ListItemText primary={'리포트'} />
               </ListItemButton>
-            </Link>
+            </StyledLink>
           </ListItem>
       </List>
     </Box>
