@@ -780,7 +780,7 @@ function Marketpage() {
                       <CardContent>
                         <Typography
                           sx={{ fontSize: 14 }}
-                          color="#B22222"
+                          color="#DBDFFD"
                           gutterBottom
                         >
                           매우 공포 (0~25)
@@ -796,7 +796,7 @@ function Marketpage() {
                       <CardContent>
                         <Typography
                           sx={{ fontSize: 14 }}
-                          color="#FF6347"
+                          color="#9BA3EB"
                           gutterBottom
                         >
                           공포 (26~45)
@@ -812,7 +812,7 @@ function Marketpage() {
                       <CardContent>
                         <Typography
                           sx={{ fontSize: 14 }}
-                          color="#FF8C00"
+                          color="#646FD4"
                           gutterBottom
                         >
                           중립 (46~54)
@@ -828,7 +828,7 @@ function Marketpage() {
                       <CardContent>
                         <Typography
                           sx={{ fontSize: 14 }}
-                          color="#7FFF00"
+                          color="#242F9B"
                           gutterBottom
                         >
                           탐욕 (55~75)
@@ -844,7 +844,7 @@ function Marketpage() {
                       <CardContent>
                         <Typography
                           sx={{ fontSize: 14 }}
-                          color="#3CB371"
+                          color="#210B61"
                           gutterBottom
                         >
                           매우 탐욕 (76~100)
