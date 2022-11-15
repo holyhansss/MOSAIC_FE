@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer
 } from "recharts";
 
 //Responsive Web
@@ -226,12 +227,10 @@ function Index1d() {
       </Pc>
       <Mobile>
       {res && (
-        <div>
+        <div style={{ width: '100%', height: 300 }} >
+          <ResponsiveContainer >
           <LineChart
-            width={250}
-            height={150}
             data={res}
-            margin={{ top: 5, bottom: 5 }}
           >
             <CartesianGrid opacity={0.4} />
             <XAxis
@@ -265,6 +264,7 @@ function Index1d() {
               dot={false}
             />
           </LineChart>
+          </ResponsiveContainer>
         </div>
       )}
       </Mobile>
