@@ -9,9 +9,11 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer
 } from "recharts";
 import { CustomTooltip } from "./LineGraph1d";
-
+//Responsive Web
+import {Pc, Mobile} from "../Responsive/Responsive";
 // S&P 500 지수 와 CMC 200 지수를 그래프로(한 달)
 
 function Index1mo() {
@@ -35,6 +37,7 @@ function Index1mo() {
   }, []);
   return (
     <div>
+      <Pc>
       {res && (
         <div>
           <LineChart
@@ -77,6 +80,50 @@ function Index1mo() {
           </LineChart>
         </div>
       )}
+      </Pc>
+      <Mobile>
+      {res && (
+        <div style={{ width: '100%', height: 300 }}>
+          <ResponsiveContainer >
+          <LineChart
+            data={res}
+          >
+            <CartesianGrid opacity={0.4} />
+            <XAxis
+              dataKey="Time"
+              minTickGap={60}
+              tickSize={5}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis
+              tickSize={5}
+              domain={[50, 150]}
+              tickMargin={5}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            <Line
+              name="S&P"
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="SNP"
+              stroke="#8884d8"
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              isAnimationActive={false}
+              dataKey="CMC"
+              stroke="#82ca9d"
+              dot={false}
+            />
+          </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+      </Mobile>
     </div>
   );
 }

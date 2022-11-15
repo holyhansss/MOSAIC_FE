@@ -46,17 +46,21 @@ export default function Footer() {
         <section className=''>
           <MDBContainer className='text-center text-md-start mt-5'>
             <MDBRow className='mt-3'>
-              <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
+              <MDBCol md="6" lg="6" xl="5" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>
                   <MDBIcon icon="gem" className="me-3" />
                   MOSAIC
                 </h6>
                 <p>
-                Mosaic는 “건전한 암호화폐 투자의 대중화”를 목적으로 설립되었습니다.
+                Mosaic는 “건전한 암호화폐 투자의 대중화”를<br/>
+                목적으로 설립되었습니다.
+                </p>
+                <p style={{fontSize:"80%"}}>
+               (주)MOSAIC | 대표: 한성원
                 </p>
               </MDBCol>
   
-              <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
+              {/* <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>MOSAIC</h6>
                 <p>
                   <StyledLink href='/' className='text-reset'>
@@ -73,52 +77,44 @@ export default function Footer() {
                     모자익 건의사항
                   </StyledLink>
                 </p>
-              </MDBCol>
+              </MDBCol> */}
   
               <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>추천 메뉴</h6>
-                <p>
+                <p style={{fontSize:"80%"}}>
                   <StyledLink href='/reportMain' className='text-reset'>
                     데일리 리포트
                   </StyledLink>
                 </p>
-                <p>
+                <p style={{fontSize:"80%"}}>
                   <StyledLink href='/promising' className='text-reset'>
                     유망코인
                   </StyledLink>
                 </p>
-                <p>
+                <p style={{fontSize:"80%"}}>
                   <StyledLink href='/ranking' className='text-reset'>
                     MOSAIC 랭킹
-                  </StyledLink>
-                </p>
-                <p>
-                  <StyledLink href='/help' className='text-reset'>
-                    Help
                   </StyledLink>
                 </p>
               </MDBCol>
   
               <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
-                <p>
-                  <ContactsIcon />
+                <p style={{fontSize:"80%"}}>
+                <ContactsIcon />
                   경상북도.포항시.북구.흥해읍.한동로
                 </p>
-                <p>
-                  <AlternateEmailIcon/>
+                <p style={{fontSize:"80%"}}>
+                <AlternateEmailIcon/>
                   mosaic.team.tech@gmail.com
                 </p>
-                <p>
-                  <ChatIcon/>
+                <p style={{fontSize:"80%"}}>
+                <ChatIcon/>
                   <StyledLink href='https://open.kakao.com/o/gdQximie' className='text-reset'>
                     모자익 오픈 채팅방
                   </StyledLink>
                 </p>
-                <p>
-                  <BusinessIcon />
-                  (주)MOSAIC | 대표: 한성원
-                </p>
+                
               </MDBCol>
             </MDBRow>
           </MDBContainer>

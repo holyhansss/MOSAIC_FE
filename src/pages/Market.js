@@ -373,6 +373,11 @@ function Marketpage() {
           </div>
         </Pc>
         <Mobile>
+        <div style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
           <div>
             {categoryArray[0] ? (
               <Button
@@ -381,10 +386,10 @@ function Marketpage() {
                 size="small"
                 name="Currency"
                 sx={{
-                  width: "50%",
-                  height: "50%",
-                  margin: "3%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  height: "6em",
+                  margin: "0.3rem 0.5rem",
+                  fontSize: "8px",
                   color: "#FFB404",
                   border: "1px solid #FFB404",
                 }}
@@ -398,10 +403,10 @@ function Marketpage() {
                 size="small"
                 name="Currency"
                 sx={{
-                  width: "50%",
-                  height: "50%",
-                  margin: "3%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  height: "6em",
+                  margin: "0.3rem 0.5rem",
+                  fontSize: "8px",
                   color: "black",
                   background: "#FFB404",
                 }}
@@ -418,10 +423,10 @@ function Marketpage() {
                 size="small"
                 name="Smart Contract Platform"
                 sx={{
-                  width: "50%",
-                  height: "50%",
-                  margin: "3%",
-                  fontSize: "3%",
+                  width: "12.5em",
+                  height: "6em",
+                  margin: "0.3rem 0.5rem",
+                  fontSize: "8px",
                   color: "#BCCF5F",
                   border: "1px solid #BCCF5F",
                 }}
@@ -435,10 +440,10 @@ function Marketpage() {
                 size="small"
                 name="Smart Contract Platform"
                 sx={{
-                  width: "50%",
-                  margin: "3%",
-                  height: "50%",
-                  fontSize: "3%",
+                  width: "12.5em",
+                  margin: "0.3rem 0.5rem",
+                  height: "6em",
+                  fontSize: "8px",
                   color: "black",
                   background: "#BCCF5F",
                 }}
@@ -455,10 +460,10 @@ function Marketpage() {
                 size="small"
                 name="Computing"
                 sx={{
-                  width: "50%",
-                  height: "50%",
-                  margin: "3%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  height: "6em",
+                  margin: "0.3rem 0.5rem",
+                  fontSize: "8px",
                   color: "#01EDA5",
                   border: "1px solid #01EDA5",
                 }}
@@ -472,10 +477,10 @@ function Marketpage() {
                 size="small"
                 name="Computing"
                 sx={{
-                  width: "50%",
-                  margin: "3%",
-                  height: "50%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  margin: "0.3rem 0.5rem",
+                  height: "6em",
+                  fontSize: "8px",
                   color: "black",
                   background: "#01EDA5",
                 }}
@@ -484,6 +489,12 @@ function Marketpage() {
               </Button>
             )}
           </div>
+          </div>
+          <div style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
           <div>
             {categoryArray[3] ? (
               <Button
@@ -492,10 +503,10 @@ function Marketpage() {
                 size="small"
                 name="DeFi"
                 sx={{
-                  width: "50%",
-                  height: "50%",
-                  margin: "3%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  height: "6em",
+                  margin: "0.3rem 0.5rem",
+                  fontSize: "8px",
                   color: "#24C6FE",
                   border: "1px solid #24C6FE",
                 }}
@@ -509,10 +520,10 @@ function Marketpage() {
                 variant="contained"
                 name="DeFi"
                 sx={{
-                  width: "50%",
-                  margin: "3%",
-                  height: "50%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  margin: "0.3rem 0.5rem",
+                  height: "6em",
+                  fontSize: "8px",
                   color: "black",
                   background: "#24C6FE",
                 }}
@@ -529,10 +540,10 @@ function Marketpage() {
                 size="small"
                 name="Culture & Entertainment"
                 sx={{
-                  width: "50%",
-                  height: "50%",
-                  margin: "3%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  height: "6em",
+                  margin: "0.3rem 0.5rem",
+                  fontSize: "8px",
                   color: "#5D5CB0",
                   border: "1px solid #5D5CB0",
                 }}
@@ -546,10 +557,10 @@ function Marketpage() {
                 size="small"
                 name="Culture & Entertainment"
                 sx={{
-                  width: "50%",
-                  margin: "3%",
-                  height: "50%",
-                  fontSize: "10%",
+                  width: "12.5em",
+                  margin: "0.3rem 0.5rem",
+                  height: "6em",
+                  fontSize: "8px",
                   color: "black",
                   background: "#5D5CB0",
                 }}
@@ -558,6 +569,8 @@ function Marketpage() {
               </Button>
             )}
           </div>
+          </div>
+          
         </Mobile>
       </>
     );
@@ -934,6 +947,8 @@ function Marketpage() {
               <Typography variant="h7" gutterBottom>
                 카테고리별 인덱스
               </Typography>
+            </Grid>
+            <Grid item xs={12}>
               <Typography
                 align="left"
                 gutterBottom
@@ -943,10 +958,38 @@ function Marketpage() {
                 Currency, Smart Contract Platform, Computing, DeFi, Culture &
                 Entertainment의 5가지 섹터로 나누어 상위 10개 종목으로 구성한
                 지수를 보여줍니다.
-                <br />
                 어떤 섹터의 코인/토큰들의 수익률이 우수한지 비교할 수 있으며,
                 시세를 통해 어떤 산업이 강세인지를 파악할 수 있습니다.
               </Typography>
+              <Accordion
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
+                sx={{ boxShadow: 0 }}
+              >
+                <AccordionSummary
+                  aria-controls="panel1d-content"
+                  id="panel1d-header"
+                >
+                  <Typography sx={{ fontSize: "0.5rem" }}>
+                    카테고리 설명 보기
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography
+                    align="left"
+                    gutterBottom
+                    variant="caption"
+                    sx={{ color: "#7F8487" }}
+                  >
+                    Currency: BaaS, 스테이블 코인, 사설 화폐 등 <br />
+                    Smart Contract Platform: 멀티체인, 싱글체인 <br />
+                    Computing: IoT, 클라우드, 공유 네트워크, 공유 스토리지 등{" "}
+                    <br />
+                    DeFi: DAO, 파생, 거래소, 보험, 스테이킹 등 <br />
+                    Culture & Entertainment: 예술, 미디어, 메타버스, NFT 등
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
             </Grid>
             <Grid item xs={12}>
               <div style={{ display: "flex", justifyContent: "center" }}>
@@ -971,7 +1014,7 @@ function Marketpage() {
               </div>
             </Grid>
             <Grid item xs={12}>
-              <div style={{ display: "flex" }}>
+
                 <div>
                   {categoryIndex === 0 && <CategoryLineGraph1d {...props} />}
                   {categoryIndex === 1 && <CategoryLineGraph1mo {...props} />}
@@ -980,31 +1023,11 @@ function Marketpage() {
                   {categoryIndex === 4 && <CategoryLineGraph1mo {...props} />}
                   {categoryIndex === 5 && <CategoryLineGraph1y {...props} />}
                 </div>
-              </div>
             </Grid>
             <Grid item xs={12}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
+              
                 <CategoryButton />
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography
-                align="left"
-                gutterBottom
-                variant="caption"
-                sx={{ color: "#7F8487" }}
-              >
-                Currency: BaaS, 스테이블 코인, 사설 화폐 등 <br />
-                Smart Contract Platform: 멀티체인, 싱글체인 <br />
-                Computing: IoT, 클라우드, 공유 네트워크, 공유 스토리지 등 <br />
-                DeFi: DAO, 파생, 거래소, 보험, 스테이킹 등 <br />
-                Culture & Entertainment: 예술, 미디어, 메타버스, NFT 등
-              </Typography>
+
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h7" gutterBottom>
@@ -1037,90 +1060,19 @@ function Marketpage() {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
-                    <Grid container spacing={3}>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
                           <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#DBDFFD"
+                            variant="caption"
+                            sx={{ color: "#7F8487" }}
                             gutterBottom
                           >
-                            매우 공포 (0~25)
+                            매우 공포 (0~25): 극심한 공포로 인해 과도하게 매도<br/>
+                            공포 (26~45): 자산 하락의 두려움이 생김<br/>
+                            중립 (46~54): 저항과 지지를 동시에 받음<br/>
+                            탐욕 (55~75):매수에 대한 관심이 증가<br/>
+                            매우 탐욕 (76~100): 매수에 대한 관심이 매우 증가<br/>
+
                           </Typography>
-                          <Typography variant="body2">
-                            극심한 공포로 인해 과도하게 매도
-                            <br />
-                            {'"시장의 변동성 증가"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#9BA3EB"
-                            gutterBottom
-                          >
-                            공포 (26~45)
-                          </Typography>
-                          <Typography variant="body2">
-                            자산 하락의 두려움이 생김
-                            <br />
-                            {'"거래량 증가, 자산 가격 하락"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#646FD4"
-                            gutterBottom
-                          >
-                            중립 (46~54)
-                          </Typography>
-                          <Typography variant="body2">
-                            저항과 지지를 동시에 받음
-                            <br />
-                            {'"자산 가격 행보 예측 힘듦"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#242F9B"
-                            gutterBottom
-                          >
-                            탐욕 (55~75)
-                          </Typography>
-                          <Typography variant="body2">
-                            매수에 대한 관심이 증가
-                            <br />
-                            {'"단기차익을 노린 투자자들이 투입"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      <Card sx={{ minWidth: 220 }}>
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 14 }}
-                            color="#210B61"
-                            gutterBottom
-                          >
-                            매우 탐욕 (76~100)
-                          </Typography>
-                          <Typography variant="body2">
-                            매수에 대한 관심이 매우 증가
-                            <br />
-                            {'"시장의 변동성 증가"'}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  </Box>
+                          
                 </AccordionDetails>
               </Accordion>
             </Grid>

@@ -7,6 +7,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ResponsiveContainer
 } from "recharts";
 
 //Responsive Web
@@ -133,12 +134,10 @@ function CategoryLineGraph_1d(props) {
       </Pc>
       <Mobile>
       {datesAndPrices && (
-        <div>
+        <div  style={{ width: '100%', height: 300 }}>
+          <ResponsiveContainer >
           <LineChart
-            width={250}
-            height={150}
             data={datesAndPrices}
-            margin={{ top: 5, bottom: 5 }}
           >
             <CartesianGrid opacity={0.4} />
             <XAxis
@@ -193,6 +192,7 @@ function CategoryLineGraph_1d(props) {
             />
             {/* <Line type="monotone" dataKey="Digitization" stroke="gray" dot={false}/>  */}
           </LineChart>
+          </ResponsiveContainer>
         </div>
       )}
       </Mobile>
