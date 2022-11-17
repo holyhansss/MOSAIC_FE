@@ -39,8 +39,9 @@ import { Pc, Mobile } from "../components/Responsive/Responsive";
 export default function ReportWeeklyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   const location = useLocation();
-  const thumbnail = location.state.thumbnail;
-
+  // const thumbnail = location.state.thumbnail;
+  const thumbnail = 'thumbnail';
+  
   const [value, setValue] = useState("1");
 
   //코멘트 가져오기
