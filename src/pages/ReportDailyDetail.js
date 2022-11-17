@@ -34,10 +34,11 @@ import { DailyComment } from "../components/Comment/Comment";
 export default function ReportDailyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   const location = useLocation();
-  const thumbnail = location.state.thumbnail;
-
+  // const thumbnail = location.state.thumbnail;
+  const thumbnail = 'thumbnail';
+  
   //코멘트 가져오기
-  const [reply, setReply] = useState([]);
+  const [reply, setReply] = useState([]); 
 
   const getReplies = async () => {
     const repl = query(
@@ -62,7 +63,6 @@ export default function ReportDailyDetail({ user }) {
   };
 
   //좋아요 가져오기
-  // const [likenum, setLikenum] = useState([]);
   const [clickICon, setClickIcon] = useState(false);
   const [likescount, setLikescount] = useState([]);
   const [count, setCount] = useState(0);
@@ -126,7 +126,7 @@ export default function ReportDailyDetail({ user }) {
           title: title,
           writer: writer,
           date: date,
-          thumbnail: thumbnail,
+          thumbnail: thumbnail ,
           type: "daily"
         });
       } else {
