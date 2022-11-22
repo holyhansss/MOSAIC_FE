@@ -19,6 +19,7 @@ import {
   setDoc,
   doc,
   where,
+  getDoc,
 } from "firebase/firestore";
 import { dbService } from "../firebase";
 import IconButton from "@mui/material/IconButton";
@@ -39,9 +40,13 @@ import { Pc, Mobile } from "../components/Responsive/Responsive";
 export default function ReportWeeklyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   const location = useLocation();
-  // const thumbnail = location.state.thumbnail;
-  const thumbnail = 'thumbnail';
-  
+  const [thumbnail, setThumbnail] = useState();
+
+  const getThumbnail = async () => {
+    const Thumb = doc(dbService, "weekly_report", id);
+    const QuerySnapShot = await getDoc(Thumb);
+    setThumbnail(QuerySnapShot.data().thumbnail);
+  };
   const [value, setValue] = useState("1");
 
   //코멘트 가져오기
@@ -109,6 +114,7 @@ export default function ReportWeeklyDetail({ user }) {
     getReplies();
     getLikes();
     getUserLike();
+    getThumbnail();
   }, []);
 
   useEffect(() => {

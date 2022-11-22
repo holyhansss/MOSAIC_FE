@@ -18,6 +18,7 @@ import {
   setDoc,
   doc,
   where,
+  getDoc
 } from "firebase/firestore";
 import { dbService } from "../firebase";
 import IconButton from "@mui/material/IconButton";
@@ -34,8 +35,14 @@ import { DailyComment } from "../components/Comment/Comment";
 export default function ReportDailyDetail({ user }) {
   const { id, title, writer, date } = useParams();
   const location = useLocation();
-  // const thumbnail = location.state.thumbnail;
-  const thumbnail = 'thumbnail';
+
+  const [thumbnail, setThumbnail] = useState();
+
+  const getThumbnail = async () => {
+    const Thumb = doc(dbService, "daily_report", id);
+    const QuerySnapShot = await getDoc(Thumb);
+    setThumbnail(QuerySnapShot.data().thumbnail);
+  };
   
   //코멘트 가져오기
   const [reply, setReply] = useState([]); 
@@ -103,6 +110,7 @@ export default function ReportDailyDetail({ user }) {
     getReplies();
     getLikes();
     getUserLike();
+    getThumbnail();
   }, []);
 
   useEffect(() => {
