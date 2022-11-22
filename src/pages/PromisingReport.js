@@ -291,7 +291,7 @@ export default function PromisingReport({ user }) {
                     }}
                   >
                     {" "}
-                    {promising.cmcLink}{" "}
+                    코인마켓캡에서 자세히 보기{" "}
                   </Button>
                 </Typography>
               </Grid>
