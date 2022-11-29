@@ -100,8 +100,8 @@ function Marketpage() {
   const [snpRange, setSnpRange] = useState("1d");
   const [snpIndex, setSnpIndex] = useState(0);
 
-  const [categoryRange, setCategoryRange] = useState("1d");
-  const [categoryIndex, setCategoryIndex] = useState(0);
+  const [categoryRange, setCategoryRange] = useState("1mo");
+  const [categoryIndex, setCategoryIndex] = useState(1);
   const [categoryArray, setCategoryArray] = useState([
     true,
     true,
@@ -373,204 +373,205 @@ function Marketpage() {
           </div>
         </Pc>
         <Mobile>
-        <div style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-          <div>
-            {categoryArray[0] ? (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="text"
-                size="small"
-                name="Currency"
-                sx={{
-                  width: "12.5em",
-                  height: "6em",
-                  margin: "0.3rem 0.5rem",
-                  fontSize: "8px",
-                  color: "#FFB404",
-                  border: "1px solid #FFB404",
-                }}
-              >
-                Currency
-              </Button>
-            ) : (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="contained"
-                size="small"
-                name="Currency"
-                sx={{
-                  width: "12.5em",
-                  height: "6em",
-                  margin: "0.3rem 0.5rem",
-                  fontSize: "8px",
-                  color: "black",
-                  background: "#FFB404",
-                }}
-              >
-                Currency
-              </Button>
-            )}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div>
+              {categoryArray[0] ? (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="text"
+                  size="small"
+                  name="Currency"
+                  sx={{
+                    width: "12.5em",
+                    height: "6em",
+                    margin: "0.3rem 0.5rem",
+                    fontSize: "8px",
+                    color: "#FFB404",
+                    border: "1px solid #FFB404",
+                  }}
+                >
+                  Currency
+                </Button>
+              ) : (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="contained"
+                  size="small"
+                  name="Currency"
+                  sx={{
+                    width: "12.5em",
+                    height: "6em",
+                    margin: "0.3rem 0.5rem",
+                    fontSize: "8px",
+                    color: "black",
+                    background: "#FFB404",
+                  }}
+                >
+                  Currency
+                </Button>
+              )}
+            </div>
+            <div>
+              {categoryArray[1] ? (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="text"
+                  size="small"
+                  name="Smart Contract Platform"
+                  sx={{
+                    width: "12.5em",
+                    height: "6em",
+                    margin: "0.3rem 0.5rem",
+                    fontSize: "8px",
+                    color: "#BCCF5F",
+                    border: "1px solid #BCCF5F",
+                  }}
+                >
+                  Smart Contract Platform
+                </Button>
+              ) : (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="contained"
+                  size="small"
+                  name="Smart Contract Platform"
+                  sx={{
+                    width: "12.5em",
+                    margin: "0.3rem 0.5rem",
+                    height: "6em",
+                    fontSize: "8px",
+                    color: "black",
+                    background: "#BCCF5F",
+                  }}
+                >
+                  Smart Contract Platform
+                </Button>
+              )}
+            </div>
+            <div>
+              {categoryArray[2] ? (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="text"
+                  size="small"
+                  name="Computing"
+                  sx={{
+                    width: "12.5em",
+                    height: "6em",
+                    margin: "0.3rem 0.5rem",
+                    fontSize: "8px",
+                    color: "#01EDA5",
+                    border: "1px solid #01EDA5",
+                  }}
+                >
+                  Computing
+                </Button>
+              ) : (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="contained"
+                  size="small"
+                  name="Computing"
+                  sx={{
+                    width: "12.5em",
+                    margin: "0.3rem 0.5rem",
+                    height: "6em",
+                    fontSize: "8px",
+                    color: "black",
+                    background: "#01EDA5",
+                  }}
+                >
+                  Computing
+                </Button>
+              )}
+            </div>
           </div>
-          <div>
-            {categoryArray[1] ? (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="text"
-                size="small"
-                name="Smart Contract Platform"
-                sx={{
-                  width: "12.5em",
-                  height: "6em",
-                  margin: "0.3rem 0.5rem",
-                  fontSize: "8px",
-                  color: "#BCCF5F",
-                  border: "1px solid #BCCF5F",
-                }}
-              >
-                Smart Contract Platform
-              </Button>
-            ) : (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="contained"
-                size="small"
-                name="Smart Contract Platform"
-                sx={{
-                  width: "12.5em",
-                  margin: "0.3rem 0.5rem",
-                  height: "6em",
-                  fontSize: "8px",
-                  color: "black",
-                  background: "#BCCF5F",
-                }}
-              >
-                Smart Contract Platform
-              </Button>
-            )}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <div>
+              {categoryArray[3] ? (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="text"
+                  size="small"
+                  name="DeFi"
+                  sx={{
+                    width: "12.5em",
+                    height: "6em",
+                    margin: "0.3rem 0.5rem",
+                    fontSize: "8px",
+                    color: "#24C6FE",
+                    border: "1px solid #24C6FE",
+                  }}
+                >
+                  DeFi
+                </Button>
+              ) : (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  size="small"
+                  variant="contained"
+                  name="DeFi"
+                  sx={{
+                    width: "12.5em",
+                    margin: "0.3rem 0.5rem",
+                    height: "6em",
+                    fontSize: "8px",
+                    color: "black",
+                    background: "#24C6FE",
+                  }}
+                >
+                  DeFi
+                </Button>
+              )}
+            </div>
+            <div>
+              {categoryArray[4] ? (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="text"
+                  size="small"
+                  name="Culture & Entertainment"
+                  sx={{
+                    width: "12.5em",
+                    height: "6em",
+                    margin: "0.3rem 0.5rem",
+                    fontSize: "8px",
+                    color: "#5D5CB0",
+                    border: "1px solid #5D5CB0",
+                  }}
+                >
+                  Culture & Entertainment
+                </Button>
+              ) : (
+                <Button
+                  onClick={buttonToggleArrayElement}
+                  variant="contained"
+                  size="small"
+                  name="Culture & Entertainment"
+                  sx={{
+                    width: "12.5em",
+                    margin: "0.3rem 0.5rem",
+                    height: "6em",
+                    fontSize: "8px",
+                    color: "black",
+                    background: "#5D5CB0",
+                  }}
+                >
+                  Culture & Entertainment
+                </Button>
+              )}
+            </div>
           </div>
-          <div>
-            {categoryArray[2] ? (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="text"
-                size="small"
-                name="Computing"
-                sx={{
-                  width: "12.5em",
-                  height: "6em",
-                  margin: "0.3rem 0.5rem",
-                  fontSize: "8px",
-                  color: "#01EDA5",
-                  border: "1px solid #01EDA5",
-                }}
-              >
-                Computing
-              </Button>
-            ) : (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="contained"
-                size="small"
-                name="Computing"
-                sx={{
-                  width: "12.5em",
-                  margin: "0.3rem 0.5rem",
-                  height: "6em",
-                  fontSize: "8px",
-                  color: "black",
-                  background: "#01EDA5",
-                }}
-              >
-                Computing
-              </Button>
-            )}
-          </div>
-          </div>
-          <div style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-          <div>
-            {categoryArray[3] ? (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="text"
-                size="small"
-                name="DeFi"
-                sx={{
-                  width: "12.5em",
-                  height: "6em",
-                  margin: "0.3rem 0.5rem",
-                  fontSize: "8px",
-                  color: "#24C6FE",
-                  border: "1px solid #24C6FE",
-                }}
-              >
-                DeFi
-              </Button>
-            ) : (
-              <Button
-                onClick={buttonToggleArrayElement}
-                size="small"
-                variant="contained"
-                name="DeFi"
-                sx={{
-                  width: "12.5em",
-                  margin: "0.3rem 0.5rem",
-                  height: "6em",
-                  fontSize: "8px",
-                  color: "black",
-                  background: "#24C6FE",
-                }}
-              >
-                DeFi
-              </Button>
-            )}
-          </div>
-          <div>
-            {categoryArray[4] ? (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="text"
-                size="small"
-                name="Culture & Entertainment"
-                sx={{
-                  width: "12.5em",
-                  height: "6em",
-                  margin: "0.3rem 0.5rem",
-                  fontSize: "8px",
-                  color: "#5D5CB0",
-                  border: "1px solid #5D5CB0",
-                }}
-              >
-                Culture & Entertainment
-              </Button>
-            ) : (
-              <Button
-                onClick={buttonToggleArrayElement}
-                variant="contained"
-                size="small"
-                name="Culture & Entertainment"
-                sx={{
-                  width: "12.5em",
-                  margin: "0.3rem 0.5rem",
-                  height: "6em",
-                  fontSize: "8px",
-                  color: "black",
-                  background: "#5D5CB0",
-                }}
-              >
-                Culture & Entertainment
-              </Button>
-            )}
-          </div>
-          </div>
-          
         </Mobile>
       </>
     );
@@ -710,9 +711,9 @@ function Marketpage() {
                   exclusive
                   sx={{ height: "2.5em" }}
                 >
-                  <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                  {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                     1D
-                  </ToggleButton>
+                  </ToggleButton> */}
                   <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                     1M
                   </ToggleButton>
@@ -723,10 +724,10 @@ function Marketpage() {
               </ThemeProvider>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div>
-                  {categoryIndex === 0 && <CategoryLineGraph1d {...props} />}
+                  {/* {categoryIndex === 0 && <CategoryLineGraph1d {...props} />} */}
                   {categoryIndex === 1 && <CategoryLineGraph1mo {...props} />}
                   {categoryIndex === 2 && <CategoryLineGraph1y {...props} />}
-                  {categoryIndex === 3 && <CategoryLineGraph1d {...props} />}
+                  {/* {categoryIndex === 3 && <CategoryLineGraph1d {...props} />} */}
                   {categoryIndex === 4 && <CategoryLineGraph1mo {...props} />}
                   {categoryIndex === 5 && <CategoryLineGraph1y {...props} />}
                 </div>
@@ -957,9 +958,9 @@ function Marketpage() {
               >
                 Currency, Smart Contract Platform, Computing, DeFi, Culture &
                 Entertainment의 5가지 섹터로 나누어 상위 10개 종목으로 구성한
-                지수를 보여줍니다.
-                어떤 섹터의 코인/토큰들의 수익률이 우수한지 비교할 수 있으며,
-                시세를 통해 어떤 산업이 강세인지를 파악할 수 있습니다.
+                지수를 보여줍니다. 어떤 섹터의 코인/토큰들의 수익률이 우수한지
+                비교할 수 있으며, 시세를 통해 어떤 산업이 강세인지를 파악할 수
+                있습니다.
               </Typography>
               <Accordion
                 expanded={expanded === "panel1"}
@@ -1000,9 +1001,9 @@ function Marketpage() {
                     exclusive
                     sx={{ height: "2.5em" }}
                   >
-                    <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                    {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                       1D
-                    </ToggleButton>
+                    </ToggleButton> */}
                     <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                       1M
                     </ToggleButton>
@@ -1014,20 +1015,17 @@ function Marketpage() {
               </div>
             </Grid>
             <Grid item xs={12}>
-
-                <div>
-                  {categoryIndex === 0 && <CategoryLineGraph1d {...props} />}
-                  {categoryIndex === 1 && <CategoryLineGraph1mo {...props} />}
-                  {categoryIndex === 2 && <CategoryLineGraph1y {...props} />}
-                  {categoryIndex === 3 && <CategoryLineGraph1d {...props} />}
-                  {categoryIndex === 4 && <CategoryLineGraph1mo {...props} />}
-                  {categoryIndex === 5 && <CategoryLineGraph1y {...props} />}
-                </div>
+              <div>
+                {/* {categoryIndex === 0 && <CategoryLineGraph1d {...props} />} */}
+                {categoryIndex === 1 && <CategoryLineGraph1mo {...props} />}
+                {categoryIndex === 2 && <CategoryLineGraph1y {...props} />}
+                {/* {categoryIndex === 3 && <CategoryLineGraph1d {...props} />} */}
+                {categoryIndex === 4 && <CategoryLineGraph1mo {...props} />}
+                {categoryIndex === 5 && <CategoryLineGraph1y {...props} />}
+              </div>
             </Grid>
             <Grid item xs={12}>
-              
-                <CategoryButton />
-
+              <CategoryButton />
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h7" gutterBottom>
@@ -1060,19 +1058,22 @@ function Marketpage() {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                          <Typography
-                            variant="caption"
-                            sx={{ color: "#7F8487" }}
-                            gutterBottom
-                          >
-                            매우 공포 (0~25): 극심한 공포로 인해 과도하게 매도<br/>
-                            공포 (26~45): 자산 하락의 두려움이 생김<br/>
-                            중립 (46~54): 저항과 지지를 동시에 받음<br/>
-                            탐욕 (55~75):매수에 대한 관심이 증가<br/>
-                            매우 탐욕 (76~100): 매수에 대한 관심이 매우 증가<br/>
-
-                          </Typography>
-                          
+                  <Typography
+                    variant="caption"
+                    sx={{ color: "#7F8487" }}
+                    gutterBottom
+                  >
+                    매우 공포 (0~25): 극심한 공포로 인해 과도하게 매도
+                    <br />
+                    공포 (26~45): 자산 하락의 두려움이 생김
+                    <br />
+                    중립 (46~54): 저항과 지지를 동시에 받음
+                    <br />
+                    탐욕 (55~75):매수에 대한 관심이 증가
+                    <br />
+                    매우 탐욕 (76~100): 매수에 대한 관심이 매우 증가
+                    <br />
+                  </Typography>
                 </AccordionDetails>
               </Accordion>
             </Grid>
