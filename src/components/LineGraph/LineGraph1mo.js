@@ -125,7 +125,7 @@ function Index1mo() {
                 />
                 <YAxis
                   tickSize={5}
-                  domain={[50, 150]}
+                  domain={minMax}
                   tickMargin={5}
                   tick={{ fontSize: 12 }}
                 />

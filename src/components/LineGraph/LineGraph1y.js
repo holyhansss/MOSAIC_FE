@@ -127,7 +127,7 @@ function Index1y() {
             />
             <YAxis
               tickSize={5}
-              domain={[0, 200]}
+              domain={minMax}
               tickMargin={5}
               tick={{ fontSize: 12 }}
             />
