@@ -958,6 +958,14 @@ function Marketpage() {
             <Grid item xs={12}>
               <Typography variant="h7" gutterBottom>
                 카테고리별 인덱스
+                <Tooltip
+                  title="아래 버튼을 눌러 섹터별 인덱스를 확인하세요!"
+                  disableInteractive
+                >
+                  <IconButton>
+                    <HelpOutlineIcon sx={{ fontSize: "large" }} />
+                  </IconButton>
+                </Tooltip>
               </Typography>
             </Grid>
             <Grid item xs={12}>
