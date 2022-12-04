@@ -68,7 +68,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://query2.finance.yahoo.com",
+  "proxy": "https://pro-api.coinmarketcap.com",
   "devDependencies": {
     "nodemon": "^2.0.19"
   }
