@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Container,
+  Button,
   CardMedia,
   Divider,
 } from "@mui/material";
@@ -76,8 +77,10 @@ const MainPage = ({ result, reports, crypto }) => {
                   className="mw-100 w-auto"
                   src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FRanking.jpg?alt=media&token=f3d66167-c25a-4417-809b-16a8b90df16a"
                   alt="Ranking slide"
-                />
+                />     
+                <Button variant="contained"  sx={{height: 60}} style={{position:"absolute" , top:"250px",left:"200px",background:"#DCC3FC",color:"#451776"}}>Mosaic 랭킹 확인가기</Button>      
               </Link>
+              
             </Carousel.Item>
             <Carousel.Item
               style={{ backgroundColor: "#A2D9DC", textAlign: "center" }}
@@ -88,6 +91,7 @@ const MainPage = ({ result, reports, crypto }) => {
                   src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FRating.jpg?alt=media&token=e124885f-c6d1-4c4f-8ee8-ec9529570dfc"
                   alt="Rating slide"
                 />
+                <Button variant="contained"  sx={{height: 60}} style={{position:"absolute" , top:"250px",left:"200px",background:"#1F6183"}}>Mosaic 등급 보러가기</Button> 
               </Link>
             </Carousel.Item>
             <Carousel.Item
@@ -99,6 +103,7 @@ const MainPage = ({ result, reports, crypto }) => {
                   src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FMarket.jpg?alt=media&token=50353301-5ea7-467f-a473-7992c2feece3"
                   alt="Market slide"
                 />
+                <Button variant="contained"  sx={{height: 60}} style={{position:"absolute" , top:"250px",left:"240px",background:"#66A3FD"}}>시장동향 보러가기</Button> 
               </Link>
             </Carousel.Item>
           </Carousel>
