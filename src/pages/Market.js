@@ -8,15 +8,18 @@ import {
   ToggleButton,
   Button,
   Box,
+  Tooltip,
+  IconButton,
+  Card,
+  CardContent,
 } from "@mui/material";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { styled } from "@mui/material/styles";
-import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 // Components
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
@@ -97,8 +100,8 @@ const MainContainer = styled(Container)`
 // `;
 
 function Marketpage() {
-  const [snpRange, setSnpRange] = useState("1d");
-  const [snpIndex, setSnpIndex] = useState(0);
+  const [snpRange, setSnpRange] = useState("1mo");
+  const [snpIndex, setSnpIndex] = useState(1);
 
   const [categoryRange, setCategoryRange] = useState("1mo");
   const [categoryIndex, setCategoryIndex] = useState(1);
@@ -644,9 +647,9 @@ function Marketpage() {
                   exclusive
                   sx={{ height: "2.5em" }}
                 >
-                  <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                  {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                     1D
-                  </ToggleButton>
+                  </ToggleButton> */}
                   <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                     1M
                   </ToggleButton>
@@ -661,6 +664,14 @@ function Marketpage() {
             <Grid item xs={12} sx={{ marginBottom: "5rem" }}>
               <Typography variant="h5" gutterBottom>
                 카테고리별 인덱스
+                <Tooltip
+                  title="오른쪽 버튼을 눌러 섹터별 인덱스를 확인하세요!"
+                  disableInteractive
+                >
+                  <IconButton>
+                    <HelpOutlineIcon sx={{ fontSize: "large" }} />
+                  </IconButton>
+                </Tooltip>
               </Typography>
               <Typography
                 align="left"
@@ -927,9 +938,9 @@ function Marketpage() {
                     exclusive
                     sx={{ height: "2.5em" }}
                   >
-                    <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                    {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                       1D
-                    </ToggleButton>
+                    </ToggleButton> */}
                     <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                       1M
                     </ToggleButton>
