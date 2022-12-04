@@ -93,7 +93,7 @@ const MainPage = ({ result, reports, crypto }) => {
             <Carousel.Item
               style={{ backgroundColor: "#000000", textAlign: "center" }}
             >
-              <Link to="market">
+              <Link to="/market">
                 <img
                   className="mw-100 w-auto"
                   src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FMarket.jpg?alt=media&token=50353301-5ea7-467f-a473-7992c2feece3"
@@ -285,7 +285,7 @@ const MainPage = ({ result, reports, crypto }) => {
             <Carousel.Item
               style={{ backgroundColor: "#000000", textAlign: "center" }}
             >
-              <Link to="market">
+              <Link to="/market">
                 <img
                   className="mw-100 w-auto"
                   src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/banner%2FMarket.jpg?alt=media&token=50353301-5ea7-467f-a473-7992c2feece3"
