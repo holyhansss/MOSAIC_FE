@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Box, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import PromisingCard from "../components/PromisingCoin/PromisingCard";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const MainContainer = styled(Container)`
   position: relative;
@@ -9,6 +13,13 @@ const MainContainer = styled(Container)`
 `;
 
 export default function PromisingList({ crypto, crypto_fliter }) {
+
+  const [filter, setFilter] = useState('');
+
+  const handleChange = (event) => {
+    setFilter(event.target.value);
+  };
+
   return (
     <>
       <div
@@ -43,29 +54,69 @@ export default function PromisingList({ crypto, crypto_fliter }) {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Typography variant="h5" gutterBottom>
               유망코인 리스트
             </Typography>
           </Grid>
+          <Grid item xs={6}>
+            <Box sx={{ minWidth: 120 }} display="flex" justifyContent="flex-end">
+              <FormControl sx={{ minWidth: 120 }} >
+                <InputLabel id="demo-simple-select-label">정렬</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={filter}
+                  label="정렬"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={'최신 순'}>최신 순</MenuItem>
+                  <MenuItem value={'순위 순'}>순위 순</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
           <Grid item xs={12}>
-            <Grid container spacting={1}>
-              {crypto !== null &&
-                crypto.map(
-                  (content, index) =>
-                    content.promising === true && (
-                      <Grid
-                        item
-                        xs={12}
-                        md={5}
-                        lg={4}
-                        sx={{ display: "flex", justifyContent: "center" }}
-                      >
-                        <PromisingCard crypto={content} key={index} />
-                      </Grid>
-                    )
-                )}
-            </Grid>
+            {
+            filter === "순위 순" ? (
+              <Grid container spacting={1}>
+                {crypto !== null &&
+                  crypto.map(
+                    (content, index) =>
+                      content.promising === true && (
+                        <Grid
+                          item
+                          xs={12}
+                          md={5}
+                          lg={4}
+                          sx={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <PromisingCard crypto={content} key={index} />
+                        </Grid>
+                      )
+                  )}
+              </Grid>
+            ) : (
+              <Grid container spacting={1}>
+                {crypto_fliter !== null &&
+                  crypto_fliter.map(
+                    (content, index) =>
+                      content.promising === true && (
+                        <Grid
+                          item
+                          xs={12}
+                          md={5}
+                          lg={4}
+                          sx={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <PromisingCard crypto={content} key={index} />
+                        </Grid>
+                      )
+                  )}
+              </Grid>
+
+            )
+          }
           </Grid>
         </Grid>
       </MainContainer>
