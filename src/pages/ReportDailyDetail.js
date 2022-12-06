@@ -44,7 +44,7 @@ export default function ReportDailyDetail({ user }) {
     setThumbnail(QuerySnapShot.data().thumbnail);
   };
   
-  //코멘트 가져오기
+  //댓글 가져오기
   const [reply, setReply] = useState([]); 
 
   const getReplies = async () => {

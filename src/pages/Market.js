@@ -8,18 +8,15 @@ import {
   ToggleButton,
   Button,
   Box,
-  Tooltip,
-  IconButton,
-  Card,
-  CardContent,
 } from "@mui/material";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { styled } from "@mui/material/styles";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 // Components
 import FearandGreed from "../components/FearAndGreed/FearandGreed";
 import Index1d from "../components/LineGraph/LineGraph1d";
@@ -100,8 +97,8 @@ const MainContainer = styled(Container)`
 // `;
 
 function Marketpage() {
-  const [snpRange, setSnpRange] = useState("1mo");
-  const [snpIndex, setSnpIndex] = useState(1);
+  const [snpRange, setSnpRange] = useState("1d");
+  const [snpIndex, setSnpIndex] = useState(0);
 
   const [categoryRange, setCategoryRange] = useState("1mo");
   const [categoryIndex, setCategoryIndex] = useState(1);
@@ -595,14 +592,13 @@ function Marketpage() {
             position: "absolute",
             left: 0,
             backgroundColor: "#00297F",
-            background: 'linear-gradient(45deg, #00297F 30%, #4D4F82 80%)',
             width: "calc(100vw - (100vw - 100%))",
             height: "20em",
           }}
         ></div>
         <MainContainer maxWidth="lg">
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   height: "20em",
@@ -613,36 +609,19 @@ function Marketpage() {
               >
                 <Box sx={{ height: "2em" }} />
                 <Typography
-                  variant="h3"
+                  variant="h4"
                   sx={{ color: "white", marginBottom: "1rem" }}
                 >
                   시장 동향
                 </Typography>
-                <Typography variant="h5" sx={{ color: "lightgrey" }}>
+                <Typography variant="body1" sx={{ color: "lightgrey" }}>
                   거시적 지표들을 통해 실시간으로 시장의 흐름을 파악하고
                 </Typography>
-                <Typography variant="h5" sx={{ color: "lightgrey" }}>
+                <Typography variant="body1" sx={{ color: "lightgrey" }}>
                   전통 금융 시장과 비교할 수 있습니다.
                 </Typography>
               </Box>
-              
             </Grid>
-            <Grid item xs={6}>
-            <Box
-              sx={{
-                height: "20em",
-                display: "flex",
-                flexDirection: "raw",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                  src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_data_reports_706v.svg?alt=media&token=2b60aa1f-11ce-4c9d-bbe0-7290eff215f1"
-                  alt="Promising"
-                  width={350}
-                />
-            </Box>
-          </Grid>
             <Grid item xs={12} sx={{ marginBottom: "5rem" }}>
               <Typography variant="h5" gutterBottom>
                 S&P 500 vs CMC 200
@@ -665,9 +644,9 @@ function Marketpage() {
                   exclusive
                   sx={{ height: "2.5em" }}
                 >
-                  {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                  <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                     1D
-                  </ToggleButton> */}
+                  </ToggleButton>
                   <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                     1M
                   </ToggleButton>
@@ -682,14 +661,6 @@ function Marketpage() {
             <Grid item xs={12} sx={{ marginBottom: "5rem" }}>
               <Typography variant="h5" gutterBottom>
                 카테고리별 인덱스
-                <Tooltip
-                  title="오른쪽 버튼을 눌러 섹터별 인덱스를 확인하세요!"
-                  disableInteractive
-                >
-                  <IconButton>
-                    <HelpOutlineIcon sx={{ fontSize: "large" }} />
-                  </IconButton>
-                </Tooltip>
               </Typography>
               <Typography
                 align="left"
@@ -956,9 +927,9 @@ function Marketpage() {
                     exclusive
                     sx={{ height: "2.5em" }}
                   >
-                    {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                    <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                       1D
-                    </ToggleButton> */}
+                    </ToggleButton>
                     <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                       1M
                     </ToggleButton>
@@ -976,14 +947,6 @@ function Marketpage() {
             <Grid item xs={12}>
               <Typography variant="h7" gutterBottom>
                 카테고리별 인덱스
-                <Tooltip
-                  title="아래 버튼을 눌러 섹터별 인덱스를 확인하세요!"
-                  disableInteractive
-                >
-                  <IconButton>
-                    <HelpOutlineIcon sx={{ fontSize: "large" }} />
-                  </IconButton>
-                </Tooltip>
               </Typography>
             </Grid>
             <Grid item xs={12}>

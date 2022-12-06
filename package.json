@@ -9,7 +9,6 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.90",
     "@mui/material": "^5.8.7",
-    "@mui/styles": "^5.10.16",
     "@mui/x-data-grid": "^5.17.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -69,7 +68,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://pro-api.coinmarketcap.com",
+  "proxy": "https://query2.finance.yahoo.com",
   "devDependencies": {
     "nodemon": "^2.0.19"
   }

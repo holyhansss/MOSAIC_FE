@@ -249,7 +249,7 @@ function SingleComment({ value, id, user, title, writer, date, commentObj, thumb
           </Box>
           <TextField
             id="input-with-sx"
-            label="코멘트를 작성해 주세요"
+            label="댓글을 작성해 주세요"
             variant="standard"
             sx={{
               color: "action.active",
@@ -271,9 +271,9 @@ function SingleComment({ value, id, user, title, writer, date, commentObj, thumb
             </StyleButton>
           ) : (
             <Button
-              disabled
               variant="contained"
               sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
+              onClick= {()=> {alert("로그인이 필요한 서비스입니다.")}}
             >
               등록
             </Button>
@@ -604,7 +604,7 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj, 
           </Box>
           <TextField
             id="input-with-sx"
-            label="코멘트를 작성해 주세요"
+            label="댓글을 작성해 주세요"
             variant="standard"
             sx={{
               color: "action.active",
@@ -626,9 +626,9 @@ function DailySingleComment({ value, id, user, title, writer, date, commentObj, 
             </StyleButton>
           ) : (
             <Button
-              disabled
               variant="contained"
               sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
+              onClick= {()=> {alert("로그인이 필요한 서비스입니다.")}}
             >
               등록
             </Button>

@@ -49,7 +49,7 @@ export default function ReportWeeklyDetail({ user }) {
   };
   const [value, setValue] = useState("1");
 
-  //코멘트 가져오기
+  //댓글 가져오기
   const [reply, setReply] = useState([]);
   const getReplies = async () => {
     const repl = query(

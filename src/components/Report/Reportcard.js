@@ -22,7 +22,7 @@ const Styleli = styled.li`
 `;
 
 function Reportcard({ title, writer, date, mac }) {
-  const inputmacro = useRef([]);
+  const inputmacro = useRef(window.scrollTo(0,0));
 
   return (
     <div>
@@ -135,7 +135,7 @@ function Reportcard({ title, writer, date, mac }) {
           component="div"
           sx={{ textDecoration: "underline" }}
         >
-          Credit
+          작성자
         </Typography>
       </div>
       <Typography
@@ -279,7 +279,7 @@ function DailyReportcard({ title, writer, date, daily }) {
           component="div"
           sx={{ textDecoration: "underline" }}
         >
-          Credit
+          작성자
         </Typography>
       </div>
       <Typography
@@ -416,7 +416,7 @@ function DailyReportcard({ title, writer, date, daily }) {
           component="div"
           sx={{ textDecoration: "underline" }}
         >
-          Credit
+          작성자
         </Typography>
       </div>
       <Typography

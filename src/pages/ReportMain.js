@@ -30,14 +30,13 @@ function ReportMain({ result, reports, dailyReport }) {
           position: "absolute",
           left: 0,
           backgroundColor: "#451776",
-          background: 'linear-gradient(45deg, #451776 30%, #604D82 80%)',
           width: "calc(100vw - (100vw - 100%))",
           height: "20em",
         }}
       ></div>
       <MainContainer maxWidth="lg">
         <Grid container spacing={3} >
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Box
               sx={{
                 height: "20em",
@@ -48,33 +47,17 @@ function ReportMain({ result, reports, dailyReport }) {
             >
               <Box sx={{ height: "2em" }} />
               <Typography
-                variant="h3"
+                variant="h4"
                 sx={{ color: "white", marginBottom: "1rem" }}
               >
                 리포트
               </Typography>
-              <Typography variant="h5" sx={{ color: "white" }}>
+              <Typography variant="body1" sx={{ color: "white" }}>
                 암호화폐 시장의 주요 이슈들을 정리한
               </Typography>
-              <Typography variant="h5" sx={{ color: "white" }}>
+              <Typography variant="body1" sx={{ color: "white" }}>
                 Mosaic 리포트를 만나보세요!
               </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                height: "20em",
-                display: "flex",
-                flexDirection: "raw",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                  src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_absorbed_in_re_ymd6%20(2).svg?alt=media&token=4b56ff8a-780b-4f35-8f10-5b840937026d"
-                  alt="Promising"
-                  width={260}
-                />
             </Box>
           </Grid>
           <Grid item xs={6}>

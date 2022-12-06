@@ -289,6 +289,7 @@ export default function PromisingReport({ user }) {
                     onClick={() => {
                       window.open(promising.cmcLink, "_blank");
                     }}
+                    variant="contained"
                   >
                     {" "}
                     코인마켓캡에서 자세히 보기{" "}
@@ -325,6 +326,7 @@ export default function PromisingReport({ user }) {
                     onClick={() => {
                       window.open(promising.notionLink, "_blank");
                     }}
+                    variant="contained"
                   >
                     {" "}
                     자세히보기{" "}
@@ -505,6 +507,7 @@ export default function PromisingReport({ user }) {
                     onClick={() => {
                       window.open(promising.notionLink, "_blank");
                     }}
+                    variant="contained"
                   >
                     {" "}
                     자세히보기{" "}
