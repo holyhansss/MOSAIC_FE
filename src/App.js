@@ -289,6 +289,7 @@ function App() {
     getCrypto();
   }, []);
 
+  // console.log(crypto);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -336,7 +337,7 @@ function App() {
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
-                element={<PromisingList crypto={promising} crypto_fliter={crypto} />}
+                element={<PromisingList crypto={promising} crypto_filter={crypto} />}
               />
               <Route path="/promising/:id" element={<PromisingReport user={userObj}/>} />
               <Route
