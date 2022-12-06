@@ -27,13 +27,14 @@ export default function PromisingList({ crypto, crypto_filter }) {
           position: "absolute",
           left: 0,
           backgroundColor: "#3C1A7D",
+          background: 'linear-gradient(45deg, #3C1A7D 30%, #5C4D82 80%)',
           width: "calc(100vw - (100vw - 100%))",
           height: "20em",
         }}
       ></div>
       <MainContainer maxWidth="lg">
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+        <Grid item xs={6}>
             <Box
               sx={{
                 height: "20em",
@@ -44,14 +45,30 @@ export default function PromisingList({ crypto, crypto_filter }) {
             >
               <Box sx={{ height: "2em" }} />
               <Typography
-                variant="h4"
+                variant="h3"
                 sx={{ color: "white", marginBottom: "1rem" }}
               >
                 유망 코인
               </Typography>
-              <Typography variant="body1" sx={{ color: "lightgrey" }}>
+              <Typography variant="h5" sx={{ color: "lightgrey" }}>
                 Mosaic이 발굴한 유망 코인을 만나보세요!
               </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                height: "20em",
+                display: "flex",
+                flexDirection: "raw",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                  src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_content_structure_re_ebkv.svg?alt=media&token=3b215805-8336-4fc5-9875-71666030ae34"
+                  alt="Promising"
+                  width={200}
+                />
             </Box>
           </Grid>
           <Grid item xs={6}>
