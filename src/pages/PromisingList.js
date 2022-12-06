@@ -12,7 +12,7 @@ const MainContainer = styled(Container)`
   z-index: 1;
 `;
 
-export default function PromisingList({ crypto, crypto_fliter }) {
+export default function PromisingList({ crypto, crypto_filter }) {
 
   const [filter, setFilter] = useState('');
 
@@ -80,8 +80,8 @@ export default function PromisingList({ crypto, crypto_fliter }) {
             {
             filter === "순위 순" ? (
               <Grid container spacting={1}>
-                {crypto !== null &&
-                  crypto.map(
+                {crypto_filter !== null &&
+                  crypto_filter.map(
                     (content, index) =>
                       content.promising === true && (
                         <Grid
@@ -98,8 +98,8 @@ export default function PromisingList({ crypto, crypto_fliter }) {
               </Grid>
             ) : (
               <Grid container spacting={1}>
-                {crypto_fliter !== null &&
-                  crypto_fliter.map(
+                {crypto !== null &&
+                  crypto.map(
                     (content, index) =>
                       content.promising === true && (
                         <Grid

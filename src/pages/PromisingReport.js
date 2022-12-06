@@ -471,9 +471,10 @@ export default function PromisingReport({ user }) {
                     onClick={() => {
                       window.open(promising.cmcLink, "_blank");
                     }}
+                    variant="contained"
                   >
                     {" "}
-                    {promising.cmcLink}{" "}
+                    코인마켓캡에서 자세히 보기{" "}
                   </Button>
                 </Typography>
               </Grid>
