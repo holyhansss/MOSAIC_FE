@@ -596,13 +596,14 @@ function Marketpage() {
             position: "absolute",
             left: 0,
             backgroundColor: "#00297F",
+            background: 'linear-gradient(45deg, #00297F 30%, #4D4F82 80%)',
             width: "calc(100vw - (100vw - 100%))",
             height: "20em",
           }}
         ></div>
         <MainContainer maxWidth="lg">
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Box
                 sx={{
                   height: "20em",
@@ -613,18 +614,35 @@ function Marketpage() {
               >
                 <Box sx={{ height: "2em" }} />
                 <Typography
-                  variant="h4"
+                  variant="h3"
                   sx={{ color: "white", marginBottom: "1rem" }}
                 >
                   시장 동향
                 </Typography>
-                <Typography variant="body1" sx={{ color: "lightgrey" }}>
+                <Typography variant="h5" sx={{ color: "lightgrey" }}>
                   거시적 지표들을 통해 실시간으로 시장의 흐름을 파악하고
                 </Typography>
-                <Typography variant="body1" sx={{ color: "lightgrey" }}>
+                <Typography variant="h5" sx={{ color: "lightgrey" }}>
                   전통 금융 시장과 비교할 수 있습니다.
                 </Typography>
               </Box>
+              
+            </Grid>
+            <Grid item xs={6}>
+            <Box
+              sx={{
+                height: "20em",
+                display: "flex",
+                flexDirection: "raw",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                  src="https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/service_info%2Fundraw_data_reports_706v.svg?alt=media&token=2b60aa1f-11ce-4c9d-bbe0-7290eff215f1"
+                  alt="Promising"
+                  width={350}
+                />
+            </Box>
             </Grid>
             <Grid item xs={12} sx={{ marginBottom: "5rem" }}>
               <Typography variant="h5" gutterBottom>
