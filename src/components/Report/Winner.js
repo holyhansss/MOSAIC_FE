@@ -125,7 +125,7 @@ const Winner = ({ user, id, title, writer, date }) => {
                 component="div"
                 sx={{ textDecoration: "underline" }}
               >
-                Credit
+                작성자
               </Typography>
             </div>
             <Typography

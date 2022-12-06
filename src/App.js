@@ -336,7 +336,7 @@ function App() {
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
-                element={<PromisingList crypto={promising} />}
+                element={<PromisingList crypto={promising} crypto_fliter={crypto} />}
               />
               <Route path="/promising/:id" element={<PromisingReport user={userObj}/>} />
               <Route

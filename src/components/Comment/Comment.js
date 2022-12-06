@@ -26,7 +26,7 @@ function Comment({ user, id, title, rep, writer, date, thumbnail }) {
     }
   }, [user]);
 
-  //코멘트 저장하기
+  //댓글 저장하기
   const [comment, setComment] = useState("");
 
   const handleChange = (event) => {
@@ -76,7 +76,7 @@ function Comment({ user, id, title, rep, writer, date, thumbnail }) {
         </Box>
         <TextField
           id="input-with-sx"
-          label="코멘트를 작성해 주세요"
+          label="댓글을 작성해 주세요"
           variant="standard"
           sx={{
             color: "primary",
@@ -98,9 +98,9 @@ function Comment({ user, id, title, rep, writer, date, thumbnail }) {
           </StyleButton>
         ) : (
           <Button
-            disabled
             variant="contained"
             sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
+            onClick= {()=> {alert("로그인이 필요한 서비스입니다.")}}
           >
             등록
           </Button>
@@ -142,7 +142,7 @@ function DailyComment({ user, id, title, rep, writer, date, thumbnail }) {
     }
   }, [user]);
 
-  //코멘트 저장하기
+  //댓글 저장하기
   const [comment, setComment] = useState("");
 
   const handleChange = (event) => {
@@ -192,7 +192,7 @@ function DailyComment({ user, id, title, rep, writer, date, thumbnail }) {
         </Box>
         <TextField
           id="input-with-sx"
-          label="코멘트를 작성해 주세요"
+          label="댓글을 작성해 주세요"
           variant="standard"
           sx={{
             color: "primary",
@@ -214,9 +214,9 @@ function DailyComment({ user, id, title, rep, writer, date, thumbnail }) {
           </StyleButton>
         ) : (
           <Button
-            disabled
             variant="contained"
             sx={{ width: "10%", height: "40px", borderRadius: "5px" }}
+            onClick= {()=> {alert("로그인이 필요한 서비스입니다.")}}
           >
             등록
           </Button>

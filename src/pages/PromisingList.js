@@ -8,7 +8,7 @@ const MainContainer = styled(Container)`
   z-index: 1;
 `;
 
-export default function PromisingList({ crypto }) {
+export default function PromisingList({ crypto, crypto_fliter }) {
   return (
     <>
       <div
