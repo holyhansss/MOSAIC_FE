@@ -666,9 +666,9 @@ function Marketpage() {
                   exclusive
                   sx={{ height: "2.5em" }}
                 >
-                  {/* <ToggleButton sx={{ color: "#7F8487" }} value="1d">
+                  <ToggleButton sx={{ color: "#7F8487" }} value="1d">
                     1D
-                  </ToggleButton> */}
+                  </ToggleButton>
                   <ToggleButton sx={{ color: "#7F8487" }} value="1mo">
                     1M
                   </ToggleButton>
