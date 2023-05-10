@@ -32,32 +32,36 @@ function Index1mo() {
     // console.log(response.data);
     setRes(response.data);
 
-    let snp_minmax = [0, 0];
-    let cmc_minmax = [0, 0];
-    snp_minmax[0] = response.data
-      .map((v) => v.SNP)
-      .reduce((min, cur) =>
-        Number(min) > Number(cur) ? Number(cur) : Number(min)
-      );
-    snp_minmax[1] = response.data
-      .map((v) => v.SNP)
-      .reduce((max, cur) =>
-        Number(max) < Number(cur) ? Number(cur) : Number(max)
-      );
-    cmc_minmax[0] = response.data
-      .map((v) => v.CMC)
-      .reduce((min, cur) =>
-        Number(min) > Number(cur) ? Number(cur) : Number(min)
-      );
-    cmc_minmax[1] = response.data
-      .map((v) => v.CMC)
-      .reduce((max, cur) =>
-        Number(max) < Number(cur) ? Number(cur) : Number(max)
-      );
+    // let snp_minmax = [0, 0];
+    // let cmc_minmax = [0, 0];
+    // snp_minmax[0] = response.data
+    //   .map((v) => v.SNP)
+    //   .reduce((min, cur) =>
+    //     Number(min) > Number(cur) ? Number(cur) : Number(min)
+    //   );
+    // snp_minmax[1] = response.data
+    //   .map((v) => v.SNP)
+    //   .reduce((max, cur) =>
+    //     Number(max) < Number(cur) ? Number(cur) : Number(max)
+    //   );
+    // cmc_minmax[0] = response.data
+    //   .map((v) => v.CMC)
+    //   .reduce((min, cur) =>
+    //     Number(min) > Number(cur) ? Number(cur) : Number(min)
+    //   );
+    // cmc_minmax[1] = response.data
+    //   .map((v) => v.CMC)
+    //   .reduce((max, cur) =>
+    //     Number(max) < Number(cur) ? Number(cur) : Number(max)
+    //   );
 
+    // setMinMax([
+    //   Math.min(snp_minmax[0], cmc_minmax[0]) - 1,
+    //   Math.max(snp_minmax[1], cmc_minmax[1]) + 1,
+    // ]);
     setMinMax([
-      Math.min(snp_minmax[0], cmc_minmax[0]) - 1,
-      Math.max(snp_minmax[1], cmc_minmax[1]) + 1,
+      Math.min(Math.min(...response.data.map(v => v.SNP)), Math.min(...response.data.map(v => v.CMC))) - 1,
+      Math.max(Math.max(...response.data.map(v => v.SNP)), Math.max(...response.data.map(v => v.CMC))) + 1,
     ]);
   };
 
