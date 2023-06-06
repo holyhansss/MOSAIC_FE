@@ -28,7 +28,7 @@ export default function CryptoTable({ crypto }) {
         },
         params: {
           convert: "KRW",
-          limit: 1000,
+          limit: 1050,
         },
       })
       .then((res) => {
