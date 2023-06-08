@@ -32,6 +32,9 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import styled from "styled-components";
 import PromisingScore from "../components/PromisingCoin/PromisingScore";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
+
+import { GRADE_IMAGE } from "../constants/constants";
+
 //Responsive Web
 import { Pc, Mobile } from "../components/Responsive/Responsive";
 
@@ -52,79 +55,80 @@ export default function PromisingReport({ user }) {
     const docSnap = await getDoc(docRef);
     setPromising(docSnap.data());
 
-    if (docSnap.data().rating === "D") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FD.png?alt=media&token=7494f9d9-dd21-4d89-8ccb-a5a3d68d93cc"
-      );
-    } else if (docSnap.data().rating === "C") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FC.png?alt=media&token=b28afc0b-0f9a-4d70-af88-604ce6432d33"
-      );
-    } else if (docSnap.data().rating === "CC") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FCC.png?alt=media&token=dfd3bdce-7d2d-443e-a7c2-cdb1eda58703"
-      );
-    } else if (docSnap.data().rating === "CCC") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FCCC.png?alt=media&token=8ab979bf-f05f-4b37-a305-f1c17b40cdcf"
-      );
-    } else if (docSnap.data().rating === "B-") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FB-.png?alt=media&token=da27c7e2-7b0c-4c73-bedd-59cfb7033f61"
-      );
-    } else if (docSnap.data().rating === "B") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FB.png?alt=media&token=44c2dd15-82a7-4610-ab5e-e84bb98288f9"
-      );
-    } else if (docSnap.data().rating === "B+") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FB%2B.png?alt=media&token=48419489-7127-4ba6-80fb-144db7a0fc35"
-      );
-    } else if (docSnap.data().rating === "BB-") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBB-.png?alt=media&token=811912dc-5845-41cf-990d-e1c396b72e4f"
-      );
-    } else if (docSnap.data().rating === "BB") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBB.png?alt=media&token=127a30d6-d661-4fe6-876b-73e985147bda"
-      );
-    } else if (docSnap.data().rating === "BB+") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBB%2B.png?alt=media&token=6fcee14d-d572-425a-91eb-303211ad16e0"
-      );
-    } else if (docSnap.data().rating === "BBB") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBBB.png?alt=media&token=9e5ee3e7-8dd6-4034-a817-1dc6584bf79e"
-      );
-    } else if (docSnap.data().rating === "A-") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FA-.png?alt=media&token=2d168ac1-c440-45e3-8bb6-cb2c0c971112"
-      );
-    } else if (docSnap.data().rating === "A") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FA.png?alt=media&token=d791675d-cb8b-4dd0-be83-db337874230e"
-      );
-    } else if (docSnap.data().rating === "A+") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FA%2B.png?alt=media&token=2ef9a10b-0619-4679-8248-94e3e3ec77e4"
-      );
-    } else if (docSnap.data().rating === "AA-") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAA-.png?alt=media&token=9c953c8a-82cb-46e7-991b-40480e42db46"
-      );
-    } else if (docSnap.data().rating === "AA") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAA.png?alt=media&token=729a2a96-6b1a-4b86-b189-b1625ff3acbc"
-      );
-    } else if (docSnap.data().rating === "AA+") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAA%2B.png?alt=media&token=fa78cc19-c0d9-4387-baf0-2e0d10d36807"
-      );
-    } else if (docSnap.data().rating === "AAA") {
-      setGradeImg(
-        "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAAA.png?alt=media&token=d1c9aeb6-8883-4dc5-9df3-c40657903b72"
-      );
-    }
+    setGradeImg(GRADE_IMAGE[docSnap.data().rating]);
+    // if (docSnap.data().rating === "D") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FD.png?alt=media&token=7494f9d9-dd21-4d89-8ccb-a5a3d68d93cc"
+    //   );
+    // } else if (docSnap.data().rating === "C") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FC.png?alt=media&token=b28afc0b-0f9a-4d70-af88-604ce6432d33"
+    //   );
+    // } else if (docSnap.data().rating === "CC") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FCC.png?alt=media&token=dfd3bdce-7d2d-443e-a7c2-cdb1eda58703"
+    //   );
+    // } else if (docSnap.data().rating === "CCC") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FCCC.png?alt=media&token=8ab979bf-f05f-4b37-a305-f1c17b40cdcf"
+    //   );
+    // } else if (docSnap.data().rating === "B-") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FB-.png?alt=media&token=da27c7e2-7b0c-4c73-bedd-59cfb7033f61"
+    //   );
+    // } else if (docSnap.data().rating === "B") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FB.png?alt=media&token=44c2dd15-82a7-4610-ab5e-e84bb98288f9"
+    //   );
+    // } else if (docSnap.data().rating === "B+") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FB%2B.png?alt=media&token=48419489-7127-4ba6-80fb-144db7a0fc35"
+    //   );
+    // } else if (docSnap.data().rating === "BB-") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBB-.png?alt=media&token=811912dc-5845-41cf-990d-e1c396b72e4f"
+    //   );
+    // } else if (docSnap.data().rating === "BB") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBB.png?alt=media&token=127a30d6-d661-4fe6-876b-73e985147bda"
+    //   );
+    // } else if (docSnap.data().rating === "BB+") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBB%2B.png?alt=media&token=6fcee14d-d572-425a-91eb-303211ad16e0"
+    //   );
+    // } else if (docSnap.data().rating === "BBB") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FBBB.png?alt=media&token=9e5ee3e7-8dd6-4034-a817-1dc6584bf79e"
+    //   );
+    // } else if (docSnap.data().rating === "A-") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FA-.png?alt=media&token=2d168ac1-c440-45e3-8bb6-cb2c0c971112"
+    //   );
+    // } else if (docSnap.data().rating === "A") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FA.png?alt=media&token=d791675d-cb8b-4dd0-be83-db337874230e"
+    //   );
+    // } else if (docSnap.data().rating === "A+") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FA%2B.png?alt=media&token=2ef9a10b-0619-4679-8248-94e3e3ec77e4"
+    //   );
+    // } else if (docSnap.data().rating === "AA-") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAA-.png?alt=media&token=9c953c8a-82cb-46e7-991b-40480e42db46"
+    //   );
+    // } else if (docSnap.data().rating === "AA") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAA.png?alt=media&token=729a2a96-6b1a-4b86-b189-b1625ff3acbc"
+    //   );
+    // } else if (docSnap.data().rating === "AA+") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAA%2B.png?alt=media&token=fa78cc19-c0d9-4387-baf0-2e0d10d36807"
+    //   );
+    // } else if (docSnap.data().rating === "AAA") {
+    //   setGradeImg(
+    //     "https://firebasestorage.googleapis.com/v0/b/mosaic-db1e4.appspot.com/o/rank%2FAAA.png?alt=media&token=d1c9aeb6-8883-4dc5-9df3-c40657903b72"
+    //   );
+    // }
   };
 
   const onClick = async () => {
