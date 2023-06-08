@@ -15,25 +15,19 @@ function PostList({ user, kind }) {
     );
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((collection) => {
-      let postObj = {};
+      const postObj = {
+        id: collection.id,
+        date: collection.data().date,
+        thumbnail: collection.data().thumbnail,
+      };
       if (kind === "scrap") {
-        postObj = {
-          id: collection.id,
-          name: collection.data().name,
-          code: collection.data().code,
-          hashtag: collection.data().hashtag,
-          date: collection.data().date,
-          thumbnail: collection.data().thumbnail,
-        };
+        postObj.name = collection.data().name;
+        postObj.code = collection.data().code;
+        postObj.hashtag = collection.data().hashtag;
       } else {
-        postObj = {
-          id: collection.id,
-          title: collection.data().title,
-          writer: collection.data().writer,
-          date: collection.data().date,
-          thumbnail: collection.data().thumbnail,
-          type: collection.data().type,
-        };
+        postObj.title = collection.data().title;
+        postObj.writer = collection.data().writer;
+        postObj.type = collection.data().type;
       }
       setPosts((prev) => [postObj, ...prev]);
     });

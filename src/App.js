@@ -117,167 +117,156 @@ function App() {
   const result = dailyReport[0];
 
   const getCrypto = async () => {
+    // 랭킹 테이블에 사용될 암호화폐 (등급순)
     const q = query(
       collection(dbService, "cryptocurrency"),
       orderBy("rate", "asc")
     );
     const querySnapShot = await getDocs(q);
     querySnapShot.forEach((docs) => {
-      let cryptoObj = {};
-      if (docs.data().promising === true) {
-        if (docs.data().type === "coin") {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            security: docs.data().security,
-            scalability: docs.data().scalability,
-            decentralization: docs.data().decentralization,
-            others: docs.data().others,
-            logo: docs.data().logo,
-            rating: docs.data().rating,
-            thumbnail: docs.data().thumbnail,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            description: docs.data().description,
-            assessment: docs.data().assessment,
-            rate: docs.data().rate,
-            cmcLink: docs.data().cmcLink,
-          };
-        } else {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            business: docs.data().business,
-            technicality: docs.data().technicality,
-            reliability: docs.data().reliability,
-            logo: docs.data().logo,
-            rating: docs.data().rating,
-            thumbnail: docs.data().thumbnail,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            description: docs.data().description,
-            assessment: docs.data().assessment,
-            rate: docs.data().rate,
-            cmcLink: docs.data().cmcLink,
-          };
-        }
-      } else {
-        if (docs.data().type === "coin") {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            security: docs.data().security,
-            scalability: docs.data().scalability,
-            decentralization: docs.data().decentralization,
-            others: docs.data().others,
-            rating: docs.data().rating,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            rate: docs.data().rate,
-            cmcLink: docs.data().cmcLink,
-          };
-        } else {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            business: docs.data().business,
-            technicality: docs.data().technicality,
-            reliability: docs.data().reliability,
-            rating: docs.data().rating,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            rate: docs.data().rate,
-            cmcLink: docs.data().cmcLink,
-          };
-        }
+      const cryptoObj = {
+        id: docs.id,
+        name: docs.data().name,
+        code: docs.data().code,
+        rating: docs.data().rating,
+        hashtag: docs.data().hashtag,
+        type: docs.data().type,
+        promising: docs.data().promising,
+        rate: docs.data().rate,
+        cmcLink: docs.data().cmcLink,
       }
+
+      if (docs.data().promising === true) {
+        cryptoObj.logo = docs.data().logo;
+        cryptoObj.thumbnail = docs.data().thumbnail;
+        cryptoObj.description = docs.data().description;
+        cryptoObj.assessment = docs.data().description;
+      }
+      
+      if (docs.data().type === "coin") {
+        cryptoObj.security = docs.data().security;
+        cryptoObj.scalability = docs.data().scalability;
+        cryptoObj.decentralization = docs.data().decentralization;
+        cryptoObj.others = docs.data().others;
+      } else {
+        cryptoObj.business = docs.data().business;
+        cryptoObj.technicality = docs.data().technicality;
+        cryptoObj.reliability = docs.data().reliability;
+      }
+
+      // let cryptoObj = {};
+      // console.log(docs.data());
+      // if (docs.data().promising === true) {
+      //   if (docs.data().type === "coin") {
+      //     cryptoObj = {
+      //       id: docs.id,
+      //       name: docs.data().name,
+      //       code: docs.data().code,
+      //       security: docs.data().security,
+      //       scalability: docs.data().scalability,
+      //       decentralization: docs.data().decentralization,
+      //       others: docs.data().others,
+      //       logo: docs.data().logo,
+      //       rating: docs.data().rating,
+      //       thumbnail: docs.data().thumbnail,
+      //       hashtag: docs.data().hashtag,
+      //       type: docs.data().type,
+      //       promising: docs.data().promising,
+      //       description: docs.data().description,
+      //       assessment: docs.data().assessment,
+      //       rate: docs.data().rate,
+      //       cmcLink: docs.data().cmcLink,
+      //     };
+      //   } else {
+      //     cryptoObj = {
+      //       id: docs.id,
+      //       name: docs.data().name,
+      //       code: docs.data().code,
+      //       business: docs.data().business,
+      //       technicality: docs.data().technicality,
+      //       reliability: docs.data().reliability,
+      //       logo: docs.data().logo,
+      //       rating: docs.data().rating,
+      //       thumbnail: docs.data().thumbnail,
+      //       hashtag: docs.data().hashtag,
+      //       type: docs.data().type,
+      //       promising: docs.data().promising,
+      //       description: docs.data().description,
+      //       assessment: docs.data().assessment,
+      //       rate: docs.data().rate,
+      //       cmcLink: docs.data().cmcLink,
+      //     };
+      //   }
+      // } else {
+      //   if (docs.data().type === "coin") {
+      //     cryptoObj = {
+      //       id: docs.id,
+      //       name: docs.data().name,
+      //       code: docs.data().code,
+      //       security: docs.data().security,
+      //       scalability: docs.data().scalability,
+      //       decentralization: docs.data().decentralization,
+      //       others: docs.data().others,
+      //       rating: docs.data().rating,
+      //       hashtag: docs.data().hashtag,
+      //       type: docs.data().type,
+      //       promising: docs.data().promising,
+      //       rate: docs.data().rate,
+      //       cmcLink: docs.data().cmcLink,
+      //     };
+      //   } else {
+      //     cryptoObj = {
+      //       id: docs.id,
+      //       name: docs.data().name,
+      //       code: docs.data().code,
+      //       business: docs.data().business,
+      //       technicality: docs.data().technicality,
+      //       reliability: docs.data().reliability,
+      //       rating: docs.data().rating,
+      //       hashtag: docs.data().hashtag,
+      //       type: docs.data().type,
+      //       promising: docs.data().promising,
+      //       rate: docs.data().rate,
+      //       cmcLink: docs.data().cmcLink,
+      //     };
+      //   }
+      // }
 
       setCrypto((prev) => [cryptoObj, ...prev]);
     });
 
+    // 유망코인 리포트에 사용될 암호화폐 (등록순)
     const q2 = query(collection(dbService, "cryptocurrency"), orderBy("date"));
     const querySnapShot2 = await getDocs(q2);
     querySnapShot2.forEach((docs) => {
-      let cryptoObj = {};
+      const cryptoObj = {
+        id: docs.id,
+        name: docs.data().name,
+        code: docs.data().code,
+        rating: docs.data().rating,
+        hashtag: docs.data().hashtag,
+        type: docs.data().type,
+        promising: docs.data().promising,
+        rate: docs.data().rate,
+        cmcLink: docs.data().cmcLink,
+      }
+
       if (docs.data().promising === true) {
-        if (docs.data().type === "coin") {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            security: docs.data().security,
-            scalability: docs.data().scalability,
-            decentralization: docs.data().decentralization,
-            others: docs.data().others,
-            logo: docs.data().logo,
-            rating: docs.data().rating,
-            thumbnail: docs.data().thumbnail,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            description: docs.data().description,
-            assessment: docs.data().assessment,
-            rate: docs.data().rate,
-            cmcLink: docs.data().cmcLink,
-          };
-        } else {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            business: docs.data().business,
-            technicality: docs.data().technicality,
-            reliability: docs.data().reliability,
-            logo: docs.data().logo,
-            rating: docs.data().rating,
-            thumbnail: docs.data().thumbnail,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            description: docs.data().description,
-            assessment: docs.data().assessment,
-            cmcLink: docs.data().cmcLink,
-          };
-        }
+        cryptoObj.logo = docs.data().logo;
+        cryptoObj.thumbnail = docs.data().thumbnail;
+        cryptoObj.description = docs.data().description;
+        cryptoObj.assessment = docs.data().description;
+      }
+      
+      if (docs.data().type === "coin") {
+        cryptoObj.security = docs.data().security;
+        cryptoObj.scalability = docs.data().scalability;
+        cryptoObj.decentralization = docs.data().decentralization;
+        cryptoObj.others = docs.data().others;
       } else {
-        if (docs.data().type === "coin") {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            security: docs.data().security,
-            scalability: docs.data().scalability,
-            decentralization: docs.data().decentralization,
-            others: docs.data().others,
-            rating: docs.data().rating,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            cmcLink: docs.data().cmcLink,
-          };
-        } else {
-          cryptoObj = {
-            id: docs.id,
-            name: docs.data().name,
-            code: docs.data().code,
-            business: docs.data().business,
-            technicality: docs.data().technicality,
-            reliability: docs.data().reliability,
-            rating: docs.data().rating,
-            hashtag: docs.data().hashtag,
-            type: docs.data().type,
-            promising: docs.data().promising,
-            cmcLink: docs.data().cmcLink,
-          };
-        }
+        cryptoObj.business = docs.data().business;
+        cryptoObj.technicality = docs.data().technicality;
+        cryptoObj.reliability = docs.data().reliability;
       }
 
       setPromising((prev) => [cryptoObj, ...prev]);
@@ -337,9 +326,14 @@ function App() {
               <Route path="/market" element={<MarketPage />} />
               <Route
                 path="/promising"
-                element={<PromisingList crypto={promising} crypto_filter={crypto} />}
+                element={
+                  <PromisingList crypto={promising} crypto_filter={crypto} />
+                }
               />
-              <Route path="/promising/:id" element={<PromisingReport user={userObj}/>} />
+              <Route
+                path="/promising/:id"
+                element={<PromisingReport user={userObj} />}
+              />
               <Route
                 path="/reportMain"
                 element={
